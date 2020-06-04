@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import Constants from "expo-constants";
 import color from "../config/colors";
+import GameList from "../components/GameList";
 
 function wait(timeout) {
   return new Promise((resolve) => {
@@ -32,7 +33,13 @@ export default function Home() {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        <Text>Pull down to see RefreshControl indicator</Text>
+        <ScrollView>
+          <GameList />
+          <GameList />
+          <GameList />
+          <GameList />
+          <GameList />
+        </ScrollView>
       </ScrollView>
     </SafeAreaView>
   );
