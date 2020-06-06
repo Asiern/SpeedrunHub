@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet, View, Image, Text, ActivityIndicator } from "react-native";
 import config from "../config/config.json";
 import colors from "../config/colors";
+import { color } from "react-native-reanimated";
 class GameList extends Component {
   constructor(props) {
     super(props);
@@ -14,10 +15,10 @@ class GameList extends Component {
   componentDidMount() {
     return fetch("https://facebook.github.io/react-native/movies.json")
       .then((response) => response.json())
-      .then((responseJosn) => {
+      .then((responseJson) => {
         this.setState({
           isLoading: false,
-          dataSource: responseJosn.movies,
+          dataSource: responseJson.movies,
         });
       })
       .catch((error) => {
@@ -35,8 +36,12 @@ class GameList extends Component {
     } else {
       let movies = this.state.dataSource.map((val, key) => {
         return (
-          <View style={styles.container} key={key}>
-            <Text>{val.title}</Text>
+          <View style={styles.container}>
+            <View style={styles.game}>
+              <View key={key}>
+                <Text>{val.title}</Text>
+              </View>
+            </View>
           </View>
         );
       });
@@ -47,10 +52,20 @@ class GameList extends Component {
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingVertical: 20,
+    padding: 20,
     backgroundColor: colors.light,
     padding: 8,
+    width: 300,
+    alignItems: "center",
+    alignSelf: "center",
+    top: 20,
+  },
+  game: {
+    flex: 1,
+    paddingVertical: 40,
+    width: 300,
+    backgroundColor: colors.white,
+    alignItems: "center",
   },
   paragraph: {
     margin: 24,
