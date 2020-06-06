@@ -33,20 +33,22 @@ export default function Home() {
       <View style={styles.banner}>
         <Image
           style={styles.logo}
-          source={require("../assets/asiern.png")}
+          source={require("../assets/trophy.png")}
         ></Image>
-        <Text style={styles.text}>SPEEDRUN.COM</Text>
+        <Image style={styles.s} source={require("../assets/logo.png")}></Image>
       </View>
-      <ScrollView style={styles.scrollView}>
-        <GameList />
-        <GameList />
-        <GameList />
-        <GameList />
-        <GameList />
-        <GameList />
-        <GameList />
-        <GameList />
-      </ScrollView>
+      <View style={styles.scrollViewContainer}>
+        <ScrollView style={styles.scrollView}>
+          <GameList />
+          <GameList />
+          <GameList />
+          <GameList />
+          <GameList />
+          <GameList />
+          <GameList />
+          <GameList />
+        </ScrollView>
+      </View>
     </SafeAreaView>
   );
 }
@@ -55,7 +57,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: Constants.statusBarHeight,
-    backgroundColor: colors.secondary,
+    backgroundColor: colors.light,
+  },
+  scrollViewContainer: {
+    flex: 1,
   },
   scrollView: {
     flex: 1,
@@ -76,5 +81,9 @@ const styles = StyleSheet.create({
   logo: {
     height: 40,
     width: 40,
+  },
+  s: {
+    height: 15,
+    width: 250,
   },
 });
