@@ -64,9 +64,7 @@ export default function App() {
             let iconName;
 
             if (route.name === "Home") {
-              iconName = focused
-                ? "ios-information-circle"
-                : "ios-information-circle-outline";
+              iconName = focused ? "ios-trophy" : "ios-trophy";
             } else if (route.name === "Settings") {
               iconName = focused ? "ios-list-box" : "ios-list";
             } else if (route.name === "Search") {
