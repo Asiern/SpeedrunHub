@@ -39,14 +39,11 @@ export default function Home() {
       </View>
       <View style={styles.scrollViewContainer}>
         <ScrollView style={styles.scrollView}>
-          <GameList />
-          <GameList />
-          <GameList />
-          <GameList />
-          <GameList />
-          <GameList />
-          <GameList />
-          <GameList />
+          <GameList id={"w6jve26j"} name={"darksouls"} />
+          <GameList id={"m1zky010"} name={"darksouls2"} />
+          <GameList id={"k6qg0xdg"} name={"darksouls3"} />
+          <GameList id={"o1y5nvdq"} name={"nier"} />
+          <GameList id={"76rkwed8"} name={"na"} />
         </ScrollView>
       </View>
     </SafeAreaView>
