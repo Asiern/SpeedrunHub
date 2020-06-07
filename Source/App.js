@@ -1,5 +1,6 @@
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 import Home from "./app/screens/Home";
+import Search from "./app/screens/Search";
 import color from "./app/config/colors";
 
 import * as React from "react";
@@ -38,11 +39,7 @@ function AccountScreen() {
 }
 
 function SearchScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Search</Text>
-    </View>
-  );
+  return <Search />;
 }
 
 function SettingsScreen() {
