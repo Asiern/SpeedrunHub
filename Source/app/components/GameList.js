@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Image, Text, ActivityIndicator } from "react-native";
-import config from "../config/config.json";
 import colors from "../config/colors";
 import { color } from "react-native-reanimated";
 import ds from "../assets/json/ds.json";
@@ -10,6 +9,10 @@ class GameList extends Component {
     this.state = {
       isLoading: true,
       dataSource: null,
+      id: this.props.id,
+      name: this.props.name,
+      cover:
+        "https://www.speedrun.com/themes/" + this.props.name + "/cover-128.png",
     };
   }
 
@@ -21,12 +24,12 @@ class GameList extends Component {
             <Image
               style={styles.coverimage}
               source={{
-                uri: "https://www.speedrun.com/themes/darksouls/cover-128.png",
+                uri: this.state.cover,
               }}
             ></Image>
           </View>
           <View style={styles.paragraph}>
-            <Text style={styles.title}>{ds.data.names.international}</Text>
+            <Text style={styles.title}>{this.props.name}</Text>
             <Text style={styles.text}>{ds.data["release-date"]}</Text>
           </View>
         </View>
