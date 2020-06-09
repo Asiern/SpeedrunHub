@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import Constants from "expo-constants";
 import color from "../config/colors";
-import GameList from "../components/GameList";
+import GameList from "../components/GameCard";
 import colors from "../config/colors";
 
 function wait(timeout) {
