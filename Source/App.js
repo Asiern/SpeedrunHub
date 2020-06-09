@@ -1,23 +1,13 @@
-import WelcomeScreen from "./app/screens/WelcomeScreen";
 import Home from "./app/screens/Home";
 import Search from "./app/screens/Search";
+import Test from "./app/screens/test";
 import color from "./app/config/colors";
 
 import * as React from "react";
-import { Text, View, Image } from "react-native";
+import { Text, View, Image, StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Constants from "expo-constants";
 
-//ICONS
-import {
-  StarOutlined,
-  StarFilled,
-  StarTwoTone,
-  SafeAreaView,
-  ScrollView,
-  RefreshControl,
-} from "@ant-design/icons";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 //SCROLL
@@ -44,8 +34,14 @@ function SearchScreen() {
 
 function SettingsScreen() {
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Settings</Text>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Test />
     </View>
   );
 }
