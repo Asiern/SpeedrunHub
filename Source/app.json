@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Speedrun.com",
-    "slug": "Speedrun.com",
+    "name": "Speedrun",
+    "slug": "Speedrun",
     "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
