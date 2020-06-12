@@ -1,86 +1,71 @@
 import React from "react";
-import {
-  ScrollView,
-  RefreshControl,
-  StyleSheet,
-  Text,
-  SafeAreaView,
-  View,
-  Image,
-} from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import Constants from "expo-constants";
-import color from "../config/colors";
-import GameList from "../components/GameCard";
+import GameCard from "../components/GameCard";
+import User from "../components/User";
 import colors from "../config/colors";
 
-function wait(timeout) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, timeout);
-  });
-}
-
 export default function Home() {
-  const [refreshing, setRefreshing] = React.useState(false);
-
-  const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
-
-    wait(2000).then(() => setRefreshing(false));
-  }, [refreshing]);
-
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.banner}>
-        <Image
-          style={styles.logo}
-          source={require("../assets/trophy.png")}
-        ></Image>
-        <Image style={styles.s} source={require("../assets/logo.png")}></Image>
+    <ScrollView style={styles.container}>
+      <View style={styles.profile}>
+        <User />
       </View>
-      <View style={styles.scrollViewContainer}>
-        <ScrollView style={styles.scrollView}>
-          <GameList id={"w6jve26j"} name={"darksouls"} />
-          <GameList id={"m1zky010"} name={"darksouls2"} />
-          <GameList id={"k6qg0xdg"} name={"darksouls3"} />
-          <GameList id={"o1y5nvdq"} name={"nier"} />
-          <GameList id={"76rkwed8"} name={"na"} />
+      <View style={{ paddingVertical: 20 }}></View>
+      <Text style={styles.headertext}>Followed Games</Text>
+      <View style={styles.gamelist}>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          <GameCard id={"w6jve26j"} name={"darksouls"} />
+          <GameCard id={"76rkwed8"} name={"na"} />
+          <GameCard id={"o1y5nvdq"} name={"nier"} />
+          <GameCard id={"m1zky010"} name={"darksouls2"} />
         </ScrollView>
       </View>
-    </SafeAreaView>
+      <View style={{ paddingVertical: 20 }}></View>
+      <Text style={styles.headertext}>Popular Games</Text>
+      <View style={styles.populargames}>
+        <View style={styles.gamelist}>
+          <GameCard id={"w6jve26j"} name={"darksouls"} />
+          <GameCard id={"76rkwed8"} name={"na"} />
+          <GameCard id={"o1y5nvdq"} name={"nier"} />
+          <GameCard id={"m1zky010"} name={"darksouls2"} />
+        </View>
+        <View style={styles.gamelist}>
+          <GameCard id={"w6jve26j"} name={"darksouls"} />
+          <GameCard id={"76rkwed8"} name={"na"} />
+          <GameCard id={"o1y5nvdq"} name={"nier"} />
+          <GameCard id={"m1zky010"} name={"darksouls2"} />
+        </View>
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: Constants.statusBarHeight,
+    //marginTop: Constants.statusBarHeight,
     backgroundColor: colors.light,
   },
-  scrollViewContainer: {
-    flex: 1,
+  profile: {
+    backgroundColor: colors.secondary,
+    marginTop: Constants.statusBarHeight,
+    height: 100,
   },
-  scrollView: {
+  gamelist: {
     flex: 1,
-  },
-  banner: {
-    height: 80,
-    flexDirection: "row",
-    width: "100%",
-    backgroundColor: colors.primary,
+    padding: 10,
+    alignContent: "center",
     alignItems: "center",
-    justifyContent: "space-evenly",
   },
-  text: {
-    color: colors.white,
+  headertext: {
+    color: colors.darkgrey,
+    fontSize: 20,
+    paddingLeft: 20,
     fontWeight: "bold",
-    fontSize: 30,
   },
-  logo: {
-    height: 40,
-    width: 40,
-  },
-  s: {
-    height: 15,
-    width: 250,
+  populargames: {
+    flex: 1,
+    flexDirection: "row",
   },
 });
