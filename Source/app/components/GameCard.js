@@ -1,14 +1,11 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Image, Text, ActivityIndicator } from "react-native";
+import { StyleSheet, View, Text, ImageBackground } from "react-native";
 import colors from "../config/colors";
-import { color } from "react-native-reanimated";
-import ds from "../assets/json/ds.json";
+
 class GameCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: true,
-      dataSource: null,
       id: this.props.id,
       name: this.props.name,
       cover:
@@ -19,70 +16,33 @@ class GameCard extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.game}>
-          <View style={styles.cover}>
-            <Image
-              style={styles.coverimage}
-              source={{
-                uri: this.state.cover,
-              }}
-            ></Image>
-          </View>
-          <View style={styles.paragraph}>
-            <Text style={styles.title}>{this.props.name}</Text>
-            <Text style={styles.text}>{ds.data["release-date"]}</Text>
-          </View>
-        </View>
+        <ImageBackground
+          source={{ uri: this.state.cover }}
+          style={styles.image}
+        ></ImageBackground>
       </View>
     );
   }
 }
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.light,
-    padding: 1,
-    width: 300,
-    alignItems: "center",
-    alignSelf: "center",
-  },
-  game: {
+    padding: 10,
     flex: 1,
+    width: 150,
+    height: 200,
+  },
+  image: {
+    borderRadius: 20,
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center",
     flexDirection: "row",
-    alignContent: "space-between",
-    paddingVertical: 20,
-    paddingLeft: 20,
-    width: 400,
+  },
+  titlecontainer: {
+    justifyContent: "flex-end",
     backgroundColor: colors.white,
-    alignItems: "center",
   },
-  title: {
-    fontWeight: "bold",
-    fontSize: 20,
-    alignSelf: "center",
-  },
-  text: {
-    alignSelf: "center",
-  },
-  cover: {
-    width: 80,
-    height: 120,
-    alignContent: "center",
-    backgroundColor: colors.secondary,
-    padding: 2,
-  },
-  coverimage: {
-    flex: 1,
-  },
-  paragraph: {
-    alignContent: "space-between",
-    flexDirection: "column",
-    flex: 1,
-    height: 120,
-    marginHorizontal: 20,
-    fontSize: 18,
-    fontWeight: "bold",
-    textAlign: "center",
-  },
+  title: { fontSize: 15, fontWeight: "bold", color: colors.secondary },
 });
 
 export default GameCard;
