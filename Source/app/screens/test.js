@@ -11,11 +11,12 @@ import {
 } from "react-native";
 import Constants from "expo-constants";
 import colors from "../config/colors";
-import { color } from "react-native-reanimated";
-import { ScrollView } from "react-native-gesture-handler";
+import {
+  ScrollView,
+  State,
+  TapGestureHandler,
+} from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/Ionicons";
-import { Colors } from "react-native/Libraries/NewAppScreen";
-
 const cover = {
   uri: "https://www.speedrun.com/themes/darksouls/cover-256.png",
 };
@@ -27,96 +28,76 @@ const black = {
   uri:
     "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.telerik.com%2Fclientsfiles%2F287558_TestCase11772-B-07-25-2011-11-25-31-9633.png%3Fsfvrsn%3D58f4aa62_0&f=1&nofb=1",
 };
+var cata = "Any%";
+
 export default function Test() {
   return (
-    <ScrollView style={styles.scrollViewContainer}>
-      <View style={styles.info}>
-        <ImageBackground source={na} style={styles.bgimage}>
-          <View style={styles.buttons}>
-            <View style={styles.button}>
-              <Icon name="ios-arrow-back" color={colors.white} size={35} />
+    <TapGestureHandler>
+      <ScrollView style={styles.scrollViewContainer}>
+        <View style={styles.info}>
+          <ImageBackground source={na} style={styles.bgimage}>
+            <View style={styles.buttons}>
+              <View style={styles.button}>
+                <Icon name="ios-arrow-back" color={colors.white} size={35} />
+              </View>
+              <View style={styles.button}>
+                <Icon name="ios-options" color={colors.white} size={40} />
+              </View>
             </View>
-            <View style={styles.button}>
-              <Icon name="ios-options" color={colors.white} size={40} />
+
+            <View style={styles.cover}>
+              <Image source={cover} style={styles.coverimg}></Image>
+              <Text style={styles.title}>Dark Souls</Text>
+              <Text style={styles.text}>12-12-2012</Text>
             </View>
-          </View>
+          </ImageBackground>
+        </View>
 
-          <View style={styles.cover}>
-            <Image source={cover} style={styles.coverimg}></Image>
-            <Text style={styles.title}>Dark Souls</Text>
-            <Text style={styles.text}>12-12-2012</Text>
+        <ScrollView style={styles.categoriesScrollView} horizontal={true}>
+          <View style={styles.categories}>
+            <Button
+              onPress={() => (cata = "Any%")}
+              title="Any%"
+              color="#0F7A4D"
+              accessibilityLabel="Learn more about this purple button"
+            />
           </View>
-        </ImageBackground>
-      </View>
-
-      <ScrollView style={styles.categoriesScrollView} horizontal={true}>
-        <View style={styles.categories}>
-          <Button
-            onPress={() => Alert.alert("Simple Button pressed")}
-            title="Any%"
-            color="#841584"
-            accessibilityLabel="Learn more about this purple button"
-          />
-        </View>
-        <View style={styles.categories}>
-          <Button
-            onPress={() => Alert.alert("Simple Button pressed")}
-            title="Any% No Wrong Warp"
-            color="#841584"
-            accessibilityLabel="Learn more about this purple button"
-          />
-        </View>
-        <View style={styles.categories}>
-          <Button
-            onPress={() => Alert.alert("Simple Button pressed")}
-            title="Any% Force Quit"
-            color="#841584"
-            accessibilityLabel="Learn more about this purple button"
-          />
-        </View>
-        <View style={styles.categories}>
-          <Button
-            onPress={() => Alert.alert("Simple Button pressed")}
-            title="All Bosses"
-            color="#841584"
-            accessibilityLabel="Learn more about this purple button"
-          />
-        </View>
-        <View style={styles.categories}>
-          <Button
-            onPress={() => Alert.alert("Simple Button pressed")}
-            title="All Achievements"
-            color="#841584"
-            accessibilityLabel="Learn more about this purple button"
-          />
-        </View>
+          <View style={styles.categories}>
+            <Button
+              onPress={() => (cata = "Any% No Wrong Warp")}
+              title="Any% No Wrong Warp"
+              color="#0F7A4D"
+              accessibilityLabel="Learn more about this purple button"
+            />
+          </View>
+          <View style={styles.categories}>
+            <Button
+              onPress={() => Alert.alert("Simple Button pressed")}
+              title="Any% Force Quit"
+              color="#0F7A4D"
+              accessibilityLabel="Learn more about this purple button"
+            />
+          </View>
+          <View style={styles.categories}>
+            <Button
+              onPress={() => Alert.alert("Simple Button pressed")}
+              title="All Bosses"
+              color="#0F7A4D"
+              accessibilityLabel="Learn more about this purple button"
+            />
+          </View>
+          <View style={styles.categories}>
+            <Button
+              onPress={() => Alert.alert("Simple Button pressed")}
+              title="All Achievements"
+              color="#0F7A4D"
+              accessibilityLabel="Learn more about this purple button"
+            />
+          </View>
+        </ScrollView>
+        <View style={styles.leaderboard}></View>
       </ScrollView>
-      <View style={styles.leaderboard}>
-        <Text>asdijasoidijasoidjoais</Text>
-        <Text>asdijasoidijasoidjoais</Text>
-        <Text>asdijasoidijasoidjoais</Text>
-        <Text>asdijasoidijasoidjoais</Text>
-        <Text>asdijasoidijasoidjoais</Text>
-        <Text>asdijasoidijasoidjoais</Text>
-        <Text>asdijasoidijasoidjoais</Text>
-        <Text>asdijasoidijasoidjoais</Text>
-        <Text>asdijasoidijasoidjoais</Text>
-        <Text>asdijasoidijasoidjoais</Text>
-        <Text>asdijasoidijasoidjoais</Text>
-        <Text>asdijasoidijasoidjoais</Text>
-        <Text>asdijasoidijasoidjoais</Text>
-        <Text>asdijasoidijasoidjoais</Text>
-        <Text>asdijasoidijasoidjoais</Text>
-        <Text>asdijasoidijasoidjoais</Text>
-        <Text>asdijasoidijasoidjoais</Text>
-        <Text>asdijasoidijasoidjoais</Text>
-        <Text>asdijasoidijasoidjoais</Text>
-        <Text>asdijasoidijasoidjoais</Text>
-        <Text>asdijasoidijasoidjoais</Text>
-        <Text>asdijasoidijasoidjoais</Text>
-        <Text>asdijasoidijasoidjoais</Text>
-      </View>
-    </ScrollView>
+    </TapGestureHandler>
   );
 }
 
