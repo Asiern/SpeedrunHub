@@ -9,6 +9,10 @@ class User extends Component {
     this.state = {
       isLoading: true,
       username: this.props.username,
+      userpicture:
+        "https://www.speedrun.com/themes/user/" +
+        this.props.username +
+        "/image.png",
     };
   }
 
@@ -17,14 +21,16 @@ class User extends Component {
       <View style={styles.container}>
         <View style={styles.imagecontainer}>
           <Image
-            source={require("../assets/asiern.png")}
+            source={{
+              uri: this.state.userpicture,
+            }}
             style={styles.Image}
           ></Image>
         </View>
 
         <View style={styles.textcontainer}>
           <Text style={styles.welcome}>Welcome back,</Text>
-          <Text style={styles.usename}>Asiern</Text>
+          <Text style={styles.usename}>{this.state.username}</Text>
         </View>
 
         <View style={styles.iconcontainer}>
@@ -48,15 +54,14 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   Image: {
-    maxHeight: 50,
-    maxWidth: 50,
-    backgroundColor: colors.light,
-    borderColor: colors.secondary,
+    height: 50,
+    width: 50,
+    borderColor: colors.primary,
+    borderWidth: 1,
     borderRadius: 30,
   },
   imagecontainer: {
     flex: 1,
-
     alignItems: "center",
     alignContent: "center",
     justifyContent: "center",
