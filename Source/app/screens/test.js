@@ -1,34 +1,12 @@
 import React from "react";
-import {
-  StyleSheet,
-  SafeAreaView,
-  ImageBackground,
-  View,
-  Text,
-  Image,
-  Button,
-  Alert,
-} from "react-native";
+import { StyleSheet, View, Text, Image, Button, Alert } from "react-native";
 import Constants from "expo-constants";
 import colors from "../config/colors";
-import {
-  ScrollView,
-  State,
-  TapGestureHandler,
-} from "react-native-gesture-handler";
-import Icon from "react-native-vector-icons/Ionicons";
-import Home from "./Home";
+import { ScrollView, TapGestureHandler } from "react-native-gesture-handler";
 const cover = {
   uri: "https://www.speedrun.com/themes/darksouls/cover-256.png",
 };
-const na = {
-  uri: "https://www.speedrun.com/themes/darksouls/cover-256.png",
-  style: { opacity: 0.4 },
-};
-const black = {
-  uri:
-    "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.telerik.com%2Fclientsfiles%2F287558_TestCase11772-B-07-25-2011-11-25-31-9633.png%3Fsfvrsn%3D58f4aa62_0&f=1&nofb=1",
-};
+
 var cata = "Any%";
 
 export default function Test() {
@@ -36,27 +14,11 @@ export default function Test() {
     <TapGestureHandler>
       <ScrollView style={styles.scrollViewContainer}>
         <View style={styles.info}>
-          <ImageBackground source={na} style={styles.bgimage}>
-            <View style={styles.buttons}>
-              <View style={styles.button}>
-                <Icon
-                  name="ios-arrow-back"
-                  color={colors.white}
-                  size={35}
-                  onPress={() => {}}
-                />
-              </View>
-              <View style={styles.button}>
-                <Icon name="ios-options" color={colors.white} size={40} />
-              </View>
-            </View>
-
-            <View style={styles.cover}>
-              <Image source={cover} style={styles.coverimg}></Image>
-              <Text style={styles.title}>Dark Souls</Text>
-              <Text style={styles.text}>12-12-2012</Text>
-            </View>
-          </ImageBackground>
+          <View style={styles.cover}>
+            <Image source={cover} style={styles.coverimg}></Image>
+            <Text style={styles.title}>Dark Souls</Text>
+            <Text style={styles.text}>12-12-2012</Text>
+          </View>
         </View>
 
         <ScrollView style={styles.categoriesScrollView} horizontal={true}>
@@ -161,10 +123,11 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   info: {
-    height: 600,
+    height: 500,
     alignSelf: "stretch",
+    alignItems: "center",
     justifyContent: "center",
-    backgroundColor: colors.black,
+    backgroundColor: colors.light,
   },
   buttons: {
     marginTop: Constants.statusBarHeight,
@@ -193,13 +156,13 @@ const styles = StyleSheet.create({
     width: 150,
   },
   title: {
-    color: colors.white,
+    color: colors.secondary,
     alignSelf: "center",
     fontSize: 20,
     fontWeight: "bold",
   },
   text: {
-    color: colors.white,
+    color: colors.secondary,
     alignSelf: "center",
   },
   categoriesScrollView: {
