@@ -1,9 +1,18 @@
 import React, { Component } from "react";
-import { ScrollView, StyleSheet, Text, View, Modal } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  Modal,
+  Button,
+} from "react-native";
 import Constants from "expo-constants";
 import GameCard from "../components/GameCard";
+import Test from "./test";
 import User from "../components/User";
 import colors from "../config/colors";
+import Icon from "react-native-vector-icons/Ionicons";
 
 class Home extends React.Component {
   constructor() {
@@ -15,7 +24,20 @@ class Home extends React.Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Modal visible={this.state.show}></Modal>
+        <Modal visible={this.state.show} style={{ padding: 20 }}>
+          <View style={styles.modalbuttons}>
+            <Icon
+              name="ios-arrow-back"
+              color={colors.secondary}
+              size={40}
+              onPress={() => {
+                this.setState({ show: false });
+              }}
+            />
+            <Icon name="ios-options" color={colors.secondary} size={40} />
+          </View>
+          <Test />
+        </Modal>
         <ScrollView style={styles.container}>
           <View style={styles.profile}>
             <User username={"Asiern"} />
@@ -65,6 +87,14 @@ const styles = StyleSheet.create({
     backgroundColor: colors.secondary,
     marginTop: Constants.statusBarHeight,
     height: 100,
+  },
+  modalbuttons: {
+    height: 50,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: 20,
+    backgroundColor: colors.light,
   },
   gamelist: {
     flex: 1,
