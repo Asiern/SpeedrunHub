@@ -20,16 +20,20 @@ function wait(timeout) {
 function HomeScreen() {
   return <Home />;
 }
-function AccountScreen() {
+function ProfileScreen() {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Account</Text>
+      <Text>Profile</Text>
     </View>
   );
 }
 
 function SearchScreen() {
-  return <Search />;
+  return (
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Text>Search</Text>
+    </View>
+  );
 }
 
 function SettingsScreen() {
@@ -62,7 +66,7 @@ export default function App() {
               iconName = focused ? "ios-list-box" : "ios-list";
             } else if (route.name === "Search") {
               iconName = focused ? "ios-search" : "ios-search";
-            } else if (route.name === "Account") {
+            } else if (route.name === "Profile") {
               iconName = focused ? "ios-list-box" : "ios-list-box";
             }
 
@@ -76,7 +80,7 @@ export default function App() {
         }}
       >
         <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Account" component={AccountScreen} />
+        <Tab.Screen name="Profile" component={ProfileScreen} />
         <Tab.Screen name="Search" component={SearchScreen} />
         <Tab.Screen name="Settings" component={SettingsScreen} />
       </Tab.Navigator>
