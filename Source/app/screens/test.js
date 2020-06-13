@@ -17,6 +17,7 @@ import {
   TapGestureHandler,
 } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/Ionicons";
+import Home from "./Home";
 const cover = {
   uri: "https://www.speedrun.com/themes/darksouls/cover-256.png",
 };
@@ -38,7 +39,12 @@ export default function Test() {
           <ImageBackground source={na} style={styles.bgimage}>
             <View style={styles.buttons}>
               <View style={styles.button}>
-                <Icon name="ios-arrow-back" color={colors.white} size={35} />
+                <Icon
+                  name="ios-arrow-back"
+                  color={colors.white}
+                  size={35}
+                  onPress={() => {}}
+                />
               </View>
               <View style={styles.button}>
                 <Icon name="ios-options" color={colors.white} size={40} />
@@ -95,7 +101,51 @@ export default function Test() {
             />
           </View>
         </ScrollView>
-        <View style={styles.leaderboard}></View>
+        <View style={styles.leaderboard}>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+          <Text>asjdhnasiudnas</Text>
+        </View>
       </ScrollView>
     </TapGestureHandler>
   );
@@ -107,7 +157,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
   },
   scrollViewContainer: {
-    marginTop: Constants.statusBarHeight,
     flex: 1,
     alignSelf: "stretch",
   },
