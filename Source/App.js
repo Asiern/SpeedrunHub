@@ -1,4 +1,5 @@
 import Home from "./app/screens/Home";
+import Profile from "./app/screens/Profile";
 import Search from "./app/screens/Search";
 import Test from "./app/screens/test";
 import color from "./app/config/colors";
@@ -21,11 +22,7 @@ function HomeScreen() {
   return <Home />;
 }
 function ProfileScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Profile</Text>
-    </View>
-  );
+  return <Profile />;
 }
 
 function SearchScreen() {
