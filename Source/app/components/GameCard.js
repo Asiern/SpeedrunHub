@@ -9,7 +9,7 @@ class GameCard extends Component {
       id: this.props.id,
       name: this.props.name,
       cover:
-        "https://www.speedrun.com/themes/" + this.props.name + "/cover-128.png",
+        "https://www.speedrun.com/themes/" + this.props.name + "/cover-256.png",
     };
   }
 
@@ -38,11 +38,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "row",
   },
-  titlecontainer: {
-    justifyContent: "flex-end",
-    backgroundColor: colors.white,
-  },
-  title: { fontSize: 15, fontWeight: "bold", color: colors.secondary },
 });
 
 export default GameCard;
