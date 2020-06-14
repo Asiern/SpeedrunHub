@@ -1,5 +1,12 @@
-import React, { Component } from "react";
-import { ScrollView, StyleSheet, Text, View, Modal } from "react-native";
+import React, { Component, useState } from "react";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  Modal,
+  TextInput,
+} from "react-native";
 import GameCard from "../components/GameCard";
 import colors from "../config/colors";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -14,11 +21,15 @@ class Profile extends React.Component {
       show: false,
     };
   }
+
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.profile}>
           <User username={user.name} />
+        </View>
+        <View>
+          <Text style={styles.headertext}>Runs</Text>
         </View>
       </View>
     );
@@ -35,6 +46,12 @@ const styles = StyleSheet.create({
     backgroundColor: colors.secondary,
     marginTop: Constants.statusBarHeight,
     height: 100,
+  },
+  headertext: {
+    color: colors.darkgrey,
+    fontSize: 20,
+    paddingLeft: 20,
+    fontWeight: "bold",
   },
 });
 
