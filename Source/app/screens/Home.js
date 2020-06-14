@@ -13,6 +13,7 @@ import Test from "./test";
 import User from "../components/User";
 import colors from "../config/colors";
 import Icon from "react-native-vector-icons/Ionicons";
+import user from "../config/user";
 
 class Home extends React.Component {
   constructor() {
@@ -40,7 +41,7 @@ class Home extends React.Component {
         </Modal>
         <ScrollView style={styles.container}>
           <View style={styles.profile}>
-            <User username={"Asiern"} />
+            <User username={user.name} />
           </View>
           <View style={{ paddingVertical: 20 }}></View>
           <Text style={styles.headertext}>Followed Games</Text>
