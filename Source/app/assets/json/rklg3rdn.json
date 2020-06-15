@@ -1,0 +1,122 @@
+{
+  "data": {
+    "weblink": "https://www.speedrun.com/aoe2/full_game#All_Campaigns",
+    "game": "xldev513",
+    "category": "rklg3rdn",
+    "level": null,
+    "platform": null,
+    "region": null,
+    "emulators": null,
+    "video-only": false,
+    "timing": "realtime",
+    "values": {},
+    "runs": [
+      {
+        "place": 1,
+        "run": {
+          "id": "yw1nj0nz",
+          "weblink": "https://www.speedrun.com/aoe2/run/yw1nj0nz",
+          "game": "xldev513",
+          "level": null,
+          "category": "rklg3rdn",
+          "videos": {
+            "links": [{ "uri": "https://www.youtube.com/watch?v=F1z59gYX7Jk" }]
+          },
+          "comment": "Bad levels:\r\nJoA5 - Transport ship never landed, so no trigger for the end never loaded?\r\nSala2 - Bad ships\r\nBB3  - Myself playing super bad\r\nAtt1 -  Destroy monastery then market. noted.\r\nMonte 2 - Bad luck on the red army killing my rams and bad play.\r\nHastings - Needed to play it on AoE2HD not AoC\r\nVindlandsaga - Longboats wrecked me.",
+          "status": {
+            "status": "verified",
+            "examiner": "v18q6wjn",
+            "verify-date": "2018-01-05T03:22:57Z"
+          },
+          "players": [
+            {
+              "rel": "user",
+              "id": "18vqvejl",
+              "uri": "https://www.speedrun.com/api/v1/users/18vqvejl"
+            }
+          ],
+          "date": "2018-01-02",
+          "submitted": "2018-01-02T22:04:03Z",
+          "times": {
+            "primary": "PT7H3M43S",
+            "primary_t": 25423,
+            "realtime": "PT7H3M43S",
+            "realtime_t": 25423,
+            "realtime_noloads": null,
+            "realtime_noloads_t": 0,
+            "ingame": null,
+            "ingame_t": 0
+          },
+          "system": {
+            "platform": "8gej2n93",
+            "emulated": false,
+            "region": null
+          },
+          "splits": {
+            "rel": "splits.io",
+            "uri": "https://splits.io/api/v3/runs/23gp"
+          },
+          "values": { "m5ly6jn4": "xqke89q9" }
+        }
+      },
+      {
+        "place": 2,
+        "run": {
+          "id": "pzgkj6ey",
+          "weblink": "https://www.speedrun.com/aoe2/run/pzgkj6ey",
+          "game": "xldev513",
+          "level": null,
+          "category": "rklg3rdn",
+          "videos": {
+            "links": [
+              { "uri": "http://www.twitch.tv/adam_ak/v/4191464" },
+              { "uri": "http://www.twitch.tv/adam_ak/v/4191449" }
+            ]
+          },
+          "comment": "part 2: http://www.twitch.tv/adam_ak/v/4191464\r\n\r\nResult of the race with Mhmd and Dawned. Montezuma and BoC were a mess -- rest was OK. Will improve :v)",
+          "status": {
+            "status": "verified",
+            "examiner": "v18q6wjn",
+            "verify-date": "2015-05-10T12:09:40Z"
+          },
+          "players": [
+            {
+              "rel": "user",
+              "id": "gpj0mxwr",
+              "uri": "https://www.speedrun.com/api/v1/users/gpj0mxwr"
+            }
+          ],
+          "date": "2015-04-11",
+          "submitted": "2015-04-20T13:41:10Z",
+          "times": {
+            "primary": "PT27H55M24S",
+            "primary_t": 100524,
+            "realtime": "PT27H55M24S",
+            "realtime_t": 100524,
+            "realtime_noloads": null,
+            "realtime_noloads_t": 0,
+            "ingame": null,
+            "ingame_t": 0
+          },
+          "system": {
+            "platform": "8gej2n93",
+            "emulated": false,
+            "region": null
+          },
+          "splits": null,
+          "values": { "m5ly6jn4": "p12z471x" }
+        }
+      }
+    ],
+    "links": [
+      {
+        "rel": "game",
+        "uri": "https://www.speedrun.com/api/v1/games/xldev513"
+      },
+      {
+        "rel": "category",
+        "uri": "https://www.speedrun.com/api/v1/categories/rklg3rdn"
+      }
+    ]
+  }
+}
