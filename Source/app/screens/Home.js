@@ -11,6 +11,7 @@ import Constants from "expo-constants";
 import GameCard from "../components/GameCard";
 import Test from "./test";
 import User from "../components/User";
+import Leaderboard from "../components/Leaderboard";
 import colors from "../config/colors";
 import Icon from "react-native-vector-icons/Ionicons";
 import user from "../config/user";
@@ -77,7 +78,9 @@ class Home extends React.Component {
           </View>
           <View style={{ paddingVertical: 20 }}></View>
           <Text style={styles.headertext}>Latest Runs</Text>
-          <View style={styles.populargames}></View>
+          <View style={styles.populargames}>
+            <Leaderboard />
+          </View>
         </ScrollView>
       </View>
     );
