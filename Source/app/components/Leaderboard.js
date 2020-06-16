@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Image, Text, Alert } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Image,
+  Text,
+  Alert,
+  ActivityIndicator,
+  ImageBackground,
+} from "react-native";
 import colors from "../config/colors";
 import Icon from "react-native-vector-icons/Ionicons";
 import data from "../assets/json/Any%Leaderboard.json";
@@ -10,7 +18,8 @@ class Leaderboard extends Component {
     super(props);
     this.state = {
       isLoading: true,
-      dataSource: "",
+      dataSource: [],
+      name: this.props.name,
     };
   }
   getData() {
@@ -19,8 +28,8 @@ class Leaderboard extends Component {
     )
       .then((response) => response.json())
       .then((responseJson) => {
-        console.log(responseJson.data.runs);
-        this.setState({ dataSource: responseJson.data.runs });
+        //console.log(responseJson.data.runs);
+        this.setState({ dataSource: responseJson.data.runs, isLoading: false });
       })
       .catch((error) => {
         console.error(error);
@@ -30,16 +39,66 @@ class Leaderboard extends Component {
     this.getData();
   }
   render() {
-    return <Run data={this.state.dataSource} />;
+    if (this.state.isLoading) {
+      <ActivityIndicator />;
+    }
+    return (
+      <View
+        style={{
+          alignItems: "center",
+          alignSelf: "center",
+          paddingVertical: 20,
+        }}
+      >
+        <View style={styles.container}>
+          <View style={styles.banner}>
+            <ImageBackground
+              source={{
+                uri:
+                  "https://www.speedrun.com/themes/" +
+                  this.state.name +
+                  "/cover-256.png",
+              }}
+              style={styles.image}
+            >
+              <Text style={styles.title}>{this.state.name}</Text>
+            </ImageBackground>
+          </View>
+          <Run data={this.state.dataSource} />
+          <Run data={this.state.dataSource} />
+        </View>
+      </View>
+    );
   }
 }
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.light,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
     flex: 1,
-    flexDirection: "row",
     alignItems: "center",
     alignSelf: "center",
+  },
+  banner: {
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    height: 60,
+    alignSelf: "stretch",
+    justifyContent: "center",
+  },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center",
+    flexDirection: "row",
+    opacity: 1,
+  },
+  title: {
+    alignSelf: "center",
+    color: colors.white,
+    fontSize: 25,
+    fontWeight: "bold",
   },
 });
 
