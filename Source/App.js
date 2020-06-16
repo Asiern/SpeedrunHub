@@ -1,6 +1,7 @@
 import Home from "./app/screens/Home";
 import Profile from "./app/screens/Profile";
 import Search from "./app/screens/Search";
+import Settings from "./app/screens/Settings";
 import Test from "./app/screens/test";
 import color from "./app/config/colors";
 
@@ -34,17 +35,7 @@ function SearchScreen() {
 }
 
 function SettingsScreen() {
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Test />
-    </View>
-  );
+  return <Settings />;
 }
 
 const Tab = createBottomTabNavigator();
