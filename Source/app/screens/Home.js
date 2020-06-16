@@ -79,7 +79,13 @@ class Home extends React.Component {
           <View style={{ paddingVertical: 20 }}></View>
           <Text style={styles.headertext}>Latest Runs</Text>
           <View style={styles.populargames}>
-            <Leaderboard />
+            <Leaderboard name={"darksouls"} />
+          </View>
+          <View style={styles.populargames}>
+            <Leaderboard name={"na"} />
+          </View>
+          <View style={styles.populargames}>
+            <Leaderboard name={"darksouls3"} />
           </View>
         </ScrollView>
       </View>
