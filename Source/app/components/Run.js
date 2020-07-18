@@ -24,19 +24,42 @@ export default class Run extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      category: this.props.category,
+      categoryid: this.props.category,
+      category: "",
       place: this.props.place,
       time: this.props.time,
       runner: this.props.runner,
+      cover: "https://www.speedrun.com/themes/oot/cover-128.png",
       game: [],
       loading: true,
+      abbreviation: "darksouls",
     };
   }
+  fetchCategory() {
+    fetch("https://www.speedrun.com/api/v1/categories/" + this.state.categoryid)
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.state.category = responseJson.data.name;
+      })
+      .catch((error) => {
+        console.log("Data fetching failed");
+      });
+  }
   async componentDidMount() {
-    const url = "https://www.speedrun.com/api/v1/games/76rkwed8";
+    const url = "https://www.speedrun.com/api/v1/games/" + this.props.gameid;
     const response = await fetch(url);
     const data = await response.json();
-    this.setState({ loading: false, game: data.data });
+
+    this.setState({
+      loading: false,
+      game: data.data,
+    });
+    //this.setState({ abbreviation: this.state.game.abbreviation.toString() });
+    const coveruri = this.state.game.assets.logo.uri;
+    this.setState({ cover: coveruri });
+  }
+  componentWillMount() {
+    this.fetchCategory();
   }
 
   render() {
@@ -45,11 +68,10 @@ export default class Run extends Component {
         <View style={styles.container}>
           <Image
             style={styles.cover}
-            source={{ uri: "https://www.speedrun.com/themes/na/cover-256.png" }}
+            source={{ uri: this.state.cover }}
           ></Image>
-          <Text style={styles.text}>{this.state.game.abbreviation}</Text>
+          <Text style={styles.text}>{this.state.category}</Text>
           <Text style={styles.accenttext}>{this.state.place}</Text>
-          <Text style={styles.text}>{this.state.runner}</Text>
           <Text style={styles.text}>{this.state.time}</Text>
         </View>
       </Content>
