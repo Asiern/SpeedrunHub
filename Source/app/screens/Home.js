@@ -20,7 +20,7 @@ class Home extends React.Component {
   constructor() {
     super();
     this.state = {
-      show: false,
+      show: true,
     };
     this._retrieveData();
   }
@@ -57,50 +57,15 @@ class Home extends React.Component {
           <View style={styles.profile}>
             <User username={user.name} />
           </View>
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            <View style={styles.button}>
-              <Text style={styles.buttontext}>My Profile</Text>
-            </View>
-            <View style={styles.button}>
-              <Text style={styles.buttontext}>My Runs</Text>
-            </View>
-            <View style={styles.button}>
-              <Text style={styles.buttontext}>Settings</Text>
-            </View>
-            <View style={styles.button}>
-              <Text style={styles.buttontext}>Settings</Text>
-            </View>
-            <View style={styles.button}>
-              <Text style={styles.buttontext}>Settings</Text>
-            </View>
-          </ScrollView>
           <View style={{ paddingVertical: 20 }}></View>
           <Text style={styles.headertext}>Followed Games</Text>
           <View style={styles.gamelist}>
-            <ScrollView
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-            >
-              <GameCard id={"w6jve26j"} name={"darksouls"} />
-              <GameCard id={"76rkwed8"} name={"na"} />
-              <GameCard id={"o1y5nvdq"} name={"nier"} />
-              <GameCard id={"m1zky010"} name={"darksouls2"} />
-              <GameCard id={"m1zky010"} name={"darksouls3"} />
-              <GameCard id={"m1zky010"} name={"oot"} />
-            </ScrollView>
-          </View>
-          <View style={{ paddingVertical: 20 }}></View>
-          <Text style={styles.headertext}>Latest Runs</Text>
-
-          <View style={styles.populargames}>
-            <Leaderboard name={"darksouls"} />
-          </View>
-
-          <View style={styles.populargames}>
-            <Leaderboard name={"na"} />
-          </View>
-          <View style={styles.populargames}>
-            <Leaderboard name={"darksouls3"} />
+            <GameCard id={"w6jve26j"} name={"darksouls"} />
+            <GameCard id={"76rkwed8"} name={"na"} />
+            <GameCard id={"o1y5nvdq"} name={"nier"} />
+            <GameCard id={"m1zky010"} name={"darksouls2"} />
+            <GameCard id={"m1zky010"} name={"darksouls3"} />
+            <GameCard id={"m1zky010"} name={"oot"} />
           </View>
         </ScrollView>
       </View>
