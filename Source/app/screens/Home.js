@@ -22,7 +22,20 @@ class Home extends React.Component {
     this.state = {
       show: false,
     };
+    this._retrieveData();
   }
+  _retrieveData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("name");
+      if (value !== null) {
+        // Our data is fetched successfully
+        console.log(value);
+      }
+    } catch (error) {
+      // Error retrieving data
+    }
+  };
+
   render() {
     return (
       <View style={{ flex: 1 }}>
@@ -78,9 +91,11 @@ class Home extends React.Component {
           </View>
           <View style={{ paddingVertical: 20 }}></View>
           <Text style={styles.headertext}>Latest Runs</Text>
+
           <View style={styles.populargames}>
             <Leaderboard name={"darksouls"} />
           </View>
+
           <View style={styles.populargames}>
             <Leaderboard name={"na"} />
           </View>
