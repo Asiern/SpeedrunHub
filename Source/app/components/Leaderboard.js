@@ -65,7 +65,6 @@ class Leaderboard extends Component {
             </ImageBackground>
           </View>
           <Run data={this.state.dataSource} />
-          <Run data={this.state.dataSource} />
         </View>
       </View>
     );
