@@ -7,6 +7,7 @@ import {
   Modal,
   TextInput,
   Image,
+  ImageBackground,
 } from "react-native";
 import GameCard from "../components/GameCard";
 import colors from "../config/colors";
@@ -14,63 +15,77 @@ import Icon from "react-native-vector-icons/Ionicons";
 import user from "../config/user";
 import User from "../components/User";
 import Constants from "expo-constants";
+import Run from "../components/Run";
+import Leaderboard from "../components/Leaderboard";
+
+const BG = {
+  uri:
+    "https://www.speedrun.com/themes/user/Asiern/background.png?version=46d4f3ee",
+};
 
 class Profile extends React.Component {
   constructor() {
     super();
     this.state = {
-      show: false,
+      loading: true,
       userpicture:
         "https://www.speedrun.com/themes/user/" + user.name + "/image.png",
+      runs: [],
     };
+  }
+  async componentDidMount() {
+    const url = "https://www.speedrun.com/api/v1/users/48g3q2rx/personal-bests";
+    const response = await fetch(url);
+    const data = await response.json();
+    this.setState({ loading: false, runs: data.data });
   }
 
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.profile}>
-          <View style={styles.imagecontainer}>
-            <Image
-              source={{
-                uri: this.state.userpicture,
-              }}
-              style={styles.Image}
-            ></Image>
-          </View>
+      <ScrollView style={styles.container}>
+        <ImageBackground style={styles.profileBG} source={BG}>
+          <View style={styles.profile}>
+            <View style={styles.imagecontainer}>
+              <Image
+                source={{
+                  uri: this.state.userpicture,
+                }}
+                style={styles.Image}
+              ></Image>
+            </View>
 
-          <View style={styles.userinfo}>
-            <View style={styles.userinfoitem}>
-              <Text style={styles.h1}>{user.name}</Text>
-              <Text style={styles.h2}>{user.country}</Text>
-            </View>
-            <View style={styles.socialbuttons}>
-              <ScrollView
-                horizontal={true}
-                showsHorizontalScrollIndicator={false}
-              >
-                <View style={styles.button}>
-                  <Text style={styles.buttontext}>Twitch</Text>
+            <View style={styles.userinfo}>
+              <View style={styles.userinfoitem}>
+                <Text style={styles.h1}>{user.name}</Text>
+                <View style={styles.country}>
+                  <View>
+                    <Image
+                      source={{
+                        uri: "https://www.speedrun.com/images/flags/es/pv.png",
+                      }}
+                      style={styles.flag}
+                    ></Image>
+                  </View>
+                  <View>
+                    <Text style={styles.h2}>{user.country}</Text>
+                  </View>
                 </View>
-                <View style={styles.button}>
-                  <Text style={styles.buttontext}>YouTube</Text>
-                </View>
-                <View style={styles.button}>
-                  <Text style={styles.buttontext}>Discord</Text>
-                </View>
-                <View style={styles.button}>
-                  <Text style={styles.buttontext}>Settings</Text>
-                </View>
-                <View style={styles.button}>
-                  <Text style={styles.buttontext}>Settings</Text>
-                </View>
-              </ScrollView>
+              </View>
             </View>
           </View>
-        </View>
+        </ImageBackground>
         <View style={styles.preferences}>
           <Text style={styles.headertext}>Runs</Text>
+          {this.state.runs.map((run) => (
+            <Run
+              category={run.run.category}
+              place={run.place}
+              runner={run.run.players[0].id}
+              time={"39m 07s"}
+            />
+          ))}
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -79,16 +94,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     //marginTop: Constants.statusBarHeight,
-    backgroundColor: colors.light,
+    backgroundColor: colors.white,
+  },
+  profileBG: {
+    flex: 1,
+    resizeMode: "cover",
+    paddingVertical: 20,
   },
   profile: {
-    backgroundColor: colors.light,
     marginTop: Constants.statusBarHeight,
-    flex: 2,
+    flex: 1,
+  },
+  country: {
+    flexDirection: "row",
+  },
+  flag: {
+    height: 18,
+    width: 25,
   },
   imagecontainer: {
-    flex: 2,
-    backgroundColor: colors.light,
+    flex: 1,
     alignContent: "center",
     justifyContent: "flex-end",
     alignItems: "center",
@@ -101,7 +126,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   userinfo: {
-    flex: 3,
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -112,14 +137,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   h1: {
-    paddingTop: 20,
-    color: colors.darkgrey,
+    color: colors.light,
     fontSize: 25,
     fontWeight: "bold",
     alignSelf: "center",
   },
   h2: {
-    color: colors.darkgrey,
+    color: colors.light,
     fontSize: 15,
     fontWeight: "bold",
     alignSelf: "center",
@@ -129,9 +153,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     paddingLeft: 20,
     fontWeight: "bold",
+    paddingVertical: 20,
   },
   preferences: {
-    flex: 3,
+    flex: 2,
   },
   button: {
     paddingHorizontal: 20,
