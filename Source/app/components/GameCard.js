@@ -19,6 +19,7 @@ class GameCard extends Component {
         <ImageBackground
           source={{ uri: this.state.cover }}
           style={styles.image}
+          imageStyle={{ borderRadius: 10 }}
         ></ImageBackground>
       </View>
     );
@@ -32,7 +33,6 @@ const styles = StyleSheet.create({
     height: 200,
   },
   image: {
-    borderRadius: 20,
     flex: 1,
     resizeMode: "cover",
     justifyContent: "center",

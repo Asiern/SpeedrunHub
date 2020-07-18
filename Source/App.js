@@ -63,7 +63,7 @@ export default function App() {
           },
         })}
         tabBarOptions={{
-          activeTintColor: color.primary,
+          activeTintColor: color.Crystalline1,
           inactiveTintColor: "gray",
         }}
       >

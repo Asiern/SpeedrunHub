@@ -6,6 +6,7 @@ import {
   Text,
   Alert,
   ImageBackground,
+  TouchableOpacityComponent,
 } from "react-native";
 import {
   Content,
@@ -27,14 +28,27 @@ export default class Run extends Component {
       place: this.props.place,
       time: this.props.time,
       runner: this.props.runner,
+      game: [],
+      loading: true,
     };
   }
+  async componentDidMount() {
+    const url = "https://www.speedrun.com/api/v1/games/76rkwed8";
+    const response = await fetch(url);
+    const data = await response.json();
+    this.setState({ loading: false, game: data.data });
+  }
+
   render() {
     return (
       <Content>
         <View style={styles.container}>
-          <Text style={styles.text}>{this.state.category}</Text>
-          <Text style={styles.text}>{this.state.place}</Text>
+          <Image
+            style={styles.cover}
+            source={{ uri: "https://www.speedrun.com/themes/na/cover-256.png" }}
+          ></Image>
+          <Text style={styles.text}>{this.state.game.abbreviation}</Text>
+          <Text style={styles.accenttext}>{this.state.place}</Text>
           <Text style={styles.text}>{this.state.runner}</Text>
           <Text style={styles.text}>{this.state.time}</Text>
         </View>
@@ -44,15 +58,30 @@ export default class Run extends Component {
 }
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 30,
+    paddingVertical: 20,
     flexDirection: "row",
     flex: 1,
     alignItems: "center",
     justifyContent: "space-evenly",
+    backgroundColor: colors.white,
+    marginTop: 10,
+    borderRadius: 10,
+    padding: 10,
   },
   text: {
     paddingHorizontal: 10,
+    paddingVertical: 10,
     fontSize: 15,
+  },
+  accenttext: {
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    fontSize: 15,
+    color: colors.Crystalline1,
+  },
+  cover: {
+    height: 60,
+    width: 45,
   },
 });
 module.export = Run;

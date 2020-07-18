@@ -14,7 +14,7 @@ import User from "../components/User";
 import Leaderboard from "../components/Leaderboard";
 import colors from "../config/colors";
 import Icon from "react-native-vector-icons/Ionicons";
-import user from "../config/user";
+import user from "../assets/json/user.json";
 
 class Home extends React.Component {
   constructor() {

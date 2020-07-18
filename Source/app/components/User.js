@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet, View, Image, Text, Alert } from "react-native";
 import colors from "../config/colors";
 import Icon from "react-native-vector-icons/Ionicons";
+import user from "../assets/json/user.json";
 
 class User extends Component {
   constructor(props) {
@@ -35,7 +36,7 @@ class User extends Component {
 
         <View style={styles.iconcontainer}>
           <Icon
-            onPress={() => Alert.alert("Notifications")}
+            onPress={() => (user.name = "Amei")}
             name="ios-notifications-outline"
             color={colors.secondary}
             size={35}
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
   Image: {
     height: 50,
     width: 50,
-    borderColor: colors.primary,
+    borderColor: colors.Crystalline1,
     borderWidth: 1,
     borderRadius: 30,
   },

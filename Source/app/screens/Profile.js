@@ -4,19 +4,15 @@ import {
   StyleSheet,
   Text,
   View,
-  Modal,
-  TextInput,
   Image,
   ImageBackground,
 } from "react-native";
-import GameCard from "../components/GameCard";
 import colors from "../config/colors";
 import Icon from "react-native-vector-icons/Ionicons";
-import user from "../config/user";
-import User from "../components/User";
 import Constants from "expo-constants";
 import Run from "../components/Run";
-import Leaderboard from "../components/Leaderboard";
+import { color } from "react-native-reanimated";
+import user from "../assets/json/user.json";
 
 const BG = {
   uri:
@@ -31,19 +27,31 @@ class Profile extends React.Component {
       userpicture:
         "https://www.speedrun.com/themes/user/" + user.name + "/image.png",
       runs: [],
+      user: [],
     };
   }
   async componentDidMount() {
-    const url = "https://www.speedrun.com/api/v1/users/48g3q2rx/personal-bests";
-    const response = await fetch(url);
-    const data = await response.json();
-    this.setState({ loading: false, runs: data.data });
+    const runsurl =
+      "https://www.speedrun.com/api/v1/users/48g3q2rx/personal-bests";
+    const runsresponse = await fetch(runsurl);
+    const runsdata = await runsresponse.json();
+
+    console.log(this.state.user);
+
+    this.setState({ loading: false, runs: runsdata.data });
   }
 
   render() {
     return (
       <ScrollView style={styles.container}>
-        <ImageBackground style={styles.profileBG} source={BG}>
+        <ImageBackground
+          style={styles.profileBG}
+          source={require("../assets/gradient.jpg")}
+          imageStyle={{
+            borderBottomLeftRadius: 30,
+            borderBottomRightRadius: 30,
+          }}
+        >
           <View style={styles.profile}>
             <View style={styles.imagecontainer}>
               <Image
@@ -59,29 +67,24 @@ class Profile extends React.Component {
                 <Text style={styles.h1}>{user.name}</Text>
                 <View style={styles.country}>
                   <View>
-                    <Image
-                      source={{
-                        uri: "https://www.speedrun.com/images/flags/es/pv.png",
-                      }}
-                      style={styles.flag}
-                    ></Image>
-                  </View>
-                  <View>
-                    <Text style={styles.h2}>{user.country}</Text>
+                    <Text style={styles.h2}>TEXT</Text>
                   </View>
                 </View>
               </View>
             </View>
           </View>
         </ImageBackground>
-        <View style={styles.preferences}>
-          <Text style={styles.headertext}>Runs</Text>
+
+        <Text style={styles.headertext}>Personal Bests</Text>
+        <View style={styles.pbs}>
           {this.state.runs.map((run) => (
             <Run
+              key={run.run.id}
               category={run.run.category}
               place={run.place}
-              runner={run.run.players[0].id}
-              time={"39m 07s"}
+              runner={user.name}
+              time={run.run.times.primary}
+              gameid={run.run.game}
             />
           ))}
         </View>
@@ -94,15 +97,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     //marginTop: Constants.statusBarHeight,
-    backgroundColor: colors.white,
+    backgroundColor: colors.light,
   },
+
   profileBG: {
     flex: 1,
     resizeMode: "cover",
-    paddingVertical: 20,
   },
   profile: {
-    marginTop: Constants.statusBarHeight,
     flex: 1,
   },
   country: {
@@ -113,15 +115,17 @@ const styles = StyleSheet.create({
     width: 25,
   },
   imagecontainer: {
+    marginTop: Constants.statusBarHeight,
     flex: 1,
+    paddingTop: 30,
     alignContent: "center",
     justifyContent: "flex-end",
     alignItems: "center",
   },
   Image: {
-    height: 100,
-    width: 100,
-    borderColor: colors.primary,
+    height: 80,
+    width: 80,
+    borderColor: colors.white,
     borderWidth: 1,
     borderRadius: 50,
   },
@@ -129,34 +133,36 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    padding: 30,
   },
   socialbuttons: {
-    flex: 2,
+    flex: 1,
     alignContent: "center",
     justifyContent: "center",
     alignItems: "center",
   },
   h1: {
-    color: colors.light,
-    fontSize: 25,
+    color: colors.white,
+    fontSize: 30,
     fontWeight: "bold",
     alignSelf: "center",
   },
   h2: {
-    color: colors.light,
+    color: colors.grey,
     fontSize: 15,
-    fontWeight: "bold",
+    fontWeight: "normal",
     alignSelf: "center",
   },
   headertext: {
     color: colors.darkgrey,
     fontSize: 20,
-    paddingLeft: 20,
     fontWeight: "bold",
-    paddingVertical: 20,
+    alignSelf: "center",
+    paddingTop: 40,
   },
-  preferences: {
-    flex: 2,
+  pbs: {
+    flex: 1,
+    margin: 10,
   },
   button: {
     paddingHorizontal: 20,
