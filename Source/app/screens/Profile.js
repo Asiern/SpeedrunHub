@@ -16,7 +16,7 @@ import user from "../assets/json/user.json";
 
 const BG = {
   uri:
-    "https://www.speedrun.com/themes/user/Asiern/background.png?version=46d4f3ee",
+    "https://www.speedrun.com/themes/user/" + user.name + "/image.png",
 };
 
 class Profile extends React.Component {
@@ -67,7 +67,7 @@ class Profile extends React.Component {
                 <Text style={styles.h1}>{user.name}</Text>
                 <View style={styles.country}>
                   <View>
-                    <Text style={styles.h2}>TEXT</Text>
+                    <Text style={styles.h2}>Basque Country</Text>
                   </View>
                 </View>
               </View>
