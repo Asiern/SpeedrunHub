@@ -1,6 +1,6 @@
 # Speedrun.com App for Android and IOS
 
-![alt text](https://github.com/Asiern/Speerun.comApp/blob/master/Home.jpeg){width=10%}
+<img src="https://github.com/Asiern/Speerun.comApp/blob/master/Home.jpeg" width="200" height="400" />
 
 ---
 
