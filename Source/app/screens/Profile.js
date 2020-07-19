@@ -12,11 +12,10 @@ import Icon from "react-native-vector-icons/Ionicons";
 import Constants from "expo-constants";
 import Run from "../components/Run";
 import { color } from "react-native-reanimated";
-import user from "../assets/json/user.json";
+import user from "../config/user.json";
 
 const BG = {
-  uri:
-    "https://www.speedrun.com/themes/user/" + user.name + "/image.png",
+  uri: "https://www.speedrun.com/themes/user/" + user.name + "/image.png",
 };
 
 class Profile extends React.Component {
@@ -32,7 +31,7 @@ class Profile extends React.Component {
   }
   async componentDidMount() {
     const runsurl =
-      "https://www.speedrun.com/api/v1/users/48g3q2rx/personal-bests";
+      "https://www.speedrun.com/api/v1/users/48g3q2rx/personal-bests?embed=game,category";
     const runsresponse = await fetch(runsurl);
     const runsdata = await runsresponse.json();
 
@@ -80,11 +79,11 @@ class Profile extends React.Component {
           {this.state.runs.map((run) => (
             <Run
               key={run.run.id}
-              category={run.run.category}
+              category={run.category.data.name}
               place={run.place}
-              runner={user.name}
+              runner={run.run.players[0].id}
               time={run.run.times.primary}
-              gameid={run.run.game}
+              game={run.game.data.names.international}
             />
           ))}
         </View>
