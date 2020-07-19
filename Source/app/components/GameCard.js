@@ -7,9 +7,11 @@ class GameCard extends Component {
     super(props);
     this.state = {
       id: this.props.id,
-      name: this.props.name,
+      abbreviation: this.props.abbreviation,
       cover:
-        "https://www.speedrun.com/themes/" + this.props.name + "/cover-256.png",
+        "https://www.speedrun.com/themes/" +
+        this.props.abbreviation +
+        "/cover-256.png",
     };
   }
 
