@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet, View, Image, Text, Alert } from "react-native";
 import colors from "../config/colors";
 import Icon from "react-native-vector-icons/Ionicons";
-import user from "../assets/json/user.json";
+import user from "../config/user.json";
 
 class User extends Component {
   constructor(props) {
@@ -48,7 +48,7 @@ class User extends Component {
 }
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.light,
+    backgroundColor: colors.white,
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
