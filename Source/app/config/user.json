@@ -1,0 +1,25 @@
+{
+  "name": "Asiern",
+  "id": "48g3q2rx",
+  "country": "Basque Country",
+  "games": [
+    { "id": "w6jve26j", "abbreviation": "darksouls" },
+    { "id": "76rkwed8", "abbreviation": "na" },
+    { "id": "m1zky010", "abbreviation": "darksouls2" },
+    { "id": "k6qg0xdg", "abbreviation": "darksouls3" },
+    { "id": "j1l9qz1g", "abbreviation": "oot" },
+    { "id": "m1zx70d0", "abbreviation": "tphd" },
+    { "id": "w6jve26j", "abbreviation": "tp" },
+    { "id": "76rkwed8", "abbreviation": "mm" },
+    { "id": "m1zky010", "abbreviation": "tww" },
+    { "id": "k6qg0xdg", "abbreviation": "twwhd" },
+    { "id": "j1l9qz1g", "abbreviation": "nier" },
+    { "id": "m1zx70d0", "abbreviation": "sm64" },
+    { "id": "w6jve26j", "abbreviation": "ss" },
+    { "id": "76rkwed8", "abbreviation": "na" },
+    { "id": "m1zky010", "abbreviation": "darksouls2" },
+    { "id": "k6qg0xdg", "abbreviation": "darksouls3" },
+    { "id": "j1l9qz1g", "abbreviation": "oot" },
+    { "id": "m1zx70d0", "abbreviation": "tphd" }
+  ]
+}
