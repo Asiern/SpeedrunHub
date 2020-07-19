@@ -5,7 +5,7 @@ import {
   Text,
   View,
   Modal,
-  Button,
+  FlatList,
 } from "react-native";
 import Constants from "expo-constants";
 import GameCard from "../components/GameCard";
@@ -14,13 +14,13 @@ import User from "../components/User";
 import Leaderboard from "../components/Leaderboard";
 import colors from "../config/colors";
 import Icon from "react-native-vector-icons/Ionicons";
-import user from "../assets/json/user.json";
+import user from "../config/user.json";
 
 class Home extends React.Component {
   constructor() {
     super();
     this.state = {
-      show: true,
+      show: false,
     };
     this._retrieveData();
   }
@@ -53,21 +53,21 @@ class Home extends React.Component {
           </View>
           <Test />
         </Modal>
-        <ScrollView style={styles.container}>
-          <View style={styles.profile}>
-            <User username={user.name} />
-          </View>
-          <View style={{ paddingVertical: 20 }}></View>
-          <Text style={styles.headertext}>Followed Games</Text>
-          <View style={styles.gamelist}>
-            <GameCard id={"w6jve26j"} name={"darksouls"} />
-            <GameCard id={"76rkwed8"} name={"na"} />
-            <GameCard id={"o1y5nvdq"} name={"nier"} />
-            <GameCard id={"m1zky010"} name={"darksouls2"} />
-            <GameCard id={"m1zky010"} name={"darksouls3"} />
-            <GameCard id={"m1zky010"} name={"oot"} />
-          </View>
-        </ScrollView>
+        <View style={styles.profile}>
+          <User username={user.name} />
+        </View>
+        <View style={styles.container}>
+          <FlatList
+            keyExtractor={(item) => item.id}
+            data={user.games}
+            renderItem={({ item }) => (
+              <View style={styles.card}>
+                <GameCard id={item.id} abbreviation={item.abbreviation} />
+              </View>
+            )}
+            numColumns={2}
+          ></FlatList>
+        </View>
       </View>
     );
   }
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     //marginTop: Constants.statusBarHeight,
-    backgroundColor: colors.light,
+    backgroundColor: colors.white,
   },
   profile: {
     backgroundColor: colors.secondary,
@@ -109,12 +109,6 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: colors.light,
   },
-  gamelist: {
-    flex: 1,
-    padding: 10,
-    alignContent: "center",
-    alignItems: "center",
-  },
   headertext: {
     color: colors.darkgrey,
     fontSize: 20,
@@ -124,6 +118,11 @@ const styles = StyleSheet.create({
   populargames: {
     flex: 1,
     flexDirection: "row",
+  },
+  card: {
+    flexWrap: "wrap",
+    flex: 1,
+    alignContent: "center",
   },
 });
 
