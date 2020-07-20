@@ -14,10 +14,6 @@ import Run from "../components/Run";
 import user from "../config/user.json";
 import { useScreens } from "react-native-screens";
 
-const BG = {
-  uri: "https://www.speedrun.com/themes/user/" + user.name + "/image.png",
-};
-
 class Profile extends React.Component {
   constructor() {
     super();
