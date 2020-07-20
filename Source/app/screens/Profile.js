@@ -11,8 +11,8 @@ import colors from "../config/colors";
 import Icon from "react-native-vector-icons/Ionicons";
 import Constants from "expo-constants";
 import Run from "../components/Run";
-import { color } from "react-native-reanimated";
 import user from "../config/user.json";
+import { useScreens } from "react-native-screens";
 
 const BG = {
   uri: "https://www.speedrun.com/themes/user/" + user.name + "/image.png",
@@ -26,16 +26,15 @@ class Profile extends React.Component {
       userpicture:
         "https://www.speedrun.com/themes/user/" + user.name + "/image.png",
       runs: [],
-      user: [],
     };
   }
   async componentDidMount() {
     const runsurl =
-      "https://www.speedrun.com/api/v1/users/48g3q2rx/personal-bests?embed=game,category";
+      "https://www.speedrun.com/api/v1/users/" +
+      user.id +
+      "/personal-bests?embed=game,category";
     const runsresponse = await fetch(runsurl);
     const runsdata = await runsresponse.json();
-
-    console.log(this.state.user);
 
     this.setState({ loading: false, runs: runsdata.data });
   }
@@ -45,11 +44,7 @@ class Profile extends React.Component {
       <ScrollView style={styles.container}>
         <ImageBackground
           style={styles.profileBG}
-          source={require("../assets/gradient.jpg")}
-          imageStyle={{
-            borderBottomLeftRadius: 30,
-            borderBottomRightRadius: 30,
-          }}
+          source={require("../assets/gr1.png")}
         >
           <View style={styles.profile}>
             <View style={styles.imagecontainer}>
@@ -73,17 +68,31 @@ class Profile extends React.Component {
             </View>
           </View>
         </ImageBackground>
-
+        <View style={styles.socialbuttons}>
+          <Text>Twitter</Text>
+          <Text>Twitter</Text>
+          <Text>Twitter</Text>
+          <Text>Twitter</Text>
+          <Text>Twitter</Text>
+        </View>
         <Text style={styles.headertext}>Personal Bests</Text>
         <View style={styles.pbs}>
+          <View style={styles.runinfo}>
+            <Text>Game</Text>
+            <Text>Category</Text>
+            <Text>Place</Text>
+            <Text>Runner</Text>
+            <Text>Time</Text>
+          </View>
           {this.state.runs.map((run) => (
             <Run
               key={run.run.id}
               category={run.category.data.name}
               place={run.place}
-              runner={run.run.players[0].id}
+              runner={user.name}
               time={run.run.times.primary}
               game={run.game.data.names.international}
+              abbreviation={run.game.data.abbreviation}
             />
           ))}
         </View>
@@ -98,7 +107,6 @@ const styles = StyleSheet.create({
     //marginTop: Constants.statusBarHeight,
     backgroundColor: colors.light,
   },
-
   profileBG: {
     flex: 1,
     resizeMode: "cover",
@@ -136,18 +144,20 @@ const styles = StyleSheet.create({
   },
   socialbuttons: {
     flex: 1,
+    flexDirection: "row",
     alignContent: "center",
-    justifyContent: "center",
+    justifyContent: "space-around",
     alignItems: "center",
+    padding: 20,
   },
   h1: {
-    color: colors.white,
+    color: colors.darkgrey,
     fontSize: 30,
     fontWeight: "bold",
     alignSelf: "center",
   },
   h2: {
-    color: colors.grey,
+    color: colors.darkgrey,
     fontSize: 15,
     fontWeight: "normal",
     alignSelf: "center",
@@ -162,6 +172,12 @@ const styles = StyleSheet.create({
   pbs: {
     flex: 1,
     margin: 10,
+  },
+  runinfo: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    paddingTop: 20,
   },
   button: {
     paddingHorizontal: 20,
