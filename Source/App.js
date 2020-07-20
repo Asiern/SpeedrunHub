@@ -1,68 +1,77 @@
-import Home from "./app/screens/Home";
+import React, { Component } from "react";
 import Profile from "./app/screens/Profile";
+import Home from "./app/screens/Home";
 import Settings from "./app/screens/Settings";
-import color from "./app/config/colors";
+import GameInfo from "./app/screens/GameInfo";
+import FollowedGames from "./app/screens/FollowedGames";
+import Search from "./app/screens/Search";
 
-import * as React from "react";
-import { Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import colors from "./app/config/colors";
 
-import Ionicons from "react-native-vector-icons/Ionicons";
+const Stack = createStackNavigator();
+const BottomTabs = createBottomTabNavigator();
 
-function HomeScreen() {
-  return <Home />;
-}
-function ProfileScreen() {
-  return <Profile />;
-}
-
-function SearchScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Nothing Here</Text>
-    </View>
+export default class App extends Component {
+  createHomeStack = (props) => (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{ title: "Home", headerShown: "" }}
+      />
+      <Stack.Screen name="Game Info" component={GameInfo} />
+    </Stack.Navigator>
   );
-}
-
-function SettingsScreen() {
-  return <Settings />;
-}
-
-const Tab = createBottomTabNavigator();
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
-
-            if (route.name === "Home") {
-              iconName = focused ? "ios-home" : "ios-home";
-            } else if (route.name === "Settings") {
-              iconName = focused ? "ios-list-box" : "ios-list";
-            } else if (route.name === "Search") {
-              iconName = focused ? "ios-search" : "ios-search";
-            } else if (route.name === "Profile") {
-              iconName = focused ? "ios-list-box" : "ios-list-box";
-            }
-
-            // You can return any component that you like here!
-            return <Ionicons name={iconName} size={size} color={color} />;
-          },
-        })}
-        tabBarOptions={{
-          activeTintColor: color.Crystalline1,
-          inactiveTintColor: "gray",
-        }}
-      >
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Profile" component={ProfileScreen} />
-        <Tab.Screen name="Search" component={SearchScreen} />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
-      </Tab.Navigator>
-    </NavigationContainer>
+  createProfileStack = (props) => (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
+        options={{ title: "My Profile", headerShown: "" }}
+      />
+      <Stack.Screen name="Game Info" component={GameInfo} />
+    </Stack.Navigator>
   );
+  render() {
+    return (
+      <NavigationContainer>
+        <BottomTabs.Navigator
+          screenOptions={({ route }) => ({
+            tabBarIcon: ({ focused, color, size }) => {
+              let iconName;
+
+              if (route.name === "Profile") {
+                iconName = focused ? "md-contact" : "md-contact";
+              } else if (route.name === "Settings") {
+                iconName = focused ? "md-options" : "md-options";
+              } else if (route.name === "Home") {
+                iconName = focused ? "md-home" : "md-home";
+              } else if (route.name === "Search") {
+                iconName = focused ? "md-search" : "md-search";
+              }
+
+              // You can return any component that you like here!
+              return <Ionicons name={iconName} size={size} color={color} />;
+            },
+          })}
+          tabBarOptions={{
+            activeTintColor: colors.Crystalline1,
+            inactiveTintColor: colors.darkgrey,
+          }}
+        >
+          <BottomTabs.Screen name="Home" children={this.createHomeStack} />
+          <BottomTabs.Screen
+            name="Profile"
+            children={this.createProfileStack}
+          />
+          <BottomTabs.Screen name="Search" component={Search} />
+          <BottomTabs.Screen name="Settings" component={GameInfo} />
+        </BottomTabs.Navigator>
+      </NavigationContainer>
+    );
+  }
 }
