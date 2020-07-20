@@ -10,24 +10,46 @@ export default class Run extends Component {
       place: this.props.place,
       time: this.props.time,
       runner: this.props.runner,
-      cover: "https://www.speedrun.com/themes/oot/cover-128.png",
+      cover:
+        "https://www.speedrun.com/themes/" +
+        this.props.abbreviation +
+        "/cover-64.png",
       game: this.props.game,
+      abbreviation: this.props.abbreviation,
       loading: true,
     };
   }
-
+  componentDidMount() {
+    this.timeConverter();
+  }
+  timeConverter() {
+    var result = this.state.time;
+    result = result.substr(2, result.lenght);
+    this.setState({ time: result });
+  }
   render() {
     return (
       <Content>
         <View style={styles.container}>
-          <Image
-            style={styles.cover}
-            source={{ uri: this.state.cover }}
-          ></Image>
-          <Text style={styles.text}>{this.state.category}</Text>
-          <Text style={styles.accenttext}>{this.state.place}</Text>
-          <Text style={styles.text}>{this.state.runner}</Text>
-          <Text style={styles.text}>{this.state.time}</Text>
+          <View style={styles.game}>
+            <Image
+              style={styles.cover}
+              source={{ uri: this.state.cover }}
+            ></Image>
+          </View>
+          <View style={styles.category}>
+            <Text style={styles.text}>{this.state.category}</Text>
+          </View>
+          <View style={styles.place}>
+            <Text style={styles.accenttext}>{this.state.place}</Text>
+          </View>
+          <View style={styles.runner}>
+            <Text style={styles.text}>{this.state.runner}</Text>
+          </View>
+
+          <View style={styles.time}>
+            <Text style={styles.text}>{this.state.time}</Text>
+          </View>
         </View>
       </Content>
     );
@@ -39,11 +61,35 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flex: 1,
     alignItems: "center",
-    justifyContent: "space-evenly",
     backgroundColor: colors.white,
     marginTop: 10,
     borderRadius: 10,
-    padding: 10,
+    paddingHorizontal: 10,
+  },
+  game: {
+    flex: 3,
+    //backgroundColor: "dodgerblue",
+    alignItems: "center",
+  },
+  category: {
+    flex: 5,
+    //backgroundColor: "gold"
+    alignItems: "center",
+  },
+  place: {
+    flex: 3,
+    //backgroundColor: "tomato",
+    alignItems: "center",
+  },
+  runner: {
+    flex: 5,
+    //backgroundColor: "green",
+    alignItems: "center",
+  },
+  time: {
+    flex: 8,
+    //backgroundColor: "orange",
+    alignItems: "center",
   },
   text: {
     paddingHorizontal: 10,
