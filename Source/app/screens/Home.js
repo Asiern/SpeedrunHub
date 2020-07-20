@@ -1,20 +1,13 @@
 import React, { Component } from "react";
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-  Modal,
-  FlatList,
-} from "react-native";
+import { StyleSheet, View, Modal, FlatList, Text } from "react-native";
 import Constants from "expo-constants";
 import GameCard from "../components/GameCard";
 import Test from "./test";
 import User from "../components/User";
-import Leaderboard from "../components/Leaderboard";
 import colors from "../config/colors";
 import Icon from "react-native-vector-icons/Ionicons";
 import user from "../config/user.json";
+import { color } from "react-native-reanimated";
 
 class Home extends React.Component {
   constructor() {
@@ -28,8 +21,6 @@ class Home extends React.Component {
     try {
       const value = await AsyncStorage.getItem("name");
       if (value !== null) {
-        // Our data is fetched successfully
-        console.log(value);
       }
     } catch (error) {
       // Error retrieving data
@@ -53,16 +44,25 @@ class Home extends React.Component {
           </View>
           <Test />
         </Modal>
-        <View style={styles.profile}>
-          <User username={user.name} />
+        <View style={styles.profilecontainer}>
+          <View style={styles.profile}>
+            <User username={user.name} />
+          </View>
         </View>
+
         <View style={styles.container}>
           <FlatList
             keyExtractor={(item) => item.id}
             data={user.games}
             renderItem={({ item }) => (
-              <View style={styles.card}>
-                <GameCard id={item.id} abbreviation={item.abbreviation} />
+              <View style={styles.flatList}>
+                <GameCard
+                  id={item.id}
+                  abbreviation={item.abbreviation}
+                  onPress={() => {
+                    this.setState({ show: true });
+                  }}
+                />
               </View>
             )}
             numColumns={2}
@@ -75,12 +75,13 @@ class Home extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     //marginTop: Constants.statusBarHeight,
+    flex: 1,
+  },
+  profilecontainer: {
     backgroundColor: colors.white,
   },
   profile: {
-    backgroundColor: colors.secondary,
     marginTop: Constants.statusBarHeight,
     height: 100,
   },
@@ -110,19 +111,17 @@ const styles = StyleSheet.create({
     backgroundColor: colors.light,
   },
   headertext: {
-    color: colors.darkgrey,
+    color: colors.Crystalline1,
     fontSize: 20,
-    paddingLeft: 20,
+    paddingBottom: 20,
     fontWeight: "bold",
+    alignSelf: "center",
   },
-  populargames: {
-    flex: 1,
-    flexDirection: "row",
-  },
-  card: {
+  flatList: {
     flexWrap: "wrap",
     flex: 1,
     alignContent: "center",
+    backgroundColor: colors.light,
   },
 });
 
