@@ -38,7 +38,7 @@ class User extends Component {
           <Icon
             onPress={() => (user.name = "Amei")}
             name="ios-notifications-outline"
-            color={colors.secondary}
+            color={colors.Crystalline1}
             size={35}
           />
         </View>
