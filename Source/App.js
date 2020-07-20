@@ -1,23 +1,14 @@
 import Home from "./app/screens/Home";
 import Profile from "./app/screens/Profile";
-import Search from "./app/screens/Search";
 import Settings from "./app/screens/Settings";
-import Test from "./app/screens/test";
 import color from "./app/config/colors";
 
 import * as React from "react";
-import { Text, View, Image, StatusBar } from "react-native";
+import { Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Ionicons from "react-native-vector-icons/Ionicons";
-
-//SCROLL
-function wait(timeout) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, timeout);
-  });
-}
 
 function HomeScreen() {
   return <Home />;
