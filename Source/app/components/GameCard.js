@@ -1,5 +1,11 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Text, ImageBackground } from "react-native";
+import { Button } from "native-base";
+import {
+  TouchableNativeFeedback,
+  TouchableHighlight,
+  TouchableOpacity,
+} from "react-native-gesture-handler";
 
 class GameCard extends Component {
   constructor(props) {
@@ -16,13 +22,20 @@ class GameCard extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <ImageBackground
-          source={{ uri: this.state.cover }}
-          style={styles.image}
-          imageStyle={{ borderRadius: 10 }}
-        ></ImageBackground>
-      </View>
+      <TouchableOpacity
+        onPress={() =>
+          this.props.navigation.navigate("Game Info", { id: this.props.id })
+        }
+        style={styles.container}
+      >
+        <View style={styles.container}>
+          <ImageBackground
+            source={{ uri: this.state.cover }}
+            style={styles.image}
+            imageStyle={{ borderRadius: 10 }}
+          ></ImageBackground>
+        </View>
+      </TouchableOpacity>
     );
   }
 }
@@ -36,7 +49,6 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     resizeMode: "cover",
-    justifyContent: "center",
     flexDirection: "row",
   },
 });
