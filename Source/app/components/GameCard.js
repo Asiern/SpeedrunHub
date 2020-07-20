@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Text, ImageBackground } from "react-native";
-import colors from "../config/colors";
 
 class GameCard extends Component {
   constructor(props) {
