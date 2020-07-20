@@ -1,6 +1,6 @@
 {
   "name": "Asiern",
-  "id": "48g3q2rx",
+  "id": "48g3q2rx", //48g3q2rx qj26goxk
   "country": "Basque Country",
   "games": [
     { "id": "w6jve26j", "abbreviation": "darksouls" },
@@ -9,17 +9,9 @@
     { "id": "k6qg0xdg", "abbreviation": "darksouls3" },
     { "id": "j1l9qz1g", "abbreviation": "oot" },
     { "id": "m1zx70d0", "abbreviation": "tphd" },
-    { "id": "w6jve26j", "abbreviation": "tp" },
-    { "id": "76rkwed8", "abbreviation": "mm" },
-    { "id": "m1zky010", "abbreviation": "tww" },
-    { "id": "k6qg0xdg", "abbreviation": "twwhd" },
-    { "id": "j1l9qz1g", "abbreviation": "nier" },
-    { "id": "m1zx70d0", "abbreviation": "sm64" },
-    { "id": "w6jve26j", "abbreviation": "ss" },
-    { "id": "76rkwed8", "abbreviation": "na" },
-    { "id": "m1zky010", "abbreviation": "darksouls2" },
-    { "id": "k6qg0xdg", "abbreviation": "darksouls3" },
-    { "id": "j1l9qz1g", "abbreviation": "oot" },
-    { "id": "m1zx70d0", "abbreviation": "tphd" }
+    { "id": "76rljl68", "abbreviation": "twwhd" },
+    { "id": "o1y5nvdq", "abbreviation": "nier" },
+    { "id": "268zey6p", "abbreviation": "mm" },
+    { "id": "76r55vd8", "abbreviation": "smo" }
   ]
 }
