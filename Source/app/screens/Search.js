@@ -1,84 +1,75 @@
-import React from "react";
-import {
-  StyleSheet,
-  SafeAreaView,
-  View,
-  Image,
-  ScrollView,
-} from "react-native";
+import { StyleSheet, View, FlatList } from "react-native";
+import React, { Component, useState } from "react";
+import { SearchBar } from "react-native-elements";
 import Constants from "expo-constants";
 import color from "../config/colors";
-import GameList from "../components/GameCard";
 import colors from "../config/colors";
+import GameCard from "../components/GameCard";
 
-function wait(timeout) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, timeout);
-  });
-}
+class Search extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      search: "",
+      loading: true,
+      games: [],
+      url: "https://www.speedrun.com/api/v1/games?name=",
+    };
+  }
+  updateSearch = (search) => {
+    this.setState({ search });
+    //console.log(this.state.search);
 
-export default function Search() {
-  const [refreshing, setRefreshing] = React.useState(false);
+    const url =
+      "https://www.speedrun.com/api/v1/games?name=" + this.state.search;
+    //console.log(this.state.url);
+    this.setState({ url: url });
+    this.Fetch(url);
+  };
 
-  const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
+  async Fetch(url) {
+    const response = await fetch(url);
+    const data = await response.json();
+    //console.log(data.data[0]);
+    this.setState({ loading: false, games: data.data });
+  }
+  render() {
+    const { search } = this.state;
+    return (
+      <View style={styles.container}>
+        <SearchBar
+          placeholder="Type Here..."
+          onChangeText={this.updateSearch}
+          value={search}
+          platform="ios"
+          lightTheme={true}
+        />
 
-    wait(2000).then(() => setRefreshing(false));
-  }, [refreshing]);
-
-  return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.banner}>
-        <Image
-          style={styles.logo}
-          source={require("../assets/trophy.png")}
-        ></Image>
-        <Image style={styles.s} source={require("../assets/logo.png")}></Image>
+        <FlatList
+          keyExtractor={(item) => item.id}
+          data={this.state.games}
+          renderItem={({ item }) => (
+            <View style={styles.flatList}>
+              <GameCard
+                navigation={this.props.navigation}
+                id={item.id}
+                abbreviation={item.abbreviation}
+              />
+            </View>
+          )}
+          numColumns={2}
+        ></FlatList>
       </View>
-      <View style={styles.scrollViewContainer}>
-        <ScrollView style={styles.scrollView}>
-          <GameList id={"w6jve26j"} name={"darksouls"} />
-          <GameList id={"m1zky010"} name={"darksouls2"} />
-          <GameList id={"k6qg0xdg"} name={"darksouls3"} />
-          <GameList id={"o1y5nvdq"} name={"nier"} />
-          <GameList id={"76rkwed8"} name={"na"} />
-        </ScrollView>
-      </View>
-    </SafeAreaView>
-  );
+    );
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: Constants.statusBarHeight,
-    backgroundColor: colors.light,
-  },
-  scrollViewContainer: {
-    flex: 1,
-  },
-  scrollView: {
-    flex: 1,
-  },
-  banner: {
-    height: 80,
-    flexDirection: "row",
-    width: "100%",
     backgroundColor: colors.primary,
-    alignItems: "center",
-    justifyContent: "space-evenly",
-  },
-  text: {
-    color: colors.white,
-    fontWeight: "bold",
-    fontSize: 30,
-  },
-  logo: {
-    height: 40,
-    width: 40,
-  },
-  s: {
-    height: 15,
-    width: 250,
   },
 });
+
+export default Search;
