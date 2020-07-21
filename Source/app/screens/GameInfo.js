@@ -14,6 +14,18 @@ import Run from "../components/Run";
 import user from "../config/user.json";
 import { useScreens } from "react-native-screens";
 import GameCard from "../components/GameCard";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+
+const Tab = createMaterialTopTabNavigator();
+
+function Tabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="[A]" component={<Run></Run>}></Tab.Screen>
+      <Tab.Screen name="[E]" component={<Run></Run>}></Tab.Screen>
+    </Tab.Navigator>
+  );
+}
 
 class GameInfo extends React.Component {
   constructor() {
@@ -21,18 +33,17 @@ class GameInfo extends React.Component {
     this.state = {
       loading: true,
       id: "",
-      runs: [],
+      game: [],
     };
   }
   async componentDidMount() {
-    const runsurl =
-      "https://www.speedrun.com/api/v1/users/" +
-      user.id +
-      "/personal-bests?embed=game,category";
-    const runsresponse = await fetch(runsurl);
-    const runsdata = await runsresponse.json();
+    const url =
+      "https://www.speedrun.com/api/v1/games/76rkwed8?embed=categories";
+    const response = await fetch(url);
+    const data = await response.json();
 
-    this.setState({ loading: false, runs: runsdata.data });
+    this.setState({ loading: false, game: data.data });
+    //console.log(this.state.game.categories.data[0]);
   }
   render() {
     return (
@@ -72,17 +83,6 @@ class GameInfo extends React.Component {
             <Text>Runner</Text>
             <Text>Time</Text>
           </View>
-          {this.state.runs.map((run) => (
-            <Run
-              key={run.run.id}
-              category={run.category.data.name}
-              place={run.place}
-              runner={user.name}
-              time={run.run.times.primary}
-              game={run.game.data.names.international}
-              abbreviation={run.game.data.abbreviation}
-            />
-          ))}
         </View>
       </ScrollView>
     );
