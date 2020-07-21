@@ -70,7 +70,7 @@ export default class App extends Component {
             children={this.createProfileStack}
           />
           <BottomTabs.Screen name="Search" component={Search} />
-          <BottomTabs.Screen name="Settings" component={GameInfo} />
+          <BottomTabs.Screen name="Settings" component={Settings} />
         </BottomTabs.Navigator>
       </NavigationContainer>
     );
