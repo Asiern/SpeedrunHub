@@ -20,6 +20,7 @@ class GameInfo extends React.Component {
     super();
     this.state = {
       loading: true,
+      id: "",
       runs: [],
     };
   }
