@@ -17,6 +17,7 @@ const BottomTabs = createBottomTabNavigator();
 
 export default class App extends Component {
   createHomeStack = (props) => (
+    //console.log(props),
     <Stack.Navigator>
       <Stack.Screen
         name="Home"
