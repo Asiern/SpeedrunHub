@@ -64,13 +64,6 @@ class Profile extends React.Component {
             </View>
           </View>
         </ImageBackground>
-        <View style={styles.socialbuttons}>
-          <Text>Twitter</Text>
-          <Text>Twitter</Text>
-          <Text>Twitter</Text>
-          <Text>Twitter</Text>
-          <Text>Twitter</Text>
-        </View>
         <Text style={styles.headertext}>Personal Bests</Text>
         <View style={styles.pbs}>
           <View style={styles.runinfo}>
