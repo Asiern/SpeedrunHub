@@ -16,21 +16,15 @@ class Search extends React.Component {
       url: "https://www.speedrun.com/api/v1/games?name=",
     };
   }
-  updateSearch = (search) => {
-    this.setState({ search });
-    //console.log(this.state.search);
-
-    const url =
-      "https://www.speedrun.com/api/v1/games?name=" + this.state.search;
-    //console.log(this.state.url);
-    this.setState({ url: url });
+  updateSearch = (input) => {
+    this.setState({ search: input });
+    const url = "https://www.speedrun.com/api/v1/games?name=" + input;
     this.Fetch(url);
   };
 
   async Fetch(url) {
     const response = await fetch(url);
     const data = await response.json();
-    //console.log(data.data[0]);
     this.setState({ loading: false, games: data.data });
   }
   render() {
@@ -44,7 +38,6 @@ class Search extends React.Component {
           platform="ios"
           lightTheme={true}
         />
-
         <FlatList
           keyExtractor={(item) => item.id}
           data={this.state.games}
@@ -57,7 +50,7 @@ class Search extends React.Component {
               />
             </View>
           )}
-          numColumns={2}
+          numColumns={3}
         ></FlatList>
       </View>
     );
@@ -68,7 +61,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: Constants.statusBarHeight,
-    backgroundColor: colors.primary,
+    backgroundColor: colors.light,
   },
 });
 
