@@ -60,6 +60,9 @@ const styles = StyleSheet.create({
   flatList: {
     flexWrap: "wrap",
     flex: 1,
+    alignContent: "center",
+    justifyContent: "space-around",
+    alignItems: "center",
   },
 });
 
