@@ -24,27 +24,26 @@ class GameCard extends Component {
     return (
       <TouchableOpacity
         onPress={() =>
-          this.props.navigation.navigate("Game Info", { id: this.props.id })
+          this.props.navigation.navigate("Game Info", { id: "someid" })
         }
         style={styles.container}
       >
-        <View style={styles.container}>
-          <ImageBackground
-            source={{ uri: this.state.cover }}
-            style={styles.image}
-            imageStyle={{ borderRadius: 10 }}
-          ></ImageBackground>
-        </View>
+        <ImageBackground
+          source={{ uri: this.state.cover }}
+          style={styles.image}
+          imageStyle={{ borderRadius: 10 }}
+        ></ImageBackground>
       </TouchableOpacity>
     );
   }
 }
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
-    flex: 1,
     width: 150,
     height: 200,
+    padding: 10,
+    alignContent: "center",
+    justifyContent: "center",
   },
   image: {
     flex: 1,
