@@ -74,11 +74,21 @@ class Profile extends React.Component {
         <Text style={styles.headertext}>Personal Bests</Text>
         <View style={styles.pbs}>
           <View style={styles.runinfo}>
-            <Text>Game</Text>
-            <Text>Category</Text>
-            <Text>Place</Text>
-            <Text>Runner</Text>
-            <Text>Time</Text>
+            <View style={styles.game}>
+              <Text>Game</Text>
+            </View>
+            <View style={styles.category}>
+              <Text>Category</Text>
+            </View>
+            <View style={styles.place}>
+              <Text>Place</Text>
+            </View>
+            <View style={styles.runner}>
+              <Text>Runner</Text>
+            </View>
+            <View style={styles.time}>
+              <Text>Time</Text>
+            </View>
           </View>
           {this.state.runs.map((run) => (
             <Run
@@ -172,8 +182,33 @@ const styles = StyleSheet.create({
   runinfo: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "space-around",
+    paddingHorizontal: 10,
     paddingTop: 20,
+  },
+  game: {
+    flex: 3,
+    //backgroundColor: "dodgerblue",
+    alignItems: "center",
+  },
+  category: {
+    flex: 5,
+    //backgroundColor: "gold"
+    alignItems: "center",
+  },
+  place: {
+    flex: 3,
+    //backgroundColor: "tomato",
+    alignItems: "center",
+  },
+  runner: {
+    flex: 5,
+    //backgroundColor: "green",
+    alignItems: "center",
+  },
+  time: {
+    flex: 8,
+    //backgroundColor: "orange",
+    alignItems: "center",
   },
   button: {
     paddingHorizontal: 20,
