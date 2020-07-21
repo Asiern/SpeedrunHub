@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { StyleSheet, View, Modal, FlatList } from "react-native";
 import Constants from "expo-constants";
 import GameCard from "../components/GameCard";
-import Test from "./test";
-import User from "../components/User";
 import colors from "../config/colors";
 import Icon from "react-native-vector-icons/Ionicons";
 import user from "../config/user.json";
