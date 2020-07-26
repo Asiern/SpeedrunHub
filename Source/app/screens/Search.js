@@ -1,4 +1,4 @@
-import { StyleSheet, View, FlatList } from "react-native";
+import { StyleSheet, View, FlatList, ActivityIndicator } from "react-native";
 import React, { Component, useState } from "react";
 import { SearchBar } from "react-native-elements";
 import Constants from "expo-constants";
@@ -32,26 +32,28 @@ class Search extends React.Component {
     return (
       <View style={styles.container}>
         <SearchBar
-          placeholder="Type Here..."
+          placeholder="Search for games"
           onChangeText={this.updateSearch}
           value={search}
           platform="ios"
           lightTheme={true}
         />
-        <FlatList
-          keyExtractor={(item) => item.id}
-          data={this.state.games}
-          renderItem={({ item }) => (
-            <View style={styles.flatList}>
-              <GameCard
-                navigation={this.props.navigation}
-                id={item.id}
-                abbreviation={item.abbreviation}
-              />
-            </View>
-          )}
-          numColumns={3}
-        ></FlatList>
+        <View style={{ flex: 1 }}>
+          <FlatList
+            keyExtractor={(item) => item.id}
+            data={this.state.games}
+            renderItem={({ item }) => (
+              <View style={styles.flatList}>
+                <GameCard
+                  navigation={this.props.navigation}
+                  id={item.id}
+                  abbreviation={item.abbreviation}
+                />
+              </View>
+            )}
+            numColumns={2}
+          ></FlatList>
+        </View>
       </View>
     );
   }
@@ -62,6 +64,13 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: Constants.statusBarHeight,
     backgroundColor: colors.light,
+  },
+  flatList: {
+    flexWrap: "wrap",
+    flex: 1,
+    alignContent: "center",
+    justifyContent: "space-around",
+    alignItems: "center",
   },
 });
 
