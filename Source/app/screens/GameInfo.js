@@ -6,6 +6,8 @@ import {
   View,
   ImageBackground,
   Image,
+  ActivityIndicator,
+  FlatList,
 } from "react-native";
 import colors from "../config/colors";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -14,6 +16,7 @@ import Run from "../components/Run";
 import user from "../config/user.json";
 import { useScreens } from "react-native-screens";
 import GameCard from "../components/GameCard";
+import Leaderboard from "../components/Leaderboard";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 const Tab = createMaterialTopTabNavigator();
@@ -32,7 +35,8 @@ class GameInfo extends React.Component {
     super();
     this.state = {
       loading: true,
-      id: "",
+      name: "NieR: Automata",
+      id: "76rkwed8",
       game: [],
     };
   }
@@ -43,49 +47,65 @@ class GameInfo extends React.Component {
     const data = await response.json();
 
     this.setState({ loading: false, game: data.data });
-    //console.log(this.state.game.categories.data[0]);
+    //console.log(this.state.game.categories);
   }
   render() {
-    return (
-      <ScrollView style={styles.container}>
-        <ImageBackground
-          style={styles.profileBG}
-          source={{ uri: "https://www.speedrun.com/themes/na/cover-256.png" }}
-        >
-          <View style={styles.profile}>
-            <View style={styles.imagecontainer}>
-              <Image
-                source={{
-                  uri: "https://www.speedrun.com/themes/na/cover-256.png",
-                }}
-                style={styles.Image}
-              ></Image>
-            </View>
-          </View>
-
-          <View style={styles.userinfo}>
-            <View style={styles.userinfoitem}>
-              <Text style={styles.h1}>{user.name}</Text>
-              <View style={styles.country}>
-                <View>
-                  <Text style={styles.h2}>Basque Country</Text>
-                </View>
+    if (this.state.loading) {
+      return (
+        <ActivityIndicator
+          style={{ alignSelf: "center", flex: 1, scaleX: 2, scaleY: 2 }}
+        />
+      );
+    } else {
+      return (
+        <ScrollView style={styles.container}>
+          <ImageBackground
+            style={styles.profileBG}
+            source={{ uri: "https://www.speedrun.com/themes/na/cover-256.png" }}
+          >
+            <View style={styles.profile}>
+              <View style={styles.imagecontainer}>
+                <Image
+                  source={{
+                    uri: "https://www.speedrun.com/themes/na/cover-256.png",
+                  }}
+                  style={styles.Image}
+                ></Image>
               </View>
             </View>
+
+            <View style={styles.userinfo}>
+              <View style={styles.userinfoitem}>
+                <Text style={styles.h1}>
+                  {this.state.game.names.international}
+                </Text>
+              </View>
+            </View>
+          </ImageBackground>
+          <View>
+            <Text style={styles.headertext}>Categories</Text>
+            <FlatList
+              keyExtractor={(item) => item.id}
+              data={this.state.game.categories.data}
+              horizontal={true}
+              renderItem={({ item }) => (
+                <View style={styles.button}>
+                  <Text>{item.id}</Text>
+                </View>
+              )}
+            ></FlatList>
           </View>
-        </ImageBackground>
-        <Text style={styles.headertext}>Runs</Text>
-        <View style={styles.pbs}>
-          <View style={styles.runinfo}>
-            <Text>Game</Text>
-            <Text>Category</Text>
-            <Text>Place</Text>
-            <Text>Runner</Text>
-            <Text>Time</Text>
+          <Text style={styles.headertext}>Runs</Text>
+          <View style={styles.pbs}>
+            <Leaderboard
+              name={"na"}
+              gameid={"76rkwed8"}
+              categoryid={"xd1erv42"}
+            />
           </View>
-        </View>
-      </ScrollView>
-    );
+        </ScrollView>
+      );
+    }
   }
 }
 
@@ -110,7 +130,6 @@ const styles = StyleSheet.create({
     width: 25,
   },
   imagecontainer: {
-    marginTop: Constants.statusBarHeight,
     flex: 1,
     paddingTop: 30,
     alignContent: "center",
@@ -118,11 +137,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   Image: {
-    height: 80,
-    width: 80,
-    borderColor: colors.white,
-    borderWidth: 1,
-    borderRadius: 50,
+    width: 110,
+    height: 150,
+    padding: 10,
+    borderRadius: 10,
   },
   userinfo: {
     flex: 1,
@@ -139,7 +157,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   h1: {
-    color: colors.darkgrey,
+    color: colors.white,
     fontSize: 30,
     fontWeight: "bold",
     alignSelf: "center",
