@@ -7,6 +7,7 @@ import {
   Alert,
   ActivityIndicator,
   ImageBackground,
+  FlatList,
 } from "react-native";
 import colors from "../config/colors";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -18,54 +19,41 @@ class Leaderboard extends Component {
     super(props);
     this.state = {
       isLoading: true,
-      dataSource: [],
+      runs: [],
       name: this.props.name,
+      gameid: this.props.gameid,
+      categoryid: this.props.categoryid,
     };
   }
-  getData() {
-    fetch(
-      "https://www.speedrun.com/api/v1/leaderboards/xldev513/category/rklg3rdn"
-    )
-      .then((response) => response.json())
-      .then((responseJson) => {
-        //console.log(responseJson.data.runs);
-        this.setState({ dataSource: responseJson.data.runs, isLoading: false });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+  async FetchData() {
+    const url =
+      "https://www.speedrun.com/api/v1/leaderboards/76rkwed8/category/ndxmj4r2";
+    const variable =
+      "https://www.speedrun.com/api/v1/categories/xd1erv42/variables?";
+    const response = await fetch(url);
+    const data = await response.json();
+    this.setState({ loading: false, runs: data.data.runs });
+    //console.log(this.state.runs[55]);
   }
   componentDidMount() {
-    this.getData();
+    this.FetchData();
   }
   render() {
     if (this.state.isLoading) {
       <ActivityIndicator />;
     }
     return (
-      <View
-        style={{
-          alignItems: "center",
-          alignSelf: "center",
-          paddingVertical: 20,
-        }}
-      >
-        <View style={styles.container}>
-          <View style={styles.banner}>
-            <ImageBackground
-              source={{
-                uri:
-                  "https://www.speedrun.com/themes/" +
-                  this.state.name +
-                  "/cover-256.png",
-              }}
-              style={styles.image}
-            >
-              <Text style={styles.title}>{this.state.name}</Text>
-            </ImageBackground>
-          </View>
-          <Run data={this.state.dataSource} />
-        </View>
+      <View style={{ flex: 1 }}>
+        {this.state.runs.map((run) => (
+          <Run
+            key={run.run.id}
+            category={run.run.category}
+            place={run.place}
+            runnerid={run.run.players[0].id}
+            time={run.run.times.primary}
+            abbreviation={"na"}
+          />
+        ))}
       </View>
     );
   }
