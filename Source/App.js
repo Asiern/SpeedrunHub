@@ -17,7 +17,6 @@ const BottomTabs = createBottomTabNavigator();
 
 export default class App extends Component {
   createHomeStack = (props) => (
-    //console.log(props),
     <Stack.Navigator>
       <Stack.Screen
         name="Home"
@@ -33,6 +32,16 @@ export default class App extends Component {
         name="Profile"
         component={Profile}
         options={{ title: "My Profile", headerShown: "" }}
+      />
+      <Stack.Screen name="Game Info" component={GameInfo} />
+    </Stack.Navigator>
+  );
+  createSearchStack = (props) => (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Search"
+        component={Search}
+        options={{ title: "Home", headerShown: "" }}
       />
       <Stack.Screen name="Game Info" component={GameInfo} />
     </Stack.Navigator>
@@ -53,9 +62,11 @@ export default class App extends Component {
                 iconName = focused ? "md-home" : "md-home";
               } else if (route.name === "Search") {
                 iconName = focused ? "md-search" : "md-search";
+              } else if (route.name === "My Games") {
+                iconName = focused ? "md-heart" : "md-heart-empty";
+              } else if (route.name === "Streams") {
+                iconName = focused ? "logo-twitch" : "logo-twitch";
               }
-
-              // You can return any component that you like here!
               return <Ionicons name={iconName} size={size} color={color} />;
             },
           })}
@@ -64,12 +75,12 @@ export default class App extends Component {
             inactiveTintColor: colors.darkgrey,
           }}
         >
-          <BottomTabs.Screen name="Home" children={this.createHomeStack} />
+          <BottomTabs.Screen name="My Games" children={this.createHomeStack} />
           <BottomTabs.Screen
             name="Profile"
             children={this.createProfileStack}
           />
-          <BottomTabs.Screen name="Search" component={Search} />
+          <BottomTabs.Screen name="Search" component={this.createSearchStack} />
           <BottomTabs.Screen name="Settings" component={Settings} />
         </BottomTabs.Navigator>
       </NavigationContainer>
