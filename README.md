@@ -10,6 +10,7 @@ speedrun.com app for Android/IOS using [REST API](https://github.com/speedruncom
 
 - IOS Version not tested
 - Navigation
+- Mem Security Issue
 
 ---
 
