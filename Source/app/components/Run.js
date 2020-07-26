@@ -10,6 +10,7 @@ export default class Run extends Component {
       place: this.props.place,
       time: this.props.time,
       runner: this.props.runner,
+      runnerid: this.props.runnerid,
       cover:
         "https://www.speedrun.com/themes/" +
         this.props.abbreviation +
@@ -21,11 +22,19 @@ export default class Run extends Component {
   }
   componentDidMount() {
     this.timeConverter();
+    console.log(this.state.runnerid);
+    this.FetchUser(this.state.runnerid);
   }
   timeConverter() {
     var result = this.state.time;
     result = result.substr(2, result.lenght);
     this.setState({ time: result });
+  }
+  async FetchUser(runnerid) {
+    const url = "https://www.speedrun.com/api/v1/users/" + runnerid;
+    const response = await fetch(url);
+    const data = await response.json();
+    this.setState({ loading: false, runner: data.data.names.international });
   }
   render() {
     return (
