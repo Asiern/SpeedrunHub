@@ -7,7 +7,9 @@ speedrun.com app for Android/IOS using [REST API](https://github.com/speedruncom
 ---
 
 #### Expo
+
 Expo [Project](https://expo.io/dashboard/asiern/speedruncomapp)
+
 Expo [Builds](https://expo.io/dashboard/asiern/speedruncomapp/builds)
 
 ---
