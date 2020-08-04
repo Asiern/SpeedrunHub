@@ -1,10 +1,11 @@
-import { StyleSheet, View, FlatList, ActivityIndicator } from "react-native";
+import { StyleSheet, View, FlatList, ActivityIndicator, Button } from "react-native";
 import React, { Component, useState } from "react";
 import { SearchBar } from "react-native-elements";
 import Constants from "expo-constants";
 import color from "../config/colors";
 import colors from "../config/colors";
 import GameCard from "../components/GameCard";
+import { Colors } from "react-native/Libraries/NewAppScreen";
 
 class Search extends React.Component {
   constructor() {
@@ -12,6 +13,7 @@ class Search extends React.Component {
     this.state = {
       search: "",
       loading: true,
+      filter:"games",
       games: [],
       url: "https://www.speedrun.com/api/v1/games?name=",
     };
@@ -38,6 +40,13 @@ class Search extends React.Component {
           platform="ios"
           lightTheme={true}
         />
+        <View style={styles.filter}>
+        <Button
+          title="Filter"
+          color={colors.darkgrey}
+          style={styles.filterbtn}
+        />
+        </View>
         <View style={{ flex: 1 }}>
           <FlatList
             keyExtractor={(item) => item.id}
@@ -64,6 +73,12 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: Constants.statusBarHeight,
     backgroundColor: colors.light,
+  },
+  filter:{
+    padding:10,
+    flexDirection:"row",
+  },
+  filterbtn:{
   },
   flatList: {
     flexWrap: "wrap",
