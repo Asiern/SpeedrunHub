@@ -1,9 +1,6 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Image, Text, Alert } from "react-native";
+import { StyleSheet, View, Image, Text } from "react-native";
 import colors from "../config/colors";
-import Icon from "react-native-vector-icons/Ionicons";
-import user from "../config/user.json";
-
 class User extends Component {
   constructor(props) {
     super(props);
@@ -30,17 +27,7 @@ class User extends Component {
         </View>
 
         <View style={styles.textcontainer}>
-          <Text style={styles.welcome}>Welcome back,</Text>
           <Text style={styles.usename}>{this.state.username}</Text>
-        </View>
-
-        <View style={styles.iconcontainer}>
-          <Icon
-            onPress={() => (user.name = "Amei")}
-            name="ios-notifications-outline"
-            color={colors.Crystalline1}
-            size={35}
-          />
         </View>
       </View>
     );
@@ -53,6 +40,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     alignSelf: "center",
+    padding:10 
   },
   Image: {
     height: 50,
@@ -60,6 +48,7 @@ const styles = StyleSheet.create({
     borderColor: colors.Crystalline1,
     borderWidth: 1,
     borderRadius: 30,
+    backgroundColor: colors.light,
   },
   imagecontainer: {
     flex: 1,
@@ -70,8 +59,8 @@ const styles = StyleSheet.create({
   textcontainer: {
     flex: 2,
     flexDirection: "column",
+    alignItems:"center"
   },
-  welcome: {},
   usename: { color: colors.secondary, fontWeight: "bold", fontSize: 20 },
   iconcontainer: {
     flex: 1,
