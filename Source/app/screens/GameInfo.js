@@ -17,18 +17,8 @@ import user from "../config/user.json";
 import { useScreens } from "react-native-screens";
 import GameCard from "../components/GameCard";
 import Leaderboard from "../components/Leaderboard";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
-const Tab = createMaterialTopTabNavigator();
 
-function Tabs() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="[A]" component={<Run></Run>}></Tab.Screen>
-      <Tab.Screen name="[E]" component={<Run></Run>}></Tab.Screen>
-    </Tab.Navigator>
-  );
-}
 
 class GameInfo extends React.Component {
   constructor() {
@@ -36,13 +26,19 @@ class GameInfo extends React.Component {
     this.state = {
       loading: true,
       name: "NieR: Automata",
-      id: "76rkwed8",
+      id: "",
+      abbreviation:"",
       game: [],
     };
   }
+  loadData = () => {
+    const{id,abbreviation,other}=this.props.route.params
+    this.setState({id,abbreviation});
+  };
   async componentDidMount() {
+    this.loadData();
     const url =
-      "https://www.speedrun.com/api/v1/games/76rkwed8?embed=categories";
+      "https://www.speedrun.com/api/v1/games/"+this.props.route.params.id+"?embed=categories";
     const response = await fetch(url);
     const data = await response.json();
 
@@ -61,13 +57,14 @@ class GameInfo extends React.Component {
         <ScrollView style={styles.container}>
           <ImageBackground
             style={styles.profileBG}
-            source={{ uri: "https://www.speedrun.com/themes/na/cover-256.png" }}
+            source={{ uri: "https://www.speedrun.com/themes/"+this.state.abbreviation+"/cover-256.png" }}
+            opacity={0.3}
           >
             <View style={styles.profile}>
               <View style={styles.imagecontainer}>
                 <Image
                   source={{
-                    uri: "https://www.speedrun.com/themes/na/cover-256.png",
+                    uri: "https://www.speedrun.com/themes/"+this.state.abbreviation+"/cover-256.png",
                   }}
                   style={styles.Image}
                 ></Image>
@@ -90,7 +87,7 @@ class GameInfo extends React.Component {
               horizontal={true}
               renderItem={({ item }) => (
                 <View style={styles.button}>
-                  <Text>{item.id}</Text>
+                  <Text>{item.name}</Text>
                 </View>
               )}
             ></FlatList>
@@ -98,9 +95,9 @@ class GameInfo extends React.Component {
           <Text style={styles.headertext}>Runs</Text>
           <View style={styles.pbs}>
             <Leaderboard
-              name={"na"}
-              gameid={"76rkwed8"}
-              categoryid={"xd1erv42"}
+              name={this.state.abbreviation}
+              gameid={this.state.id}
+              categoryid={"9kvmp98k"}
             />
           </View>
         </ScrollView>
@@ -118,6 +115,7 @@ const styles = StyleSheet.create({
   profileBG: {
     flex: 1,
     resizeMode: "cover",
+    backgroundColor:colors.black
   },
   profile: {
     flex: 1,
