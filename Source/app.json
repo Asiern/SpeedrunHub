@@ -1,8 +1,12 @@
 {
   "expo": {
-    "name": "Speedrun",
-    "slug": "Speedrun",
-    "platforms": ["ios", "android", "web"],
+    "name": "Speedrun.com App",
+    "slug": "speedruncomapp",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./app/assets/trophy.png",
@@ -14,9 +18,16 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
+    },
+    "description": "speedrun.com app for Android/IOS using REST API",
+    "githubUrl": "https://github.com/Asiern/Speerun.comApp",
+    "android": {
+      "package": "Speedrun.comApp"
     }
   }
 }
