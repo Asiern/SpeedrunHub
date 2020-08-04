@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet, View, Modal, FlatList } from "react-native";
 import Constants from "expo-constants";
 import GameCard from "../components/GameCard";
-import User from "../components/User";
+import UserHeader from "../components/UserHeader";
 import colors from "../config/colors";
 import Icon from "react-native-vector-icons/Ionicons";
 import user from "../config/user.json";
@@ -13,7 +13,7 @@ class Home extends React.Component {
       <View style={{ flex: 1 }}>
         <View style={styles.profilecontainer}>
           <View style={styles.profile}>
-            <User username={user.name} />
+            <UserHeader username={user.name} />
           </View>
         </View>
         <View style={styles.container}>
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   profilecontainer: {
-    backgroundColor: colors.white,
+    backgroundColor: colors.light,
   },
   profile: {
     marginTop: Constants.statusBarHeight,
