@@ -3,7 +3,6 @@ import Profile from "./app/screens/Profile";
 import Home from "./app/screens/Home";
 import Settings from "./app/screens/Settings";
 import GameInfo from "./app/screens/GameInfo";
-import FollowedGames from "./app/screens/FollowedGames";
 import Search from "./app/screens/Search";
 
 import { NavigationContainer } from "@react-navigation/native";
