@@ -64,6 +64,13 @@ class Profile extends React.Component {
             </View>
           </View>
         </ImageBackground>
+        <Text style={styles.headertext}>Social Media</Text>
+        <View style={styles.social}>
+          <Icon name="logo-twitch"size={20}/>
+          <Icon name="logo-twitter" size={20} />
+          <Icon name="logo-youtube" size={20}/>
+          <Icon name="logo-instagram" size={20}/>
+        </View>
         <Text style={styles.headertext}>Personal Bests</Text>
         <View style={styles.pbs}>
           <View style={styles.runinfo}>
@@ -162,15 +169,24 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   headertext: {
-    color: colors.darkgrey,
+    color: colors.light,
+    backgroundColor: colors.Crystalline1,
     fontSize: 20,
     fontWeight: "bold",
     alignSelf: "center",
-    paddingTop: 40,
+    borderRadius: 15,
+    padding:10
   },
   pbs: {
     flex: 1,
     margin: 10,
+  },
+  social: {
+    flex: 1,
+    margin: 10,
+    flexDirection:"row",
+    paddingVertical: 20,
+    justifyContent:"space-around"
   },
   runinfo: {
     flex: 1,
