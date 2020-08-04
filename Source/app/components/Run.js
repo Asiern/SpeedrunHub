@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet, View, Image, Text } from "react-native";
 import { Content } from "native-base";
 import colors from "../config/colors";
+import user from "../config/user.json"
 export default class Run extends Component {
   constructor(props) {
     super(props);
@@ -22,8 +23,7 @@ export default class Run extends Component {
   }
   componentDidMount() {
     this.timeConverter();
-    console.log(this.state.runnerid);
-    this.FetchUser(this.state.runnerid);
+    //this.FetchUser(this.state.runnerid);
   }
   timeConverter() {
     var result = this.state.time;
