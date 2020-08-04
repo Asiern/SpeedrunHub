@@ -24,7 +24,7 @@ class GameCard extends Component {
     return (
       <TouchableOpacity
         onPress={() =>
-          this.props.navigation.navigate("Game Info", { id: "someid" })
+          this.props.navigation.navigate("Game Info", { id: this.state.id, name:"name",abbreviation:this.state.abbreviation, })
         }
         style={styles.container}
       >
