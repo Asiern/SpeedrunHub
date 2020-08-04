@@ -27,7 +27,7 @@ class Leaderboard extends Component {
   }
   async FetchData() {
     const url =
-      "https://www.speedrun.com/api/v1/leaderboards/76rkwed8/category/ndxmj4r2";
+      "https://www.speedrun.com/api/v1/leaderboards/76rkwed8/category/9kvmp98k";
     const variable =
       "https://www.speedrun.com/api/v1/categories/xd1erv42/variables?";
     const response = await fetch(url);
