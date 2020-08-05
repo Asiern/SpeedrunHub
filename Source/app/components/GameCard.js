@@ -1,11 +1,6 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Text, ImageBackground } from "react-native";
-import { Button } from "native-base";
-import {
-  TouchableNativeFeedback,
-  TouchableHighlight,
-  TouchableOpacity,
-} from "react-native-gesture-handler";
+import { StyleSheet, ImageBackground } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 class GameCard extends Component {
   constructor(props) {
@@ -24,7 +19,11 @@ class GameCard extends Component {
     return (
       <TouchableOpacity
         onPress={() =>
-          this.props.navigation.navigate("Game Info", { id: this.state.id, name:"name",abbreviation:this.state.abbreviation, })
+          this.props.navigation.navigate("Game Info", {
+            id: this.state.id,
+            name: "name",
+            abbreviation: this.state.abbreviation,
+          })
         }
         style={styles.container}
       >
