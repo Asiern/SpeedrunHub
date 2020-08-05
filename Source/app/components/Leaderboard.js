@@ -1,17 +1,6 @@
 import React, { Component } from "react";
-import {
-  StyleSheet,
-  View,
-  Image,
-  Text,
-  Alert,
-  ActivityIndicator,
-  ImageBackground,
-  FlatList,
-} from "react-native";
+import { StyleSheet, View, Text, ActivityIndicator } from "react-native";
 import colors from "../config/colors";
-import Icon from "react-native-vector-icons/Ionicons";
-import data from "../assets/json/Any%Leaderboard.json";
 import Run from "./Run";
 
 class Leaderboard extends Component {
