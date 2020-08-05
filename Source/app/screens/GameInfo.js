@@ -8,17 +8,11 @@ import {
   Image,
   ActivityIndicator,
   FlatList,
+  Button,
 } from "react-native";
 import colors from "../config/colors";
-import Icon from "react-native-vector-icons/Ionicons";
-import Constants from "expo-constants";
-import Run from "../components/Run";
-import user from "../config/user.json";
-import { useScreens } from "react-native-screens";
-import GameCard from "../components/GameCard";
 import Leaderboard from "../components/Leaderboard";
-
-
+import config from "../config/user.json";
 
 class GameInfo extends React.Component {
   constructor() {
@@ -27,29 +21,51 @@ class GameInfo extends React.Component {
       loading: true,
       name: "NieR: Automata",
       id: "",
-      abbreviation:"",
+      abbreviation: "",
       game: [],
+      selectedCategory: "",
     };
   }
   loadData = () => {
-    const{id,abbreviation,other}=this.props.route.params
-    this.setState({id,abbreviation});
+    const { id, abbreviation } = this.props.route.params;
+    this.setState({
+      id,
+      abbreviation,
+    });
+  };
+  readFavs() {
+    const { favs } = config.games[0].id;
+  }
+  selectCategory = (selectedCategory) => {
+    this.setState({ selectedCategory });
+    console.log(this.state.selectedCategory);
   };
   async componentDidMount() {
     this.loadData();
+    this.readFavs();
     const url =
-      "https://www.speedrun.com/api/v1/games/"+this.props.route.params.id+"?embed=categories";
+      "https://www.speedrun.com/api/v1/games/" +
+      this.props.route.params.id +
+      "?embed=categories";
     const response = await fetch(url);
     const data = await response.json();
 
-    this.setState({ loading: false, game: data.data });
+    this.setState({
+      loading: false,
+      game: data.data,
+    });
     //console.log(this.state.game.categories);
   }
   render() {
     if (this.state.loading) {
       return (
         <ActivityIndicator
-          style={{ alignSelf: "center", flex: 1, scaleX: 2, scaleY: 2 }}
+          style={{
+            alignSelf: "center",
+            flex: 1,
+            scaleX: 2,
+            scaleY: 2,
+          }}
         />
       );
     } else {
@@ -57,20 +73,27 @@ class GameInfo extends React.Component {
         <ScrollView style={styles.container}>
           <ImageBackground
             style={styles.profileBG}
-            source={{ uri: "https://www.speedrun.com/themes/"+this.state.abbreviation+"/cover-256.png" }}
+            source={{
+              uri:
+                "https://www.speedrun.com/themes/" +
+                this.state.abbreviation +
+                "/cover-256.png",
+            }}
             opacity={0.3}
           >
             <View style={styles.profile}>
               <View style={styles.imagecontainer}>
                 <Image
                   source={{
-                    uri: "https://www.speedrun.com/themes/"+this.state.abbreviation+"/cover-256.png",
+                    uri:
+                      "https://www.speedrun.com/themes/" +
+                      this.state.abbreviation +
+                      "/cover-256.png",
                   }}
                   style={styles.Image}
                 ></Image>
               </View>
             </View>
-
             <View style={styles.userinfo}>
               <View style={styles.userinfoitem}>
                 <Text style={styles.h1}>
@@ -80,24 +103,31 @@ class GameInfo extends React.Component {
             </View>
           </ImageBackground>
           <View>
-            <Text style={styles.headertext}>Categories</Text>
+            <Text style={styles.headertext}> Categories </Text>
             <FlatList
               keyExtractor={(item) => item.id}
               data={this.state.game.categories.data}
               horizontal={true}
+              showsHorizontalScrollIndicator={false}
               renderItem={({ item }) => (
                 <View style={styles.button}>
-                  <Text>{item.name}</Text>
+                  <Button
+                    title={item.name}
+                    style={styles.button}
+                    color={colors.Crystalline1}
+                    accessibilityLabel="Learn more about this purple button"
+                    onPress={() => this.selectCategory(item.id)}
+                  />
                 </View>
               )}
             ></FlatList>
           </View>
-          <Text style={styles.headertext}>Runs</Text>
+          <Text style={styles.headertext}> Runs </Text>
           <View style={styles.pbs}>
             <Leaderboard
               name={this.state.abbreviation}
               gameid={this.state.id}
-              categoryid={"9kvmp98k"}
+              categoryid={"x"}
             />
           </View>
         </ScrollView>
@@ -115,7 +145,7 @@ const styles = StyleSheet.create({
   profileBG: {
     flex: 1,
     resizeMode: "cover",
-    backgroundColor:colors.black
+    backgroundColor: colors.black,
   },
   profile: {
     flex: 1,
@@ -168,6 +198,7 @@ const styles = StyleSheet.create({
   },
   headertext: {
     color: colors.darkgrey,
+    padding: 20,
     fontSize: 20,
     fontWeight: "bold",
     alignSelf: "center",
