@@ -17,7 +17,6 @@ Expo [Builds](https://expo.io/dashboard/asiern/speedruncomapp/builds)
 
 - IOS Version not tested
 - Navigation
-- Mem Security Issue
 
 ---
 
