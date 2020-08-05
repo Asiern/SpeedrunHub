@@ -18,7 +18,7 @@ class Leaderboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: true,
+      isLoading: false,
       runs: [],
       name: this.props.name,
       gameid: this.props.gameid,
@@ -33,29 +33,31 @@ class Leaderboard extends Component {
     const response = await fetch(url);
     const data = await response.json();
     this.setState({ loading: false, runs: data.data.runs });
-    //console.log(this.state.runs[55]);
   }
   componentDidMount() {
     this.FetchData();
   }
   render() {
     if (this.state.isLoading) {
-      <ActivityIndicator />;
+      return <ActivityIndicator />;
+    } else if (this.state.categoryid == "") {
+      return <Text>Select Category</Text>;
+    } else {
+      return (
+        <View style={{ flex: 1 }}>
+          {this.state.runs.map((run) => (
+            <Run
+              key={run.run.id}
+              category={run.run.category}
+              place={run.place}
+              runnerid={run.run.players[0].id}
+              time={run.run.times.primary}
+              abbreviation={"na"}
+            />
+          ))}
+        </View>
+      );
     }
-    return (
-      <View style={{ flex: 1 }}>
-        {this.state.runs.map((run) => (
-          <Run
-            key={run.run.id}
-            category={run.run.category}
-            place={run.place}
-            runnerid={run.run.players[0].id}
-            time={run.run.times.primary}
-            abbreviation={"na"}
-          />
-        ))}
-      </View>
-    );
   }
 }
 const styles = StyleSheet.create({
