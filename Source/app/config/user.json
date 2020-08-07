@@ -3,6 +3,7 @@
   "id": "48g3q2rx", //48g3q2rx qj26goxk
   "country": "Basque Country",
   "games": [
+    { "id": "m1zjlkm6", "abbreviation": "re2remake" },
     { "id": "w6jve26j", "abbreviation": "darksouls" },
     { "id": "76rkwed8", "abbreviation": "na" },
     { "id": "m1zky010", "abbreviation": "darksouls2" },
