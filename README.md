@@ -8,9 +8,9 @@ An app for IOS/Android platforms made with [React Native](https://reactnative.de
 
 #### Basics
 
-[Components]()
+[Components](https://github.com/Asiern/Speerun.comApp/blob/master/Readme/Components.md)
 
-[Screens]()
+[Screens](https://github.com/Asiern/Speerun.comApp/blob/master/Readme/Screens.md)
 
 ---
 
