@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import colors from "../config/colors";
 import Leaderboard from "../components/Leaderboard";
+import Variables from "../components/Variables";
 import config from "../config/user.json";
 
 class GameInfo extends React.Component {
@@ -19,7 +20,6 @@ class GameInfo extends React.Component {
     super();
     this.state = {
       loading: true,
-      name: "NieR: Automata",
       id: "",
       abbreviation: "",
       game: [],
@@ -28,6 +28,7 @@ class GameInfo extends React.Component {
   }
   loadData = () => {
     const { id, abbreviation } = this.props.route.params;
+    console.log(id, abbreviation);
     this.setState({
       id,
       abbreviation,
@@ -38,11 +39,12 @@ class GameInfo extends React.Component {
   }
   selectCategory = (selectedCategory) => {
     this.setState({ selectedCategory });
+    this.forceUpdate();
     console.log(this.state.selectedCategory);
   };
   async componentDidMount() {
     this.loadData();
-    this.readFavs();
+    //this.readFavs();
     const url =
       "https://www.speedrun.com/api/v1/games/" +
       this.props.route.params.id +
@@ -122,14 +124,11 @@ class GameInfo extends React.Component {
               )}
             ></FlatList>
           </View>
-          <Text style={styles.headertext}> Runs </Text>
-          <View style={styles.pbs}>
-            <Leaderboard
-              name={this.state.abbreviation}
-              gameid={this.state.id}
-              categoryid={"x"}
-            />
-          </View>
+          <Variables
+            name={this.state.abbreviation}
+            gameid={this.state.id}
+            categoryid={"wkpmv8vk"}
+          />
         </ScrollView>
       );
     }
