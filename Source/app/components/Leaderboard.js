@@ -12,18 +12,35 @@ class Leaderboard extends Component {
       name: this.props.name,
       gameid: this.props.gameid,
       categoryid: this.props.categoryid,
+      variables: [],
+      url: "",
     };
   }
+  buildUrl = () => {
+    var url = "";
+    if (true) {
+      url =
+        "https://www.speedrun.com/api/v1/leaderboards/" +
+        this.state.gameid +
+        "/category/" +
+        this.state.categoryid;
+    } else {
+    }
+    this.setState({ url: url });
+    console.log(url);
+  };
   async FetchData() {
     const url =
+      "https://www.speedrun.com/api/v1/leaderboards/76rkwed8/category/xd1erv42?var-9l733dqn=013w8gyq";
+    const url2 =
       "https://www.speedrun.com/api/v1/leaderboards/76rkwed8/category/9kvmp98k";
-    const variable =
-      "https://www.speedrun.com/api/v1/categories/xd1erv42/variables?";
+
     const response = await fetch(url);
     const data = await response.json();
     this.setState({ loading: false, runs: data.data.runs });
   }
   componentDidMount() {
+    this.buildUrl();
     this.FetchData();
   }
   render() {
