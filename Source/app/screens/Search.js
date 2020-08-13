@@ -4,12 +4,15 @@ import {
   FlatList,
   ActivityIndicator,
   Button,
+  Text,
+  ScrollView,
 } from "react-native";
 import React, { Component, useState } from "react";
 import { SearchBar } from "react-native-elements";
 import Constants from "expo-constants";
 import colors from "../config/colors";
 import GameCard from "../components/GameCard";
+import User from "../components/User";
 
 class Search extends React.Component {
   constructor() {
@@ -19,19 +22,29 @@ class Search extends React.Component {
       loading: true,
       filter: "games",
       games: [],
-      url: "https://www.speedrun.com/api/v1/games?name=",
+      users: [],
+      gameurl: "https://www.speedrun.com/api/v1/games?name=",
+      userurl: "https://www.speedrun.com/api/v1/users?name=",
     };
   }
   updateSearch = (input) => {
     this.setState({ search: input });
-    const url = "https://www.speedrun.com/api/v1/games?name=" + input;
-    this.Fetch(url);
+    const gameurl = "https://www.speedrun.com/api/v1/games?name=" + input;
+    const usereurl = "https://www.speedrun.com/api/v1/users?name=" + input;
+    this.Fetch(gameurl, usereurl);
   };
 
-  async Fetch(url) {
-    const response = await fetch(url);
-    const data = await response.json();
-    this.setState({ loading: false, games: data.data });
+  async Fetch(gameurl, userurl) {
+    const gameresponse = await fetch(gameurl);
+    const gamedata = await gameresponse.json();
+    const userresponse = await fetch(userurl);
+    const userdata = await userresponse.json();
+
+    this.setState({
+      loading: false,
+      games: gamedata.data,
+      users: userdata.data,
+    });
   }
   render() {
     const { search } = this.state;
@@ -44,29 +57,30 @@ class Search extends React.Component {
           platform="ios"
           lightTheme={true}
         />
-        <View style={styles.filter}>
-          <Button
-            title="Filter"
-            color={colors.darkgrey}
-            style={styles.filterbtn}
-          />
-        </View>
-        <View style={{ flex: 1 }}>
-          <FlatList
-            keyExtractor={(item) => item.id}
-            data={this.state.games}
-            renderItem={({ item }) => (
-              <View style={styles.flatList}>
-                <GameCard
-                  navigation={this.props.navigation}
-                  id={item.id}
-                  abbreviation={item.abbreviation}
-                />
-              </View>
-            )}
-            numColumns={2}
-          ></FlatList>
-        </View>
+        <ScrollView>
+          <Text style={styles.headertext}>Games</Text>
+          <View style={{ flex: 2 }}>
+            {this.state.games.map((item) => (
+              <GameCard
+                key={item.id}
+                navigation={this.props.navigation}
+                id={item.id}
+                abbreviation={item.abbreviation}
+              />
+            ))}
+          </View>
+          <Text style={styles.headertext}>Users</Text>
+          <View style={{ flex: 1 }}>
+            {this.state.users.map((item) => (
+              <User
+                key={item.id}
+                username={item.names.international}
+                userid={item.id}
+                navigation={this.props.navigation}
+              />
+            ))}
+          </View>
+        </ScrollView>
       </View>
     );
   }
@@ -78,17 +92,19 @@ const styles = StyleSheet.create({
     marginTop: Constants.statusBarHeight,
     backgroundColor: colors.light,
   },
-  filter: {
-    padding: 10,
-    flexDirection: "row",
-  },
-  filterbtn: {},
   flatList: {
     flexWrap: "wrap",
     flex: 1,
     alignContent: "center",
     justifyContent: "space-around",
     alignItems: "center",
+  },
+  headertext: {
+    color: colors.Crystalline1,
+    fontSize: 20,
+    padding: 20,
+    fontWeight: "bold",
+    alignSelf: "center",
   },
 });
 
