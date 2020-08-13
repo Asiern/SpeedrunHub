@@ -13,40 +13,22 @@ class Leaderboard extends Component {
       gameid: this.props.gameid,
       categoryid: this.props.categoryid,
       variables: [],
-      url: "",
+      url: this.props.url,
     };
   }
-  buildUrl = () => {
-    var url = "";
-    if (true) {
-      url =
-        "https://www.speedrun.com/api/v1/leaderboards/" +
-        this.state.gameid +
-        "/category/" +
-        this.state.categoryid;
-    } else {
-    }
-    this.setState({ url: url });
-    console.log(url);
-  };
-  async FetchData() {
-    const url =
-      "https://www.speedrun.com/api/v1/leaderboards/76rkwed8/category/xd1erv42?var-9l733dqn=013w8gyq";
-    const url2 =
-      "https://www.speedrun.com/api/v1/leaderboards/76rkwed8/category/9kvmp98k";
 
-    const response = await fetch(url);
+  async FetchData() {
+    const response = await fetch(this.state.url);
     const data = await response.json();
     this.setState({ loading: false, runs: data.data.runs });
   }
   componentDidMount() {
-    this.buildUrl();
     this.FetchData();
   }
   render() {
     if (this.state.isLoading) {
       return <ActivityIndicator />;
-    } else if (this.state.categoryid == "") {
+    } else if (this.props.url == null) {
       return <Text>Select Category</Text>;
     } else {
       return (
@@ -68,7 +50,7 @@ class Leaderboard extends Component {
 }
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.light,
+    backgroundColor: "tomato",
     paddingHorizontal: 20,
     paddingVertical: 10,
     flex: 1,
