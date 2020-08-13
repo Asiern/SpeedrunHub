@@ -28,7 +28,6 @@ class GameInfo extends React.Component {
   }
   loadData = () => {
     const { id, abbreviation } = this.props.route.params;
-    console.log(id, abbreviation);
     this.setState({
       id,
       abbreviation,
@@ -39,12 +38,10 @@ class GameInfo extends React.Component {
   }
   selectCategory = (selectedCategory) => {
     this.setState({ selectedCategory });
-    this.forceUpdate();
-    console.log(this.state.selectedCategory);
+    console.log(selectedCategory);
   };
   async componentDidMount() {
     this.loadData();
-    //this.readFavs();
     const url =
       "https://www.speedrun.com/api/v1/games/" +
       this.props.route.params.id +
@@ -55,8 +52,9 @@ class GameInfo extends React.Component {
     this.setState({
       loading: false,
       game: data.data,
+      //Select first category
+      selectedCategory: data.data.categories.data[0].id,
     });
-    //console.log(this.state.game.categories);
   }
   render() {
     if (this.state.loading) {
@@ -105,7 +103,6 @@ class GameInfo extends React.Component {
             </View>
           </ImageBackground>
           <View>
-            <Text style={styles.headertext}> Categories </Text>
             <FlatList
               keyExtractor={(item) => item.id}
               data={this.state.game.categories.data}
@@ -117,7 +114,6 @@ class GameInfo extends React.Component {
                     title={item.name}
                     style={styles.button}
                     color={colors.Crystalline1}
-                    accessibilityLabel="Learn more about this purple button"
                     onPress={() => this.selectCategory(item.id)}
                   />
                 </View>
@@ -127,7 +123,7 @@ class GameInfo extends React.Component {
           <Variables
             name={this.state.abbreviation}
             gameid={this.state.id}
-            categoryid={"wkpmv8vk"}
+            categoryid={this.state.selectedCategory}
           />
         </ScrollView>
       );
@@ -214,7 +210,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   button: {
-    paddingHorizontal: 20,
+    margin: 20,
     height: 45,
     alignSelf: "center",
   },
