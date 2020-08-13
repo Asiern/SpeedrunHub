@@ -12,27 +12,35 @@ import Icon from "react-native-vector-icons/Ionicons";
 import Constants from "expo-constants";
 import Run from "../components/Run";
 import user from "../config/user.json";
-import { useScreens } from "react-native-screens";
 
 class Profile extends React.Component {
   constructor() {
     super();
     this.state = {
       loading: true,
-      userpicture:
-        "https://www.speedrun.com/themes/user/" + user.name + "/image.png",
+      username: "",
+      userid: "",
+      userpicture: "",
       runs: [],
     };
   }
-  async componentDidMount() {
+  async loadData() {
+    const { username, userid } = this.props.route.params;
+    this.setState({
+      userid,
+      username,
+    });
     const runsurl =
       "https://www.speedrun.com/api/v1/users/" +
-      user.id +
+      userid +
       "/personal-bests?embed=game,category";
     const runsresponse = await fetch(runsurl);
     const runsdata = await runsresponse.json();
 
     this.setState({ loading: false, runs: runsdata.data });
+  }
+  async componentDidMount() {
+    this.loadData();
   }
 
   render() {
@@ -46,7 +54,10 @@ class Profile extends React.Component {
             <View style={styles.imagecontainer}>
               <Image
                 source={{
-                  uri: this.state.userpicture,
+                  uri:
+                    "https://www.speedrun.com/themes/user/" +
+                    this.state.username +
+                    "/image.png",
                 }}
                 style={styles.Image}
               ></Image>
@@ -54,7 +65,7 @@ class Profile extends React.Component {
 
             <View style={styles.userinfo}>
               <View style={styles.userinfoitem}>
-                <Text style={styles.h1}>{user.name}</Text>
+                <Text style={styles.h1}>{this.state.username}</Text>
                 <View style={styles.country}>
                   <View>
                     <Text style={styles.h2}>Basque Country</Text>
@@ -66,10 +77,10 @@ class Profile extends React.Component {
         </ImageBackground>
         <Text style={styles.headertext}>Social Media</Text>
         <View style={styles.social}>
-          <Icon name="logo-twitch"size={20}/>
+          <Icon name="logo-twitch" size={20} />
           <Icon name="logo-twitter" size={20} />
-          <Icon name="logo-youtube" size={20}/>
-          <Icon name="logo-instagram" size={20}/>
+          <Icon name="logo-youtube" size={20} />
+          <Icon name="logo-instagram" size={20} />
         </View>
         <Text style={styles.headertext}>Personal Bests</Text>
         <View style={styles.pbs}>
@@ -95,7 +106,7 @@ class Profile extends React.Component {
               key={run.run.id}
               category={run.category.data.name}
               place={run.place}
-              runner={user.name}
+              runner={this.state.username}
               time={run.run.times.primary}
               game={run.game.data.names.international}
               abbreviation={run.game.data.abbreviation}
@@ -175,7 +186,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     alignSelf: "center",
     borderRadius: 15,
-    padding:10
+    padding: 10,
   },
   pbs: {
     flex: 1,
@@ -184,9 +195,9 @@ const styles = StyleSheet.create({
   social: {
     flex: 1,
     margin: 10,
-    flexDirection:"row",
+    flexDirection: "row",
     paddingVertical: 20,
-    justifyContent:"space-around"
+    justifyContent: "space-around",
   },
   runinfo: {
     flex: 1,
