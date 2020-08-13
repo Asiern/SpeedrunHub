@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Image, Text } from "react-native";
 import colors from "../config/colors";
+import { TouchableOpacity } from "react-native-gesture-handler";
 class User extends Component {
   constructor(props) {
     super(props);
@@ -16,7 +17,15 @@ class User extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <TouchableOpacity
+        onPress={() =>
+          this.props.navigation.navigate("Profile", {
+            username: this.props.username,
+            userid: this.props.userid,
+          })
+        }
+        style={styles.container}
+      >
         <View style={styles.imagecontainer}>
           <Image
             source={{
@@ -29,7 +38,7 @@ class User extends Component {
         <View style={styles.textcontainer}>
           <Text style={styles.usename}>{this.state.username}</Text>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   }
 }
@@ -40,7 +49,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     alignSelf: "center",
-    padding:10 
+    padding: 10,
   },
   Image: {
     height: 50,
@@ -59,7 +68,7 @@ const styles = StyleSheet.create({
   textcontainer: {
     flex: 2,
     flexDirection: "column",
-    alignItems:"center"
+    alignItems: "center",
   },
   usename: { color: colors.secondary, fontWeight: "bold", fontSize: 20 },
   iconcontainer: {
