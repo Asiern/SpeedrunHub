@@ -4,6 +4,7 @@ import Home from "./app/screens/Home";
 import Settings from "./app/screens/Settings";
 import GameInfo from "./app/screens/GameInfo";
 import Search from "./app/screens/Search";
+import User from "./app/components/User";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -40,9 +41,10 @@ export default class App extends Component {
       <Stack.Screen
         name="Search"
         component={Search}
-        options={{ title: "Home", headerShown: "" }}
+        options={{ title: "Search", headerShown: "" }}
       />
       <Stack.Screen name="Game Info" component={GameInfo} />
+      <Stack.Screen name="Profile" component={Profile} />
     </Stack.Navigator>
   );
   render() {
