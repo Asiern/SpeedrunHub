@@ -17,6 +17,13 @@ class UserHeader extends Component {
     };
   }
 
+  miputafuncion = (input) => {
+    this.setState({
+      username: input,
+      userpicture:
+        "https://www.speedrun.com/themes/user/" + input + "/image.png",
+    });
+  };
   render() {
     return (
       <View style={styles.container}>
@@ -36,7 +43,7 @@ class UserHeader extends Component {
 
         <View style={styles.iconcontainer}>
           <Icon
-            onPress={() => (user.name = "Amei")}
+            onPress={() => this.miputafuncion("Amei")}
             name="ios-notifications-outline"
             color={colors.Crystalline1}
             size={35}
