@@ -66,22 +66,23 @@ class Profile extends React.Component {
             <View style={styles.userinfo}>
               <View style={styles.userinfoitem}>
                 <Text style={styles.h1}>{this.state.username}</Text>
-                <View style={styles.country}>
+                {/*<View style={styles.country}>
                   <View>
                     <Text style={styles.h2}>Basque Country</Text>
                   </View>
-                </View>
+              </View>*/}
               </View>
             </View>
           </View>
         </ImageBackground>
+        {/* Social
         <Text style={styles.headertext}>Social Media</Text>
         <View style={styles.social}>
           <Icon name="logo-twitch" size={20} />
           <Icon name="logo-twitter" size={20} />
           <Icon name="logo-youtube" size={20} />
           <Icon name="logo-instagram" size={20} />
-        </View>
+              </View>*/}
         <Text style={styles.headertext}>Personal Bests</Text>
         <View style={styles.pbs}>
           <View style={styles.runinfo}>
