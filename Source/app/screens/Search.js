@@ -1,13 +1,5 @@
-import {
-  StyleSheet,
-  View,
-  FlatList,
-  ActivityIndicator,
-  Button,
-  Text,
-  ScrollView,
-} from "react-native";
-import React, { Component, useState } from "react";
+import { StyleSheet, View, Text, ScrollView } from "react-native";
+import React from "react";
 import { SearchBar } from "react-native-elements";
 import Constants from "expo-constants";
 import colors from "../config/colors";
@@ -20,26 +12,27 @@ class Search extends React.Component {
     this.state = {
       search: "",
       loading: true,
-      filter: "games",
       games: [],
       users: [],
-      gameurl: "https://www.speedrun.com/api/v1/games?name=",
-      userurl: "https://www.speedrun.com/api/v1/users?name=",
     };
   }
   updateSearch = (input) => {
     this.setState({ search: input });
     const gameurl = "https://www.speedrun.com/api/v1/games?name=" + input;
     const usereurl = "https://www.speedrun.com/api/v1/users?name=" + input;
+    //Fetch url for users and games
     this.Fetch(gameurl, usereurl);
   };
 
   async Fetch(gameurl, userurl) {
+    //Games
     const gameresponse = await fetch(gameurl);
     const gamedata = await gameresponse.json();
+    //Users
     const userresponse = await fetch(userurl);
     const userdata = await userresponse.json();
 
+    //Load data to state
     this.setState({
       loading: false,
       games: gamedata.data,
@@ -51,15 +44,17 @@ class Search extends React.Component {
     return (
       <View style={styles.container}>
         <SearchBar
-          placeholder="Search for games"
+          placeholder="Search for games and users"
           onChangeText={this.updateSearch}
           value={search}
           platform="ios"
           lightTheme={true}
         />
         <ScrollView>
-          <Text style={styles.headertext}>Games</Text>
-          <View style={{ flex: 2 }}>
+          <View style={styles.headercontainer}>
+            <Text style={styles.headertext}>Games</Text>
+          </View>
+          <View style={styles.gamecontainer}>
             {this.state.games.map((item) => (
               <GameCard
                 key={item.id}
@@ -69,7 +64,9 @@ class Search extends React.Component {
               />
             ))}
           </View>
-          <Text style={styles.headertext}>Users</Text>
+          <View style={styles.headercontainer}>
+            <Text style={styles.headertext}>Users</Text>
+          </View>
           <View style={{ flex: 1 }}>
             {this.state.users.map((item) => (
               <User
@@ -92,17 +89,19 @@ const styles = StyleSheet.create({
     marginTop: Constants.statusBarHeight,
     backgroundColor: colors.light,
   },
-  flatList: {
+  gamecontainer: {
+    flexDirection: "row",
     flexWrap: "wrap",
-    flex: 1,
-    alignContent: "center",
+    flex: 2,
     justifyContent: "space-around",
-    alignItems: "center",
+  },
+  headercontainer: {
+    backgroundColor: colors.Crystalline1,
   },
   headertext: {
-    color: colors.Crystalline1,
-    fontSize: 20,
-    padding: 20,
+    color: colors.white,
+    fontSize: 25,
+    padding: 15,
     fontWeight: "bold",
     alignSelf: "center",
   },
