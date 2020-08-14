@@ -38,7 +38,6 @@ class Variables extends Component {
     var subcategories = [];
     for (let variable of data.data) {
       const str = "variable.is-subcategory";
-      //El puto guion
       if (str == true) {
         //Add sub-category to list
         let subcategory = [
@@ -55,7 +54,7 @@ class Variables extends Component {
     this.setState({ variables: data.data, isLoading: false, subcategories });
     //console.log(subcategories[0]);
     const a = varia.data[0].values.default;
-    console.log(varia.data[0].values.values);
+    //console.log(varia.data[0].values.values);
   }
   componentDidMount() {
     this.getVariables();
@@ -72,14 +71,22 @@ class Variables extends Component {
       return (
         <View style={styles.container}>
           {this.state.variables.map((item) => (
-            <View style={styles.button}>
-              <Button
-                key={item.id}
-                title={item.name}
-                style={styles.button}
-                color={colors.Crystalline1}
-                onPress={() => this.selectCategory(item.id)}
-              />
+            <View key={item.id} style={styles.button}>
+              <FlatList
+                keyExtractor={(item) => item}
+                data={item.links}
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+                renderItem={({ item }) => (
+                  <View style={styles.button}>
+                    <Button
+                      title={item.rel}
+                      style={styles.button}
+                      color={colors.Crystalline1}
+                    />
+                  </View>
+                )}
+              ></FlatList>
             </View>
           ))}
           <Leaderboard
