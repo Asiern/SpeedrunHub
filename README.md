@@ -25,7 +25,6 @@ Expo [Builds](https://expo.io/dashboard/asiern/speedruncomapp/builds)
 #### Issues
 
 - IOS Version not tested
-- Navigation
 
 ---
 
@@ -33,7 +32,6 @@ Expo [Builds](https://expo.io/dashboard/asiern/speedruncomapp/builds)
 
 - Game info display
 - Notifications via [APIKey](https://github.com/speedruncomorg/api/blob/master/authentication.md)
-- User Profile searching
 - Themes
 - Animations
 - UI Design
