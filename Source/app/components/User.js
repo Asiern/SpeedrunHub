@@ -26,17 +26,19 @@ class User extends Component {
         }
         style={styles.container}
       >
-        <View style={styles.imagecontainer}>
-          <Image
-            source={{
-              uri: this.state.userpicture,
-            }}
-            style={styles.Image}
-          ></Image>
-        </View>
+        <View style={styles.user}>
+          <View style={styles.imagecontainer}>
+            <Image
+              source={{
+                uri: this.state.userpicture,
+              }}
+              style={styles.Image}
+            ></Image>
+          </View>
 
-        <View style={styles.textcontainer}>
-          <Text style={styles.usename}>{this.state.username}</Text>
+          <View style={styles.textcontainer}>
+            <Text style={styles.usename}>{this.state.username}</Text>
+          </View>
         </View>
       </TouchableOpacity>
     );
@@ -44,12 +46,22 @@ class User extends Component {
 }
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    alignSelf: "center",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
+  user: {
     backgroundColor: colors.white,
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
     alignSelf: "center",
-    padding: 10,
+    paddingVertical: 20,
+    paddingHorizontal: 20,
+    borderRadius: 20,
   },
   Image: {
     height: 50,
