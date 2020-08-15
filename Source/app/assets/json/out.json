@@ -1,0 +1,26 @@
+{
+  "data": [
+    {
+      "id": "9l733dqn",
+      "name": "[A] Difficulty",
+      "categories": [
+        {
+          "id": "zqomp441",
+          "label": "Easy"
+        },
+        {
+          "id": "013w8gyq",
+          "label": "Normal"
+        },
+        {
+          "id": "rqv6p8yl",
+          "label": "Hard"
+        },
+        {
+          "id": "5le3rw6q",
+          "label": "Very Hard"
+        }
+      ]
+    }
+  ]
+}
