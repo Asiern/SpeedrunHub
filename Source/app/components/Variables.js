@@ -10,6 +10,7 @@ import {
 import colors from "../config/colors";
 import Leaderboard from "./Leaderboard";
 import varia from "../assets/json/var.json";
+import varout from "../assets/json/out.json";
 
 class Variables extends Component {
   constructor(props) {
@@ -22,46 +23,41 @@ class Variables extends Component {
       categoryid: this.props.categoryid,
       variables: [],
       subcategories: [],
-      url: "",
-      test: "",
-      array: ["1", "2", "3"],
     };
   }
   async getVariables() {
-    const variables =
+    const variablesurl =
       "https://www.speedrun.com/api/v1/categories/" +
-      this.state.categoryid +
+      this.props.categoryid +
       "/variables?";
-    const response = await fetch(variables);
+    const response = await fetch(variablesurl);
     const data = await response.json();
 
     var subcategories = [];
+    var subcategory = { id: "", name: "", values: {} };
+    var value = { id: "", label: "" };
     for (let variable of data.data) {
-      const str = "variable.is-subcategory";
+      const str = variable["is-subcategory"];
       if (str == true) {
-        //Add sub-category to list
-        let subcategory = [
-          {
-            id: variable.id,
-            name: variable.name,
-            //values
-          },
-        ];
-        //console.log(subcategory);
-        subcategories.push(subcategorysubcategory);
+        subcategory.id = variable.id;
+        subcategory.name = variable.name;
+        for (var a in variable.values.values) {
+          value.id = a;
+          //value.label = variable.values.values.a.label;
+
+          //add value to subcategory.values
+        }
+        //subcategory.push(id, varid);
       }
+      console.log(subcategory);
     }
-    this.setState({ variables: data.data, isLoading: false, subcategories });
-    //console.log(subcategories[0]);
-    const a = varia.data[0].values.default;
-    //console.log(varia.data[0].values.values);
+    //subcategories.push(subcategory);
+    //console.log(subcategories);
+    this.setState({ variables: data.data, isLoading: false });
   }
   componentDidMount() {
     this.getVariables();
   }
-  test = (input) => {
-    this.setState({ test: input });
-  };
   render() {
     if (this.state.isLoading) {
       return <ActivityIndicator />;
@@ -70,25 +66,6 @@ class Variables extends Component {
     } else {
       return (
         <View style={styles.container}>
-          {this.state.variables.map((item) => (
-            <View key={item.id} style={styles.button}>
-              <FlatList
-                keyExtractor={(item) => item}
-                data={item.links}
-                horizontal={true}
-                showsHorizontalScrollIndicator={false}
-                renderItem={({ item }) => (
-                  <View style={styles.button}>
-                    <Button
-                      title={item.rel}
-                      style={styles.button}
-                      color={colors.Crystalline1}
-                    />
-                  </View>
-                )}
-              ></FlatList>
-            </View>
-          ))}
           <Leaderboard
             gameid={this.props.gameid}
             categoryid={this.props.categoryid}
@@ -103,8 +80,8 @@ class Variables extends Component {
 }
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "gold",
     flex: 1,
+    padding: 20,
   },
   button: {
     paddingHorizontal: 20,
