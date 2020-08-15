@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
   },
   headercontainer: {
-    backgroundColor: colors.Crystalline1,
+    backgroundColor: colors.primary,
   },
   headertext: {
     color: colors.white,
