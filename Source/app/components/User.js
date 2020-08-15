@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   Image: {
     height: 50,
     width: 50,
-    borderColor: colors.Crystalline1,
+    borderColor: colors.primary,
     borderWidth: 1,
     borderRadius: 30,
     backgroundColor: colors.light,
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
   },
-  usename: { color: colors.secondary, fontWeight: "bold", fontSize: 20 },
+  usename: { color: colors.darkgrey, fontWeight: "bold", fontSize: 20 },
   iconcontainer: {
     flex: 1,
     alignContent: "center",
