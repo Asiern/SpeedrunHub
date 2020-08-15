@@ -43,9 +43,9 @@ class UserHeader extends Component {
 
         <View style={styles.iconcontainer}>
           <Icon
-            onPress={() => this.miputafuncion("Amei")}
+            //onPress={() => this.miputafuncion("Amei")}
             name="ios-notifications-outline"
-            color={colors.Crystalline1}
+            color={colors.secondary}
             size={35}
           />
         </View>
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   Image: {
     height: 50,
     width: 50,
-    borderColor: colors.Crystalline1,
+    borderColor: colors.primary,
     borderWidth: 1,
     borderRadius: 30,
   },
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
   welcome: {},
-  usename: { color: colors.secondary, fontWeight: "bold", fontSize: 20 },
+  usename: { color: colors.darkgrey, fontWeight: "bold", fontSize: 20 },
   iconcontainer: {
     flex: 1,
     alignContent: "center",
