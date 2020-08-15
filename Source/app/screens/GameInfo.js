@@ -134,7 +134,6 @@ class GameInfo extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //marginTop: Constants.statusBarHeight,
     backgroundColor: colors.light,
   },
   profileBG: {
