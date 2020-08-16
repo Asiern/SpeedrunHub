@@ -40,7 +40,7 @@ class GameCard extends Component {
 const styles = StyleSheet.create({
   container: {
     width: 150,
-    height: 200,
+    height: 100,
     padding: 10,
     alignContent: "center",
     justifyContent: "center",
