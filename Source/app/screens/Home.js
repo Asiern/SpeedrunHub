@@ -1,67 +1,74 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Modal, FlatList } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import Constants from "expo-constants";
 import GameCard from "../components/GameCard";
 import UserHeader from "../components/UserHeader";
 import colors from "../config/colors";
 import Icon from "react-native-vector-icons/Ionicons";
 import user from "../config/user.json";
+import { ScrollView } from "react-native-gesture-handler";
+import Notification from "../components/Notification";
 
 class Home extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1 }}>
         <View style={styles.profilecontainer}>
           <View style={styles.profile}>
-            <UserHeader username={user.name} />
+            <UserHeader
+              username={user.name}
+              navigation={this.props.navigation}
+            />
           </View>
         </View>
-        <View style={styles.container}>
-          <FlatList
-            keyExtractor={(item) => item.id}
-            data={user.games}
-            renderItem={({ item }) => (
-              <View style={styles.flatList}>
-                <GameCard
-                  navigation={this.props.navigation}
-                  id={item.id}
-                  abbreviation={item.abbreviation}
-                />
-              </View>
-            )}
-            numColumns={2}
-          ></FlatList>
+        <Text style={styles.headertext}>Notifications</Text>
+        <View style={styles.notifications}>
+          <Notification />
+          <Notification />
+          <Notification />
         </View>
-      </View>
+
+        <Text style={styles.headertext}>My Games</Text>
+        <View style={styles.flatList}>
+          {user.games.map((game) => (
+            <View key={game.id} style={styles.button}>
+              <GameCard
+                navigation={this.props.navigation}
+                id={game.id}
+                abbreviation={game.abbreviation}
+              />
+            </View>
+          ))}
+        </View>
+      </ScrollView>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    //marginTop: Constants.statusBarHeight,
     flex: 1,
   },
-  profilecontainer: {
-    backgroundColor: colors.light,
-  },
+  profilecontainer: {},
   profile: {
-    marginTop: Constants.statusBarHeight,
-    height: 100,
+    height: 250,
   },
   headertext: {
-    color: colors.Crystalline1,
-    fontSize: 20,
+    color: colors.darkgrey,
+    fontSize: 30,
     paddingBottom: 20,
     fontWeight: "bold",
-    alignSelf: "center",
+    paddingHorizontal: 20,
   },
   flatList: {
+    flexDirection: "row",
     flexWrap: "wrap",
-    flex: 1,
-    alignContent: "center",
+    flex: 2,
     justifyContent: "space-around",
-    alignItems: "center",
+  },
+  notifications: {
+    flexDirection: "row",
+    paddingHorizontal: 10,
   },
 });
 
