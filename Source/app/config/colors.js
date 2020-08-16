@@ -1,11 +1,12 @@
 export default {
-  primary: "#00cdac",
+  primary: "#ff758c",
+  primaryG: "#ff7eb3",
   secondary: "#CA39CC",
   Crystalline1: "#00cdac",
   Crystalline2: "#8ddad5",
-  light: "#F2F2F2",
+  light: "#f8f8f8",
   white: "#fff",
   grey: "#f0f0f0",
-  darkgrey: "#2E2E2E",
+  darkgrey: "#242c37",
   black: "#000",
 };
