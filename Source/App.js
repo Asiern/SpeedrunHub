@@ -24,6 +24,8 @@ export default class App extends Component {
         options={{ title: "Home", headerShown: "" }}
       />
       <Stack.Screen name="Game Info" component={GameInfo} />
+      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="Settings" component={Settings} />
     </Stack.Navigator>
   );
   createProfileStack = (props) => (
@@ -33,6 +35,7 @@ export default class App extends Component {
         component={(Profile, { userid: "48g3q2rx", username: "Asiern" })}
         options={{ title: "My Profile", headerShown: "" }}
       />
+      <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="Game Info" component={GameInfo} />
     </Stack.Navigator>
   );
@@ -80,7 +83,7 @@ export default class App extends Component {
             inactiveTintColor: colors.darkgrey,
           }}
         >
-          <BottomTabs.Screen name="My Games" children={this.createHomeStack} />
+          <BottomTabs.Screen name="Profile" children={this.createHomeStack} />
           {/*
           <BottomTabs.Screen
             name="Profile"
