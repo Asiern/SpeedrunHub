@@ -48,7 +48,7 @@ class Profile extends React.Component {
       <ScrollView style={styles.container}>
         <ImageBackground
           style={styles.profileBG}
-          source={require("../assets/gr1.png")}
+          source={require("../assets/UserHeader.png")}
         >
           <View style={styles.profile}>
             <View style={styles.imagecontainer}>
@@ -83,7 +83,6 @@ class Profile extends React.Component {
           <Icon name="logo-youtube" size={20} />
           <Icon name="logo-instagram" size={20} />
               </View>*/}
-        <Text style={styles.headertext}>Personal Bests</Text>
         <View style={styles.pbs}>
           <View style={styles.runinfo}>
             <View style={styles.game}>
@@ -131,6 +130,7 @@ const styles = StyleSheet.create({
   },
   profile: {
     flex: 1,
+    paddingBottom: 70,
   },
   country: {
     flexDirection: "row",
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   h1: {
-    color: colors.darkgrey,
+    color: colors.white,
     fontSize: 30,
     fontWeight: "bold",
     alignSelf: "center",
