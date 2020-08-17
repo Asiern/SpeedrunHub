@@ -48,41 +48,46 @@ class Profile extends React.Component {
       <ScrollView style={styles.container}>
         <ImageBackground
           style={styles.profileBG}
-          source={require("../assets/UserHeader.png")}
+          source={require("../assets/Notification.jpg")}
         >
-          <View style={styles.profile}>
-            <View style={styles.imagecontainer}>
-              <Image
-                source={{
-                  uri:
-                    "https://www.speedrun.com/themes/user/" +
-                    this.state.username +
-                    "/image.png",
-                }}
-                style={styles.Image}
-              ></Image>
-            </View>
+          <View style={styles.topbar}>
+            <Icon
+              //onPress={() => this.goBack()}
+              name="ios-arrow-back"
+              color={colors.white}
+              size={35}
+            />
+            <Text style={styles.h2}>Profile</Text>
+            <Icon
+              //onPress={() => this.props.navigation.navigate("Home")}
+              name="ios-more"
+              color={colors.white}
+              size={35}
+            />
+          </View>
+          <View style={styles.imagecontainer}>
+            <Image
+              source={{
+                uri:
+                  "https://www.speedrun.com/themes/user/" +
+                  this.state.username +
+                  "/image.png",
+              }}
+              style={styles.Image}
+            ></Image>
+          </View>
 
-            <View style={styles.userinfo}>
-              <View style={styles.userinfoitem}>
-                <Text style={styles.h1}>{this.state.username}</Text>
-                {/*<View style={styles.country}>
-                  <View>
-                    <Text style={styles.h2}>Basque Country</Text>
-                  </View>
-              </View>*/}
+          <View style={styles.userinfo}>
+            <View style={styles.userinfoitem}>
+              <Text style={styles.h1}>{this.state.username}</Text>
+              <View style={styles.country}>
+                <View>
+                  <Text style={styles.h2}>Basque Country</Text>
+                </View>
               </View>
             </View>
           </View>
         </ImageBackground>
-        {/* Social
-        <Text style={styles.headertext}>Social Media</Text>
-        <View style={styles.social}>
-          <Icon name="logo-twitch" size={20} />
-          <Icon name="logo-twitter" size={20} />
-          <Icon name="logo-youtube" size={20} />
-          <Icon name="logo-instagram" size={20} />
-              </View>*/}
         <View style={styles.pbs}>
           <View style={styles.runinfo}>
             <View style={styles.game}>
@@ -128,29 +133,32 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: "cover",
   },
+  topbar: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: Constants.statusBarHeight,
+    paddingTop: 10,
+    paddingHorizontal: 20,
+    paddingBottom: 10,
+  },
   profile: {
     flex: 1,
-    paddingBottom: 70,
-  },
-  country: {
-    flexDirection: "row",
-  },
-  flag: {
-    height: 18,
-    width: 25,
+    paddingBottom: 30,
+    backgroundColor: "gold",
+    justifyContent: "center",
+    alignItems: "center",
+    alignContent: "center",
   },
   imagecontainer: {
-    marginTop: Constants.statusBarHeight,
     flex: 1,
-    paddingTop: 30,
     alignContent: "center",
     justifyContent: "flex-end",
     alignItems: "center",
   },
   Image: {
-    height: 80,
-    width: 80,
-    borderColor: colors.white,
+    height: 100,
+    width: 100,
     borderWidth: 1,
     borderRadius: 50,
   },
@@ -158,26 +166,18 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    padding: 30,
-  },
-  socialbuttons: {
-    flex: 1,
-    flexDirection: "row",
-    alignContent: "center",
-    justifyContent: "space-around",
-    alignItems: "center",
     padding: 20,
   },
   h1: {
     color: colors.white,
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: "bold",
     alignSelf: "center",
   },
   h2: {
-    color: colors.darkgrey,
+    color: colors.white,
     fontSize: 15,
-    fontWeight: "normal",
+    fontWeight: "bold",
     alignSelf: "center",
   },
   headertext: {
@@ -192,13 +192,6 @@ const styles = StyleSheet.create({
   pbs: {
     flex: 1,
     margin: 10,
-  },
-  social: {
-    flex: 1,
-    margin: 10,
-    flexDirection: "row",
-    paddingVertical: 20,
-    justifyContent: "space-around",
   },
   runinfo: {
     flex: 1,
