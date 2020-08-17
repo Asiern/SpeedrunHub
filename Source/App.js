@@ -5,6 +5,7 @@ import Settings from "./app/screens/Settings";
 import About from "./app/screens/About";
 import GameInfo from "./app/screens/GameInfo";
 import Search from "./app/screens/Search";
+import Themes from "./app/screens/Themes";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -24,8 +25,13 @@ export default class App extends Component {
         options={{ title: "Home", headerShown: "" }}
       />
       <Stack.Screen name="Game Info" component={GameInfo} />
-      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
+        options={{ title: "Profile", headerShown: "" }}
+      />
       <Stack.Screen name="Settings" component={Settings} />
+      <Stack.Screen name="Themes" component={Themes} />
     </Stack.Navigator>
   );
   createProfileStack = (props) => (
@@ -47,7 +53,11 @@ export default class App extends Component {
         options={{ title: "Search", headerShown: "" }}
       />
       <Stack.Screen name="Game Info" component={GameInfo} />
-      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
+        options={{ title: "My Profile", headerShown: "" }}
+      />
     </Stack.Navigator>
   );
   render() {
@@ -83,7 +93,7 @@ export default class App extends Component {
             inactiveTintColor: colors.darkgrey,
           }}
         >
-          <BottomTabs.Screen name="Profile" children={this.createHomeStack} />
+          <BottomTabs.Screen name="Home" children={this.createHomeStack} />
           {/*
           <BottomTabs.Screen
             name="Profile"
