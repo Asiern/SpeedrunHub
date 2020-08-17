@@ -25,6 +25,8 @@ Expo [Builds](https://expo.io/dashboard/asiern/speedruncomapp/builds)
 #### Issues
 
 - IOS Version not tested
+- Shadows
+- Gradients
 
 ---
 
