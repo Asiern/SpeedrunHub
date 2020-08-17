@@ -1,5 +1,5 @@
 import React, { Component, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Button } from "react-native";
 import Constants from "expo-constants";
 import colors from "../config/colors";
 
@@ -20,7 +20,6 @@ class Settings extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: Constants.statusBarHeight,
     backgroundColor: colors.light,
     alignContent: "center",
     justifyContent: "center",
