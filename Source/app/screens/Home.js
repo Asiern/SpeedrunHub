@@ -21,12 +21,12 @@ class Home extends React.Component {
             />
           </View>
         </View>
-        <Text style={styles.headertext}>Notifications</Text>
+        {/*<Text style={styles.headertext}>Notifications</Text>
         <View style={styles.notifications}>
           <Notification />
           <Notification />
           <Notification />
-        </View>
+    </View>*/}
 
         <Text style={styles.headertext}>My Games</Text>
         <View style={styles.flatList}>
@@ -56,15 +56,15 @@ const styles = StyleSheet.create({
   headertext: {
     color: colors.darkgrey,
     fontSize: 30,
-    paddingBottom: 20,
+    marginLeft: 20,
     fontWeight: "bold",
-    paddingHorizontal: 20,
   },
   flatList: {
     flexDirection: "row",
     flexWrap: "wrap",
-    flex: 2,
-    justifyContent: "space-around",
+    flex: 3,
+    margin: 20,
+    justifyContent: "space-between",
   },
   notifications: {
     flexDirection: "row",
