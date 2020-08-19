@@ -3,6 +3,7 @@
 An app for IOS/Android platforms made with [React Native](https://reactnative.dev/) which allows you to consult the speedrun.com page natively using the speedrun.com [REST API](https://github.com/speedruncomorg/api).
 
 <img src="https://github.com/Asiern/Speerun.comApp/blob/master/Home.jpeg" width="200" height="400"/>
+<img src="https://github.com/Asiern/Speerun.comApp/blob/master/Profile.jpeg" width="200" height="400"/>
 
 ---
 
