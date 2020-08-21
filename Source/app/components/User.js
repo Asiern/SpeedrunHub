@@ -61,7 +61,14 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     paddingVertical: 20,
     paddingHorizontal: 20,
-    borderRadius: 20,
+    borderRadius: 10,
+    shadowColor: "gold",
+    shadowOffset: { width: 5, height: 5 },
+    shadowOpacity: 0.9,
+
+    // add shadows for Android only
+    // No options for shadow color, shadow offset, shadow opacity like iOS
+    elevation: 1,
   },
   Image: {
     height: 50,

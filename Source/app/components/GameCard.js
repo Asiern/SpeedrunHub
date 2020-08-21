@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { StyleSheet, ImageBackground } from "react-native";
+import { StyleSheet, ImageBackground, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { colors } from "react-native-elements";
+import { BoxShadow } from "react-native-shadow";
 
 class GameCard extends Component {
   constructor(props) {
@@ -17,33 +17,60 @@ class GameCard extends Component {
   }
 
   render() {
+    const shadow = {
+      width: 110,
+      height: 153,
+      color: "#000000",
+      radius: 10,
+      opacity: 0.6,
+      x: 5,
+      y: 5,
+      style: { marginVertical: 5 },
+    };
     return (
-      <TouchableOpacity
-        onPress={() =>
-          this.props.navigation.navigate("Game Info", {
-            id: this.state.id,
-            name: "name",
-            abbreviation: this.state.abbreviation,
-          })
-        }
-        style={styles.container}
-      >
-        <ImageBackground
-          source={{ uri: this.state.cover }}
-          style={styles.image}
-          imageStyle={{ borderRadius: 10 }}
-        ></ImageBackground>
-      </TouchableOpacity>
+      <View style={{ padding: 2 }}>
+        <TouchableOpacity
+          onPress={() =>
+            this.props.navigation.navigate("Game Info", {
+              id: this.state.id,
+              name: "name",
+              abbreviation: this.state.abbreviation,
+            })
+          }
+          style={styles.container}
+        >
+          <ImageBackground
+            source={{ uri: this.state.cover }}
+            style={styles.image}
+            imageStyle={{ borderRadius: 10 }}
+          ></ImageBackground>
+        </TouchableOpacity>
+      </View>
     );
   }
 }
 const styles = StyleSheet.create({
+  shadow: {
+    backgroundColor: "white",
+    shadowColor: "gold",
+    shadowOffset: { width: 5, height: 5 },
+    shadowOpacity: 0.9,
+
+    // add shadows for Android only
+    // No options for shadow color, shadow offset, shadow opacity like iOS
+    elevation: 5,
+  },
   container: {
-    width: 117,
+    width: 113,
     height: 160,
-    padding: 4,
     alignContent: "center",
     justifyContent: "center",
+    shadowColor: "black",
+    backgroundColor: "white",
+    borderRadius: 10,
+    shadowOffset: { width: 5, height: 5 },
+    shadowOpacity: 1,
+    elevation: 5,
   },
   image: {
     flex: 1,
