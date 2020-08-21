@@ -45,29 +45,27 @@ class UserHeader extends Component {
                 userid: "48g3q2rx",
               })
             }
-            style={styles.imagecontainer}
+            style={styles.touch}
           >
-            <Image
-              source={{
-                uri: this.state.userpicture,
-              }}
-              style={styles.Image}
-            ></Image>
+            <View style={styles.imagecontainer}>
+              <Image
+                source={{
+                  uri: this.state.userpicture,
+                }}
+                style={styles.Image}
+              ></Image>
+            </View>
+            <View style={styles.textcontainer}>
+              <Text style={styles.welcome}>Welcome back,</Text>
+              <Text style={styles.usename}>{this.state.username}</Text>
+            </View>
           </TouchableOpacity>
-
-          <View style={styles.textcontainer}>
-            <Text style={styles.welcome}>Welcome back,</Text>
-            <Text style={styles.usename}>{this.state.username}</Text>
-          </View>
-
-          <View style={styles.iconcontainer}>
-            <Icon
-              onPress={() => this.props.navigation.navigate("Settings")}
-              name="ios-options"
-              color={colors.white}
-              size={35}
-            />
-          </View>
+          <TouchableOpacity
+            style={styles.iconcontainer}
+            onPress={() => this.props.navigation.navigate("Settings")}
+          >
+            <Icon name="ios-options" color={colors.white} size={35} />
+          </TouchableOpacity>
         </View>
       </ImageBackground>
     );
@@ -90,6 +88,12 @@ const styles = StyleSheet.create({
     width: 60,
     borderWidth: 1,
     borderRadius: 30,
+  },
+  touch: {
+    flex: 2,
+    flexDirection: "row",
+    alignItems: "center",
+    alignSelf: "center",
   },
   imagecontainer: {
     flex: 1,
