@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Text, ActivityIndicator } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  ActivityIndicator,
+  FlatList,
+} from "react-native";
 import colors from "../config/colors";
 import Run from "./Run";
 
@@ -18,13 +24,21 @@ class Leaderboard extends Component {
   }
 
   async FetchData() {
-    const response = await fetch(this.state.url);
+    const response = await fetch(this.props.url);
     const data = await response.json();
     this.setState({ loading: false, runs: data.data.runs });
   }
   componentDidMount() {
     this.FetchData();
   }
+  renderItem = ({ item }) => (
+    <Run
+      place={item.place}
+      runnerid={item.run.players[0].id}
+      time={item.run.times.primary}
+      abbreviation={this.props.abbreviation}
+    />
+  );
   render() {
     if (this.state.isLoading) {
       return <ActivityIndicator />;
@@ -33,16 +47,11 @@ class Leaderboard extends Component {
     } else {
       return (
         <View style={{ flex: 1 }}>
-          {this.state.runs.map((run) => (
-            <Run
-              key={run.run.id}
-              category={run.run.category}
-              place={run.place}
-              runnerid={run.run.players[0].id}
-              time={run.run.times.primary}
-              abbreviation={"na"}
-            />
-          ))}
+          <FlatList
+            keyExtractor={(item) => item.run.id}
+            data={this.state.runs}
+            renderItem={this.renderItem}
+          ></FlatList>
         </View>
       );
     }

@@ -70,8 +70,12 @@ class Variables extends Component {
             gameid={this.props.gameid}
             categoryid={this.props.categoryid}
             url={
-              "https://www.speedrun.com/api/v1/leaderboards/76rkwed8/category/rklqxrn2"
+              "https://www.speedrun.com/api/v1/leaderboards/" +
+              this.props.gameid +
+              "/category/" +
+              this.props.categoryid
             }
+            abbreviation={this.props.abbreviation}
           />
         </View>
       );

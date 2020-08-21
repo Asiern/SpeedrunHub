@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 10,
     fontSize: 15,
-    color: colors.Crystalline1,
+    color: colors.primary,
   },
   cover: {
     height: 60,

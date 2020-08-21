@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, ScrollView } from "react-native";
+import { StyleSheet, View, Text, ScrollView, SectionList } from "react-native";
 import React from "react";
 import { SearchBar } from "react-native-elements";
 import Constants from "expo-constants";
@@ -39,8 +39,19 @@ class Search extends React.Component {
       users: userdata.data,
     });
   }
+  searchbar = () => {
+    return (
+      <SearchBar
+        placeholder="Search for games and users"
+        onChangeText={this.updateSearch}
+        value={search}
+        platform="ios"
+      />
+    );
+  };
   render() {
     const { search } = this.state;
+
     return (
       <View style={styles.container}>
         <SearchBar
@@ -54,6 +65,7 @@ class Search extends React.Component {
           <View style={styles.headercontainer}>
             <Text style={styles.headertext}>Games</Text>
           </View>
+
           <View style={styles.gamecontainer}>
             {this.state.games.map((item) => (
               <GameCard

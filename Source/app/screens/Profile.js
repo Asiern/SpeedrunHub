@@ -12,6 +12,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import Constants from "expo-constants";
 import Run from "../components/Run";
 import user from "../config/user.json";
+import { FlatList } from "react-native-gesture-handler";
 
 class Profile extends React.Component {
   constructor() {
@@ -42,83 +43,71 @@ class Profile extends React.Component {
   async componentDidMount() {
     this.loadData();
   }
+  renderItem = ({ item }) => (
+    <Run
+      place={item.place}
+      runnerid={item.run.players[0].id}
+      time={item.run.times.primary}
+      abbreviation={item.game.data.abbreviation}
+      category={item.category.data.name}
+    />
+  );
 
-  render() {
+  ProfileHeader = () => {
     return (
-      <ScrollView style={styles.container}>
-        <ImageBackground
-          style={styles.profileBG}
-          source={require("../assets/Notification.jpg")}
-        >
-          <View style={styles.topbar}>
+      <ImageBackground
+        style={styles.profileBG}
+        source={require("../assets/Notification.jpg")}
+      >
+        <View style={styles.topbar}>
+          <View style={styles.topbarleft}>
             <Icon
-              //onPress={() => this.goBack()}
+              onPress={() => this.props.navigation.navigate("Home")}
               name="ios-arrow-back"
               color={colors.white}
               size={35}
+              style={{ paddingLeft: 20 }}
             />
+          </View>
+          <View style={styles.topbarcenter}>
             <Text style={styles.h2}>Profile</Text>
-            <Icon
-              //onPress={() => this.props.navigation.navigate("Home")}
-              name="ios-more"
-              color={colors.white}
-              size={35}
-            />
           </View>
-          <View style={styles.imagecontainer}>
-            <Image
-              source={{
-                uri:
-                  "https://www.speedrun.com/themes/user/" +
-                  this.state.username +
-                  "/image.png",
-              }}
-              style={styles.Image}
-            ></Image>
-          </View>
+          <View style={styles.topbarright}></View>
+        </View>
+        <View style={styles.imagecontainer}>
+          <Image
+            source={{
+              uri:
+                "https://www.speedrun.com/themes/user/" +
+                this.state.username +
+                "/image.png",
+            }}
+            style={styles.Image}
+          ></Image>
+        </View>
 
-          <View style={styles.userinfo}>
-            <View style={styles.userinfoitem}>
-              <Text style={styles.h1}>{this.state.username}</Text>
-              <View style={styles.country}>
-                <View>
-                  <Text style={styles.h2}>Basque Country</Text>
-                </View>
+        <View style={styles.userinfo}>
+          <View style={styles.userinfoitem}>
+            <Text style={styles.h1}>{this.state.username}</Text>
+            <View style={styles.country}>
+              <View>
+                <Text style={styles.h2}>Basque Country</Text>
               </View>
             </View>
           </View>
-        </ImageBackground>
-        <View style={styles.pbs}>
-          <View style={styles.runinfo}>
-            <View style={styles.game}>
-              <Text>Game</Text>
-            </View>
-            <View style={styles.category}>
-              <Text>Category</Text>
-            </View>
-            <View style={styles.place}>
-              <Text>Place</Text>
-            </View>
-            <View style={styles.runner}>
-              <Text>Runner</Text>
-            </View>
-            <View style={styles.time}>
-              <Text>Time</Text>
-            </View>
-          </View>
-          {this.state.runs.map((run) => (
-            <Run
-              key={run.run.id}
-              category={run.category.data.name}
-              place={run.place}
-              runner={this.state.username}
-              time={run.run.times.primary}
-              game={run.game.data.names.international}
-              abbreviation={run.game.data.abbreviation}
-            />
-          ))}
         </View>
-      </ScrollView>
+      </ImageBackground>
+    );
+  };
+
+  render() {
+    return (
+      <FlatList
+        keyExtractor={(item) => item.run.id}
+        data={this.state.runs}
+        renderItem={this.renderItem}
+        ListHeaderComponent={this.ProfileHeader()}
+      ></FlatList>
     );
   }
 }
@@ -136,11 +125,19 @@ const styles = StyleSheet.create({
   topbar: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "space-between",
     marginTop: Constants.statusBarHeight,
     paddingTop: 10,
-    paddingHorizontal: 20,
     paddingBottom: 10,
+  },
+  topbarleft: {
+    flex: 1,
+  },
+  topbarcenter: {
+    flex: 1,
+    justifyContent: "center",
+  },
+  topbarright: {
+    flex: 1,
   },
   profile: {
     flex: 1,

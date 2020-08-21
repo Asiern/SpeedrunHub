@@ -113,7 +113,7 @@ class GameInfo extends React.Component {
                   <Button
                     title={item.name}
                     style={styles.button}
-                    color={colors.Crystalline1}
+                    color={colors.primary}
                     onPress={() => this.selectCategory(item.id)}
                   />
                 </View>
@@ -124,6 +124,7 @@ class GameInfo extends React.Component {
             name={this.state.abbreviation}
             gameid={this.state.id}
             categoryid={this.state.selectedCategory}
+            abbreviation={this.state.abbreviation}
           />
         </ScrollView>
       );
