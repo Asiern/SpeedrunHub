@@ -44,59 +44,81 @@ class Profile extends React.Component {
     this.loadData();
   }
   renderItem = ({ item }) => (
-    <Run
-      place={item.place}
-      runnerid={item.run.players[0].id}
-      time={item.run.times.primary}
-      abbreviation={item.game.data.abbreviation}
-      category={item.category.data.name}
-    />
+    <View style={styles.pbs}>
+      <Run
+        place={item.place}
+        runnerid={item.run.players[0].id}
+        time={item.run.times.primary}
+        abbreviation={item.game.data.abbreviation}
+        category={item.category.data.name}
+      />
+    </View>
   );
 
   ProfileHeader = () => {
     return (
-      <ImageBackground
-        style={styles.profileBG}
-        source={require("../assets/Notification.jpg")}
-      >
-        <View style={styles.topbar}>
-          <View style={styles.topbarleft}>
-            <Icon
-              onPress={() => this.props.navigation.navigate("Home")}
-              name="ios-arrow-back"
-              color={colors.white}
-              size={35}
-              style={{ paddingLeft: 20 }}
-            />
+      <View>
+        <ImageBackground
+          style={styles.profileBG}
+          source={require("../assets/Notification.jpg")}
+        >
+          <View style={styles.topbar}>
+            <View style={styles.topbarleft}>
+              <Icon
+                onPress={() => this.props.navigation.navigate("Home")}
+                name="ios-arrow-back"
+                color={colors.white}
+                size={35}
+                style={{ paddingLeft: 20 }}
+              />
+            </View>
+            <View style={styles.topbarcenter}>
+              <Text style={styles.h2}>Profile</Text>
+            </View>
+            <View style={styles.topbarright}></View>
           </View>
-          <View style={styles.topbarcenter}>
-            <Text style={styles.h2}>Profile</Text>
+          <View style={styles.imagecontainer}>
+            <Image
+              source={{
+                uri:
+                  "https://www.speedrun.com/themes/user/" +
+                  this.state.username +
+                  "/image.png",
+              }}
+              style={styles.Image}
+            ></Image>
           </View>
-          <View style={styles.topbarright}></View>
-        </View>
-        <View style={styles.imagecontainer}>
-          <Image
-            source={{
-              uri:
-                "https://www.speedrun.com/themes/user/" +
-                this.state.username +
-                "/image.png",
-            }}
-            style={styles.Image}
-          ></Image>
-        </View>
-
-        <View style={styles.userinfo}>
-          <View style={styles.userinfoitem}>
-            <Text style={styles.h1}>{this.state.username}</Text>
-            <View style={styles.country}>
-              <View>
-                <Text style={styles.h2}>Basque Country</Text>
+          <View style={styles.userinfo}>
+            <View style={styles.userinfoitem}>
+              <Text style={styles.h1}>{this.state.username}</Text>
+              <View style={styles.country}>
+                <View>
+                  <Text style={styles.h2}>Basque Country</Text>
+                </View>
               </View>
             </View>
           </View>
+        </ImageBackground>
+        <View style={{ flex: 1, margin: 10 }}>
+          <View style={styles.runinfo}>
+            <View style={styles.game}>
+              <Text>Game</Text>
+            </View>
+            <View style={styles.category}>
+              <Text>Category</Text>
+            </View>
+            <View style={styles.place}>
+              <Text>Place</Text>
+            </View>
+            <View style={styles.runner}>
+              <Text>Runner</Text>
+            </View>
+            <View style={styles.time}>
+              <Text>Time</Text>
+            </View>
+          </View>
         </View>
-      </ImageBackground>
+      </View>
     );
   };
 
@@ -188,7 +210,7 @@ const styles = StyleSheet.create({
   },
   pbs: {
     flex: 1,
-    margin: 10,
+    marginHorizontal: 10,
   },
   runinfo: {
     flex: 1,
