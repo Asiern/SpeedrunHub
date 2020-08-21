@@ -39,7 +39,7 @@ class About extends React.Component {
           <Text style={styles.title}>How Can I Help?</Text>
           <Text style={styles.paragraph}>
             If you have any problems or find any improvements to be made, you
-            are welcome to open a problem on the GitHub page for it to be fixed.
+            are welcome to open an issue on the GitHub page for it to be fixed.
           </Text>
           <Text style={styles.paragraph}>
             As this project is completely open source, if you want to
@@ -73,8 +73,10 @@ class About extends React.Component {
               <Text style={styles.githubtext}>Donations</Text>
             </View>
           </TouchableOpacity>
-          <Text style={styles.title}>Special Thanks</Text>
           <Text style={styles.title}>Contact Me</Text>
+          <Text style={styles.paragraph}>
+            asiern.dev@gmail.com // Discord: Asiern#5149
+          </Text>
         </View>
       </ScrollView>
     );

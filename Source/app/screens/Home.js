@@ -1,15 +1,21 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Text } from "react-native";
-import Constants from "expo-constants";
 import GameCard from "../components/GameCard";
 import UserHeader from "../components/UserHeader";
 import colors from "../config/colors";
-import Icon from "react-native-vector-icons/Ionicons";
 import user from "../config/user.json";
-import { ScrollView } from "react-native-gesture-handler";
-import Notification from "../components/Notification";
+import { ScrollView, FlatList } from "react-native-gesture-handler";
 
 class Home extends React.Component {
+  HomeHeader = () => {
+    return (
+      <View style={styles.profilecontainer}>
+        <View style={styles.profile}>
+          <UserHeader username={user.name} navigation={this.props.navigation} />
+        </View>
+      </View>
+    );
+  };
   render() {
     return (
       <ScrollView style={{ flex: 1 }}>
@@ -22,11 +28,11 @@ class Home extends React.Component {
           </View>
         </View>
         {/*<Text style={styles.headertext}>Notifications</Text>
-        <View style={styles.notifications}>
-          <Notification />
-          <Notification />
-          <Notification />
-    </View>*/}
+      <View style={styles.notifications}>
+        <Notification />
+        <Notification />
+        <Notification />
+  </View>*/}
 
         <Text style={styles.headertext}>My Games</Text>
         <View style={styles.flatList}>
