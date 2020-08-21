@@ -38,33 +38,40 @@ export default class Run extends Component {
   }
   render() {
     return (
-      <Content>
-        <View style={styles.container}>
-          <View style={styles.game}>
-            <Image
-              style={styles.cover}
-              source={{ uri: this.state.cover }}
-            ></Image>
-          </View>
-          <View style={styles.category}>
-            <Text style={styles.text}>{this.state.category}</Text>
-          </View>
-          <View style={styles.place}>
-            <Text style={styles.accenttext}>{this.state.place}</Text>
-          </View>
-          <View style={styles.runner}>
-            <Text style={styles.text}>{this.state.runner}</Text>
-          </View>
-
-          <View style={styles.time}>
-            <Text style={styles.text}>{this.state.time}</Text>
-          </View>
+      <View style={styles.container}>
+        <View style={styles.game}>
+          <Image
+            style={styles.cover}
+            source={{ uri: this.state.cover }}
+          ></Image>
         </View>
-      </Content>
+        <View style={styles.category}>
+          <Text style={styles.text}>{this.state.category}</Text>
+        </View>
+        <View style={styles.place}>
+          <Text style={styles.accenttext}>{this.state.place}</Text>
+        </View>
+        <View style={styles.runner}>
+          <Text style={styles.text}>{this.state.runner}</Text>
+        </View>
+
+        <View style={styles.time}>
+          <Text style={styles.text}>{this.state.time}</Text>
+        </View>
+      </View>
     );
   }
 }
 const styles = StyleSheet.create({
+  shadow: {
+    shadowColor: "gold",
+    shadowOffset: { width: 5, height: 5 },
+    shadowOpacity: 0.9,
+
+    // add shadows for Android only
+    // No options for shadow color, shadow offset, shadow opacity like iOS
+    elevation: 1,
+  },
   container: {
     paddingVertical: 20,
     flexDirection: "row",
@@ -74,6 +81,10 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 10,
     paddingHorizontal: 10,
+    shadowColor: "gold",
+    shadowOffset: { width: 5, height: 5 },
+    shadowOpacity: 0.9,
+    elevation: 1,
   },
   game: {
     flex: 3,
