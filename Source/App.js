@@ -9,12 +9,12 @@ import Themes from "./app/screens/Themes";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import colors from "./app/config/colors";
 
 const Stack = createStackNavigator();
-const BottomTabs = createBottomTabNavigator();
+const BottomTabs = createMaterialBottomTabNavigator();
 
 export default class App extends Component {
   createHomeStack = (props) => (
@@ -64,46 +64,46 @@ export default class App extends Component {
     return (
       <NavigationContainer>
         <BottomTabs.Navigator
-          screenOptions={({ route }) => ({
-            tabBarIcon: ({ focused, color, size }) => {
-              let iconName;
-
-              if (route.name === "Profile") {
-                iconName = focused ? "md-contact" : "md-contact";
-              } else if (route.name === "Settings") {
-                iconName = focused ? "md-options" : "md-options";
-              } else if (route.name === "Home") {
-                iconName = focused ? "md-home" : "md-home";
-              } else if (route.name === "Search") {
-                iconName = focused ? "ios-search" : "ios-search";
-              } else if (route.name === "My Games") {
-                iconName = focused ? "md-heart" : "md-heart-empty";
-              } else if (route.name === "Streams") {
-                iconName = focused ? "logo-twitch" : "logo-twitch";
-              } else if (route.name === "About") {
-                iconName = focused
-                  ? "ios-information-circle"
-                  : "ios-information-circle-outline";
-              }
-              return <Ionicons name={iconName} size={size} color={color} />;
-            },
-          })}
-          tabBarOptions={{
-            activeTintColor: colors.primary,
-            inactiveTintColor: colors.darkgrey,
-          }}
+          initialRouteName="Home"
+          activeColor={colors.primary}
+          inactiveColor={colors.darkgrey}
+          barStyle={{ backgroundColor: colors.white }}
         >
-          <BottomTabs.Screen name="Home" children={this.createHomeStack} />
-          {/*
           <BottomTabs.Screen
-            name="Profile"
-            children={this.createProfileStack}
+            name="Home"
+            children={this.createHomeStack}
+            options={{
+              tabBarLabel: "Home",
+              tabBarIcon: ({ color }) => (
+                <Ionicons name="md-home" color={color} size={26} />
+              ),
+            }}
           />
-          <BottomTabs.Screen name="Settings" component={Settings} />
-          */}
-          <BottomTabs.Screen name="Search" component={this.createSearchStack} />
+          <BottomTabs.Screen
+            name="Search"
+            component={this.createSearchStack}
+            options={{
+              tabBarLabel: "Search",
+              tabBarIcon: ({ color }) => (
+                <Ionicons name="ios-search" color={color} size={26} />
+              ),
+            }}
+          />
 
-          <BottomTabs.Screen name="About" component={About} />
+          <BottomTabs.Screen
+            name="About"
+            component={About}
+            options={{
+              tabBarLabel: "About",
+              tabBarIcon: ({ color }) => (
+                <Ionicons
+                  name="ios-information-circle-outline"
+                  color={color}
+                  size={26}
+                />
+              ),
+            }}
+          />
         </BottomTabs.Navigator>
       </NavigationContainer>
     );
