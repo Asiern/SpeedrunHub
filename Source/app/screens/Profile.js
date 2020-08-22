@@ -10,7 +10,7 @@ import {
 import colors from "../config/colors";
 import Icon from "react-native-vector-icons/Ionicons";
 import Constants from "expo-constants";
-import Run from "../components/Run";
+import PB from "../components/PB";
 import user from "../config/user.json";
 import { FlatList } from "react-native-gesture-handler";
 
@@ -45,7 +45,7 @@ class Profile extends React.Component {
   }
   renderItem = ({ item }) => (
     <View style={styles.pbs}>
-      <Run
+      <PB
         place={item.place}
         runnerid={item.run.players[0].id}
         time={item.run.times.primary}
