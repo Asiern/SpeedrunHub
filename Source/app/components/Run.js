@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   runner: {
-    flex: 5,
+    flex: 7,
     //backgroundColor: "green",
     alignItems: "center",
   },
