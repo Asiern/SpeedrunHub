@@ -33,6 +33,7 @@ Expo [Builds](https://expo.io/dashboard/asiern/speedruncomapp/builds)
 
 #### WIP
 
+- Async Storage
 - Game info display
 - Notifications via [APIKey](https://github.com/speedruncomorg/api/blob/master/authentication.md)
 - Themes
