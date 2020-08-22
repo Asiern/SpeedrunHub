@@ -7,6 +7,7 @@ export default class Run extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      categoryid: this.props.categoryid,
       category: this.props.category,
       place: this.props.place,
       time: this.props.time,
@@ -39,22 +40,12 @@ export default class Run extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.game}>
-          <Image
-            style={styles.cover}
-            source={{ uri: this.state.cover }}
-          ></Image>
-        </View>
-        <View style={styles.category}>
-          <Text style={styles.text}>{this.state.category}</Text>
-        </View>
         <View style={styles.place}>
           <Text style={styles.accenttext}>{this.state.place}</Text>
         </View>
         <View style={styles.runner}>
           <Text style={styles.text}>{this.state.runner}</Text>
         </View>
-
         <View style={styles.time}>
           <Text style={styles.text}>{this.state.time}</Text>
         </View>
