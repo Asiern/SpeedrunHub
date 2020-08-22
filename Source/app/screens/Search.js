@@ -1,10 +1,25 @@
-import { StyleSheet, View, Text, ScrollView, SectionList } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  SectionList,
+  Settings,
+} from "react-native";
 import React from "react";
 import { SearchBar } from "react-native-elements";
 import Constants from "expo-constants";
 import colors from "../config/colors";
 import GameCard from "../components/GameCard";
 import User from "../components/User";
+import { FlatList } from "react-native-gesture-handler";
+import Animated from "react-native-reanimated";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { Tabs } from "native-base";
+import A from "../screens/Settings";
+import Themes from "./Themes";
+
+const Tab = createMaterialTopTabNavigator();
 
 class Search extends React.Component {
   constructor() {
@@ -16,6 +31,7 @@ class Search extends React.Component {
       users: [],
     };
   }
+
   updateSearch = (input) => {
     this.setState({ search: input });
     const gameurl = "https://www.speedrun.com/api/v1/games?name=" + input;
@@ -49,6 +65,13 @@ class Search extends React.Component {
       />
     );
   };
+  renderUsers = ({ user }) => (
+    <User
+      username={user.names.international}
+      userid={user.id}
+      navigation={this.props.navigation}
+    />
+  );
   render() {
     const { search } = this.state;
 
@@ -61,35 +84,10 @@ class Search extends React.Component {
           platform="ios"
           lightTheme={true}
         />
-        <ScrollView>
-          <View style={styles.headercontainer}>
-            <Text style={styles.headertext}>Games</Text>
-          </View>
-
-          <View style={styles.gamecontainer}>
-            {this.state.games.map((item) => (
-              <GameCard
-                key={item.id}
-                navigation={this.props.navigation}
-                id={item.id}
-                abbreviation={item.abbreviation}
-              />
-            ))}
-          </View>
-          <View style={styles.headercontainer}>
-            <Text style={styles.headertext}>Users</Text>
-          </View>
-          <View style={{ flex: 1 }}>
-            {this.state.users.map((item) => (
-              <User
-                key={item.id}
-                username={item.names.international}
-                userid={item.id}
-                navigation={this.props.navigation}
-              />
-            ))}
-          </View>
-        </ScrollView>
+        <Tab.Navigator>
+          <Tab.Screen name="Games" component={Themes} />
+          <Tab.Screen name="Users" component={Themes} />
+        </Tab.Navigator>
       </View>
     );
   }
@@ -100,6 +98,12 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: Constants.statusBarHeight,
     backgroundColor: colors.light,
+  },
+  flatList: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    flex: 3,
+    margin: 20,
   },
   gamecontainer: {
     flexDirection: "row",
