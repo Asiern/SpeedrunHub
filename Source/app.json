@@ -3,7 +3,7 @@
     "name": "Speedrun.com App",
     "slug": "speedruncomapp",
     "platforms": ["ios", "android", "web"],
-    "version": "1.0.2",
+    "version": "2.0.2",
     "orientation": "portrait",
     "icon": "./app/assets/Fondo.png",
     "splash": {
