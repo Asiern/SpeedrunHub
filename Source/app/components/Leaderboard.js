@@ -37,6 +37,8 @@ class Leaderboard extends Component {
       runnerid={item.run.players[0].id}
       time={item.run.times.primary}
       abbreviation={this.props.abbreviation}
+      categoryid={item.run.category}
+      category={item.run.category}
     />
   );
   render() {
