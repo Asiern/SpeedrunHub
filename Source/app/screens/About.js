@@ -55,24 +55,7 @@ class About extends React.Component {
               <Text style={styles.githubtext}>GitHub</Text>
             </View>
           </TouchableOpacity>
-          <Text style={styles.paragraph}>
-            Donations are not necessary, but if you like the app and are willing
-            to donate, you are welcome.
-          </Text>
-          <Text style={styles.paragraph}>
-            All donations will be used to improve / maintain the app.
-          </Text>
 
-          <TouchableOpacity
-            onPress={() =>
-              this.loadInBrowser("https://paypal.me/asiernl?locale.x=es_ES")
-            }
-          >
-            <View style={styles.donations}>
-              <Icon name="logo-usd" color={colors.white} size={35} />
-              <Text style={styles.githubtext}>Donations</Text>
-            </View>
-          </TouchableOpacity>
           <Text style={styles.title}>Contact Me</Text>
           <Text style={styles.paragraph}>
             asiern.dev@gmail.com // Discord: Asiern#5149
