@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import colors from "../config/colors";
 import Icon from "react-native-vector-icons/Ionicons";
-import user from "../config/user.json";
 
 class UserHeader extends Component {
   constructor(props) {
@@ -23,14 +22,6 @@ class UserHeader extends Component {
         "/image.png",
     };
   }
-
-  miputafuncion = (input) => {
-    this.setState({
-      username: input,
-      userpicture:
-        "https://www.speedrun.com/themes/user/" + input + "/image.png",
-    });
-  };
   render() {
     return (
       <ImageBackground
@@ -41,8 +32,8 @@ class UserHeader extends Component {
           <TouchableOpacity
             onPress={() =>
               this.props.navigation.navigate("Profile", {
-                username: "Asiern",
-                userid: "48g3q2rx",
+                username: this.props.username,
+                userid: this.props.userid,
               })
             }
             style={styles.touch}
@@ -50,19 +41,22 @@ class UserHeader extends Component {
             <View style={styles.imagecontainer}>
               <Image
                 source={{
-                  uri: this.state.userpicture,
+                  uri:
+                    "https://www.speedrun.com/themes/user/" +
+                    this.props.username +
+                    "/image.png",
                 }}
                 style={styles.Image}
               ></Image>
             </View>
             <View style={styles.textcontainer}>
               <Text style={styles.welcome}>Welcome back,</Text>
-              <Text style={styles.usename}>{this.state.username}</Text>
+              <Text style={styles.usename}>{this.props.username}</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.iconcontainer}
-            onPress={() => this.props.navigation.navigate("Settings")}
+            onPress={() => this.props.navigation.navigate("Login")}
           >
             <Icon name="ios-options" color={colors.white} size={35} />
           </TouchableOpacity>

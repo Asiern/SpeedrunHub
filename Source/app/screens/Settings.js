@@ -11,7 +11,13 @@ class Settings extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={{ alignSelf: "center" }}>Nothing Here</Text>
+        <Button
+          title={"Login"}
+          style={styles.button}
+          color={colors.primary}
+          onPress={() => this.props.navigation.navigate("Login")}
+        />
+        <Text style={{ alignSelf: "center" }}></Text>
       </View>
     );
   }
