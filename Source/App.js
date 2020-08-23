@@ -1,15 +1,18 @@
 import React, { Component } from "react";
 import Profile from "./app/screens/Profile";
+
 import Home from "./app/screens/Home";
 import Settings from "./app/screens/Settings";
 import About from "./app/screens/About";
 import GameInfo from "./app/screens/GameInfo";
 import Search from "./app/screens/Search";
 import Themes from "./app/screens/Themes";
+import Login from "./app/screens/Login";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+
 import Ionicons from "@expo/vector-icons/Ionicons";
 import colors from "./app/config/colors";
 
@@ -31,6 +34,7 @@ export default class App extends Component {
         options={{ title: "Profile", headerShown: "" }}
       />
       <Stack.Screen name="Settings" component={Settings} />
+      <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Themes" component={Themes} />
     </Stack.Navigator>
   );
@@ -38,7 +42,7 @@ export default class App extends Component {
     <Stack.Navigator>
       <Stack.Screen
         name="Profile"
-        component={(Profile, { userid: "48g3q2rx", username: "Asiern" })}
+        component={(Profile, { userid: "48g3q2rx", username: username })}
         options={{ title: "My Profile", headerShown: "" }}
       />
       <Stack.Screen name="Profile" component={Profile} />
