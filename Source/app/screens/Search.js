@@ -5,6 +5,7 @@ import {
   ScrollView,
   SectionList,
   Settings,
+  Button,
 } from "react-native";
 import React from "react";
 import { SearchBar } from "react-native-elements";
@@ -17,13 +18,14 @@ import Animated from "react-native-reanimated";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { Tabs } from "native-base";
 import A from "../screens/Settings";
-import Themes from "./Themes";
+import Games from "../components/Games";
+import Users from "../components/Users";
 
 const Tab = createMaterialTopTabNavigator();
 
 class Search extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       search: "",
       loading: true,
@@ -77,16 +79,17 @@ class Search extends React.Component {
 
     return (
       <View style={styles.container}>
-        <SearchBar
-          placeholder="Search for games and users"
-          onChangeText={this.updateSearch}
-          value={search}
-          platform="ios"
-          lightTheme={true}
-        />
-        <Tab.Navigator>
-          <Tab.Screen name="Games" component={Themes} />
-          <Tab.Screen name="Users" component={Themes} />
+        <Tab.Navigator style={styles.navigator}>
+          <Tab.Screen
+            name="Games"
+            component={Games}
+            props={{ data: this.state.games }}
+          />
+          <Tab.Screen
+            name="Users"
+            component={Users}
+            initialParams={{ itemId: 42, data: this.state.users }}
+          />
         </Tab.Navigator>
       </View>
     );
@@ -96,8 +99,10 @@ class Search extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: colors.white,
+  },
+  navigator: {
     marginTop: Constants.statusBarHeight,
-    backgroundColor: colors.light,
   },
   flatList: {
     flexDirection: "row",
