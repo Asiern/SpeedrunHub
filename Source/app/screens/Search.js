@@ -79,7 +79,15 @@ class Search extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Tab.Navigator style={styles.navigator}>
+        <Tab.Navigator
+          style={styles.navigator}
+          tabBarOptions={{
+            activeTintColor: colors.darkgrey,
+            labelStyle: { fontSize: 15 },
+            style: { backgroundColor: colors.white },
+            indicatorStyle: { backgroundColor: colors.primary },
+          }}
+        >
           <Tab.Screen
             name="Games"
             component={Games}
