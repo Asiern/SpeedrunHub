@@ -35,7 +35,8 @@ class Login extends React.Component {
 
       if (data.data.id !== null) {
         const id = data.data.id;
-        await AsyncStorage.setItem("@user", user);
+        const name = data.data.names.international;
+        await AsyncStorage.setItem("@user", name);
         await AsyncStorage.setItem("@userid", id);
         this._retrieveData();
         createTwoButtonAlert("Logged in successfully.");
@@ -102,10 +103,6 @@ class Login extends React.Component {
             autoCompleteType={"username"}
           />
           <Button title={"Save"} color={colors.primary} disabled={true} />
-        </View>
-
-        <View style={styles.footer}>
-          <Text>Privacy Policy . Terms & Conditions</Text>
         </View>
       </View>
     );
