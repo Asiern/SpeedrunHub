@@ -7,18 +7,10 @@ export default class Run extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      categoryid: this.props.categoryid,
-      category: this.props.category,
       place: this.props.place,
       time: this.props.time,
       runner: this.props.runner,
       runnerid: this.props.runnerid,
-      cover:
-        "https://www.speedrun.com/themes/" +
-        this.props.abbreviation +
-        "/cover-64.png",
-      game: this.props.game,
-      abbreviation: this.props.abbreviation,
       loading: true,
     };
   }
