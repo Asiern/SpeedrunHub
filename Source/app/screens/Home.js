@@ -4,7 +4,7 @@ import GameCard from "../components/GameCard";
 import UserHeader from "../components/UserHeader";
 import colors from "../config/colors";
 import user from "../config/user.json";
-import { ScrollView, FlatList } from "react-native-gesture-handler";
+import { ScrollView } from "react-native-gesture-handler";
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -13,6 +13,7 @@ class Home extends React.Component {
       userid: "",
     };
   }
+
   _retrieveData = async () => {
     try {
       const username = await AsyncStorage.getItem("@user");
@@ -25,6 +26,7 @@ class Home extends React.Component {
   componentDidMount() {
     this._retrieveData();
   }
+
   render() {
     return (
       <ScrollView style={{ flex: 1 }}>
