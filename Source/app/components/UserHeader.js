@@ -56,7 +56,7 @@ class UserHeader extends Component {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.iconcontainer}
-            onPress={() => this.props.navigation.navigate("Settings")}
+            onPress={() => this.props.navigation.navigate("Login")}
           >
             <Icon name="ios-options" color={colors.white} size={35} />
           </TouchableOpacity>
