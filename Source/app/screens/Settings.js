@@ -4,8 +4,7 @@ import {
   View,
   Button,
   TouchableOpacity,
-  TouchableOpacityComponent,
-  ImageBackground,
+  Linking,
 } from "react-native";
 import { Divider, Text } from "react-native-paper";
 import Constants from "expo-constants";
@@ -17,6 +16,11 @@ class Settings extends React.Component {
   constructor(props) {
     super(props);
   }
+  loadInBrowser = (link) => {
+    Linking.openURL(link).catch((err) =>
+      console.error("Couldn't load page", err)
+    );
+  };
 
   render() {
     return (
@@ -65,6 +69,25 @@ class Settings extends React.Component {
             </View>
           </TouchableOpacity>
           <TouchableOpacity
+            onPress={() => this.props.navigation.navigate("MyGames")}
+          >
+            <View style={styles.button}>
+              <View style={styles.icon}>
+                <FontAwesome5 name="gamepad" color={colors.primary} size={20} />
+              </View>
+              <View style={styles.textcontainer}>
+                <Text style={styles.text}>My Games</Text>
+              </View>
+              <View style={styles.icon}>
+                <FontAwesome5
+                  name="angle-right"
+                  color={colors.darkgrey}
+                  size={26}
+                />
+              </View>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
             onPress={() => this.props.navigation.navigate("About")}
           >
             <View style={styles.button}>
@@ -84,7 +107,11 @@ class Settings extends React.Component {
             </View>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => this.props.navigation.navigate("About")}
+            onPress={() =>
+              this.loadInBrowser(
+                "https://github.com/Asiern/Speerun.comApp/blob/master/Readme/Privacy%20Policy.md"
+              )
+            }
           >
             <View style={styles.button}>
               <View style={styles.icon}>

@@ -68,7 +68,7 @@ class Login extends React.Component {
       <View style={styles.container}>
         <View style={styles.user}>
           <Text style={styles.headertext}>Username</Text>
-          <View style={styles.userdata}>
+          {/*<View style={styles.userdata}>
             <View style={styles.username}>
               <Text style={styles.paragraph}>User: {this.state.username} </Text>
             </View>
@@ -76,7 +76,7 @@ class Login extends React.Component {
             <View style={styles.userid}>
               <Text style={styles.paragraph}>User ID: {this.state.userid}</Text>
             </View>
-          </View>
+    </View>*/}
 
           <TextInput
             style={styles.textinput}
