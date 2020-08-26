@@ -1,5 +1,6 @@
 export default {
   primary: "#ff758c",
+  primary2: "#ff758c",
   primaryG: "#ff7eb3",
   secondary: "#CA39CC",
   Crystalline1: "#00cdac",
