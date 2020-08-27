@@ -10,10 +10,8 @@ import {
   FlatList,
   Button,
 } from "react-native";
+import Run from "../components/Run";
 import colors from "../config/colors";
-import Leaderboard from "../components/Leaderboard";
-import Variables from "../components/Variables";
-import config from "../config/user.json";
 
 class GameInfo extends React.Component {
   constructor() {
@@ -24,38 +22,62 @@ class GameInfo extends React.Component {
       abbreviation: "",
       game: [],
       selectedCategory: "",
+      url: "",
+      runs: [],
     };
   }
-  loadData = () => {
-    const { id, abbreviation } = this.props.route.params;
-    this.setState({
-      id,
-      abbreviation,
-    });
-  };
-  readFavs() {
-    const { favs } = config.games[0].id;
-  }
-  selectCategory = (selectedCategory) => {
-    this.setState({ selectedCategory });
-    console.log(selectedCategory);
-  };
   async componentDidMount() {
-    this.loadData();
-    const url =
-      "https://www.speedrun.com/api/v1/games/" +
-      this.props.route.params.id +
-      "?embed=categories";
-    const response = await fetch(url);
-    const data = await response.json();
-
-    this.setState({
-      loading: false,
-      game: data.data,
-      //Select first category
-      selectedCategory: data.data.categories.data[0].id,
-    });
+    try {
+      //Load gameId & abbreviation from react navigation
+      const { id, abbreviation } = this.props.route.params;
+      //Get Game Data
+      //Fetch Categories from Speedrun.com
+      const url =
+        "https://www.speedrun.com/api/v1/games/" +
+        this.props.route.params.id +
+        "?embed=categories";
+      const response = await fetch(url);
+      const data = await response.json();
+      //Select Default Category
+      const selectedCategory = data.data.categories.data[0].id;
+      //Fetch Variables
+      //Load Runs
+      this.LoadRuns(selectedCategory);
+      //Set State
+      this.setState({ loading: false, game: data.data, id, abbreviation });
+    } catch (error) {
+      console.log(error);
+    }
   }
+  async LoadRuns(categoryid) {
+    try {
+      this.setState({ loading: true });
+      //Build Url
+      const url =
+        "https://www.speedrun.com/api/v1/leaderboards/" +
+        this.props.route.params.id +
+        "/category/" +
+        categoryid;
+      this.setState({ url });
+      //Fetch Runs from Speedrun.com
+      const response = await fetch(url);
+      const data = await response.json();
+      this.setState({ runs: data.data.runs, loading: false });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  renderItem = ({ item }) => (
+    <Run
+      place={item.place}
+      runnerid={item.run.players[0].id}
+      time={item.run.times.primary}
+      abbreviation={this.props.abbreviation}
+      categoryid={item.run.category}
+      category={item.run.category}
+    />
+  );
   render() {
     if (this.state.loading) {
       return (
@@ -114,18 +136,19 @@ class GameInfo extends React.Component {
                     title={item.name}
                     style={styles.button}
                     color={colors.primary}
-                    onPress={() => this.selectCategory(item.id)}
+                    onPress={() => this.LoadRuns(item.id)}
                   />
                 </View>
               )}
             ></FlatList>
           </View>
-          <Variables
-            name={this.state.abbreviation}
-            gameid={this.state.id}
-            categoryid={this.state.selectedCategory}
-            abbreviation={this.state.abbreviation}
-          />
+          <View style={{ flex: 1 }}>
+            <FlatList
+              keyExtractor={(item) => item.run.id}
+              data={this.state.runs}
+              renderItem={this.renderItem}
+            ></FlatList>
+          </View>
         </ScrollView>
       );
     }
