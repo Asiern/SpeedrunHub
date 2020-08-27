@@ -54,9 +54,6 @@ export default class Run extends Component {
         <View style={styles.place}>
           <Text style={styles.accenttext}>{this.state.place}</Text>
         </View>
-        <View style={styles.runner}>
-          <Text style={styles.text}>{this.state.runner}</Text>
-        </View>
 
         <View style={styles.time}>
           <Text style={styles.text}>{this.state.time}</Text>
