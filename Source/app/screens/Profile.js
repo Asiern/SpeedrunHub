@@ -23,6 +23,8 @@ class Profile extends React.Component {
       userid: "",
       userpicture: "",
       runs: [],
+      user: [],
+      country: "",
     };
   }
   async loadData() {
@@ -31,17 +33,31 @@ class Profile extends React.Component {
       userid,
       username,
     });
+    //PBs
     const runsurl =
       "https://www.speedrun.com/api/v1/users/" +
       userid +
       "/personal-bests?embed=game,category";
     const runsresponse = await fetch(runsurl);
     const runsdata = await runsresponse.json();
+    //User
+    const userurl = "https://www.speedrun.com/api/v1/users/" + userid;
+    const userresponse = await fetch(userurl);
+    const userdata = await userresponse.json();
 
-    this.setState({ loading: false, runs: runsdata.data });
+    this.setState({
+      loading: false,
+      runs: runsdata.data,
+      user: userdata.data,
+      country: userdata.data.location.country.names.international,
+    });
   }
   async componentDidMount() {
-    this.loadData();
+    try {
+      this.loadData();
+    } catch (error) {
+      console.log(error);
+    }
   }
   renderItem = ({ item }) => (
     <View style={styles.pbs}>
@@ -93,7 +109,7 @@ class Profile extends React.Component {
               <Text style={styles.h1}>{this.state.username}</Text>
               <View style={styles.country}>
                 <View>
-                  <Text style={styles.h2}>Basque Country</Text>
+                  <Text style={styles.h2}>{this.state.country}</Text>
                 </View>
               </View>
             </View>
@@ -109,9 +125,6 @@ class Profile extends React.Component {
             </View>
             <View style={styles.place}>
               <Text>Place</Text>
-            </View>
-            <View style={styles.runner}>
-              <Text>Runner</Text>
             </View>
             <View style={styles.time}>
               <Text>Time</Text>
