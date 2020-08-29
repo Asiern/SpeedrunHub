@@ -1,8 +1,12 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Image, Text } from "react-native";
-import { Content } from "native-base";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  Linking,
+} from "react-native";
 import colors from "../config/colors";
-import user from "../config/user.json";
 export default class Run extends Component {
   constructor(props) {
     super(props);
@@ -11,15 +15,21 @@ export default class Run extends Component {
       time: this.props.time,
       runner: this.props.runner,
       runnerid: this.props.runnerid,
+      weblink: this.props.weblink,
       loading: true,
     };
   }
+  loadInBrowser = (link) => {
+    Linking.openURL(link).catch((err) =>
+      console.error("Couldn't load page", err)
+    );
+  };
   componentDidMount() {
     this.timeConverter();
     this.FetchUser(this.state.runnerid);
   }
   timeConverter() {
-    var result = this.state.time;
+    var result = this.state.time.toLowerCase();
     result = result.substr(2, result.lenght);
     this.setState({ time: result });
   }
@@ -31,7 +41,10 @@ export default class Run extends Component {
   }
   render() {
     return (
-      <View style={styles.container}>
+      <TouchableOpacity
+        onPress={() => this.loadInBrowser(this.state.weblink)}
+        style={styles.container}
+      >
         <View style={styles.place}>
           <Text style={styles.accenttext}>{this.state.place}</Text>
         </View>
@@ -41,22 +54,20 @@ export default class Run extends Component {
         <View style={styles.time}>
           <Text style={styles.text}>{this.state.time}</Text>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   }
 }
 const styles = StyleSheet.create({
   shadow: {
-    shadowColor: "gold",
+    shadowColor: colors.darkgrey,
     shadowOffset: { width: 5, height: 5 },
     shadowOpacity: 0.9,
-
-    // add shadows for Android only
-    // No options for shadow color, shadow offset, shadow opacity like iOS
-    elevation: 1,
+    elevation: 5,
   },
   container: {
-    paddingVertical: 20,
+    marginHorizontal: 10,
+    paddingVertical: 15,
     flexDirection: "row",
     flex: 1,
     alignItems: "center",
@@ -69,29 +80,16 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.9,
     elevation: 1,
   },
-  game: {
-    flex: 3,
-    //backgroundColor: "dodgerblue",
-    alignItems: "center",
-  },
-  category: {
-    flex: 5,
-    //backgroundColor: "gold"
-    alignItems: "center",
-  },
   place: {
     flex: 3,
-    //backgroundColor: "tomato",
     alignItems: "center",
   },
   runner: {
-    flex: 7,
-    //backgroundColor: "green",
+    flex: 8,
     alignItems: "center",
   },
   time: {
     flex: 8,
-    //backgroundColor: "orange",
     alignItems: "center",
   },
   text: {
@@ -104,10 +102,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     fontSize: 15,
     color: colors.primary,
-  },
-  cover: {
-    height: 60,
-    width: 45,
   },
 });
 module.export = Run;
