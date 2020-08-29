@@ -39,7 +39,9 @@ class Login extends React.Component {
         await AsyncStorage.setItem("@user", name);
         await AsyncStorage.setItem("@userid", id);
         this._retrieveData();
-        createTwoButtonAlert("Logged in successfully.");
+        createTwoButtonAlert(
+          "Logged in successfully. Please restart the application for the changes to take effect."
+        );
       }
     } catch (error) {
       createTwoButtonAlert(
@@ -93,7 +95,7 @@ class Login extends React.Component {
           />
         </View>
 
-        <View style={styles.api}>
+        {/*} <View style={styles.api}>
           <Text style={styles.headertext}>API Key</Text>
           <TextInput
             style={styles.textinput}
@@ -103,7 +105,7 @@ class Login extends React.Component {
             autoCompleteType={"username"}
           />
           <Button title={"Save"} color={colors.primary} disabled={true} />
-        </View>
+  </View>*/}
       </View>
     );
   }
@@ -113,10 +115,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.light,
+    justifyContent: "center",
+    alignContent: "center",
   },
   user: {
-    flex: 5,
-    padding: 20,
+    flex: 1,
+    alignContent: "center",
+    justifyContent: "center",
+    marginHorizontal: 20,
   },
   userdata: {
     flexDirection: "row",
@@ -127,7 +133,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: colors.primary,
     fontSize: 25,
-    paddingTop: 20,
   },
   paragraph: {
     paddingVertical: 10,
