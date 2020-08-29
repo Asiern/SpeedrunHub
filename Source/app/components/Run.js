@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import {
   StyleSheet,
   View,
@@ -7,15 +7,12 @@ import {
   Linking,
 } from "react-native";
 import colors from "../config/colors";
-export default class Run extends Component {
+export default class Run extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      place: this.props.place,
       time: this.props.time,
       runner: this.props.runner,
-      runnerid: this.props.runnerid,
-      weblink: this.props.weblink,
       loading: true,
     };
   }
@@ -26,7 +23,7 @@ export default class Run extends Component {
   };
   componentDidMount() {
     this.timeConverter();
-    this.FetchUser(this.state.runnerid);
+    this.FetchUser(this.props.runnerid);
   }
   timeConverter() {
     var result = this.state.time.toLowerCase();
@@ -42,11 +39,11 @@ export default class Run extends Component {
   render() {
     return (
       <TouchableOpacity
-        onPress={() => this.loadInBrowser(this.state.weblink)}
+        onPress={() => this.loadInBrowser(this.props.weblink)}
         style={styles.container}
       >
         <View style={styles.place}>
-          <Text style={styles.accenttext}>{this.state.place}</Text>
+          <Text style={styles.accenttext}>{this.props.place}</Text>
         </View>
         <View style={styles.runner}>
           <Text style={styles.text}>{this.state.runner}</Text>
