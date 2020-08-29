@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, PureComponent } from "react";
 import {
   StyleSheet,
   View,
@@ -8,7 +8,7 @@ import {
   Linking,
 } from "react-native";
 import colors from "../config/colors";
-export default class Run extends Component {
+export default class PB extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -143,4 +143,4 @@ const styles = StyleSheet.create({
     width: 45,
   },
 });
-module.export = Run;
+module.export = PB;
