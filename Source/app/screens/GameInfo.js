@@ -9,6 +9,7 @@ import {
   ActivityIndicator,
   FlatList,
   Button,
+  Alert,
 } from "react-native";
 import Run from "../components/Run";
 import colors from "../config/colors";
@@ -24,6 +25,7 @@ class GameInfo extends React.Component {
       selectedCategory: "",
       url: "",
       runs: [],
+      variables: [],
     };
   }
   async componentDidMount() {
@@ -41,10 +43,66 @@ class GameInfo extends React.Component {
       //Select Default Category
       const selectedCategory = data.data.categories.data[0].id;
       //Fetch Variables
+      this.LoadVariables(selectedCategory);
       //Load Runs
       this.LoadRuns(selectedCategory);
       //Set State
       this.setState({ loading: false, game: data.data, id, abbreviation });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async LoadVariables(categoryid) {
+    try {
+      //Fetch Variables from Speedrun.com
+      const variablesUrl =
+        "https://www.speedrun.com/api/v1/categories/" +
+        categoryid +
+        "/variables?";
+      const varResponse = await fetch(variablesUrl);
+      const varData = await varResponse.json();
+      //Output Objects
+      var outSubcategoies = [];
+      var outSubcategory = {
+        id: "",
+        name: "",
+        values: [],
+      };
+      var outValue = {
+        label: "",
+        id: "",
+        //rules: "",
+      };
+      //Get subcategories (is-subcategory===true)
+      for (let subcategory of varData.data) {
+        const str = subcategory["is-subcategory"];
+        if (str == true) {
+          //console.log(subcategory.name);
+          //varData.data.is-subcategory == true
+          //Load data into output
+          outSubcategory.id = subcategory.id;
+          outSubcategory.name = subcategory.name;
+          //Get subcategory variables
+          for (let variable in subcategory.values.values) {
+            //Load outValue with data
+            outValue.id = variable;
+            outValue.label = subcategory.values.values[variable].label;
+            //outValue.rules = subcategory.values.values[variable].rules;
+            //Load output to outSubcategory.values
+            console.log(outValue);
+            //Push removes previous value
+            console.log(outSubcategory.values);
+            outSubcategory.values.push(outValue);
+          }
+          //Load values into output
+          //out.subcategory.values =
+          //Load subcategory into list
+          outSubcategoies.push(outSubcategory);
+          //console.log(outSubcategoies);
+          this.setState({ variables: outSubcategoies });
+        }
+      }
+      //console.log(this.state.variables[0].values);
     } catch (error) {
       console.log(error);
     }
@@ -76,8 +134,79 @@ class GameInfo extends React.Component {
       abbreviation={this.props.abbreviation}
       categoryid={item.run.category}
       category={item.run.category}
+      weblink={item.run.weblink}
     />
   );
+  GameHeader = () => {
+    return (
+      <View>
+        <ImageBackground
+          style={styles.profileBG}
+          source={{
+            uri:
+              "https://www.speedrun.com/themes/" +
+              this.state.abbreviation +
+              "/cover-256.png",
+          }}
+          opacity={0.3}
+        >
+          <View style={styles.profile}>
+            <View style={styles.imagecontainer}>
+              <Image
+                source={{
+                  uri:
+                    "https://www.speedrun.com/themes/" +
+                    this.state.abbreviation +
+                    "/cover-256.png",
+                }}
+                style={styles.Image}
+              ></Image>
+            </View>
+          </View>
+          <View style={styles.userinfo}>
+            <View style={styles.userinfoitem}>
+              <Text style={styles.h1}>
+                {this.state.game.names.international}
+              </Text>
+            </View>
+          </View>
+        </ImageBackground>
+
+        <FlatList
+          keyExtractor={(item) => item.id}
+          data={this.state.game.categories.data}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          renderItem={({ item }) => (
+            <View style={styles.button}>
+              <Button
+                title={item.name}
+                style={styles.button}
+                color={colors.primary}
+                onPress={() => this.LoadRuns(item.id)}
+              />
+            </View>
+          )}
+        ></FlatList>
+        <FlatList
+          keyExtractor={(item) => item.id}
+          data={this.state.variables}
+          showsHorizontalScrollIndicator={false}
+          horizontal={true}
+          renderItem={({ item }) => (
+            <View style={styles.button}>
+              <Button
+                title={item.name}
+                style={styles.button}
+                color={colors.primary}
+                //onPress={() => this.LoadRuns(item.id)}
+              />
+            </View>
+          )}
+        ></FlatList>
+      </View>
+    );
+  };
   render() {
     if (this.state.loading) {
       return (
@@ -92,64 +221,14 @@ class GameInfo extends React.Component {
       );
     } else {
       return (
-        <ScrollView style={styles.container}>
-          <ImageBackground
-            style={styles.profileBG}
-            source={{
-              uri:
-                "https://www.speedrun.com/themes/" +
-                this.state.abbreviation +
-                "/cover-256.png",
-            }}
-            opacity={0.3}
-          >
-            <View style={styles.profile}>
-              <View style={styles.imagecontainer}>
-                <Image
-                  source={{
-                    uri:
-                      "https://www.speedrun.com/themes/" +
-                      this.state.abbreviation +
-                      "/cover-256.png",
-                  }}
-                  style={styles.Image}
-                ></Image>
-              </View>
-            </View>
-            <View style={styles.userinfo}>
-              <View style={styles.userinfoitem}>
-                <Text style={styles.h1}>
-                  {this.state.game.names.international}
-                </Text>
-              </View>
-            </View>
-          </ImageBackground>
-          <View>
-            <FlatList
-              keyExtractor={(item) => item.id}
-              data={this.state.game.categories.data}
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-              renderItem={({ item }) => (
-                <View style={styles.button}>
-                  <Button
-                    title={item.name}
-                    style={styles.button}
-                    color={colors.primary}
-                    onPress={() => this.LoadRuns(item.id)}
-                  />
-                </View>
-              )}
-            ></FlatList>
-          </View>
-          <View style={{ flex: 1 }}>
-            <FlatList
-              keyExtractor={(item) => item.run.id}
-              data={this.state.runs}
-              renderItem={this.renderItem}
-            ></FlatList>
-          </View>
-        </ScrollView>
+        <View style={{ flex: 1 }}>
+          <FlatList
+            keyExtractor={(item) => item.run.id}
+            data={this.state.runs}
+            renderItem={this.renderItem}
+            ListHeaderComponent={this.GameHeader}
+          ></FlatList>
+        </View>
       );
     }
   }
