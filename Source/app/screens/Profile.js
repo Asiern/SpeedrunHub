@@ -67,6 +67,7 @@ class Profile extends React.Component {
         time={item.run.times.primary}
         abbreviation={item.game.data.abbreviation}
         category={item.category.data.name}
+        weblink={item.run.weblink}
       />
     </View>
   );

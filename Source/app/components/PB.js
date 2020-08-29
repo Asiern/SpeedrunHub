@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Image, Text } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Image,
+  Text,
+  TouchableOpacity,
+  Linking,
+} from "react-native";
 import colors from "../config/colors";
 export default class Run extends Component {
   constructor(props) {
@@ -17,9 +24,15 @@ export default class Run extends Component {
         "/cover-64.png",
       game: this.props.game,
       abbreviation: this.props.abbreviation,
+      weblink: this.props.weblink,
       loading: true,
     };
   }
+  loadInBrowser = (link) => {
+    Linking.openURL(link).catch((err) =>
+      console.error("Couldn't load page", err)
+    );
+  };
   componentDidMount() {
     try {
       this.timeConverter();
@@ -29,7 +42,7 @@ export default class Run extends Component {
     }
   }
   timeConverter() {
-    var result = this.state.time;
+    var result = this.state.time.toLowerCase();
     result = result.substr(2, result.lenght);
     this.setState({ time: result });
   }
@@ -41,7 +54,10 @@ export default class Run extends Component {
   }
   render() {
     return (
-      <View style={styles.container}>
+      <TouchableOpacity
+        style={styles.container}
+        onPress={() => this.loadInBrowser(this.state.weblink)}
+      >
         <View style={styles.game}>
           <Image
             style={styles.cover}
@@ -58,7 +74,7 @@ export default class Run extends Component {
         <View style={styles.time}>
           <Text style={styles.text}>{this.state.time}</Text>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   }
 }
