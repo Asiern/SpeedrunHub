@@ -1,6 +1,5 @@
 import React, { Component, useState } from "react";
 import {
-  ScrollView,
   StyleSheet,
   Text,
   View,
@@ -9,9 +8,9 @@ import {
   ActivityIndicator,
   FlatList,
   Button,
-  Alert,
 } from "react-native";
 import Run from "../components/Run";
+import Notification from "../components/Notification";
 import colors from "../config/colors";
 
 class GameInfo extends React.Component {
@@ -61,20 +60,15 @@ class GameInfo extends React.Component {
         "/variables?";
       const varResponse = await fetch(variablesUrl);
       const varData = await varResponse.json();
-      //Output Objects
-      var outSubcategoies = [];
-      var outSubcategory = {
-        id: "",
-        name: "",
-        values: [],
-      };
-      var outValue = {
-        label: "",
-        id: "",
-        //rules: "",
-      };
       //Get subcategories (is-subcategory===true)
+      var outSubcategoies = [];
       for (let subcategory of varData.data) {
+        //Output Subcategory
+        var outSubcategory = {
+          id: "",
+          name: "",
+          values: [],
+        };
         const str = subcategory["is-subcategory"];
         if (str == true) {
           //console.log(subcategory.name);
@@ -84,25 +78,25 @@ class GameInfo extends React.Component {
           outSubcategory.name = subcategory.name;
           //Get subcategory variables
           for (let variable in subcategory.values.values) {
+            //Create output value
+            var outValue = {
+              label: "",
+              id: "",
+              rules: "",
+            };
             //Load outValue with data
             outValue.id = variable;
             outValue.label = subcategory.values.values[variable].label;
-            //outValue.rules = subcategory.values.values[variable].rules;
+            outValue.rules = subcategory.values.values[variable].rules;
             //Load output to outSubcategory.values
-            console.log(outValue);
-            //Push removes previous value
-            console.log(outSubcategory.values);
             outSubcategory.values.push(outValue);
           }
-          //Load values into output
-          //out.subcategory.values =
           //Load subcategory into list
           outSubcategoies.push(outSubcategory);
-          //console.log(outSubcategoies);
-          this.setState({ variables: outSubcategoies });
         }
       }
-      //console.log(this.state.variables[0].values);
+      this.setState({ variables: outSubcategoies });
+      console.log(this.state.variables);
     } catch (error) {
       console.log(error);
     }
@@ -125,7 +119,9 @@ class GameInfo extends React.Component {
       console.log(error);
     }
   }
-
+  myFunction = () => {
+    console.log("Function exec");
+  };
   renderItem = ({ item }) => (
     <Run
       place={item.place}
@@ -189,19 +185,26 @@ class GameInfo extends React.Component {
           )}
         ></FlatList>
         <FlatList
-          keyExtractor={(item) => item.id}
+          keyExtractor={(subcategory) => subcategory.id}
           data={this.state.variables}
           showsHorizontalScrollIndicator={false}
-          horizontal={true}
           renderItem={({ item }) => (
-            <View style={styles.button}>
-              <Button
-                title={item.name}
-                style={styles.button}
-                color={colors.primary}
-                //onPress={() => this.LoadRuns(item.id)}
-              />
-            </View>
+            <FlatList
+              keyExtractor={(item) => item.id}
+              data={item.values}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              renderItem={({ item }) => (
+                <View style={styles.button}>
+                  <Button
+                    title={item.label}
+                    style={styles.button}
+                    color={colors.primary}
+                    //onPress={() => this.LoadRuns(item.id)}
+                  />
+                </View>
+              )}
+            ></FlatList>
           )}
         ></FlatList>
       </View>
@@ -312,7 +315,8 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   button: {
-    margin: 20,
+    marginHorizontal: 20,
+    marginVertical: 5,
     height: 45,
     alignSelf: "center",
   },
