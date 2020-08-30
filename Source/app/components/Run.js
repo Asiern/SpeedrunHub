@@ -21,9 +21,10 @@ export default class Run extends PureComponent {
       console.error("Couldn't load page", err)
     );
   };
-  componentDidMount() {
+  UNSAFE_componentWillMount() {
     this.timeConverter();
     this.FetchUser(this.props.runnerid);
+    //this.FetchUser(this.props.runnerid);
   }
   timeConverter() {
     var result = this.state.time.toLowerCase();
@@ -36,6 +37,7 @@ export default class Run extends PureComponent {
     const data = await response.json();
     this.setState({ loading: false, runner: data.data.names.international });
   }
+
   render() {
     return (
       <TouchableOpacity
