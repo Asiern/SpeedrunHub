@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import colors from "../config/colors";
 import Icon from "react-native-vector-icons/Ionicons";
+import { FontAwesome5 } from "@expo/vector-icons";
 
 class UserHeader extends Component {
   constructor(props) {
@@ -58,7 +59,7 @@ class UserHeader extends Component {
             style={styles.iconcontainer}
             onPress={() => this.props.navigation.navigate("Login")}
           >
-            <Icon name="ios-options" color={colors.white} size={35} />
+            <FontAwesome5 name="user-cog" color={colors.white} size={30} />
           </TouchableOpacity>
         </View>
       </ImageBackground>
@@ -84,6 +85,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
   },
   touch: {
+    marginLeft: 10,
     flex: 2,
     flexDirection: "row",
     alignItems: "center",
