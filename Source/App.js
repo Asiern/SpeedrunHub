@@ -7,6 +7,7 @@ import About from "./app/screens/About";
 import GameInfo from "./app/screens/GameInfo";
 import Search from "./app/screens/Search";
 import Themes from "./app/screens/Themes";
+import MyGames from "./app/screens/MyGames";
 import Login from "./app/screens/Login";
 
 import { NavigationContainer } from "@react-navigation/native";
@@ -38,7 +39,16 @@ export default class App extends Component {
       <Stack.Screen name="Themes" component={Themes} />
     </Stack.Navigator>
   );
-  createProfileStack = (props) => (
+  createSettingsStack = (props) => (
+    <Stack.Navigator>
+      <Stack.Screen name="Settings" component={Settings} />
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Themes" component={Themes} />
+      <Stack.Screen name="MyGames" component={MyGames} />
+      <Stack.Screen name="About" component={About} />
+    </Stack.Navigator>
+  );
+  /*createProfileStack = (props) => (
     <Stack.Navigator>
       <Stack.Screen
         name="Profile"
@@ -48,7 +58,7 @@ export default class App extends Component {
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="Game Info" component={GameInfo} />
     </Stack.Navigator>
-  );
+  );*/
   createSearchStack = (props) => (
     <Stack.Navigator>
       <Stack.Screen
@@ -95,16 +105,12 @@ export default class App extends Component {
           />
 
           <BottomTabs.Screen
-            name="About"
-            component={About}
+            name="Settings"
+            component={this.createSettingsStack}
             options={{
-              tabBarLabel: "About",
+              tabBarLabel: "Settings",
               tabBarIcon: ({ color }) => (
-                <Ionicons
-                  name="ios-information-circle-outline"
-                  color={color}
-                  size={26}
-                />
+                <Ionicons name="ios-settings" color={color} size={26} />
               ),
             }}
           />

@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "Speedrun.com App",
+    "name": "SpeedrunHub",
     "slug": "speedruncomapp",
     "platforms": ["ios", "android", "web"],
-    "version": "1.0.2",
+    "version": "1.0.4",
     "orientation": "portrait",
     "icon": "./app/assets/Fondo.png",
     "splash": {
@@ -16,13 +16,13 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "bundleIdentifier": "Speedrun.comApp"
+      "bundleIdentifier": "SpeedrunHub"
     },
     "description": "speedrun.com app for Android/IOS using REST API",
     "githubUrl": "https://github.com/Asiern/Speerun.comApp",
     "android": {
       "package": "com.asiern.speedrun",
-      "versionCode": 2
+      "versionCode": 4
     }
   }
 }

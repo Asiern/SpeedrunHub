@@ -1,6 +1,5 @@
-import React, { Component, useState } from "react";
+import React from "react";
 import {
-  ScrollView,
   StyleSheet,
   Text,
   View,
@@ -10,10 +9,9 @@ import {
   FlatList,
   Button,
 } from "react-native";
+import Run from "../components/Run";
 import colors from "../config/colors";
-import Leaderboard from "../components/Leaderboard";
-import Variables from "../components/Variables";
-import config from "../config/user.json";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 class GameInfo extends React.Component {
   constructor() {
@@ -24,38 +22,255 @@ class GameInfo extends React.Component {
       abbreviation: "",
       game: [],
       selectedCategory: "",
+      url: "",
+      runs: [],
+      variables: [],
+      categories: [],
     };
   }
-  loadData = () => {
-    const { id, abbreviation } = this.props.route.params;
-    this.setState({
-      id,
-      abbreviation,
-    });
-  };
-  readFavs() {
-    const { favs } = config.games[0].id;
-  }
-  selectCategory = (selectedCategory) => {
-    this.setState({ selectedCategory });
-    console.log(selectedCategory);
-  };
   async componentDidMount() {
-    this.loadData();
-    const url =
-      "https://www.speedrun.com/api/v1/games/" +
-      this.props.route.params.id +
-      "?embed=categories";
-    const response = await fetch(url);
-    const data = await response.json();
-
-    this.setState({
-      loading: false,
-      game: data.data,
-      //Select first category
-      selectedCategory: data.data.categories.data[0].id,
-    });
+    try {
+      //Load gameId & abbreviation from react navigation
+      const { id, abbreviation } = this.props.route.params;
+      //Get Game Data
+      //Fetch Categories from Speedrun.com
+      const url =
+        "https://www.speedrun.com/api/v1/games/" +
+        this.props.route.params.id +
+        "?embed=categories";
+      const response = await fetch(url);
+      const data = await response.json();
+      //Categories output
+      var outCategories = [];
+      //Filter Categories (type == Per-Game)
+      for (var category of data.data.categories.data) {
+        if (category.type == "per-game") {
+          outCategories.push(category);
+        }
+      }
+      //Select Default Category
+      const selectedCategory = outCategories[0].id;
+      //Fetch Variables
+      this.LoadVariables(selectedCategory);
+      //Set State
+      this.setState({
+        loading: false,
+        game: data.data,
+        id,
+        abbreviation,
+        categories: outCategories,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
+  async LoadVariables(categoryid) {
+    try {
+      //Fetch Variables from Speedrun.com
+      const variablesUrl =
+        "https://www.speedrun.com/api/v1/categories/" +
+        categoryid +
+        "/variables?";
+      const varResponse = await fetch(variablesUrl);
+      const varData = await varResponse.json();
+      //Get subcategories (is-subcategory===true)
+      var outSubcategoies = [];
+      //UrlBuild index
+      var index = 1;
+      //Url extension
+      var urlExt =
+        "https://www.speedrun.com/api/v1/leaderboards/" +
+        this.props.route.params.id +
+        "/category/" +
+        categoryid;
+      for (let subcategory of varData.data) {
+        //Output Subcategory
+        var outSubcategory = {
+          id: "",
+          name: "",
+          values: [],
+        };
+        const str = subcategory["is-subcategory"];
+        if (str == true) {
+          //varData.data.is-subcategory == true
+          //Load data into output
+          outSubcategory.id = subcategory.id;
+          outSubcategory.name = subcategory.name;
+          //Get subcategory variables
+          for (let variable in subcategory.values.values) {
+            //Create output value
+            var outValue = {
+              label: "",
+              id: "",
+              rules: "",
+              categoryid: "",
+            };
+            //Load outValue with data
+            outValue.id = variable;
+            outValue.label = subcategory.values.values[variable].label;
+            outValue.rules = subcategory.values.values[variable].rules;
+            outValue.categoryid = subcategory.id;
+            //Load output to outSubcategory.values
+            outSubcategory.values.push(outValue);
+          }
+          //Load subcategory into list
+          outSubcategoies.push(outSubcategory);
+          //Add url var
+          urlExt = this.buildUrl(
+            subcategory.id,
+            subcategory.values.default,
+            urlExt,
+            index
+          );
+          //++ index
+          index++;
+        }
+      }
+      this.setState({ variables: outSubcategoies });
+      this.LoadRuns(urlExt);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  buildUrl = (id, value, url, index) => {
+    try {
+      //index = number of values loaded on the url
+      if (index == 1) {
+        return url + "?" + "var-" + id + "=" + value;
+      } else {
+        return url + "&" + "var-" + id + "=" + value;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  modifyUrl = (id, value) => {
+    var url = this.state.url;
+    var outUrl;
+    if (url.includes(id)) {
+      //Url contains id
+      //Id lenght
+      var lenght = id.length;
+      var i = url.search(id) + lenght + 1;
+      //i = value first char position
+      var start = url.substr(0, i);
+      var end = url.substr(i, url.length);
+      if (end.includes("&")) {
+        end = end.substr(end.indexOf("&"), url.length);
+        outUrl = start + value + end;
+      } else {
+        outUrl = start + value;
+      }
+      this.LoadRuns(outUrl);
+    } else {
+      console.log("Error: Category Id not found on Url");
+    }
+    //Search for id on url and modify value
+    //Load Runs
+    //this.LoadRuns(url);
+  };
+  async LoadRuns(url) {
+    try {
+      this.setState({ loading: true });
+      //Fetch Runs from Speedrun.com
+      const response = await fetch(url);
+      const data = await response.json();
+      this.setState({ runs: data.data.runs, loading: false, url });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  renderItem = ({ item }) => (
+    <Run
+      place={item.place}
+      runnerid={item.run.players[0].id}
+      time={item.run.times.primary}
+      abbreviation={this.props.abbreviation}
+      categoryid={item.run.category}
+      category={item.run.category}
+      weblink={item.run.weblink}
+    />
+  );
+  ListFooter = () => {
+    return <View style={{ padding: 20 }}></View>;
+  };
+  GameHeader = () => {
+    return (
+      <View>
+        <ImageBackground
+          style={styles.profileBG}
+          source={{
+            uri:
+              "https://www.speedrun.com/themes/" +
+              this.state.abbreviation +
+              "/cover-256.png",
+          }}
+          opacity={0.3}
+        >
+          <View style={styles.profile}>
+            <View style={styles.imagecontainer}>
+              <Image
+                source={{
+                  uri:
+                    "https://www.speedrun.com/themes/" +
+                    this.state.abbreviation +
+                    "/cover-256.png",
+                }}
+                style={styles.Image}
+              ></Image>
+            </View>
+          </View>
+          <View style={styles.userinfo}>
+            <View style={styles.userinfoitem}>
+              <Text style={styles.h1}>
+                {this.state.game.names.international}
+              </Text>
+            </View>
+          </View>
+        </ImageBackground>
+        <View style={{ padding: 10 }}></View>
+        <FlatList
+          keyExtractor={(item) => item.id}
+          data={this.state.categories}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              style={styles.categorybuttoncontainer}
+              onPress={() => this.LoadVariables(item.id)}
+            >
+              <View style={styles.categorybuttontext}>
+                <Text style={styles.text}>{item.name}</Text>
+              </View>
+            </TouchableOpacity>
+          )}
+        ></FlatList>
+        <FlatList
+          keyExtractor={(subcategory) => subcategory.id}
+          data={this.state.variables}
+          showsHorizontalScrollIndicator={false}
+          renderItem={({ item }) => (
+            <FlatList
+              keyExtractor={(item) => item.id}
+              data={item.values}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              renderItem={({ item }) => (
+                <View style={styles.button}>
+                  <Button
+                    title={item.label}
+                    style={styles.button}
+                    color={colors.primary}
+                    onPress={() => this.modifyUrl(item.categoryid, item.id)}
+                  />
+                </View>
+              )}
+            ></FlatList>
+          )}
+        ></FlatList>
+      </View>
+    );
+  };
   render() {
     if (this.state.loading) {
       return (
@@ -70,63 +285,15 @@ class GameInfo extends React.Component {
       );
     } else {
       return (
-        <ScrollView style={styles.container}>
-          <ImageBackground
-            style={styles.profileBG}
-            source={{
-              uri:
-                "https://www.speedrun.com/themes/" +
-                this.state.abbreviation +
-                "/cover-256.png",
-            }}
-            opacity={0.3}
-          >
-            <View style={styles.profile}>
-              <View style={styles.imagecontainer}>
-                <Image
-                  source={{
-                    uri:
-                      "https://www.speedrun.com/themes/" +
-                      this.state.abbreviation +
-                      "/cover-256.png",
-                  }}
-                  style={styles.Image}
-                ></Image>
-              </View>
-            </View>
-            <View style={styles.userinfo}>
-              <View style={styles.userinfoitem}>
-                <Text style={styles.h1}>
-                  {this.state.game.names.international}
-                </Text>
-              </View>
-            </View>
-          </ImageBackground>
-          <View>
-            <FlatList
-              keyExtractor={(item) => item.id}
-              data={this.state.game.categories.data}
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-              renderItem={({ item }) => (
-                <View style={styles.button}>
-                  <Button
-                    title={item.name}
-                    style={styles.button}
-                    color={colors.primary}
-                    onPress={() => this.selectCategory(item.id)}
-                  />
-                </View>
-              )}
-            ></FlatList>
-          </View>
-          <Variables
-            name={this.state.abbreviation}
-            gameid={this.state.id}
-            categoryid={this.state.selectedCategory}
-            abbreviation={this.state.abbreviation}
-          />
-        </ScrollView>
+        <View style={{ flex: 1 }}>
+          <FlatList
+            keyExtractor={(item) => item.run.id}
+            data={this.state.runs}
+            renderItem={this.renderItem}
+            ListHeaderComponent={this.GameHeader}
+            ListFooterComponent={this.ListFooter}
+          ></FlatList>
+        </View>
       );
     }
   }
@@ -171,48 +338,39 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 30,
   },
-  socialbuttons: {
-    flex: 1,
-    flexDirection: "row",
-    alignContent: "center",
-    justifyContent: "space-around",
-    alignItems: "center",
-    padding: 20,
-  },
   h1: {
     color: colors.white,
     fontSize: 30,
     fontWeight: "bold",
     alignSelf: "center",
   },
-  h2: {
-    color: colors.darkgrey,
-    fontSize: 15,
-    fontWeight: "normal",
-    alignSelf: "center",
+  //Category Button
+  categorybuttoncontainer: {
+    backgroundColor: colors.white,
+    height: 46,
+    marginVertical: 20,
+    marginHorizontal: 10,
+    shadowColor: colors.darkgrey,
+    shadowOffset: { width: 5, height: 5 },
+    shadowOpacity: 0.9,
+    elevation: 2,
+    justifyContent: "center",
+    borderRadius: 10,
   },
-  headertext: {
-    color: colors.darkgrey,
-    padding: 20,
-    fontSize: 20,
+  categorybuttontext: {
+    paddingHorizontal: 10,
+  },
+  text: {
+    color: colors.primary,
     fontWeight: "bold",
-    alignSelf: "center",
-    paddingTop: 40,
-  },
-  pbs: {
-    flex: 1,
-    margin: 10,
-  },
-  runinfo: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-around",
-    paddingTop: 20,
+    fontSize: 15,
   },
   button: {
-    margin: 20,
-    height: 45,
     alignSelf: "center",
+    height: 46,
+    alignContent: "center",
+    marginHorizontal: 10,
+    marginVertical: 10,
   },
   buttontext: {
     flex: 1,
@@ -221,12 +379,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",
-    padding: 10,
     textAlign: "center",
-    color: colors.darkgrey,
+    color: colors.primary,
     fontWeight: "bold",
     fontSize: 15,
     borderRadius: 5,
+    textAlignVertical: "center",
+    paddingHorizontal: 20,
+    shadowColor: colors.darkgrey,
+    shadowOffset: { width: 5, height: 5 },
+    shadowOpacity: 0.9,
+    elevation: 2,
   },
 });
 

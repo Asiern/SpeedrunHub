@@ -35,10 +35,13 @@ class Login extends React.Component {
 
       if (data.data.id !== null) {
         const id = data.data.id;
-        await AsyncStorage.setItem("@user", user);
+        const name = data.data.names.international;
+        await AsyncStorage.setItem("@user", name);
         await AsyncStorage.setItem("@userid", id);
         this._retrieveData();
-        createTwoButtonAlert("Logged in successfully.");
+        createTwoButtonAlert(
+          "Logged in successfully. Please restart the application for the changes to take effect."
+        );
       }
     } catch (error) {
       createTwoButtonAlert(
@@ -67,7 +70,7 @@ class Login extends React.Component {
       <View style={styles.container}>
         <View style={styles.user}>
           <Text style={styles.headertext}>Username</Text>
-          <View style={styles.userdata}>
+          {/*<View style={styles.userdata}>
             <View style={styles.username}>
               <Text style={styles.paragraph}>User: {this.state.username} </Text>
             </View>
@@ -75,7 +78,7 @@ class Login extends React.Component {
             <View style={styles.userid}>
               <Text style={styles.paragraph}>User ID: {this.state.userid}</Text>
             </View>
-          </View>
+    </View>*/}
 
           <TextInput
             style={styles.textinput}
@@ -92,7 +95,7 @@ class Login extends React.Component {
           />
         </View>
 
-        <View style={styles.api}>
+        {/*} <View style={styles.api}>
           <Text style={styles.headertext}>API Key</Text>
           <TextInput
             style={styles.textinput}
@@ -102,11 +105,7 @@ class Login extends React.Component {
             autoCompleteType={"username"}
           />
           <Button title={"Save"} color={colors.primary} disabled={true} />
-        </View>
-
-        <View style={styles.footer}>
-          <Text>Privacy Policy . Terms & Conditions</Text>
-        </View>
+  </View>*/}
       </View>
     );
   }
@@ -116,10 +115,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.light,
+    justifyContent: "center",
+    alignContent: "center",
   },
   user: {
-    flex: 5,
-    padding: 20,
+    flex: 1,
+    alignContent: "center",
+    justifyContent: "center",
+    marginHorizontal: 20,
   },
   userdata: {
     flexDirection: "row",
@@ -130,7 +133,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: colors.primary,
     fontSize: 25,
-    paddingTop: 20,
   },
   paragraph: {
     paddingVertical: 10,

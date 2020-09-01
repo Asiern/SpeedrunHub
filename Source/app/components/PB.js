@@ -1,9 +1,14 @@
-import React, { Component } from "react";
-import { StyleSheet, View, Image, Text } from "react-native";
-import { Content } from "native-base";
+import React, { Component, PureComponent } from "react";
+import {
+  StyleSheet,
+  View,
+  Image,
+  Text,
+  TouchableOpacity,
+  Linking,
+} from "react-native";
 import colors from "../config/colors";
-import user from "../config/user.json";
-export default class Run extends Component {
+export default class PB extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,15 +24,25 @@ export default class Run extends Component {
         "/cover-64.png",
       game: this.props.game,
       abbreviation: this.props.abbreviation,
+      weblink: this.props.weblink,
       loading: true,
     };
   }
+  loadInBrowser = (link) => {
+    Linking.openURL(link).catch((err) =>
+      console.error("Couldn't load page", err)
+    );
+  };
   componentDidMount() {
-    this.timeConverter();
-    this.FetchUser(this.state.runnerid);
+    try {
+      this.timeConverter();
+      this.FetchUser(this.state.runnerid);
+    } catch (error) {
+      console.log(error);
+    }
   }
   timeConverter() {
-    var result = this.state.time;
+    var result = this.state.time.toLowerCase();
     result = result.substr(2, result.lenght);
     this.setState({ time: result });
   }
@@ -39,7 +54,10 @@ export default class Run extends Component {
   }
   render() {
     return (
-      <View style={styles.container}>
+      <TouchableOpacity
+        style={styles.container}
+        onPress={() => this.loadInBrowser(this.state.weblink)}
+      >
         <View style={styles.game}>
           <Image
             style={styles.cover}
@@ -52,14 +70,11 @@ export default class Run extends Component {
         <View style={styles.place}>
           <Text style={styles.accenttext}>{this.state.place}</Text>
         </View>
-        <View style={styles.runner}>
-          <Text style={styles.text}>{this.state.runner}</Text>
-        </View>
 
         <View style={styles.time}>
           <Text style={styles.text}>{this.state.time}</Text>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   }
 }
@@ -128,4 +143,4 @@ const styles = StyleSheet.create({
     width: 45,
   },
 });
-module.export = Run;
+module.export = PB;
