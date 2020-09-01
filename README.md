@@ -1,4 +1,4 @@
-# Speedrun.com App for Android and IOS
+# SpeedrunHub
 
 An app for IOS/Android platforms made with [React Native](https://reactnative.dev/) which allows you to consult the speedrun.com page natively using the speedrun.com [REST API](https://github.com/speedruncomorg/api).
 
