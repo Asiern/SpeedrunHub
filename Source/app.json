@@ -3,7 +3,7 @@
     "name": "SpeedrunHub",
     "slug": "speedruncomapp",
     "platforms": ["ios", "android", "web"],
-    "version": "1.0.3",
+    "version": "1.0.4",
     "orientation": "portrait",
     "icon": "./app/assets/Fondo.png",
     "splash": {
@@ -22,7 +22,7 @@
     "githubUrl": "https://github.com/Asiern/Speerun.comApp",
     "android": {
       "package": "com.asiern.speedrun",
-      "versionCode": 3
+      "versionCode": 4
     }
   }
 }
