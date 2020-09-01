@@ -133,23 +133,35 @@ class GameInfo extends React.Component {
     }
   }
   buildUrl = (id, value, url, index) => {
-    if (index == 1) {
-      return url + "?" + "var-" + id + "=" + value;
-    } else {
-      return url + "&" + "var-" + id + "=" + value;
+    try {
+      //index = number of values loaded on the url
+      if (index == 1) {
+        return url + "?" + "var-" + id + "=" + value;
+      } else {
+        return url + "&" + "var-" + id + "=" + value;
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
   modifyUrl = (id, value) => {
     var url = this.state.url;
+    var outUrl;
     if (url.includes(id)) {
       //Url contains id
-      var i = url.search(id) + 1;
-      var str = "sdhgasiudhaisudas";
-      console.log(str.lenght);
-      console.log(url.charAt(i));
-      console.log(i);
-      console.log(url);
-      var notFound = false;
+      //Id lenght
+      var lenght = id.length;
+      var i = url.search(id) + lenght + 1;
+      //i = value first char position
+      var start = url.substr(0, i);
+      var end = url.substr(i, url.length);
+      if (end.includes("&")) {
+        end = end.substr(end.indexOf("&"), url.length);
+        outUrl = start + value + end;
+      } else {
+        outUrl = start + value;
+      }
+      this.LoadRuns(outUrl);
     } else {
       console.log("Error: Category Id not found on Url");
     }
@@ -213,7 +225,7 @@ class GameInfo extends React.Component {
             </View>
           </View>
         </ImageBackground>
-        <View style={{ padding: 20 }}></View>
+        <View style={{ padding: 10 }}></View>
         <FlatList
           keyExtractor={(item) => item.id}
           data={this.state.categories}
@@ -221,11 +233,11 @@ class GameInfo extends React.Component {
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
             <TouchableOpacity
-              style={styles.buttoncontainer}
+              style={styles.categorybuttoncontainer}
               onPress={() => this.LoadVariables(item.id)}
             >
-              <View style={styles.button}>
-                <Text style={styles.buttontext}>{item.name}</Text>
+              <View style={styles.categorybuttontext}>
+                <Text style={styles.text}>{item.name}</Text>
               </View>
             </TouchableOpacity>
           )}
@@ -322,43 +334,32 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 30,
   },
-  socialbuttons: {
-    flex: 1,
-    flexDirection: "row",
-    alignContent: "center",
-    justifyContent: "space-around",
-    alignItems: "center",
-    padding: 20,
-  },
   h1: {
     color: colors.white,
     fontSize: 30,
     fontWeight: "bold",
     alignSelf: "center",
   },
-  h2: {
-    color: colors.darkgrey,
-    fontSize: 15,
-    fontWeight: "normal",
-    alignSelf: "center",
+  //Category Button
+  categorybuttoncontainer: {
+    backgroundColor: colors.white,
+    height: 46,
+    marginVertical: 20,
+    marginHorizontal: 10,
+    shadowColor: colors.darkgrey,
+    shadowOffset: { width: 5, height: 5 },
+    shadowOpacity: 0.9,
+    elevation: 2,
+    justifyContent: "center",
+    borderRadius: 10,
   },
-  headertext: {
-    color: colors.darkgrey,
-    padding: 20,
-    fontSize: 20,
+  categorybuttontext: {
+    paddingHorizontal: 10,
+  },
+  text: {
+    color: colors.primary,
     fontWeight: "bold",
-    alignSelf: "center",
-    paddingTop: 40,
-  },
-  pbs: {
-    flex: 1,
-    margin: 10,
-  },
-  runinfo: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-around",
-    paddingTop: 20,
+    fontSize: 15,
   },
   button: {
     alignSelf: "center",
@@ -367,7 +368,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     marginVertical: 10,
   },
-  buttoncontainer: {},
   buttontext: {
     flex: 1,
     backgroundColor: colors.white,
