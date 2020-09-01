@@ -191,6 +191,9 @@ class GameInfo extends React.Component {
       weblink={item.run.weblink}
     />
   );
+  ListFooter = () => {
+    return <View style={{ padding: 20 }}></View>;
+  };
   GameHeader = () => {
     return (
       <View>
@@ -288,6 +291,7 @@ class GameInfo extends React.Component {
             data={this.state.runs}
             renderItem={this.renderItem}
             ListHeaderComponent={this.GameHeader}
+            ListFooterComponent={this.ListFooter}
           ></FlatList>
         </View>
       );
