@@ -25,7 +25,7 @@ class About extends React.Component {
       <ScrollView style={styles.container}>
         <View style={styles.info}>
           <View style={styles.logocontainer}>
-            <Text style={styles.logo}>Speedrun.com App</Text>
+            <Text style={styles.logo}>Speedrun Hub</Text>
           </View>
           <Text style={styles.title}>About This App</Text>
           <Text style={styles.paragraph}>

@@ -1,70 +1,68 @@
-import React, { Component } from "react";
-import { StyleSheet, View, Image, Text } from "react-native";
-import { Content } from "native-base";
+import React, { PureComponent } from "react";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  Linking,
+} from "react-native";
 import colors from "../config/colors";
-import user from "../config/user.json";
-export default class Run extends Component {
+export default class Run extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      categoryid: this.props.categoryid,
-      category: this.props.category,
-      place: this.props.place,
-      time: this.props.time,
-      runner: this.props.runner,
-      runnerid: this.props.runnerid,
-      cover:
-        "https://www.speedrun.com/themes/" +
-        this.props.abbreviation +
-        "/cover-64.png",
-      game: this.props.game,
-      abbreviation: this.props.abbreviation,
-      loading: true,
+      runner: "",
     };
   }
-  componentDidMount() {
-    this.timeConverter();
-    this.FetchUser(this.state.runnerid);
-  }
+  loadInBrowser = (link) => {
+    Linking.openURL(link).catch((err) =>
+      console.error("Couldn't load page", err)
+    );
+  };
   timeConverter() {
-    var result = this.state.time;
-    result = result.substr(2, result.lenght);
-    this.setState({ time: result });
+    var result = this.props.time.toLowerCase();
+    return result.substr(2, result.lenght);
   }
-  async FetchUser(runnerid) {
-    const url = "https://www.speedrun.com/api/v1/users/" + runnerid;
+  componentDidMount() {
+    this.FetchUser();
+  }
+  async FetchUser() {
+    const url = "https://www.speedrun.com/api/v1/users/" + this.props.runnerid;
     const response = await fetch(url);
     const data = await response.json();
-    this.setState({ loading: false, runner: data.data.names.international });
+    const runner = data.data.names.international;
+    this.setState({ runner });
   }
+
   render() {
     return (
-      <View style={styles.container}>
+      <TouchableOpacity
+        onPress={() => this.loadInBrowser(this.props.weblink)}
+        style={styles.container}
+      >
         <View style={styles.place}>
-          <Text style={styles.accenttext}>{this.state.place}</Text>
+          <Text style={styles.accenttext}>{this.props.place}</Text>
         </View>
         <View style={styles.runner}>
           <Text style={styles.text}>{this.state.runner}</Text>
         </View>
         <View style={styles.time}>
-          <Text style={styles.text}>{this.state.time}</Text>
+          <Text style={styles.text}>{this.timeConverter()}</Text>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   }
 }
 const styles = StyleSheet.create({
   shadow: {
-    shadowColor: "gold",
+    shadowColor: colors.darkgrey,
     shadowOffset: { width: 5, height: 5 },
     shadowOpacity: 0.9,
-
-    // add shadows for Android only
-    // No options for shadow color, shadow offset, shadow opacity like iOS
-    elevation: 1,
+    elevation: 5,
   },
   container: {
-    paddingVertical: 20,
+    marginHorizontal: 10,
+    paddingVertical: 15,
     flexDirection: "row",
     flex: 1,
     alignItems: "center",
@@ -77,29 +75,16 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.9,
     elevation: 1,
   },
-  game: {
-    flex: 3,
-    //backgroundColor: "dodgerblue",
-    alignItems: "center",
-  },
-  category: {
-    flex: 5,
-    //backgroundColor: "gold"
-    alignItems: "center",
-  },
   place: {
     flex: 3,
-    //backgroundColor: "tomato",
     alignItems: "center",
   },
   runner: {
-    flex: 7,
-    //backgroundColor: "green",
+    flex: 8,
     alignItems: "center",
   },
   time: {
     flex: 8,
-    //backgroundColor: "orange",
     alignItems: "center",
   },
   text: {
@@ -112,10 +97,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     fontSize: 15,
     color: colors.primary,
-  },
-  cover: {
-    height: 60,
-    width: 45,
   },
 });
 module.export = Run;
