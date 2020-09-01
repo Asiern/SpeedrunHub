@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React from "react";
 import {
   StyleSheet,
   Text,
@@ -10,8 +10,8 @@ import {
   Button,
 } from "react-native";
 import Run from "../components/Run";
-import Notification from "../components/Notification";
 import colors from "../config/colors";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 class GameInfo extends React.Component {
   constructor() {
@@ -25,6 +25,7 @@ class GameInfo extends React.Component {
       url: "",
       runs: [],
       variables: [],
+      categories: [],
     };
   }
   async componentDidMount() {
@@ -39,14 +40,26 @@ class GameInfo extends React.Component {
         "?embed=categories";
       const response = await fetch(url);
       const data = await response.json();
+      //Categories output
+      var outCategories = [];
+      //Filter Categories (type == Per-Game)
+      for (var category of data.data.categories.data) {
+        if (category.type == "per-game") {
+          outCategories.push(category);
+        }
+      }
       //Select Default Category
-      const selectedCategory = data.data.categories.data[0].id;
+      const selectedCategory = outCategories[0].id;
       //Fetch Variables
       this.LoadVariables(selectedCategory);
-      //Load Runs
-      this.LoadRuns(selectedCategory);
       //Set State
-      this.setState({ loading: false, game: data.data, id, abbreviation });
+      this.setState({
+        loading: false,
+        game: data.data,
+        id,
+        abbreviation,
+        categories: outCategories,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -62,6 +75,14 @@ class GameInfo extends React.Component {
       const varData = await varResponse.json();
       //Get subcategories (is-subcategory===true)
       var outSubcategoies = [];
+      //UrlBuild index
+      var index = 1;
+      //Url extension
+      var urlExt =
+        "https://www.speedrun.com/api/v1/leaderboards/" +
+        this.props.route.params.id +
+        "/category/" +
+        categoryid;
       for (let subcategory of varData.data) {
         //Output Subcategory
         var outSubcategory = {
@@ -71,7 +92,6 @@ class GameInfo extends React.Component {
         };
         const str = subcategory["is-subcategory"];
         if (str == true) {
-          //console.log(subcategory.name);
           //varData.data.is-subcategory == true
           //Load data into output
           outSubcategory.id = subcategory.id;
@@ -83,45 +103,71 @@ class GameInfo extends React.Component {
               label: "",
               id: "",
               rules: "",
+              categoryid: "",
             };
             //Load outValue with data
             outValue.id = variable;
             outValue.label = subcategory.values.values[variable].label;
             outValue.rules = subcategory.values.values[variable].rules;
+            outValue.categoryid = subcategory.id;
             //Load output to outSubcategory.values
             outSubcategory.values.push(outValue);
           }
           //Load subcategory into list
           outSubcategoies.push(outSubcategory);
+          //Add url var
+          urlExt = this.buildUrl(
+            subcategory.id,
+            subcategory.values.default,
+            urlExt,
+            index
+          );
+          //++ index
+          index++;
         }
       }
       this.setState({ variables: outSubcategoies });
-      console.log(this.state.variables);
+      this.LoadRuns(urlExt);
     } catch (error) {
       console.log(error);
     }
   }
-  async LoadRuns(categoryid) {
+  buildUrl = (id, value, url, index) => {
+    if (index == 1) {
+      return url + "?" + "var-" + id + "=" + value;
+    } else {
+      return url + "&" + "var-" + id + "=" + value;
+    }
+  };
+  modifyUrl = (id, value) => {
+    var url = this.state.url;
+    if (url.includes(id)) {
+      //Url contains id
+      var i = url.search(id) + 1;
+      var str = "sdhgasiudhaisudas";
+      console.log(str.lenght);
+      console.log(url.charAt(i));
+      console.log(i);
+      console.log(url);
+      var notFound = false;
+    } else {
+      console.log("Error: Category Id not found on Url");
+    }
+    //Search for id on url and modify value
+    //Load Runs
+    //this.LoadRuns(url);
+  };
+  async LoadRuns(url) {
     try {
       this.setState({ loading: true });
-      //Build Url
-      const url =
-        "https://www.speedrun.com/api/v1/leaderboards/" +
-        this.props.route.params.id +
-        "/category/" +
-        categoryid;
-      this.setState({ url });
       //Fetch Runs from Speedrun.com
       const response = await fetch(url);
       const data = await response.json();
-      this.setState({ runs: data.data.runs, loading: false });
+      this.setState({ runs: data.data.runs, loading: false, url });
     } catch (error) {
       console.log(error);
     }
   }
-  myFunction = () => {
-    console.log("Function exec");
-  };
   renderItem = ({ item }) => (
     <Run
       place={item.place}
@@ -167,21 +213,21 @@ class GameInfo extends React.Component {
             </View>
           </View>
         </ImageBackground>
-
+        <View style={{ padding: 20 }}></View>
         <FlatList
           keyExtractor={(item) => item.id}
-          data={this.state.game.categories.data}
+          data={this.state.categories}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
-            <View style={styles.button}>
-              <Button
-                title={item.name}
-                style={styles.button}
-                color={colors.primary}
-                onPress={() => this.LoadRuns(item.id)}
-              />
-            </View>
+            <TouchableOpacity
+              style={styles.buttoncontainer}
+              onPress={() => this.LoadVariables(item.id)}
+            >
+              <View style={styles.button}>
+                <Text style={styles.buttontext}>{item.name}</Text>
+              </View>
+            </TouchableOpacity>
           )}
         ></FlatList>
         <FlatList
@@ -200,7 +246,7 @@ class GameInfo extends React.Component {
                     title={item.label}
                     style={styles.button}
                     color={colors.primary}
-                    //onPress={() => this.LoadRuns(item.id)}
+                    onPress={() => this.modifyUrl(item.categoryid, item.id)}
                   />
                 </View>
               )}
@@ -315,11 +361,13 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   button: {
-    marginHorizontal: 20,
-    marginVertical: 5,
-    height: 45,
     alignSelf: "center",
+    height: 46,
+    alignContent: "center",
+    marginHorizontal: 10,
+    marginVertical: 10,
   },
+  buttoncontainer: {},
   buttontext: {
     flex: 1,
     backgroundColor: colors.white,
@@ -327,12 +375,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",
-    padding: 10,
     textAlign: "center",
-    color: colors.darkgrey,
+    color: colors.primary,
     fontWeight: "bold",
     fontSize: 15,
     borderRadius: 5,
+    textAlignVertical: "center",
+    paddingHorizontal: 20,
+    shadowColor: colors.darkgrey,
+    shadowOffset: { width: 5, height: 5 },
+    shadowOpacity: 0.9,
+    elevation: 2,
   },
 });
 
