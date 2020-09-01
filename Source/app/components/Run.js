@@ -11,9 +11,7 @@ export default class Run extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      time: this.props.time,
-      runner: this.props.runner,
-      loading: true,
+      runner: "",
     };
   }
   loadInBrowser = (link) => {
@@ -21,21 +19,19 @@ export default class Run extends PureComponent {
       console.error("Couldn't load page", err)
     );
   };
-  UNSAFE_componentWillMount() {
-    this.timeConverter();
-    this.FetchUser(this.props.runnerid);
-    //this.FetchUser(this.props.runnerid);
-  }
   timeConverter() {
-    var result = this.state.time.toLowerCase();
-    result = result.substr(2, result.lenght);
-    this.setState({ time: result });
+    var result = this.props.time.toLowerCase();
+    return result.substr(2, result.lenght);
   }
-  async FetchUser(runnerid) {
-    const url = "https://www.speedrun.com/api/v1/users/" + runnerid;
+  componentDidMount() {
+    this.FetchUser();
+  }
+  async FetchUser() {
+    const url = "https://www.speedrun.com/api/v1/users/" + this.props.runnerid;
     const response = await fetch(url);
     const data = await response.json();
-    this.setState({ loading: false, runner: data.data.names.international });
+    const runner = data.data.names.international;
+    this.setState({ runner });
   }
 
   render() {
@@ -51,7 +47,7 @@ export default class Run extends PureComponent {
           <Text style={styles.text}>{this.state.runner}</Text>
         </View>
         <View style={styles.time}>
-          <Text style={styles.text}>{this.state.time}</Text>
+          <Text style={styles.text}>{this.timeConverter()}</Text>
         </View>
       </TouchableOpacity>
     );
