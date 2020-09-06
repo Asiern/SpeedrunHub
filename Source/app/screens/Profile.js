@@ -1,18 +1,11 @@
-import React, { Component, useState } from "react";
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  ImageBackground,
-} from "react-native";
+import React from "react";
+import { StyleSheet, Text, View, Image } from "react-native";
 import colors from "../config/colors";
 import Icon from "react-native-vector-icons/Ionicons";
 import Constants from "expo-constants";
 import PB from "../components/PB";
-import user from "../config/user.json";
 import { FlatList } from "react-native-gesture-handler";
+import { LinearGradient } from "expo-linear-gradient";
 
 class Profile extends React.Component {
   constructor() {
@@ -75,10 +68,7 @@ class Profile extends React.Component {
   ProfileHeader = () => {
     return (
       <View>
-        <ImageBackground
-          style={styles.profileBG}
-          source={require("../assets/Notification.jpg")}
-        >
+        <LinearGradient colors={[colors.primary, colors.primary2]}>
           <View style={styles.topbar}>
             <View style={styles.topbarleft}>
               <Icon
@@ -115,7 +105,7 @@ class Profile extends React.Component {
               </View>
             </View>
           </View>
-        </ImageBackground>
+        </LinearGradient>
         <View style={{ flex: 1, margin: 10 }}>
           <View style={styles.runinfo}>
             <View style={styles.game}>
