@@ -21,11 +21,11 @@ class GameInfo extends React.Component {
       id: "",
       abbreviation: "",
       game: [],
-      selectedCategory: "",
       url: "",
       runs: [],
       variables: [],
       categories: [],
+      cheked: 0,
     };
   }
   async componentDidMount() {
@@ -59,6 +59,7 @@ class GameInfo extends React.Component {
         id,
         abbreviation,
         categories: outCategories,
+        cheked: selectedCategory,
       });
     } catch (error) {
       console.log(error);
@@ -126,7 +127,7 @@ class GameInfo extends React.Component {
           index++;
         }
       }
-      this.setState({ variables: outSubcategoies });
+      this.setState({ variables: outSubcategoies, cheked: categoryid });
       this.LoadRuns(urlExt);
     } catch (error) {
       console.log(error);
@@ -165,9 +166,6 @@ class GameInfo extends React.Component {
     } else {
       console.log("Error: Category Id not found on Url");
     }
-    //Search for id on url and modify value
-    //Load Runs
-    //this.LoadRuns(url);
   };
   async LoadRuns(url) {
     try {
@@ -235,14 +233,27 @@ class GameInfo extends React.Component {
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
-            <TouchableOpacity
-              style={styles.categorybuttoncontainer}
-              onPress={() => this.LoadVariables(item.id)}
-            >
-              <View style={styles.categorybuttontext}>
-                <Text style={styles.text}>{item.name}</Text>
-              </View>
-            </TouchableOpacity>
+            <View>
+              {this.state.cheked == item.id ? (
+                <TouchableOpacity
+                  style={styles.selectedcategorybuttoncontainer}
+                  onPress={() => this.LoadVariables(item.id)}
+                >
+                  <View style={styles.selectedcategorybuttontext}>
+                    <Text style={styles.selectedtext}>{item.name}</Text>
+                  </View>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  style={styles.categorybuttoncontainer}
+                  onPress={() => this.LoadVariables(item.id)}
+                >
+                  <View style={styles.categorybuttontext}>
+                    <Text style={styles.text}>{item.name}</Text>
+                  </View>
+                </TouchableOpacity>
+              )}
+            </View>
           )}
         ></FlatList>
         <FlatList
@@ -256,13 +267,26 @@ class GameInfo extends React.Component {
               horizontal={true}
               showsHorizontalScrollIndicator={false}
               renderItem={({ item }) => (
-                <View style={styles.button}>
-                  <Button
-                    title={item.label}
-                    style={styles.button}
-                    color={colors.primary}
-                    onPress={() => this.modifyUrl(item.categoryid, item.id)}
-                  />
+                <View>
+                  {this.state.url.includes(item.id) == true ? (
+                    <View style={styles.button}>
+                      <Button
+                        title={item.label}
+                        style={styles.button}
+                        color={colors.primary}
+                        onPress={() => this.modifyUrl(item.categoryid, item.id)}
+                      />
+                    </View>
+                  ) : (
+                    <View style={styles.button}>
+                      <Button
+                        title={item.label}
+                        style={styles.button}
+                        color={colors.darkgrey}
+                        onPress={() => this.modifyUrl(item.categoryid, item.id)}
+                      />
+                    </View>
+                  )}
                 </View>
               )}
             ></FlatList>
@@ -361,6 +385,27 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   text: {
+    color: colors.darkgrey,
+    fontWeight: "bold",
+    fontSize: 15,
+  },
+  //Selected Category Button
+  selectedcategorybuttoncontainer: {
+    backgroundColor: colors.white,
+    height: 46,
+    marginVertical: 20,
+    marginHorizontal: 10,
+    shadowColor: colors.darkgrey,
+    shadowOffset: { width: 5, height: 5 },
+    shadowOpacity: 0.9,
+    elevation: 2,
+    justifyContent: "center",
+    borderRadius: 10,
+  },
+  selectedcategorybuttontext: {
+    paddingHorizontal: 10,
+  },
+  selectedtext: {
     color: colors.primary,
     fontWeight: "bold",
     fontSize: 15,
