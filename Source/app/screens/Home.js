@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { StyleSheet, View, Text, AsyncStorage } from "react-native";
 import GameCard from "../components/GameCard";
 import UserHeader from "../components/UserHeader";
