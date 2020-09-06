@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component, useState, useRef } from "react";
 import {
   StyleSheet,
   View,
@@ -7,11 +7,8 @@ import {
   Linking,
 } from "react-native";
 import { Divider, Text } from "react-native-paper";
-import Constants from "expo-constants";
 import colors from "../config/colors";
 import { FontAwesome5 } from "@expo/vector-icons";
-import { color } from "react-native-reanimated";
-
 class Settings extends React.Component {
   constructor(props) {
     super(props);
