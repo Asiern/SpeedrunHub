@@ -1,65 +1,65 @@
-import React, { PureComponent } from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
-  View,
   Text,
   TouchableOpacity,
+  View,
   Linking,
 } from "react-native";
 import colors from "../config/colors";
-export default class Run extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      runner: "",
+
+const Run = (props) => {
+  const [runner, setRunner] = useState(null);
+  const [loading, setloading] = useState(true);
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
+      const response = await fetch(
+        "https://www.speedrun.com/api/v1/users/" + props.runnerid
+      );
+      const data = await response.json();
+      if (mounted) {
+        setRunner(data.data.names.international);
+        setloading(false);
+      }
+    })();
+
+    return function cleanup() {
+      mounted = false;
     };
-  }
-  loadInBrowser = (link) => {
+  }, []);
+  function loadInBrowser(link) {
     Linking.openURL(link).catch((err) =>
       console.error("Couldn't load page", err)
     );
-  };
-  timeConverter() {
-    var result = this.props.time.toLowerCase();
+  }
+  function timeConverter(time) {
+    var result = time.toLowerCase();
     return result.substr(2, result.lenght);
   }
-  componentDidMount() {
-    this.FetchUser();
-  }
-  async FetchUser() {
-    const url = "https://www.speedrun.com/api/v1/users/" + this.props.runnerid;
-    const response = await fetch(url);
-    const data = await response.json();
-    const runner = data.data.names.international;
-    this.setState({ runner });
-  }
+  return (
+    <TouchableOpacity
+      onPress={() => loadInBrowser(props.weblink)}
+      style={styles.container}
+    >
+      <View style={styles.place}>
+        <Text style={styles.accenttext}>{props.place}</Text>
+      </View>
+      <View style={styles.runner}>
+        {loading ? (
+          <Text>...loading</Text>
+        ) : (
+          <Text style={styles.text}>{runner}</Text>
+        )}
+      </View>
+      <View style={styles.time}>
+        <Text style={styles.text}>{timeConverter(props.time)}</Text>
+      </View>
+    </TouchableOpacity>
+  );
+};
 
-  render() {
-    return (
-      <TouchableOpacity
-        onPress={() => this.loadInBrowser(this.props.weblink)}
-        style={styles.container}
-      >
-        <View style={styles.place}>
-          <Text style={styles.accenttext}>{this.props.place}</Text>
-        </View>
-        <View style={styles.runner}>
-          <Text style={styles.text}>{this.state.runner}</Text>
-        </View>
-        <View style={styles.time}>
-          <Text style={styles.text}>{this.timeConverter()}</Text>
-        </View>
-      </TouchableOpacity>
-    );
-  }
-}
 const styles = StyleSheet.create({
-  shadow: {
-    shadowColor: colors.darkgrey,
-    shadowOffset: { width: 5, height: 5 },
-    shadowOpacity: 0.9,
-    elevation: 5,
-  },
   container: {
     marginHorizontal: 10,
     paddingVertical: 15,
@@ -99,4 +99,5 @@ const styles = StyleSheet.create({
     color: colors.primary,
   },
 });
-module.export = Run;
+
+export default Run;
