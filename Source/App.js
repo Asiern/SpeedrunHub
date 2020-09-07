@@ -35,14 +35,22 @@ export default class App extends Component {
         options={{ title: "Profile", headerShown: "" }}
       />
       <Stack.Screen name="Settings" component={Settings} />
-      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{ title: "My Profile", headerShown: "" }}
+      />
       <Stack.Screen name="Themes" component={Themes} />
     </Stack.Navigator>
   );
   createSettingsStack = (props) => (
     <Stack.Navigator>
       <Stack.Screen name="Settings" component={Settings} />
-      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{ title: "My Profile", headerShown: "" }}
+      />
       <Stack.Screen name="Themes" component={Themes} />
       <Stack.Screen name="MyGames" component={MyGames} />
       <Stack.Screen name="About" component={About} />
