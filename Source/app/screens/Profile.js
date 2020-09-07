@@ -68,7 +68,7 @@ class Profile extends React.Component {
   ProfileHeader = () => {
     return (
       <View>
-        <LinearGradient colors={[colors.primary, colors.primary2]}>
+        <LinearGradient colors={[colors.primary, colors.secondary]}>
           <View style={styles.topbar}>
             <View style={styles.topbarleft}>
               <Icon
