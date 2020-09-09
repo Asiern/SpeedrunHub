@@ -8,9 +8,18 @@ import {
   ImageBackground,
   AsyncStorage,
   Alert,
+  Dimensions,
 } from "react-native";
 import colors from "../config/colors";
 import { FontAwesome5 } from "@expo/vector-icons";
+import Svg, { Circle, Rect, Path, Defs, Stop } from "react-native-svg";
+import { LinearGradient } from "expo-linear-gradient";
+import Svgheader from "./svgheader";
+import Constants from "expo-constants";
+const { width, height } = Dimensions.get("screen");
+const PATHS = {
+  square: "M 0 0 L 640 0 L 640 232.53 L 0 232.53 L 0 0 Z",
+};
 
 class UserHeader extends Component {
   constructor(props) {
@@ -45,11 +54,13 @@ class UserHeader extends Component {
         { cancelable: false }
       );
     return (
-      <ImageBackground
-        style={styles.profileBG}
-        source={require("../assets/UserHeader.png")}
-      >
-        <View style={styles.container}>
+      <View style={styles.container}>
+        <Svgheader
+          customStyles={styles.svgcurve}
+          width={width}
+          height={height / 5}
+        />
+        <View style={styles.headercontainer}>
           <TouchableOpacity
             onPress={() =>
               this.props.navigation.navigate("Profile", {
@@ -82,21 +93,24 @@ class UserHeader extends Component {
             <FontAwesome5 name="sign-out-alt" color={colors.white} size={30} />
           </TouchableOpacity>
         </View>
-      </ImageBackground>
+      </View>
     );
   }
 }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    alignSelf: "center",
-    paddingBottom: 50,
   },
-  profileBG: {
+  headercontainer: {
+    top: 30,
+    position: "absolute",
     flex: 1,
-    resizeMode: "cover",
+    flexDirection: "row",
+    marginTop: Constants.statusBarHeight,
+  },
+  svgCurve: {
+    position: "absolute",
+    width: Dimensions.get("window").width,
   },
   Image: {
     height: 60,
