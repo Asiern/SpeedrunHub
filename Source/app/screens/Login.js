@@ -97,16 +97,25 @@ class Login extends React.Component {
               title={"LOG IN"}
               function={this._storeData}
               user={textinput}
-              color={colors.purple}
+              color={colors.primary}
+              textcolor={colors.white}
             />
-            <Button title={"SIGN UP"} color={colors.primary} />
+            <Button
+              title={"SIGN UP"}
+              color={colors.white}
+              textcolor={colors.primary}
+            />
           </View>
           <View style={styles.footerline}>
             <Text>Don't have an API-Key? Obtain it here</Text>
           </View>
         </View>
         <View style={styles.footer}>
-          <Button title={"SKIP"}></Button>
+          <Button
+            title={"SKIP"}
+            color={colors.white}
+            textcolor={colors.darkgrey}
+          ></Button>
         </View>
       </LinearGradient>
     );
