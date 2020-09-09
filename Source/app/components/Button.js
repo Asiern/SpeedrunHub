@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import colors from "../config/colors";
-import { color } from "react-native-reanimated";
 
 const Button = (props) => {
   const color = props.color;
@@ -10,8 +9,13 @@ const Button = (props) => {
     props.function(props.user);
   }
   return (
-    <TouchableOpacity style={styles.container} onPress={() => _storeData()}>
-      <Text style={styles.text}>{props.title}</Text>
+    <TouchableOpacity
+      style={[styles.container, { backgroundColor: props.color }]}
+      onPress={() => _storeData()}
+    >
+      <Text style={[styles.text, { color: props.textcolor }]}>
+        {props.title}
+      </Text>
     </TouchableOpacity>
   );
 };
