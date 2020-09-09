@@ -1,23 +1,37 @@
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import colors from "../config/colors";
 
 const NotificationCard = (props) => {
   return (
-    <View style={[styles.container, { width: props.width }]}>
-      <Text style={styles.text}>NotificationCard</Text>
+    <View style={[styles.container, { width: props.width / 2 }]}>
+      <TouchableOpacity style={styles.card}>
+        <Text style={styles.text}>NotificationCard</Text>
+      </TouchableOpacity>
     </View>
   );
 };
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
     flex: 1,
     alignContent: "center",
     justifyContent: "center",
   },
+  card: {
+    margin: 20,
+    borderRadius: 10,
+    backgroundColor: colors.primary,
+    shadowColor: colors.darkgrey,
+    shadowOffset: { width: 5, height: 5 },
+    shadowOpacity: 1,
+    elevation: 5,
+  },
   text: {
     padding: 20,
     alignSelf: "center",
+    color: colors.white,
+    fontWeight: "bold",
+    fontSize: 15,
   },
 });
 export default NotificationCard;
