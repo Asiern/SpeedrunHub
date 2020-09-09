@@ -6,7 +6,6 @@ import NotificationBar from "../components/NotificationBar";
 import colors from "../config/colors";
 import user from "../config/user.json";
 import { ScrollView } from "react-native-gesture-handler";
-import { color } from "react-native-reanimated";
 const { width } = Dimensions.get("screen");
 class Home extends React.Component {
   constructor(props) {
