@@ -5,21 +5,15 @@ import {
   Image,
   Text,
   TouchableOpacity,
-  ImageBackground,
   AsyncStorage,
   Alert,
   Dimensions,
 } from "react-native";
 import colors from "../config/colors";
 import { FontAwesome5 } from "@expo/vector-icons";
-import Svg, { Circle, Rect, Path, Defs, Stop } from "react-native-svg";
-import { LinearGradient } from "expo-linear-gradient";
 import Svgheader from "./svgheader";
 import Constants from "expo-constants";
 const { width, height } = Dimensions.get("screen");
-const PATHS = {
-  square: "M 0 0 L 640 0 L 640 232.53 L 0 232.53 L 0 0 Z",
-};
 
 class UserHeader extends Component {
   constructor(props) {
@@ -35,7 +29,6 @@ class UserHeader extends Component {
   }
 
   async signOut() {
-    console.log("true");
     //Remove user
     await AsyncStorage.setItem("@user", "");
     await AsyncStorage.setItem("@userid", "");
