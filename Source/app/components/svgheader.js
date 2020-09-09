@@ -9,9 +9,9 @@ export default function svgheader({ customStyles, height, width }) {
       <View style={{ backgroundColor: colors.primary, height: height }}>
         <Svg
           height="100%"
-          width={width}
-          viewBox="0 0 1440 320"
-          style={{ top: 128 }}
+          width="100%"
+          viewBox="0 0 1440 630"
+          style={{ top: height, width: width }}
         >
           <Path
             fill={colors.primary}
