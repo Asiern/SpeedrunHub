@@ -1,10 +1,13 @@
 import React from "react";
-import { StyleSheet, View, Text, AsyncStorage } from "react-native";
+import { StyleSheet, View, Text, AsyncStorage, Dimensions } from "react-native";
 import GameCard from "../components/GameCard";
 import UserHeader from "../components/UserHeader";
+import NotificationBar from "../components/NotificationBar";
 import colors from "../config/colors";
 import user from "../config/user.json";
 import { ScrollView } from "react-native-gesture-handler";
+import { color } from "react-native-reanimated";
+const { width } = Dimensions.get("screen");
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -30,33 +33,30 @@ class Home extends React.Component {
   render() {
     return (
       <ScrollView style={{ flex: 1 }}>
-        <View style={styles.profilecontainer}>
-          <View style={styles.profile}>
-            <UserHeader
-              username={this.state.username}
-              userid={this.state.userid}
-              navigation={this.props.navigation}
-            />
-          </View>
-        </View>
-        {/*<Text style={styles.headertext}>Notifications</Text>
-      <View style={styles.notifications}>
-        <Notification />
-        <Notification />
-        <Notification />
-  </View>*/}
-
-        <Text style={styles.headertext}>My Games</Text>
-        <View style={styles.flatList}>
-          {user.games.map((game) => (
-            <View key={game.id} style={styles.button}>
-              <GameCard
+        <View style={styles.container}>
+          <View style={styles.profilecontainer}>
+            <View style={styles.profile}>
+              <UserHeader
+                username={this.state.username}
+                userid={this.state.userid}
                 navigation={this.props.navigation}
-                id={game.id}
-                abbreviation={game.abbreviation}
               />
             </View>
-          ))}
+          </View>
+          <Text style={styles.headertext}>Notifications</Text>
+          <NotificationBar width={width} />
+          <Text style={styles.headertext}>My Games</Text>
+          <View style={styles.flatList}>
+            {user.games.map((game) => (
+              <View key={game.id} style={styles.button}>
+                <GameCard
+                  navigation={this.props.navigation}
+                  id={game.id}
+                  abbreviation={game.abbreviation}
+                />
+              </View>
+            ))}
+          </View>
         </View>
       </ScrollView>
     );
@@ -66,8 +66,8 @@ class Home extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: colors.white,
   },
-  profilecontainer: {},
   profile: {
     height: 250,
   },
@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     flex: 3,
     margin: 20,
+
     justifyContent: "space-between",
   },
   notifications: {
