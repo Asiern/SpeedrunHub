@@ -6,9 +6,10 @@ import {
   Text,
   TouchableOpacity,
   ImageBackground,
+  AsyncStorage,
+  Alert,
 } from "react-native";
 import colors from "../config/colors";
-import Icon from "react-native-vector-icons/Ionicons";
 import { FontAwesome5 } from "@expo/vector-icons";
 
 class UserHeader extends Component {
@@ -23,7 +24,26 @@ class UserHeader extends Component {
         "/image.png",
     };
   }
+
+  async signOut() {
+    console.log("true");
+    //Remove user
+    await AsyncStorage.setItem("@user", "");
+    await AsyncStorage.setItem("@userid", "");
+    //Set login to 1
+  }
   render() {
+    const createTwoButtonAlert = (msg) =>
+      Alert.alert(
+        "Alert",
+        msg,
+        [
+          { text: "OK", onPress: () => this.signOut() },
+          { text: "Cancel", onPress: () => null },
+        ],
+
+        { cancelable: false }
+      );
     return (
       <ImageBackground
         style={styles.profileBG}
@@ -57,9 +77,9 @@ class UserHeader extends Component {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.iconcontainer}
-            onPress={() => this.props.navigation.navigate("Login")}
+            onPress={() => createTwoButtonAlert("Are you sure?")}
           >
-            <FontAwesome5 name="user-cog" color={colors.white} size={30} />
+            <FontAwesome5 name="sign-out-alt" color={colors.white} size={30} />
           </TouchableOpacity>
         </View>
       </ImageBackground>
