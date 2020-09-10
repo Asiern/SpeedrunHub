@@ -10,12 +10,13 @@ class Login extends React.Component {
     super(props);
     this.state = {
       textinput: "",
+      keyinput: "",
       username: "",
       userid: "",
     };
   }
 
-  _storeData = async (user) => {
+  _storeData = async (user, key) => {
     const createTwoButtonAlert = (msg) =>
       Alert.alert(
         "Alert",
@@ -27,12 +28,13 @@ class Login extends React.Component {
       const url = "https://www.speedrun.com/api/v1/users/" + user;
       const response = await fetch(url);
       const data = await response.json();
-
+      //TODO Verify API key
       if (data.data.id !== null) {
         const id = data.data.id;
         const name = data.data.names.international;
         await AsyncStorage.setItem("@user", name);
         await AsyncStorage.setItem("@userid", id);
+        await AsyncStorage.setItem("@API-Key", key);
         this._retrieveData();
 
         createTwoButtonAlert(
@@ -62,6 +64,7 @@ class Login extends React.Component {
   };
   render() {
     const { textinput } = this.state;
+    const { keyinput } = this.state;
     return (
       <LinearGradient
         style={{ flex: 1 }}
@@ -88,7 +91,8 @@ class Login extends React.Component {
               autoCapitalize={"none"}
               placeholder={"API-Key"}
               autoCompleteType={"username"}
-              onChangeText={(text) => this.setState({ textinput: text })}
+              onChangeText={(text) => this.setState({ keyinput: text })}
+              value={keyinput}
             />
           </View>
 
@@ -97,6 +101,7 @@ class Login extends React.Component {
               title={"LOG IN"}
               function={this._storeData}
               user={textinput}
+              keyinput={keyinput}
               color={colors.primary}
               textcolor={colors.white}
             />
@@ -115,6 +120,9 @@ class Login extends React.Component {
             title={"SKIP"}
             color={colors.white}
             textcolor={colors.darkgrey}
+            function={async () => {
+              await AsyncStorage.setItem("@API-Key", "");
+            }}
           ></Button>
         </View>
       </LinearGradient>
