@@ -8,6 +8,7 @@ import {
   AsyncStorage,
   Alert,
   Dimensions,
+  DevSettings,
 } from "react-native";
 import colors from "../config/colors";
 import { FontAwesome5 } from "@expo/vector-icons";
@@ -33,6 +34,9 @@ class UserHeader extends Component {
     await AsyncStorage.setItem("@user", "");
     await AsyncStorage.setItem("@userid", "");
     //Set login to 1
+
+    //Restart app
+    DevSettings.reload();
   }
   render() {
     const createTwoButtonAlert = (msg) =>
@@ -81,7 +85,9 @@ class UserHeader extends Component {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.iconcontainer}
-            onPress={() => createTwoButtonAlert("Are you sure?")}
+            onPress={() =>
+              createTwoButtonAlert("Are you sure you want to log out?")
+            }
           >
             <FontAwesome5 name="sign-out-alt" color={colors.white} size={30} />
           </TouchableOpacity>
