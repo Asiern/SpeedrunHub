@@ -65,9 +65,6 @@ const styles = StyleSheet.create({
     shadowColor: colors.darkgrey,
     shadowOffset: { width: 5, height: 5 },
     shadowOpacity: 0.9,
-
-    // add shadows for Android only
-    // No options for shadow color, shadow offset, shadow opacity like iOS
     elevation: 5,
   },
   Image: {

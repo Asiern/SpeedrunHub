@@ -3,7 +3,7 @@
     "name": "SpeedrunHub",
     "slug": "speedruncomapp",
     "platforms": ["ios", "android", "web"],
-    "version": "1.0.5",
+    "version": "1.0.6",
     "orientation": "portrait",
     "icon": "./app/assets/trophy.png",
     "splash": {
@@ -19,10 +19,10 @@
       "bundleIdentifier": "SpeedrunHub"
     },
     "description": "speedrun.com app for Android/IOS using REST API",
-    "githubUrl": "https://github.com/Asiern/Speerun.comApp",
+    "githubUrl": "https://github.com/Asiern/SpeedrunHub",
     "android": {
       "package": "com.asiern.speedrun",
-      "versionCode": 5
+      "versionCode": 6
     }
   }
 }
