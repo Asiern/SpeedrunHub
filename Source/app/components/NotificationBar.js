@@ -1,27 +1,18 @@
-import React, { useRef, useEffect, useState } from "react";
-import {
-  View,
-  StyleSheet,
-  Animated,
-  FlatList,
-  Text,
-  AsyncStorage,
-} from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, StyleSheet, Animated, FlatList, Text } from "react-native";
 import NotificationCard from "./NotificationCard";
 import { ActivityIndicator } from "react-native-paper";
 import colors from "../config/colors";
-import API from "../config/API";
 
 const NotificationBar = (props) => {
   const [data, setData] = useState(null);
   const [loading, setloading] = useState(true);
-  const [key, setkey] = useState(API.key);
-
-  //TODO get APIkey via AsyncStorage
+  const [error, seterror] = useState(false);
+  const key = props.APIKey;
   useEffect(() => {
     let mounted = true;
-    var url = "https://www.speedrun.com/api/v1/notifications";
-    if (key != "") {
+    try {
+      var url = "https://www.speedrun.com/api/v1/notifications";
       var xhr = new XMLHttpRequest();
       xhr.open("GET", url);
 
@@ -31,35 +22,32 @@ const NotificationBar = (props) => {
 
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && mounted) {
-          setData(JSON.parse(xhr.responseText));
+          response = JSON.parse(xhr.responseText);
+          setData(response.data);
+          console.log(response);
           setloading(false);
         }
       };
       xhr.send();
-    } else {
-      setloading(false);
+    } catch (error) {
+      seterror(true);
+      console.log(error);
     }
+    setloading(false);
     return function cleanup() {
       mounted = false;
     };
   }, []);
   if (loading) {
     return <ActivityIndicator />;
-  } else if (key == "") {
-    return (
-      <NotificationCard
-        width={props.width}
-        text={"API Key not found"}
-        backgroundColor={colors.primary}
-        color={colors.white}
-      />
-    );
+  } else if (error) {
+    return <Text>Something went wrong</Text>;
   } else {
     return (
       <View style={styles.container}>
         <FlatList
           keyExtractor={(item) => item.id}
-          data={data.data}
+          data={data}
           renderItem={({ item }) => (
             <View>
               {item.status == "read" ? (

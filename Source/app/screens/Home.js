@@ -13,6 +13,7 @@ class Home extends React.Component {
     this.state = {
       username: "Guest",
       userid: "",
+      APIKey: "",
     };
   }
 
@@ -20,7 +21,8 @@ class Home extends React.Component {
     try {
       const username = await AsyncStorage.getItem("@user");
       const userid = await AsyncStorage.getItem("@userid");
-      this.setState({ username: username, userid: userid });
+      const APIKey = await AsyncStorage.getItem("@API-Key");
+      this.setState({ username, userid, APIKey });
     } catch (error) {
       // Error retrieving data
     }
@@ -43,7 +45,7 @@ class Home extends React.Component {
             </View>
           </View>
           <Text style={styles.headertext}>Notifications</Text>
-          <NotificationBar width={width} />
+          <NotificationBar width={width} APIKey={this.state.APIKey} />
           <Text style={styles.headertext}>My Games</Text>
           <View style={styles.flatList}>
             {user.games.map((game) => (
