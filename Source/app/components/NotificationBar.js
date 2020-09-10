@@ -23,8 +23,8 @@ const NotificationBar = (props) => {
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && mounted) {
           response = JSON.parse(xhr.responseText);
+          console.log("re render");
           setData(response.data);
-          console.log(response);
           setloading(false);
         }
       };
