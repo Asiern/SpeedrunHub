@@ -30,3 +30,5 @@ Expo [Builds](https://expo.io/dashboard/asiern/speedruncomapp/builds)
 - Themes
 - Animations
 - UI Design
+- Run Info
+- Push Notifications
