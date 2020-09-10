@@ -3,9 +3,7 @@ import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import colors from "../config/colors";
 
 const Button = (props) => {
-  const color = props.color;
   function _storeData() {
-    console.log(props.user);
     props.function(props.user);
   }
   return (
