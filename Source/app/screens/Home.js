@@ -35,14 +35,12 @@ class Home extends React.Component {
     return (
       <ScrollView style={{ flex: 1 }}>
         <View style={styles.container}>
-          <View style={styles.profilecontainer}>
-            <View style={styles.profile}>
-              <UserHeader
-                username={this.state.username}
-                userid={this.state.userid}
-                navigation={this.props.navigation}
-              />
-            </View>
+          <View style={styles.profile}>
+            <UserHeader
+              username={this.state.username}
+              userid={this.state.userid}
+              navigation={this.props.navigation}
+            />
           </View>
           <Text style={styles.headertext}>Notifications</Text>
           <NotificationBar width={width} APIKey={this.state.APIKey} />
