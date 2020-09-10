@@ -5,8 +5,10 @@ import colors from "../config/colors";
 const NotificationCard = (props) => {
   return (
     <View style={[styles.container, { width: props.width / 2 }]}>
-      <TouchableOpacity style={styles.card}>
-        <Text style={styles.text}>NotificationCard</Text>
+      <TouchableOpacity
+        style={[styles.card, { backgroundColor: props.backgroundColor }]}
+      >
+        <Text style={[styles.text, { color: props.color }]}>{props.text}</Text>
       </TouchableOpacity>
     </View>
   );
