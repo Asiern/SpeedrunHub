@@ -68,7 +68,7 @@ class Login extends React.Component {
     return (
       <LinearGradient
         style={{ flex: 1 }}
-        colors={[colors.primary, colors.secondary]}
+        colors={[colors.primary, colors.primary]}
       >
         <View style={styles.login}>
           <View style={styles.header}>
