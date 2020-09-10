@@ -4,7 +4,7 @@ import colors from "../config/colors";
 
 const Button = (props) => {
   function _storeData() {
-    props.function(props.user);
+    props.function(props.user, props.keyinput);
   }
   return (
     <TouchableOpacity
