@@ -10,23 +10,24 @@ import {
 import NotificationCard from "./NotificationCard";
 import { ActivityIndicator } from "react-native-paper";
 import colors from "../config/colors";
+import API from "../config/API";
 
 const NotificationBar = (props) => {
   const [data, setData] = useState(null);
   const [loading, setloading] = useState(true);
-  var APIKey = "";
-  //TODO get API via AsyncStorage
+  const [key, setkey] = useState(API.key);
+
+  //TODO get APIkey via AsyncStorage
   useEffect(() => {
     let mounted = true;
-
     var url = "https://www.speedrun.com/api/v1/notifications";
-    if (APIKey != "") {
+    if (key != "") {
       var xhr = new XMLHttpRequest();
       xhr.open("GET", url);
 
       xhr.setRequestHeader("Host", "www.speedrun.com");
       xhr.setRequestHeader("Accept", "application/json");
-      xhr.setRequestHeader("X-API-Key", APIKey);
+      xhr.setRequestHeader("X-API-Key", key);
 
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && mounted) {
@@ -44,7 +45,7 @@ const NotificationBar = (props) => {
   }, []);
   if (loading) {
     return <ActivityIndicator />;
-  } else if (APIKey == "") {
+  } else if (key == "") {
     return (
       <NotificationCard
         width={props.width}
@@ -59,7 +60,7 @@ const NotificationBar = (props) => {
         <FlatList
           keyExtractor={(item) => item.id}
           data={data.data}
-          renderItem={({ item, status }) => (
+          renderItem={({ item }) => (
             <View>
               {item.status == "read" ? (
                 <Animated.View>
