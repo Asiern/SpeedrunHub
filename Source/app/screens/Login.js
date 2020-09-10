@@ -1,5 +1,12 @@
 import React from "react";
-import { StyleSheet, Text, View, AsyncStorage, Alert } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  AsyncStorage,
+  Alert,
+  DevSettings,
+} from "react-native";
 import colors from "../config/colors";
 import { TextInput } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
@@ -21,7 +28,7 @@ class Login extends React.Component {
       Alert.alert(
         "Alert",
         msg,
-        [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+        [{ text: "OK", onPress: () => DevSettings.reload() }],
         { cancelable: true }
       );
     try {
@@ -38,7 +45,7 @@ class Login extends React.Component {
         this._retrieveData();
 
         createTwoButtonAlert(
-          "Logged in successfully. Please restart the application for the changes to take effect."
+          "Logged in successfully. The application will restart to save the changes."
         );
       }
     } catch (error) {
@@ -116,14 +123,14 @@ class Login extends React.Component {
           </View>
         </View>
         <View style={styles.footer}>
-          <Button
+          {/*<Button
             title={"SKIP"}
             color={colors.white}
             textcolor={colors.darkgrey}
             function={async () => {
               await AsyncStorage.setItem("@API-Key", "");
             }}
-          ></Button>
+          ></Button>*/}
         </View>
       </LinearGradient>
     );
@@ -170,7 +177,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
-    flex: 1,
+    flex: 0.5,
   },
   h1: {
     fontWeight: "bold",
