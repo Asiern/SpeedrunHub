@@ -68,7 +68,7 @@ class Profile extends React.Component {
   ProfileHeader = () => {
     return (
       <View>
-        <LinearGradient colors={[colors.primary, colors.primary2]}>
+        <LinearGradient colors={[colors.primary, colors.primary]}>
           <View style={styles.topbar}>
             <View style={styles.topbarleft}>
               <Icon
@@ -79,9 +79,7 @@ class Profile extends React.Component {
                 style={{ paddingLeft: 20 }}
               />
             </View>
-            <View style={styles.topbarcenter}>
-              <Text style={styles.h2}>Profile</Text>
-            </View>
+            <View style={styles.topbarcenter}></View>
             <View style={styles.topbarright}></View>
           </View>
           <View style={styles.imagecontainer}>
@@ -125,7 +123,9 @@ class Profile extends React.Component {
       </View>
     );
   };
-
+  ListFooter = () => {
+    return <View style={{ padding: 20 }}></View>;
+  };
   render() {
     return (
       <FlatList
@@ -133,6 +133,7 @@ class Profile extends React.Component {
         data={this.state.runs}
         renderItem={this.renderItem}
         ListHeaderComponent={this.ProfileHeader()}
+        ListFooterComponent={this.ListFooter()}
       ></FlatList>
     );
   }

@@ -1,46 +1,51 @@
-import React, { Component, useState } from "react";
+import React from "react";
 import {
   StyleSheet,
   Text,
   View,
   AsyncStorage,
-  Button,
   Alert,
+  DevSettings,
 } from "react-native";
 import colors from "../config/colors";
 import { TextInput } from "react-native-gesture-handler";
+import { LinearGradient } from "expo-linear-gradient";
+import Button from "../components/Button";
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       textinput: "",
+      keyinput: "",
       username: "",
       userid: "",
     };
   }
 
-  _storeData = async (user) => {
+  _storeData = async (user, key) => {
     const createTwoButtonAlert = (msg) =>
       Alert.alert(
         "Alert",
         msg,
-        [{ text: "OK", onPress: () => console.log("OK Pressed") }],
-        { cancelable: false }
+        [{ text: "OK", onPress: () => DevSettings.reload() }],
+        { cancelable: true }
       );
     try {
       const url = "https://www.speedrun.com/api/v1/users/" + user;
       const response = await fetch(url);
       const data = await response.json();
-
+      //TODO Verify API key
       if (data.data.id !== null) {
         const id = data.data.id;
         const name = data.data.names.international;
         await AsyncStorage.setItem("@user", name);
         await AsyncStorage.setItem("@userid", id);
+        await AsyncStorage.setItem("@API-Key", key);
         this._retrieveData();
+
         createTwoButtonAlert(
-          "Logged in successfully. Please restart the application for the changes to take effect."
+          "Logged in successfully. The application will restart to save the changes."
         );
       }
     } catch (error) {
@@ -66,47 +71,68 @@ class Login extends React.Component {
   };
   render() {
     const { textinput } = this.state;
+    const { keyinput } = this.state;
     return (
-      <View style={styles.container}>
-        <View style={styles.user}>
-          <Text style={styles.headertext}>Username</Text>
-          {/*<View style={styles.userdata}>
-            <View style={styles.username}>
-              <Text style={styles.paragraph}>User: {this.state.username} </Text>
-            </View>
+      <LinearGradient
+        style={{ flex: 1 }}
+        colors={[colors.primary, colors.primary]}
+      >
+        <View style={styles.login}>
+          <View style={styles.header}>
+            <Text style={styles.h1}>Welcome back</Text>
+            <Text style={styles.h2}>
+              Use your credentials to login into your account
+            </Text>
+          </View>
+          <View style={styles.textinputs}>
+            <TextInput
+              style={styles.textinput}
+              autoCapitalize={"none"}
+              placeholder={"Username"}
+              autoCompleteType={"username"}
+              onChangeText={(text) => this.setState({ textinput: text })}
+              value={textinput}
+            />
+            <TextInput
+              style={styles.textinput}
+              autoCapitalize={"none"}
+              placeholder={"API-Key"}
+              autoCompleteType={"username"}
+              onChangeText={(text) => this.setState({ keyinput: text })}
+              value={keyinput}
+            />
+          </View>
 
-            <View style={styles.userid}>
-              <Text style={styles.paragraph}>User ID: {this.state.userid}</Text>
-            </View>
-    </View>*/}
-
-          <TextInput
-            style={styles.textinput}
-            autoCapitalize={"none"}
-            placeholder={"Type your Speedrun.com username"}
-            autoCompleteType={"username"}
-            onChangeText={(text) => this.setState({ textinput: text })}
-            value={textinput}
-          />
-          <Button
-            title={"Save"}
-            color={colors.primary}
-            onPress={() => this._storeData(textinput)}
-          />
+          <View style={styles.buttons}>
+            <Button
+              title={"LOG IN"}
+              function={this._storeData}
+              user={textinput}
+              keyinput={keyinput}
+              color={colors.primary}
+              textcolor={colors.white}
+            />
+            <Button
+              title={"SIGN UP"}
+              color={colors.white}
+              textcolor={colors.primary}
+            />
+          </View>
+          <View style={styles.footerline}>
+            <Text>Don't have an API-Key? Obtain it here</Text>
+          </View>
         </View>
-
-        {/*} <View style={styles.api}>
-          <Text style={styles.headertext}>API Key</Text>
-          <TextInput
-            style={styles.textinput}
-            editable={false}
-            autoCapitalize={"none"}
-            placeholder={"Type your Speedrun.com API Key"}
-            autoCompleteType={"username"}
-          />
-          <Button title={"Save"} color={colors.primary} disabled={true} />
-  </View>*/}
-      </View>
+        <View style={styles.footer}>
+          {/*<Button
+            title={"SKIP"}
+            color={colors.white}
+            textcolor={colors.darkgrey}
+            function={async () => {
+              await AsyncStorage.setItem("@API-Key", "");
+            }}
+          ></Button>*/}
+        </View>
+      </LinearGradient>
     );
   }
 }
@@ -114,67 +140,64 @@ class Login extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.light,
-    justifyContent: "center",
-    alignContent: "center",
-  },
-  user: {
-    flex: 1,
-    alignContent: "center",
-    justifyContent: "center",
-    marginHorizontal: 20,
-  },
-  userdata: {
-    flexDirection: "row",
-  },
-  username: { flex: 1 },
-  userid: { flex: 1 },
-  headertext: {
-    fontWeight: "bold",
-    color: colors.primary,
-    fontSize: 25,
-  },
-  paragraph: {
-    paddingVertical: 10,
-    fontSize: 15,
-  },
-  api: {
-    flex: 5,
-    padding: 20,
-  },
-  textinput: {
-    height: 50,
-    borderColor: colors.primary,
-    borderWidth: 1,
-    borderRadius: 5,
-    marginVertical: 10,
-    padding: 10,
-  },
-  button: {
-    margin: 20,
-    height: 45,
-    alignSelf: "center",
-  },
-  buttontext: {
-    flex: 1,
     backgroundColor: colors.white,
+  },
+  login: {
+    flex: 4,
+    backgroundColor: colors.white,
+    justifyContent: "center",
     alignContent: "center",
+    borderBottomEndRadius: 80,
+    borderBottomStartRadius: 80,
+    paddingHorizontal: 30,
+  },
+
+  header: {
+    flex: 1.5,
     justifyContent: "center",
     alignItems: "center",
-    alignSelf: "center",
-    padding: 10,
-    textAlign: "center",
-    color: colors.darkgrey,
-    fontWeight: "bold",
-    fontSize: 15,
-    borderRadius: 5,
+  },
+  textinputs: {
+    flex: 0.5,
+    justifyContent: "center",
+  },
+  buttons: {
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 0.9,
+  },
+  footerline: {
+    flex: 0.4,
+    justifyContent: "center",
+    alignContent: "center",
+    textAlignVertical: "center",
+    alignItems: "center",
   },
   footer: {
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
-    flex: 1,
-    backgroundColor: colors.primary,
+    flex: 0.5,
+  },
+  h1: {
+    fontWeight: "bold",
+    fontSize: 25,
+    alignSelf: "center",
+  },
+  h2: {
+    fontSize: 15,
+    alignSelf: "center",
+    padding: 10,
+    paddingHorizontal: 20,
+    textAlign: "center",
+  },
+  textinput: {
+    height: 50,
+    borderColor: colors.primary,
+    borderWidth: 2,
+    borderRadius: 10,
+    marginVertical: 10,
+    padding: 10,
   },
 });
 

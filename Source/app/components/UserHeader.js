@@ -5,11 +5,16 @@ import {
   Image,
   Text,
   TouchableOpacity,
-  ImageBackground,
+  AsyncStorage,
+  Alert,
+  Dimensions,
+  DevSettings,
 } from "react-native";
 import colors from "../config/colors";
-import Icon from "react-native-vector-icons/Ionicons";
 import { FontAwesome5 } from "@expo/vector-icons";
+import Svgheader from "./svgheader";
+import Constants from "expo-constants";
+const { width, height } = Dimensions.get("screen");
 
 class UserHeader extends Component {
   constructor(props) {
@@ -23,13 +28,36 @@ class UserHeader extends Component {
         "/image.png",
     };
   }
+
+  async signOut() {
+    //Remove user
+    await AsyncStorage.setItem("@user", "");
+    await AsyncStorage.setItem("@userid", "");
+    //Set login to 1
+
+    //Restart app
+    DevSettings.reload();
+  }
   render() {
+    const createTwoButtonAlert = (msg) =>
+      Alert.alert(
+        "Alert",
+        msg,
+        [
+          { text: "OK", onPress: () => this.signOut() },
+          { text: "Cancel", onPress: () => null },
+        ],
+
+        { cancelable: false }
+      );
     return (
-      <ImageBackground
-        style={styles.profileBG}
-        source={require("../assets/UserHeader.png")}
-      >
-        <View style={styles.container}>
+      <View style={styles.container}>
+        <Svgheader
+          customStyles={styles.svgcurve}
+          width={width}
+          height={height / 5}
+        />
+        <View style={styles.headercontainer}>
           <TouchableOpacity
             onPress={() =>
               this.props.navigation.navigate("Profile", {
@@ -57,26 +85,31 @@ class UserHeader extends Component {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.iconcontainer}
-            onPress={() => this.props.navigation.navigate("Login")}
+            onPress={() =>
+              createTwoButtonAlert("Are you sure you want to log out?")
+            }
           >
-            <FontAwesome5 name="user-cog" color={colors.white} size={30} />
+            <FontAwesome5 name="sign-out-alt" color={colors.white} size={30} />
           </TouchableOpacity>
         </View>
-      </ImageBackground>
+      </View>
     );
   }
 }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    alignSelf: "center",
-    paddingBottom: 50,
   },
-  profileBG: {
+  headercontainer: {
+    top: 30,
+    position: "absolute",
     flex: 1,
-    resizeMode: "cover",
+    flexDirection: "row",
+    marginTop: Constants.statusBarHeight,
+  },
+  svgCurve: {
+    position: "absolute",
+    width: Dimensions.get("window").width,
   },
   Image: {
     height: 60,
