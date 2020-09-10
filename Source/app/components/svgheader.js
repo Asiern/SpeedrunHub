@@ -10,7 +10,7 @@ export default function svgheader({ customStyles, height, width }) {
         <Svg
           height="100%"
           width="100%"
-          viewBox="0 0 1440 630"
+          viewBox="0 0 1440 624"
           style={{ top: height, width: width }}
         >
           <Path
