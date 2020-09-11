@@ -19,11 +19,10 @@ const NotificationBar = (props) => {
       xhr.setRequestHeader("Host", "www.speedrun.com");
       xhr.setRequestHeader("Accept", "application/json");
       xhr.setRequestHeader("X-API-Key", key);
-
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && mounted) {
           response = JSON.parse(xhr.responseText);
-          console.log("re render");
+
           setData(response.data);
           setloading(false);
         }
@@ -31,13 +30,12 @@ const NotificationBar = (props) => {
       xhr.send();
     } catch (error) {
       seterror(true);
-      console.log(error);
     }
-    setloading(false);
     return function cleanup() {
       mounted = false;
     };
-  }, []);
+  });
+
   if (loading) {
     return <ActivityIndicator />;
   } else if (error) {
@@ -48,13 +46,14 @@ const NotificationBar = (props) => {
         <FlatList
           keyExtractor={(item) => item.id}
           data={data}
+          pagingEnabled
           renderItem={({ item }) => (
             <View>
               {item.status == "read" ? (
                 <Animated.View>
                   <NotificationCard
                     width={props.width}
-                    text={item.id}
+                    text={item.text}
                     backgroundColor={colors.white}
                     color={colors.darkgrey}
                   />
