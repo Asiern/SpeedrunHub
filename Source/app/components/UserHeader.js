@@ -52,11 +52,7 @@ class UserHeader extends Component {
       );
     return (
       <View style={styles.container}>
-        <Svgheader
-          customStyles={styles.svgcurve}
-          width={width}
-          height={height / 5}
-        />
+        <Svgheader width={width} height={height / 5} />
         <View style={styles.headercontainer}>
           <TouchableOpacity
             onPress={() =>
@@ -106,10 +102,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     marginTop: Constants.statusBarHeight,
-  },
-  svgCurve: {
-    position: "absolute",
-    width: Dimensions.get("window").width,
   },
   Image: {
     height: 60,
