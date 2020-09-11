@@ -4,9 +4,10 @@ import colors from "../config/colors";
 
 const NotificationCard = (props) => {
   return (
-    <View style={[styles.container, { width: props.width }]}>
+    <View style={[styles.container, { width: props.width / 2 }]}>
       <TouchableOpacity
         style={[styles.card, { backgroundColor: props.backgroundColor }]}
+        onPress={() => console.log(props.text)}
       >
         <Text style={[styles.text, { color: props.color }]}>{props.text}</Text>
       </TouchableOpacity>
