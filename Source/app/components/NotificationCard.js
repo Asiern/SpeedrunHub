@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 import colors from "../config/colors";
 
 const NotificationCard = (props) => {
@@ -10,14 +10,11 @@ const NotificationCard = (props) => {
   }
   return (
     <View style={[styles.container, { width: props.width }]}>
-      <TouchableOpacity
-        style={[styles.card, { backgroundColor: props.backgroundColor }]}
-        onPress={() => console.log(props.text)}
-      >
+      <View style={[styles.card, { backgroundColor: props.backgroundColor }]}>
         <Text style={[styles.text, { color: props.color }]}>
           {stripHtml(props.text)}
         </Text>
-      </TouchableOpacity>
+      </View>
     </View>
   );
 };
