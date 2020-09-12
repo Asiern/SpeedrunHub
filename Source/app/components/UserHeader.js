@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headercontainer: {
-    top: 30,
+    top: height / 10 - 30,
     position: "absolute",
     flex: 1,
     flexDirection: "row",
