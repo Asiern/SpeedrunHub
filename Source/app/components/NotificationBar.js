@@ -23,7 +23,6 @@ const NotificationBar = (props) => {
         var url = "https://www.speedrun.com/api/v1/notifications";
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url);
-        console.log("request");
         xhr.setRequestHeader("Host", "www.speedrun.com");
         xhr.setRequestHeader("Accept", "application/json");
         xhr.setRequestHeader("X-API-Key", key);
@@ -43,7 +42,7 @@ const NotificationBar = (props) => {
     return function cleanup() {
       mounted = false;
     };
-  });
+  }, [data]);
   if (loading) {
     return <ActivityIndicator />;
   } else if (error) {
