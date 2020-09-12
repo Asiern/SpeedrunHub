@@ -30,7 +30,7 @@ const NotificationBar = (props) => {
         if (xhr.readyState === 4 && mounted) {
           response = JSON.parse(xhr.responseText);
 
-          setData(response.data.slice(0, 10));
+          setData(response.data);
           setloading(false);
         }
       };
@@ -52,14 +52,16 @@ const NotificationBar = (props) => {
       <View style={styles.container}>
         <TouchableOpacity
           onPress={() =>
-            props.navigation.navigate("Notifications", { data: data })
+            props.navigation.navigate("Notifications", {
+              data: data,
+            })
           }
         >
           <Text style={styles.headertext}>Notifications</Text>
         </TouchableOpacity>
         <FlatList
           keyExtractor={(item) => item.id}
-          data={data}
+          data={data.slice(0, 5)}
           pagingEnabled
           renderItem={({ item }) => (
             <View>
