@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Animated, FlatList, Text } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Animated,
+  FlatList,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 import NotificationCard from "./NotificationCard";
 import { ActivityIndicator } from "react-native-paper";
 import colors from "../config/colors";
@@ -43,6 +50,13 @@ const NotificationBar = (props) => {
   } else {
     return (
       <View style={styles.container}>
+        <TouchableOpacity
+          onPress={() =>
+            props.navigation.navigate("Notifications", { data: data })
+          }
+        >
+          <Text style={styles.headertext}>Notifications</Text>
+        </TouchableOpacity>
         <FlatList
           keyExtractor={(item) => item.id}
           data={data}
@@ -81,6 +95,12 @@ const NotificationBar = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  headertext: {
+    color: colors.darkgrey,
+    fontSize: 30,
+    marginLeft: 20,
+    fontWeight: "bold",
   },
 });
 export default NotificationBar;
