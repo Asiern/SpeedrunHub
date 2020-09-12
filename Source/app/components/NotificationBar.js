@@ -23,7 +23,7 @@ const NotificationBar = (props) => {
         if (xhr.readyState === 4 && mounted) {
           response = JSON.parse(xhr.responseText);
 
-          setData(response.data);
+          setData(response.data.slice(0, 10));
           setloading(false);
         }
       };
@@ -35,7 +35,7 @@ const NotificationBar = (props) => {
       mounted = false;
     };
   });
-
+  //TODO fix rendering
   if (loading) {
     return <ActivityIndicator />;
   } else if (error) {
@@ -62,7 +62,7 @@ const NotificationBar = (props) => {
                 <Animated.View>
                   <NotificationCard
                     width={props.width}
-                    text={item.id}
+                    text={item.text}
                     backgroundColor={colors.primary}
                     color={colors.white}
                   />
