@@ -131,9 +131,11 @@ const styles = StyleSheet.create({
   usename: { color: colors.white, fontWeight: "bold", fontSize: 25 },
   iconcontainer: {
     flex: 1,
+    flexDirection: "row",
     alignContent: "center",
-    justifyContent: "center",
     alignItems: "center",
+    marginRight: 20,
+    justifyContent: "flex-end",
   },
 });
 
