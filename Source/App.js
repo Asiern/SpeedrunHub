@@ -9,6 +9,7 @@ import Search from "./app/screens/Search";
 import Themes from "./app/screens/Themes";
 import MyGames from "./app/screens/MyGames";
 import Login from "./app/screens/Login";
+import Notifications from "./app/screens/Notifications";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -29,6 +30,7 @@ export default class App extends Component {
         options={{ title: "Home", headerShown: "" }}
       />
       <Stack.Screen name="Game Info" component={GameInfo} />
+      <Stack.Screen name="Notifications" component={Notifications} />
       <Stack.Screen
         name="Profile"
         component={Profile}

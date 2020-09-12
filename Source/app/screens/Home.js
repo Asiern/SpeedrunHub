@@ -42,8 +42,12 @@ class Home extends React.Component {
               navigation={this.props.navigation}
             />
           </View>
-          <Text style={styles.headertext}>Notifications</Text>
-          <NotificationBar width={width} APIKey={this.state.APIKey} />
+
+          <NotificationBar
+            width={width}
+            APIKey={this.state.APIKey}
+            navigation={this.props.navigation}
+          />
           <Text style={styles.headertext}>My Games</Text>
           <View style={styles.flatList}>
             {user.games.map((game) => (
