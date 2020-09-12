@@ -10,6 +10,8 @@ import Themes from "./app/screens/Themes";
 import MyGames from "./app/screens/MyGames";
 import Login from "./app/screens/Login";
 import Notifications from "./app/screens/Notifications";
+import NotificationsSettings from "./app/screens/Settings/NotificationsSettings";
+import AccountSettings from "./app/screens/Settings/AccountSettings";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -55,6 +57,16 @@ export default class App extends Component {
       />
       <Stack.Screen name="Themes" component={Themes} />
       <Stack.Screen name="MyGames" component={MyGames} />
+      <Stack.Screen
+        name="NotificationsSettings"
+        component={NotificationsSettings}
+        options={{ title: "Notifications Settings" }}
+      />
+      <Stack.Screen
+        name="AccountSettings"
+        component={AccountSettings}
+        options={{ title: "Account Settings" }}
+      />
       <Stack.Screen name="About" component={About} />
     </Stack.Navigator>
   );
