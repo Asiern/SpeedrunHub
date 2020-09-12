@@ -19,22 +19,24 @@ const NotificationBar = (props) => {
   useEffect(() => {
     let mounted = true;
     try {
-      var url = "https://www.speedrun.com/api/v1/notifications";
-      var xhr = new XMLHttpRequest();
-      xhr.open("GET", url);
+      if (data == null) {
+        var url = "https://www.speedrun.com/api/v1/notifications";
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", url);
+        console.log("request");
+        xhr.setRequestHeader("Host", "www.speedrun.com");
+        xhr.setRequestHeader("Accept", "application/json");
+        xhr.setRequestHeader("X-API-Key", key);
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && mounted) {
+            response = JSON.parse(xhr.responseText);
 
-      xhr.setRequestHeader("Host", "www.speedrun.com");
-      xhr.setRequestHeader("Accept", "application/json");
-      xhr.setRequestHeader("X-API-Key", key);
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && mounted) {
-          response = JSON.parse(xhr.responseText);
-
-          setData(response.data);
-          setloading(false);
-        }
-      };
-      xhr.send();
+            setData(response.data);
+            setloading(false);
+          }
+        };
+        xhr.send();
+      }
     } catch (error) {
       seterror(true);
     }
@@ -42,7 +44,6 @@ const NotificationBar = (props) => {
       mounted = false;
     };
   });
-  //TODO fix rendering
   if (loading) {
     return <ActivityIndicator />;
   } else if (error) {
