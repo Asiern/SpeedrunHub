@@ -21,6 +21,8 @@
     "peer": "^0.5.3",
     "react": "16.11.0",
     "react-dom": "16.11.0",
+    "react-html-converter": "^0.3.2",
+    "react-html-parser": "^2.0.2",
     "react-is": "^16.8.6",
     "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz",
     "react-native-code-push": "^6.3.0",
