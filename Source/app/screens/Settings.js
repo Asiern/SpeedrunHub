@@ -11,7 +11,7 @@ import colors from "../config/colors";
 import { FontAwesome5 } from "@expo/vector-icons";
 class Settings extends React.Component {
   constructor(props) {
-    super(props);
+    super();
   }
   loadInBrowser = (link) => {
     Linking.openURL(link).catch((err) =>
@@ -46,7 +46,28 @@ class Settings extends React.Component {
               </View>
             </View>
           </TouchableOpacity>
-          {/*<TouchableOpacity
+          <TouchableOpacity
+            onPress={() =>
+              this.props.navigation.navigate("NotificationsSettings")
+            }
+          >
+            <View style={styles.button}>
+              <View style={styles.icon}>
+                <FontAwesome5 name="bell" color={colors.primary} size={20} />
+              </View>
+              <View style={styles.textcontainer}>
+                <Text style={styles.text}>Notifications</Text>
+              </View>
+              <View style={styles.icon}>
+                <FontAwesome5
+                  name="angle-right"
+                  color={colors.darkgrey}
+                  size={26}
+                />
+              </View>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
             onPress={() => this.props.navigation.navigate("Themes")}
           >
             <View style={styles.button}>
@@ -83,7 +104,7 @@ class Settings extends React.Component {
                 />
               </View>
             </View>
-          </TouchableOpacity>*/}
+          </TouchableOpacity>
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate("About")}
           >
