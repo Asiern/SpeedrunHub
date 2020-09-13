@@ -61,7 +61,7 @@ const NotificationBar = (props) => {
         </TouchableOpacity>
         <FlatList
           keyExtractor={(item) => item.id}
-          data={data.slice(0, 5)}
+          data={data}
           pagingEnabled
           renderItem={({ item }) => (
             <View>
