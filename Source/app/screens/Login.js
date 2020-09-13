@@ -14,7 +14,7 @@ import Button from "../components/Button";
 
 class Login extends React.Component {
   constructor(props) {
-    super(props);
+    super();
     this.state = {
       textinput: "",
       keyinput: "",
