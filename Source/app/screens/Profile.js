@@ -144,10 +144,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.light,
   },
-  profileBG: {
-    flex: 1,
-    resizeMode: "cover",
-  },
   topbar: {
     flex: 1,
     flexDirection: "row",
@@ -168,7 +164,6 @@ const styles = StyleSheet.create({
   profile: {
     flex: 1,
     paddingBottom: 30,
-    backgroundColor: "gold",
     justifyContent: "center",
     alignItems: "center",
     alignContent: "center",
