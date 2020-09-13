@@ -6,6 +6,7 @@ import {
   Image,
   TextInput,
   AsyncStorage,
+  Clipboard,
 } from "react-native";
 import colors from "../../config/colors";
 import Button from "../../components/Button";
@@ -15,12 +16,18 @@ const AccountSettings = (props) => {
   const [userId, setUserId] = useState("48g3q2rx");
   const [key, setKey] = useState("jhsodosaidjois");
   useEffect(() => {
-    async () => {
+    (async () => {
       const tempuser = await AsyncStorage.getItem("@user");
-      console.log(tempuser);
+      const tempuserid = await AsyncStorage.getItem("@userid");
+      const tempuserkey = await AsyncStorage.getItem("@API-Key");
       setUser(tempuser);
-    };
-  });
+      setUserId(tempuserid);
+      setKey(tempuserkey);
+    })();
+  }, []);
+  function logout() {
+    return null;
+  }
   return (
     <View style={styles.container}>
       <View style={styles.user}>
@@ -59,7 +66,7 @@ const AccountSettings = (props) => {
             title={"COPY API-KEY"}
             textcolor={colors.darkgrey}
             color={colors.white}
-            function={() => null}
+            function={() => Clipboard.setString(key)}
           />
         </View>
       </View>
