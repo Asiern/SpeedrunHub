@@ -3,10 +3,9 @@
 An app for IOS/Android platforms made with [React Native](https://reactnative.dev/) which allows you to consult the speedrun.com page natively using the speedrun.com [REST API](https://github.com/speedruncomorg/api).
 
 <img src="https://github.com/Asiern/SpeedrunHub/blob/master/Readme/assets/Home.jpg" width="300" height="400"/>
-<img src="https://github.com/Asiern/SpeedrunHub/blob/master/Readme/assets/Profile.jpg" width="300" height="400"/>
-<img src="https://github.com/Asiern/SpeedrunHub/blob/master/Readme/assets/RE2.jpg" width="300" height="400"/>
-<img src="https://github.com/Asiern/SpeedrunHub/blob/master/Readme/assets/GameSearch.jpg" width="300" height="400"/>
-<img src="https://github.com/Asiern/SpeedrunHub/blob/master/Readme/assets/ProfileSearch.jpg" width="300" height="400"/>
+
+- [:gear: Project Setup](#project-setup)
+- [License](#license)
 
 # Features
 
@@ -27,7 +26,7 @@ An app for IOS/Android platforms made with [React Native](https://reactnative.de
 
 - [Open an issue](https://github.com/Asiern/SpeedrunHub/issues/new/choose)
 
-# Project Setup
+# :gear: Project Setup
 
 **The following are the steps to setup the project on Windows**
 
@@ -85,3 +84,5 @@ An app for IOS/Android platforms made with [React Native](https://reactnative.de
 - Run Info
 - Push Notifications
 - My Games
+
+# License
