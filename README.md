@@ -6,7 +6,7 @@
 
 SpeedrunHub is an app for IOS/Android platforms made with [React Native](https://reactnative.dev/) which allows you to consult the speedrun.com page natively using the speedrun.com [REST API](https://github.com/speedruncomorg/api).
 
-- [:email: Send Feedback](#email-send-feedbackk)
+- [:email: Send Feedback](#email-send-feedback)
 - [:raised_hands: Contributing](#raised_hands-contributing)
 - [:gear: Project Setup](#gear-project-setup)
 - [:warning: Issues](#warning-issues)
