@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.2.1",
+    "@react-native-community/async-storage": "~1.11.0",
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/bottom-tabs": "^5.5.1",
     "@react-navigation/material-bottom-tabs": "^5.2.16",
@@ -17,30 +18,32 @@
     "@react-navigation/stack": "^5.7.1",
     "expo": "^38.0.0",
     "expo-linear-gradient": "~8.2.1",
-    "native-base": "^2.13.12",
+    "native-base": "^2.13.14",
     "peer": "^0.5.3",
     "react": "16.11.0",
     "react-dom": "16.11.0",
+    "react-html-converter": "^0.3.2",
+    "react-html-parser": "^2.0.2",
     "react-is": "^16.8.6",
     "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz",
     "react-native-code-push": "^6.3.0",
-    "react-native-elements": "^2.0.4",
+    "react-native-elements": "^2.3.2",
     "react-native-gesture-handler": "~1.6.0",
-    "react-native-paper": "^4.0.1",
+    "react-native-paper": "^4.1.0",
     "react-native-reanimated": "~1.9.0",
     "react-native-restart": "0.0.17",
     "react-native-safe-area-context": "~3.0.7",
     "react-native-screens": "~2.9.0",
     "react-native-shadow": "^1.2.2",
-    "react-native-svg": "^12.1.0",
+    "react-native-svg": "12.1.0",
     "react-native-tab-view": "^2.15.1",
     "react-native-web": "~0.11.7",
     "react-redux": "^7.2.0",
-    "styled-components": "^5.0.0"
+    "styled-components": "^5.2.0"
   },
   "devDependencies": {
-    "babel-preset-expo": "^8.2.3",
-    "@babel/core": "^7.8.6"
+    "@babel/core": "^7.11.6",
+    "babel-preset-expo": "^8.2.3"
   },
   "private": true
 }

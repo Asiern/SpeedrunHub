@@ -1,23 +1,10 @@
-import {
-  StyleSheet,
-  View,
-  Text,
-  ScrollView,
-  SectionList,
-  Settings,
-  Button,
-} from "react-native";
+import { StyleSheet, View } from "react-native";
 import React from "react";
 import { SearchBar } from "react-native-elements";
 import Constants from "expo-constants";
 import colors from "../config/colors";
-import GameCard from "../components/GameCard";
 import User from "../components/User";
-import { FlatList } from "react-native-gesture-handler";
-import Animated from "react-native-reanimated";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { Tabs } from "native-base";
-import A from "../screens/Settings";
 import Games from "../components/Games";
 import Users from "../components/Users";
 

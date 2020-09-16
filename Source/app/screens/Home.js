@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, View, Text, AsyncStorage, Dimensions } from "react-native";
+import { StyleSheet, View, Text, Dimensions } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
 import GameCard from "../components/GameCard";
 import UserHeader from "../components/UserHeader";
 import NotificationBar from "../components/NotificationBar";
@@ -7,6 +8,7 @@ import colors from "../config/colors";
 import user from "../config/user.json";
 import { ScrollView } from "react-native-gesture-handler";
 const { width } = Dimensions.get("screen");
+
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -42,9 +44,13 @@ class Home extends React.Component {
               navigation={this.props.navigation}
             />
           </View>
-          <Text style={styles.headertext}>Notifications</Text>
-          <NotificationBar width={width} APIKey={this.state.APIKey} />
-          <Text style={styles.headertext}>My Games</Text>
+
+          <NotificationBar
+            width={width}
+            APIKey={this.state.APIKey}
+            navigation={this.props.navigation}
+          />
+          <Text style={styles.headertext}>My Games (WIP)</Text>
           <View style={styles.flatList}>
             {user.games.map((game) => (
               <View key={game.id} style={styles.button}>
@@ -65,7 +71,7 @@ class Home extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.white,
+    backgroundColor: colors.light,
   },
   profile: {
     height: 250,
