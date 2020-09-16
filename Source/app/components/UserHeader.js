@@ -5,12 +5,12 @@ import {
   Image,
   Text,
   TouchableOpacity,
-  AsyncStorage,
   Alert,
   Dimensions,
   DevSettings,
 } from "react-native";
 import colors from "../config/colors";
+import AsyncStorage from "@react-native-community/async-storage";
 import { FontAwesome5 } from "@expo/vector-icons";
 import Svgheader from "./svgheader";
 import Constants from "expo-constants";
@@ -31,10 +31,11 @@ class UserHeader extends Component {
 
   async signOut() {
     //Remove user
-    await AsyncStorage.setItem("@user", "");
-    await AsyncStorage.setItem("@userid", "");
-    //Set login to 1
-    await AsyncStorage.setItem("@Loggedin", "false");
+    await AsyncStorage.multiSet([
+      ["@user", ""],
+      ["@userid", ""],
+      ["@Loggedin", "false"],
+    ]);
     //Restart app
     DevSettings.reload();
   }

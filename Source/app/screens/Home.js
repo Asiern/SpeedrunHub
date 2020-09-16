@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, View, Text, AsyncStorage, Dimensions } from "react-native";
+import { StyleSheet, View, Text, Dimensions } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
 import GameCard from "../components/GameCard";
 import UserHeader from "../components/UserHeader";
 import NotificationBar from "../components/NotificationBar";

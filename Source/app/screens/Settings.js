@@ -1,12 +1,6 @@
-import React, { Component, useState, useRef } from "react";
-import {
-  StyleSheet,
-  View,
-  Button,
-  TouchableOpacity,
-  Linking,
-} from "react-native";
-import { Divider, Text } from "react-native-paper";
+import React from "react";
+import { StyleSheet, View, TouchableOpacity, Linking } from "react-native";
+import { Text } from "react-native-paper";
 import colors from "../config/colors";
 import { FontAwesome5 } from "@expo/vector-icons";
 class Settings extends React.Component {

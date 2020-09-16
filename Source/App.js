@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { AsyncStorage } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
 import Navigation from "./app/screens/Navigation";
 import Login from "./app/screens/Login";
 
@@ -8,7 +8,7 @@ export default class App extends Component {
   constructor(props) {
     super();
     this.state = {
-      Loggedin: false,
+      Loggedin: true,
     };
   }
   async componentDidMount() {
