@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, AsyncStorage, Button } from "react-native";
+import { View, Text, StyleSheet, Button } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
 import user from "../config/user.json";
 import GameCard from "../components/GameCard";
 import colors from "../config/colors";

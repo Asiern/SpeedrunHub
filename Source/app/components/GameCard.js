@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet, ImageBackground, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { BoxShadow } from "react-native-shadow";
 
 class GameCard extends Component {
   constructor(props) {

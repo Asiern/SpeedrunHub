@@ -5,12 +5,12 @@ import {
   Image,
   Text,
   TouchableOpacity,
-  AsyncStorage,
   Alert,
   Dimensions,
   DevSettings,
 } from "react-native";
 import colors from "../config/colors";
+import AsyncStorage from "@react-native-community/async-storage";
 import { FontAwesome5 } from "@expo/vector-icons";
 import Svgheader from "./svgheader";
 import Constants from "expo-constants";
@@ -31,10 +31,11 @@ class UserHeader extends Component {
 
   async signOut() {
     //Remove user
-    await AsyncStorage.setItem("@user", "");
-    await AsyncStorage.setItem("@userid", "");
-    //Set login to 1
-
+    await AsyncStorage.multiSet([
+      ["@user", ""],
+      ["@userid", ""],
+      ["@Loggedin", "false"],
+    ]);
     //Restart app
     DevSettings.reload();
   }
@@ -52,11 +53,7 @@ class UserHeader extends Component {
       );
     return (
       <View style={styles.container}>
-        <Svgheader
-          customStyles={styles.svgcurve}
-          width={width}
-          height={height / 5}
-        />
+        <Svgheader width={width} height={height / 5} />
         <View style={styles.headercontainer}>
           <TouchableOpacity
             onPress={() =>
@@ -101,15 +98,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headercontainer: {
-    top: 30,
+    top: height / 10 - 30,
     position: "absolute",
     flex: 1,
     flexDirection: "row",
     marginTop: Constants.statusBarHeight,
-  },
-  svgCurve: {
-    position: "absolute",
-    width: Dimensions.get("window").width,
   },
   Image: {
     height: 60,
@@ -139,9 +132,11 @@ const styles = StyleSheet.create({
   usename: { color: colors.white, fontWeight: "bold", fontSize: 25 },
   iconcontainer: {
     flex: 1,
+    flexDirection: "row",
     alignContent: "center",
-    justifyContent: "center",
     alignItems: "center",
+    marginRight: 20,
+    justifyContent: "flex-end",
   },
 });
 
