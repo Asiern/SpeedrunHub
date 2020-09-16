@@ -6,7 +6,10 @@
 
 ---
 
-SpeedrunHub is an app for IOS/Android platforms made with [React Native](https://reactnative.dev/) which allows you to consult the speedrun.com page natively using the speedrun.com [REST API](https://github.com/speedruncomorg/api).
+SpeedrunHub is an open source app for IOS/Android platforms made with [React Native](https://reactnative.dev/) and [Expo](https://expo.io/).
+It allows you to consult the speedrun.com page natively on your Android/iOS device. All the data is provided by the speedrun.com [REST API](https://github.com/speedruncomorg/api).
+
+**Disclaimer: This is not an official app**
 
 - [:boom:Features](#boom-features)
 - [:email: Send Feedback](#email-send-feedback)
@@ -80,7 +83,9 @@ SpeedrunHub is an app for IOS/Android platforms made with [React Native](https:/
 
 6.  Run
     ```
+    # At "...\SpeedrunHub\Source" run
     $ npm start
+    # Expo Metro Bundler should open if all went well
     ```
 
 ## :warning: Issues
