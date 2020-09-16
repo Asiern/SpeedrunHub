@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
   h2: {
     color: colors.primary,
     marginRight: 20,
-    fontSize: 20,
+    fontSize: 17,
   },
 });
 export default NotificationBar;
