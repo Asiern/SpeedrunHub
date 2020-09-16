@@ -2,6 +2,8 @@
 
 <img src="https://github.com/Asiern/SpeedrunHub/blob/master/Readme/assets/Home.jpg" width="300" height="400"/>
 
+[![runs with expo](https://img.shields.io/badge/Runs%20with%20Expo-000.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000)](https://expo.io/)
+
 ---
 
 SpeedrunHub is an app for IOS/Android platforms made with [React Native](https://reactnative.dev/) which allows you to consult the speedrun.com page natively using the speedrun.com [REST API](https://github.com/speedruncomorg/api).
