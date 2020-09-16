@@ -1,13 +1,7 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  AsyncStorage,
-  Alert,
-  DevSettings,
-} from "react-native";
+import { StyleSheet, Text, View, Alert, DevSettings } from "react-native";
 import colors from "../config/colors";
+import AsyncStorage from "@react-native-community/async-storage";
 import { TextInput } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
 import Button from "../components/Button";

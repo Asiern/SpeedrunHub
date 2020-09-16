@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 import NotificationCard from "../components/NotificationCard";
 import colors from "../config/colors";

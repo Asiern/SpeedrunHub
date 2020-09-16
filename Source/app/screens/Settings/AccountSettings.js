@@ -5,10 +5,10 @@ import {
   StyleSheet,
   Image,
   TextInput,
-  AsyncStorage,
   Clipboard,
   DevSettings,
 } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
 import colors from "../../config/colors";
 import Button from "../../components/Button";
 
