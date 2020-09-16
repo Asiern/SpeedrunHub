@@ -1,32 +1,40 @@
 # SpeedrunHub
 
-An app for IOS/Android platforms made with [React Native](https://reactnative.dev/) which allows you to consult the speedrun.com page natively using the speedrun.com [REST API](https://github.com/speedruncomorg/api).
-
 <img src="https://github.com/Asiern/SpeedrunHub/blob/master/Readme/assets/Home.jpg" width="300" height="400"/>
 
-- [:gear: Project Setup](#project-setup)
-- [License](#license)
+---
 
-# Features
+SpeedrunHub is an app for IOS/Android platforms made with [React Native](https://reactnative.dev/) which allows you to consult the speedrun.com page natively using the speedrun.com [REST API](https://github.com/speedruncomorg/api).
+
+- [:gear: Project Setup](#project-setup)
+- [:email: Send Feedback](#Send-Feedback)
+- [:raised_hands: Contributing](#Contributing)
+- [:warning: Issues](#Issues)
+- [:construction: Work in progress](#WIP)
+- [:page_with_curl: Privacy Policy / Terms & Conditions](#Privacy-Policy-/-Terms-&-Conditions)
+
+## Features
 
 - Receieve all Speedrun.com notifications directly to your phone ([API-Key](https://github.com/speedruncomorg/api/blob/master/authentication.md#aquiring-a-users-api-key) is needed)
 - Search for users and watch their PBs
 - Search for game leaderboards
 - Manage your favourite games
 
-# Expo
+## Expo
 
 - [Project](https://expo.io/dashboard/asiern/speedruncomapp)
 
 - [Builds](https://expo.io/dashboard/asiern/speedruncomapp/builds)
 
-# Send Feedback
+## :email: Send Feedback
 
 - Send me an email at <asiern.dev@gmail.com>
 
 - [Open an issue](https://github.com/Asiern/SpeedrunHub/issues/new/choose)
 
-# :gear: Project Setup
+## :raised_hands: Contributing
+
+## :gear: Project Setup
 
 **The following are the steps to setup the project on Windows**
 
@@ -72,11 +80,11 @@ An app for IOS/Android platforms made with [React Native](https://reactnative.de
     $ npm start
     ```
 
-# Issues
+## :warning: Issues
 
 - IOS Version not tested
 
-# WIP
+## :construction: WIP
 
 - Themes
 - Animations
@@ -85,4 +93,4 @@ An app for IOS/Android platforms made with [React Native](https://reactnative.de
 - Push Notifications
 - My Games
 
-# License
+## :page_with_curl: Privacy Policy / Terms & Conditions
