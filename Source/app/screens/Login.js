@@ -42,6 +42,7 @@ class Login extends React.Component {
         await AsyncStorage.setItem("@user", name);
         await AsyncStorage.setItem("@userid", id);
         await AsyncStorage.setItem("@API-Key", key);
+        await AsyncStorage.setItem("@Loggedin", "true");
         this._retrieveData();
 
         createTwoButtonAlert(

@@ -24,29 +24,6 @@ class Settings extends React.Component {
       <View style={styles.container}>
         <View style={styles.buttons}>
           <TouchableOpacity
-            onPress={() => this.props.navigation.navigate("Login")}
-          >
-            <View style={styles.button}>
-              <View style={styles.icon}>
-                <FontAwesome5
-                  name="user-alt"
-                  color={colors.primary}
-                  size={20}
-                />
-              </View>
-              <View style={styles.textcontainer}>
-                <Text style={styles.text}>Login</Text>
-              </View>
-              <View style={styles.icon}>
-                <FontAwesome5
-                  name="angle-right"
-                  color={colors.darkgrey}
-                  size={26}
-                />
-              </View>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
             onPress={() => this.props.navigation.navigate("AccountSettings")}
           >
             <View style={styles.button}>

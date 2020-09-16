@@ -34,7 +34,7 @@ class UserHeader extends Component {
     await AsyncStorage.setItem("@user", "");
     await AsyncStorage.setItem("@userid", "");
     //Set login to 1
-
+    await AsyncStorage.setItem("@Loggedin", "false");
     //Restart app
     DevSettings.reload();
   }

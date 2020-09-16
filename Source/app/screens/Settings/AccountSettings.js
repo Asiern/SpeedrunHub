@@ -7,6 +7,7 @@ import {
   TextInput,
   AsyncStorage,
   Clipboard,
+  DevSettings,
 } from "react-native";
 import colors from "../../config/colors";
 import Button from "../../components/Button";
@@ -25,8 +26,14 @@ const AccountSettings = (props) => {
       setKey(tempuserkey);
     })();
   }, []);
-  function logout() {
-    return null;
+  async function signOut() {
+    //Remove user
+    await AsyncStorage.setItem("@user", "");
+    await AsyncStorage.setItem("@userid", "");
+    //Set login to 1
+    await AsyncStorage.setItem("@Loggedin", "false");
+    //Restart app
+    DevSettings.reload();
   }
   return (
     <View style={styles.container}>
@@ -60,7 +67,7 @@ const AccountSettings = (props) => {
             title={"LOG OUT"}
             textcolor={colors.white}
             color={colors.primary}
-            function={() => null}
+            function={() => signOut()}
           />
           <Button
             title={"COPY API-KEY"}
