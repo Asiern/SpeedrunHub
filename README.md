@@ -84,6 +84,7 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
     ```
 
 6.  Run
+
     ```
     # At "...\SpeedrunHub\Source" run
     $ npm start
@@ -92,7 +93,7 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
 
 ## :warning: Issues
 
-- IOS Version not tested
+- IOS version not tested
 
 ## :construction: WIP
 
