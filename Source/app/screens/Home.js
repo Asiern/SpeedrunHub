@@ -49,7 +49,7 @@ class Home extends React.Component {
             APIKey={this.state.APIKey}
             navigation={this.props.navigation}
           />
-          <Text style={styles.headertext}>My Games</Text>
+          <Text style={styles.headertext}>My Games (WIP)</Text>
           <View style={styles.flatList}>
             {user.games.map((game) => (
               <View key={game.id} style={styles.button}>
