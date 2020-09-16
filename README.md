@@ -60,7 +60,7 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
 4.  Clone the repository using Git
 
     ```
-    # Navigate to the location in wich you would like to store this repository
+    # Navigate to the location in which you would like to store this repository
     # by using the next command "cd <directory>"
     $ cd "Documents\GitHub\SpeedrunHub"
     ```
