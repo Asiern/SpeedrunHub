@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Text, Dimensions } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import { ScrollView } from "react-native-gesture-handler";
@@ -17,53 +17,56 @@ import user from "../config/user.json";
 
 const { width } = Dimensions.get("screen");
 
-class Home extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: "Guest",
-      userid: "",
-      APIKey: "",
-    };
-  }
+export default function Home(props) {
+  const theme = useSelector((state) => state.themeReducer.theme);
+  const dispatch = useDispatch();
 
-  _retrieveData = async () => {
-    try {
+  const [username, setUsername] = useState("Guest");
+  const [userid, setUserid] = useState("");
+  const [APIKey, setAPIKey] = useState("");
+  //const [loading, setloading] = useState(true);
+
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
       const username = await AsyncStorage.getItem("@user");
       const userid = await AsyncStorage.getItem("@userid");
       const APIKey = await AsyncStorage.getItem("@API-Key");
-      this.setState({ username, userid, APIKey });
-    } catch (error) {
-      // Error retrieving data
-    }
-  };
-  componentDidMount() {
-    this._retrieveData();
-  }
+      if (mounted) {
+        setUsername(username);
+        setUserid(userid);
+        setAPIKey(APIKey);
+        //setloading(false);
+      }
+    })();
 
-  render() {
-    return (
+    return function cleanup() {
+      mounted = false;
+    };
+  }, []);
+
+  return (
+    <ThemeProvider theme={theme}>
       <ScrollView style={{ flex: 1 }}>
         <View style={styles.container}>
           <View style={styles.profile}>
             <UserHeader
-              username={this.state.username}
-              userid={this.state.userid}
-              navigation={this.props.navigation}
+              username={username}
+              userid={userid}
+              navigation={props.navigation}
             />
           </View>
-
           <NotificationBar
             width={width}
-            APIKey={this.state.APIKey}
-            navigation={this.props.navigation}
+            APIKey={APIKey}
+            navigation={props.navigation}
           />
           <Text style={styles.headertext}>My Games (WIP)</Text>
           <View style={styles.flatList}>
             {user.games.map((game) => (
               <View key={game.id} style={styles.button}>
                 <GameCard
-                  navigation={this.props.navigation}
+                  navigation={props.navigation}
                   id={game.id}
                   abbreviation={game.abbreviation}
                 />
@@ -72,8 +75,8 @@ class Home extends React.Component {
           </View>
         </View>
       </ScrollView>
-    );
-  }
+    </ThemeProvider>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -103,5 +106,3 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
 });
-
-export default Home;
