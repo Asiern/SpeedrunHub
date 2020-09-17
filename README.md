@@ -98,6 +98,7 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
 - App reload
 - Login screen not showing on first start
 - Login button missing on AccountSettings
+- Add HTTP request Header User-Agent
 
 ## :construction: WIP
 
@@ -107,6 +108,8 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
 - Run Info
 - Push Notifications
 - My Games
+- Japanese text support
+- Internet connection msg
 
 ## :page_with_curl: Privacy Policy / Terms & Conditions / License
 
