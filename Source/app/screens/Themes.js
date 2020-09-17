@@ -7,10 +7,9 @@ import { switchTheme } from "../redux/themeActions";
 import { lightTheme, darkTheme } from "../config/Themes";
 import { Button } from "react-native-paper";
 
-export default function Themes(props) {
+export default function Themes() {
   const theme = useSelector((state) => state.themeReducer.theme);
   const dispatch = useDispatch();
-  //onPress={()=> dispatch(switchTheme(darkTheme))}
   return (
     <ThemeProvider theme={theme}>
       <Container>
