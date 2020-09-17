@@ -94,6 +94,10 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
 ## :warning: Issues
 
 - IOS version not tested
+- MIUI 12 (Android 11) Dark Theme
+- App reload
+- Login screen not showing on first start
+- Login button missing on AccountSettings
 
 ## :construction: WIP
 
