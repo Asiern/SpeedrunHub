@@ -1,12 +1,20 @@
 import React from "react";
 import { StyleSheet, View, Text, Dimensions } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
+import { ScrollView } from "react-native-gesture-handler";
+
+import styled, { ThemeProvider } from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+import { switchTheme } from "../redux/themeActions";
+import { lightTheme, darkTheme } from "../config/Themes";
+
 import GameCard from "../components/GameCard";
 import UserHeader from "../components/UserHeader";
 import NotificationBar from "../components/NotificationBar";
 import colors from "../config/colors";
+
 import user from "../config/user.json";
-import { ScrollView } from "react-native-gesture-handler";
+
 const { width } = Dimensions.get("screen");
 
 class Home extends React.Component {

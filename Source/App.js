@@ -4,6 +4,16 @@ import Navigation from "./app/screens/Navigation";
 import Login from "./app/screens/Login";
 import { ActivityIndicator } from "react-native";
 
+//Themes
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware, combineReducers } from "redux";
+import thunk from "redux-thunk";
+import themeReducer from "./app/redux/themeReducer";
+
+const store = createStore(
+  combineReducers({ themeReducer }),
+  applyMiddleware(thunk)
+);
 //Dark mode https://www.npmjs.com/package/react-native-dark-mode
 
 export default class App extends Component {
@@ -11,7 +21,7 @@ export default class App extends Component {
   constructor(props) {
     super();
     this.state = {
-      Loggedin: true,
+      Loggedin: false,
       loading: true,
     };
   }
@@ -33,12 +43,10 @@ export default class App extends Component {
     this._isMounted = false;
   }
   render() {
-    if (this.state.loading) {
-      return <ActivityIndicator />;
-    } else if (this.state.Loggedin) {
-      return <Navigation />;
-    } else {
-      return <Login />;
-    }
+    return (
+      <Provider store={store}>
+        <Navigation />
+      </Provider>
+    );
   }
 }
