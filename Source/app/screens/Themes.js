@@ -1,11 +1,10 @@
 import React from "react";
-import { Text, StyleSheet } from "react-native";
+import { Button } from "react-native-paper";
 
 import styled, { ThemeConsumer, ThemeProvider } from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { switchTheme } from "../redux/themeActions";
 import { lightTheme, darkTheme } from "../config/Themes";
-import { Button } from "react-native-paper";
 
 export default function Themes() {
   const theme = useSelector((state) => state.themeReducer.theme);
@@ -16,6 +15,7 @@ export default function Themes() {
         {theme.mode === "light" ? (
           <Button
             title={"Switch to Dark"}
+            color={theme.PRIMARY_ACCENT}
             onPress={() => dispatch(switchTheme(darkTheme))}
           >
             Switch to Dark
@@ -23,6 +23,7 @@ export default function Themes() {
         ) : (
           <Button
             title={"Switch to ligth"}
+            color={theme.PRIMARY_ACCENT}
             onPress={() => dispatch(switchTheme(lightTheme))}
           >
             Switch to Light
