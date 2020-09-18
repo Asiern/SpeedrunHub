@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import AsyncStorage from "@react-native-community/async-storage";
+import { ActivityIndicator } from "react-native";
+
+//Screens
 import Navigation from "./app/screens/Navigation";
 import Login from "./app/screens/Login";
-import { ActivityIndicator } from "react-native";
 
 //Themes
 import { Provider } from "react-redux";
@@ -28,14 +30,19 @@ export default class App extends Component {
   async componentDidMount() {
     this._isMounted = true;
     if (this._isMounted) {
-      const Loggedin = await AsyncStorage.getItem("@Loggedin");
+      try {
+        //Load themes
+        //const theme = await AsyncStorage.getItem("@Theme");
+        //Load theme using dispatcher
+        const Loggedin = await AsyncStorage.getItem("@Loggedin");
 
-      if (Loggedin == "true") {
-        this.setState({ Loggedin: true, loading: false });
-      } else if (Loggedin == "false") {
-        this.setState({ Loggedin: false, loading: false });
-      } else {
-        null;
+        if (Loggedin == "true") {
+          this.setState({ Loggedin: true, loading: false });
+        } else if (Loggedin == "false") {
+          this.setState({ Loggedin: false, loading: false });
+        }
+      } catch (error) {
+        console.log(error);
       }
     }
   }
@@ -43,10 +50,14 @@ export default class App extends Component {
     this._isMounted = false;
   }
   render() {
-    return (
-      <Provider store={store}>
-        <Navigation />
-      </Provider>
-    );
+    if (this.state.loading) {
+      return <ActivityIndicator />;
+    } else {
+      return (
+        <Provider store={store}>
+          {this.state.Loggedin == "true" ? <Navigation /> : <Login />}
+        </Provider>
+      );
+    }
   }
 }
