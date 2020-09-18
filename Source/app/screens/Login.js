@@ -16,7 +16,6 @@ class Login extends React.Component {
       userid: "",
     };
   }
-
   _storeData = async (user, key) => {
     const createTwoButtonAlert = (msg) =>
       Alert.alert(
@@ -95,6 +94,7 @@ class Login extends React.Component {
               autoCompleteType={"username"}
               onChangeText={(text) => this.setState({ keyinput: text })}
               value={keyinput}
+              secureTextEntry={true}
             />
           </View>
 
