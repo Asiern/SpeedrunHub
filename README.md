@@ -96,9 +96,6 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
 - IOS version not tested
 - MIUI 12 (Android 11) Dark Theme
 - App reload
-- Login screen not showing on first start
-- Login button missing on AccountSettings
-- Add HTTP request Header User-Agent
 
 ## :construction: WIP
 
@@ -110,6 +107,7 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
 - My Games
 - Japanese text support
 - Internet connection msg
+- Add HTTP request Header User-Agent
 
 ## :page_with_curl: Privacy Policy / Terms & Conditions / License
 
