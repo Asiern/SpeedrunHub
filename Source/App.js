@@ -27,6 +27,9 @@ export default class App extends Component {
       loading: true,
     };
   }
+  reset() {
+    this.forceUpdate();
+  }
   async componentDidMount() {
     this._isMounted = true;
     if (this._isMounted) {
@@ -55,7 +58,11 @@ export default class App extends Component {
     } else {
       return (
         <Provider store={store}>
-          {this.state.Loggedin == "true" ? <Navigation /> : <Login />}
+          {this.state.Loggedin == true ? (
+            <Navigation reload={() => this.reset()} />
+          ) : (
+            <Login />
+          )}
         </Provider>
       );
     }
