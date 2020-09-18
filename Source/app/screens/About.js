@@ -29,19 +29,23 @@ class About extends React.Component {
           </View>
           <Text style={styles.title}>About This App</Text>
           <Text style={styles.paragraph}>
-            This app for IOS/Android platforms was made using React Native and
-            it is not an official app.
+            SpeedrunHub is an open source app for IOS/Android platforms made
+            with React Native and Expo.{"\n"}
+            {"\n"}
+            It allows you to consult the speedrun.com page natively on your
+            Android/iOS device.{"\n"}
+            {"\n"}
+            All the data is provided by the speedrun.com REST API.
           </Text>
-          <Text style={styles.paragraph}>
-            It allows you to consult the speedrun.com page. All the request are
-            directed to the speedrun.com REST API.
+          <Text style={[styles.paragraph, { fontWeight: "bold" }]}>
+            Disclaimer: This is not an official app
           </Text>
           <Text style={styles.title}>How Can I Help?</Text>
           <Text style={styles.paragraph}>
             If you have any problems or find any improvements to be made, you
             are welcome to open an issue on the GitHub page for it to be fixed.
-          </Text>
-          <Text style={styles.paragraph}>
+            {"\n"}
+            {"\n"}
             As this project is completely open source, if you want to
             contribute, you can find the GitHub page at the link below.
           </Text>
@@ -56,9 +60,14 @@ class About extends React.Component {
             </View>
           </TouchableOpacity>
 
-          <Text style={styles.title}>Contact Me</Text>
+          <Text style={styles.title}>WIP</Text>
           <Text style={styles.paragraph}>
-            asiern.dev@gmail.com // Discord: Asiern#5149
+            Themes{"\n"}Animations{"\n"}UI Design{"\n"}Run Info{"\n"}Push
+            Notifications{"\n"}My Games{"\n"}Japanese text support
+          </Text>
+          <Text style={styles.title}>Send Feedback</Text>
+          <Text style={styles.paragraph}>
+            Send me an email at asiern.dev@gmail.com
           </Text>
         </View>
       </ScrollView>
