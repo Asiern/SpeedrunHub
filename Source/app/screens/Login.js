@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View, Alert, DevSettings } from "react-native";
 import colors from "../config/colors";
 import AsyncStorage from "@react-native-community/async-storage";
@@ -6,16 +6,9 @@ import { TextInput } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
 import Button from "../components/Button";
 
-class Login extends React.Component {
-  constructor(props) {
-    super();
-    this.state = {
-      textinput: "",
-      keyinput: "",
-      username: "",
-      userid: "",
-    };
-  }
+export default function Login(props) {
+  const [textinput, setTextinput] = useState("");
+  const [keyinput, setKeyinput] = useState("");
   _storeData = async (user, key) => {
     const createTwoButtonAlert = (msg) =>
       Alert.alert(
@@ -36,7 +29,6 @@ class Login extends React.Component {
         await AsyncStorage.setItem("@userid", id);
         await AsyncStorage.setItem("@API-Key", key);
         await AsyncStorage.setItem("@Loggedin", "true");
-        this._retrieveData();
 
         createTwoButtonAlert(
           "Logged in successfully. The application will restart to save the changes."
@@ -48,77 +40,59 @@ class Login extends React.Component {
       );
     }
   };
-  _retrieveData = async () => {
-    try {
-      const username = await AsyncStorage.getItem("@user");
-      const userid = await AsyncStorage.getItem("@userid");
-      this.setState({ username: username, userid: userid });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  componentDidMount() {
-    this._retrieveData();
-  }
-  updateSearch = (input) => {
-    this.setState({ search: input });
-  };
-  render() {
-    const { textinput } = this.state;
-    const { keyinput } = this.state;
-    return (
-      <LinearGradient
-        style={{ flex: 1 }}
-        colors={[colors.primary, colors.primary]}
-      >
-        <View style={styles.login}>
-          <View style={styles.header}>
-            <Text style={styles.h1}>Welcome back</Text>
-            <Text style={styles.h2}>
-              Use your credentials to login into your account
-            </Text>
-          </View>
-          <View style={styles.textinputs}>
-            <TextInput
-              style={styles.textinput}
-              autoCapitalize={"none"}
-              placeholder={"Username"}
-              autoCompleteType={"username"}
-              onChangeText={(text) => this.setState({ textinput: text })}
-              value={textinput}
-            />
-            <TextInput
-              style={styles.textinput}
-              autoCapitalize={"none"}
-              placeholder={"API-Key"}
-              autoCompleteType={"username"}
-              onChangeText={(text) => this.setState({ keyinput: text })}
-              value={keyinput}
-              secureTextEntry={true}
-            />
-          </View>
-
-          <View style={styles.buttons}>
-            <Button
-              title={"LOG IN"}
-              function={this._storeData}
-              user={textinput}
-              keyinput={keyinput}
-              color={colors.primary}
-              textcolor={colors.white}
-            />
-            <Button
-              title={"SIGN UP"}
-              color={colors.white}
-              textcolor={colors.primary}
-            />
-          </View>
-          <View style={styles.footerline}>
-            <Text>Don't have an API-Key? Obtain it here</Text>
-          </View>
+  return (
+    <LinearGradient
+      style={{ flex: 1 }}
+      colors={[colors.primary, colors.primary]}
+    >
+      <View style={styles.login}>
+        <View style={styles.header}>
+          <Text style={styles.h1}>Welcome back</Text>
+          <Text style={styles.h2}>
+            Use your credentials to login into your account
+          </Text>
         </View>
-        <View style={styles.footer}>
-          {/*<Button
+        <View style={styles.textinputs}>
+          <TextInput
+            style={styles.textinput}
+            autoCapitalize={"none"}
+            placeholder={"Username"}
+            autoCompleteType={"username"}
+            onChangeText={(text) => setTextinput(text)}
+            value={textinput}
+          />
+          <TextInput
+            style={styles.textinput}
+            autoCapitalize={"none"}
+            placeholder={"API-Key"}
+            autoCompleteType={"username"}
+            onChangeText={(text) => setKeyinput(text)}
+            value={keyinput}
+            secureTextEntry={true}
+          />
+        </View>
+
+        <View style={styles.buttons}>
+          <Button
+            title={"LOG IN"}
+            function={() => _storeData(textinput, keyinput)}
+            user={textinput}
+            keyinput={keyinput}
+            color={colors.primary}
+            textcolor={colors.white}
+          />
+          <Button
+            title={"SIGN UP"}
+            color={colors.white}
+            textcolor={colors.primary}
+          />
+        </View>
+        <View style={styles.footerline}>
+          <Text>Don't have an API-Key? Obtain it here</Text>
+        </View>
+      </View>
+      <View style={styles.footer}>
+        {/*<Button
             title={"SKIP"}
             color={colors.white}
             textcolor={colors.darkgrey}
@@ -126,10 +100,9 @@ class Login extends React.Component {
               await AsyncStorage.setItem("@API-Key", "");
             }}
           ></Button>*/}
-        </View>
-      </LinearGradient>
-    );
-  }
+      </View>
+    </LinearGradient>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -195,5 +168,3 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
-
-export default Login;
