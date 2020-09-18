@@ -28,7 +28,8 @@ export default class App extends Component {
     };
   }
   reset() {
-    this.forceUpdate();
+    this.setState({ reset: true });
+    console.log("RESET FUNCTION");
   }
   async componentDidMount() {
     this._isMounted = true;
@@ -43,6 +44,8 @@ export default class App extends Component {
           this.setState({ Loggedin: true, loading: false });
         } else if (Loggedin == "false") {
           this.setState({ Loggedin: false, loading: false });
+        } else {
+          this.setState({ loading: false });
         }
       } catch (error) {
         console.log(error);
@@ -61,7 +64,7 @@ export default class App extends Component {
           {this.state.Loggedin == true ? (
             <Navigation reload={() => this.reset()} />
           ) : (
-            <Login />
+            <Login reload={() => this.reset()} />
           )}
         </Provider>
       );
