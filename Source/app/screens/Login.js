@@ -4,6 +4,7 @@ import colors from "../config/colors";
 import AsyncStorage from "@react-native-community/async-storage";
 import { TextInput } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
+
 import Button from "../components/Button";
 
 export default function Login(props) {
@@ -92,14 +93,12 @@ export default function Login(props) {
         </View>
       </View>
       <View style={styles.footer}>
-        {/*<Button
-            title={"SKIP"}
-            color={colors.white}
-            textcolor={colors.darkgrey}
-            function={async () => {
-              await AsyncStorage.setItem("@API-Key", "");
-            }}
-          ></Button>*/}
+        <Button
+          title={"SKIP"}
+          color={colors.white}
+          textcolor={colors.darkgrey}
+          function={() => null}
+        ></Button>
       </View>
     </LinearGradient>
   );
