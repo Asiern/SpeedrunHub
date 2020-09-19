@@ -12,6 +12,7 @@ import {
 import Run from "../components/Run";
 import colors from "../config/colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import AsyncStorage from "@react-native-community/async-storage";
 
 class GameInfo extends React.Component {
   constructor() {
@@ -28,6 +29,32 @@ class GameInfo extends React.Component {
       cheked: 0,
     };
   }
+  _toggleFavourites = async () => {
+    const games = await AsyncStorage.getItem("@MyGames");
+    var contains = false;
+    var gameList = JSON.parse(games);
+    for (let GAME of gameList) {
+      if (GAME.id == this.state.id) {
+        const index = gameList.indexOf(GAME);
+        gameList.splice(index, 1);
+        contains = true;
+      }
+    }
+    if (!contains) {
+      //Create game obj
+      var game = {
+        id: this.state.id,
+        abbreviation: this.state.abbreviation,
+      };
+      //add game to list
+      gameList.push(game);
+      //Game added to list
+      await AsyncStorage.setItem("@MyGames", JSON.stringify(gameList));
+    } else {
+      //Game got removed from list
+      await AsyncStorage.setItem("@MyGames", JSON.stringify(gameList));
+    }
+  };
   async componentDidMount() {
     try {
       //Load gameId & abbreviation from react navigation
@@ -226,6 +253,10 @@ class GameInfo extends React.Component {
             </View>
           </View>
         </ImageBackground>
+        <Button
+          title={"Add to favs"}
+          onPress={() => this._toggleFavourites()}
+        />
         <View style={{ padding: 10 }}></View>
         <FlatList
           keyExtractor={(item) => item.id}
