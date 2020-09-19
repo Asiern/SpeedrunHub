@@ -13,9 +13,9 @@ import colors from "../../config/colors";
 import Button from "../../components/Button";
 
 const AccountSettings = (props) => {
-  const [user, setUser] = useState("Aa");
-  const [userId, setUserId] = useState("48g3q2rx");
-  const [key, setKey] = useState("jhsodosaidjois");
+  const [user, setUser] = useState("");
+  const [userId, setUserId] = useState("");
+  const [key, setKey] = useState("");
   useEffect(() => {
     (async () => {
       const tempuser = await AsyncStorage.getItem("@user");
