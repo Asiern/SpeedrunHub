@@ -40,7 +40,7 @@ class Settings extends React.Component {
               </View>
             </View>
           </TouchableOpacity>
-          {/*<TouchableOpacity
+          <TouchableOpacity
             onPress={() =>
               this.props.navigation.navigate("NotificationsSettings")
             }
@@ -98,7 +98,7 @@ class Settings extends React.Component {
                 />
               </View>
             </View>
-          </TouchableOpacity>*/}
+          </TouchableOpacity>
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate("About")}
           >
