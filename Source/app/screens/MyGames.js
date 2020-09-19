@@ -1,25 +1,50 @@
-import React, { Component } from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, StyleSheet, Button } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import user from "../config/user.json";
 import GameCard from "../components/GameCard";
 import colors from "../config/colors";
-class MyGames extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      games: [],
+
+export default function MyGames(props) {
+  const [games, setGames] = useState([]);
+  useEffect(() => {
+    let mounted = true;
+    if (mounted) {
+      (async () => {
+        _retrieveData();
+      })();
+    }
+    return function cleanup() {
+      mounted = false;
     };
-  }
-  _retrieveData = async () => {
+  });
+  async function _retrieveData() {
     try {
-      var games = await AsyncStorage.getItem("@games");
-      this.setState({ games });
+      var games = await AsyncStorage.getItem("@MyGames");
+      var gameList = JSON.parse(games);
+      setGames(gameList);
     } catch (error) {
       // Error retrieving data
+      console.log(error);
     }
-  };
-  _storeData = async (id, abbreviation) => {
+  }
+  async function _removeGame(id) {
+    const found = false;
+    for (let game of games) {
+      if (game.id == id && !found) {
+        const index = games.indexOf(game);
+        games.splice(index, 1);
+        var outGameList = JSON.stringify(games);
+        await AsyncStorage.setItem("@MyGames", outGameList);
+        setGames(games);
+        return;
+      } else {
+        console.log("Game not found");
+      }
+    }
+  }
+
+  async function _storeDatatest(id, abbreviation) {
     try {
       let gameList = [];
       for (let game of user.games) {
@@ -31,38 +56,44 @@ class MyGames extends Component {
         outGame.abbreviation = game.abbreviation;
         gameList.push(outGame);
       }
-      console.log(gameList);
-      //await AsyncStorage.multiSet("@games", gameList);
-      //this._retrieveData();
+      //console.log(gameList);
+      var outGameList = JSON.stringify(gameList);
+      await AsyncStorage.setItem("@MyGames", outGameList);
+      _retrieveData();
     } catch (error) {
       console.log(error);
     }
-  };
-  componentDidMount() {}
-  render() {
-    return (
-      <View style={{ flex: 1, justifyContent: "center" }}>
-        <Button
-          title={"Store Data"}
-          style={styles.button}
-          color={colors.primary}
-          onPress={() => this._storeData("76rkwed8", "na")}
-        />
-        <View style={styles.flatList}>
-          {this.state.games.map((game) => (
-            <View key={game.id} style={styles.button}>
-              <GameCard
-                navigation={this.props.navigation}
-                id={game.id}
-                abbreviation={game.abbreviation}
-              />
-            </View>
-          ))}
-        </View>
-      </View>
-    );
   }
+
+  return (
+    <View style={{ flex: 1, justifyContent: "center" }}>
+      <Button
+        title={"Store Data"}
+        style={styles.button}
+        color={colors.primary}
+        onPress={() => _storeDatatest("76rkwed8", "na")}
+      />
+      <Button
+        title={"Remove game"}
+        style={styles.button}
+        color={colors.primary}
+        onPress={() => _removeGame("76rkwed8")}
+      />
+      <View style={styles.flatList}>
+        {games.map((game) => (
+          <View key={game.id} style={styles.button}>
+            <GameCard
+              navigation={props.navigation}
+              id={game.id}
+              abbreviation={game.abbreviation}
+            />
+          </View>
+        ))}
+      </View>
+    </View>
+  );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -89,4 +120,3 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
 });
-export default MyGames;
