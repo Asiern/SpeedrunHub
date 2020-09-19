@@ -13,8 +13,6 @@ import UserHeader from "../components/UserHeader";
 import NotificationBar from "../components/NotificationBar";
 import colors from "../config/colors";
 
-import user from "../config/user.json";
-
 const { width } = Dimensions.get("screen");
 
 export default function Home(props) {
@@ -24,7 +22,7 @@ export default function Home(props) {
   const [username, setUsername] = useState("Guest");
   const [userid, setUserid] = useState("");
   const [APIKey, setAPIKey] = useState("");
-  //const [loading, setloading] = useState(true);
+  const [games, setGames] = useState([]);
 
   useEffect(() => {
     let mounted = true;
@@ -32,11 +30,12 @@ export default function Home(props) {
       const username = await AsyncStorage.getItem("@user");
       const userid = await AsyncStorage.getItem("@userid");
       const APIKey = await AsyncStorage.getItem("@API-Key");
+      const GAMES = await AsyncStorage.getItem("@MyGames");
       if (mounted) {
         setUsername(username);
         setUserid(userid);
         setAPIKey(APIKey);
-        //setloading(false);
+        setGames(JSON.parse(GAMES));
       }
     })();
 
@@ -63,7 +62,7 @@ export default function Home(props) {
           />
           <Text style={styles.headertext}>My Games (WIP)</Text>
           <View style={styles.flatList}>
-            {user.games.map((game) => (
+            {games.map((game) => (
               <View key={game.id} style={styles.button}>
                 <GameCard
                   navigation={props.navigation}
