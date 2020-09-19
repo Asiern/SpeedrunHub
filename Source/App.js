@@ -16,7 +16,6 @@ const store = createStore(
   combineReducers({ themeReducer }),
   applyMiddleware(thunk)
 );
-//Dark mode https://www.npmjs.com/package/react-native-dark-mode
 
 export default function App() {
   const [loading, setLoading] = useState(true);
