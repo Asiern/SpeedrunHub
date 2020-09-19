@@ -106,7 +106,7 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
 - Push Notifications
 - My Games
 - Japanese text support
-- Internet connection msg
+- Internet connection msg (ToastAndroid)
 - Add HTTP request Header User-Agent
 
 ## :page_with_curl: Privacy Policy / Terms & Conditions / License
