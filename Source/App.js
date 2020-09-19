@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-community/async-storage";
 import { ActivityIndicator } from "react-native";
 
@@ -18,56 +18,39 @@ const store = createStore(
 );
 //Dark mode https://www.npmjs.com/package/react-native-dark-mode
 
-export default class App extends Component {
-  _isMounted = false;
-  constructor(props) {
-    super();
-    this.state = {
-      Loggedin: false,
-      loading: true,
-    };
-  }
-  reset() {
-    this.setState({ reset: true });
-    console.log("RESET FUNCTION");
-  }
-  async componentDidMount() {
-    this._isMounted = true;
-    if (this._isMounted) {
-      try {
-        //Load themes
-        //const theme = await AsyncStorage.getItem("@Theme");
-        //Load theme using dispatcher
-        const Loggedin = await AsyncStorage.getItem("@Loggedin");
+export default function App() {
+  const [loading, setLoading] = useState(true);
+  const [Loggedin, setLoggedin] = useState(false);
 
-        if (Loggedin == "true") {
-          this.setState({ Loggedin: true, loading: false });
-        } else if (Loggedin == "false") {
-          this.setState({ Loggedin: false, loading: false });
+  useEffect(() => {
+    let mounted = true;
+    if (mounted) {
+      (async () => {
+        const LOGGEDIN = await AsyncStorage.getItem("@Loggedin");
+        if (LOGGEDIN == "true") {
+          setLoggedin(true);
+          setLoading(false);
+        } else if (LOGGEDIN == "false") {
+          setLoggedin(false);
+          setLoading(false);
         } else {
-          this.setState({ loading: false });
+          setLoading(false);
         }
-      } catch (error) {
-        console.log(error);
-      }
+      })();
     }
-  }
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
-  render() {
-    if (this.state.loading) {
-      return <ActivityIndicator />;
-    } else {
-      return (
-        <Provider store={store}>
-          {this.state.Loggedin == true ? (
-            <Navigation reload={() => this.reset()} />
-          ) : (
-            <Login reload={() => this.reset()} />
-          )}
-        </Provider>
-      );
-    }
+
+    return function cleanup() {
+      mounted = false;
+    };
+  }, []);
+
+  if (loading) {
+    return <ActivityIndicator />;
+  } else {
+    return (
+      <Provider store={store}>
+        {Loggedin == true ? <Navigation /> : <Login />}
+      </Provider>
+    );
   }
 }
