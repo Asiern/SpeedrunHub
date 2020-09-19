@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Button } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import user from "../config/user.json";
-import GameCard from "../components/GameCard";
+import Game from "../components/Game";
 import colors from "../config/colors";
+import { FlatList } from "react-native-gesture-handler";
 
 export default function MyGames(props) {
   const [games, setGames] = useState([]);
@@ -66,7 +67,7 @@ export default function MyGames(props) {
   }
 
   return (
-    <View style={{ flex: 1, justifyContent: "center" }}>
+    <View style={styles.container}>
       <Button
         title={"Store Data"}
         style={styles.button}
@@ -79,17 +80,11 @@ export default function MyGames(props) {
         color={colors.primary}
         onPress={() => _removeGame("76rkwed8")}
       />
-      <View style={styles.flatList}>
-        {games.map((game) => (
-          <View key={game.id} style={styles.button}>
-            <GameCard
-              navigation={props.navigation}
-              id={game.id}
-              abbreviation={game.abbreviation}
-            />
-          </View>
-        ))}
-      </View>
+      <FlatList
+        data={games}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <Game title={item.abbreviation} />}
+      ></FlatList>
     </View>
   );
 }
@@ -97,26 +92,6 @@ export default function MyGames(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  profilecontainer: {},
-  profile: {
-    height: 250,
-  },
-  headertext: {
-    color: colors.darkgrey,
-    fontSize: 30,
-    marginLeft: 20,
-    fontWeight: "bold",
-  },
-  flatList: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    flex: 3,
-    margin: 20,
-    justifyContent: "space-between",
-  },
-  notifications: {
-    flexDirection: "row",
-    paddingHorizontal: 10,
+    justifyContent: "center",
   },
 });

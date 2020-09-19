@@ -60,7 +60,7 @@ export default function Home(props) {
             APIKey={APIKey}
             navigation={props.navigation}
           />
-          <Text style={styles.headertext}>My Games (WIP)</Text>
+          <Text style={styles.headertext}>My Games</Text>
           <View style={styles.flatList}>
             {games.map((game) => (
               <View key={game.id} style={styles.button}>
