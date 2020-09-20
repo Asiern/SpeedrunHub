@@ -16,16 +16,6 @@ class GameCard extends Component {
   }
 
   render() {
-    const shadow = {
-      width: 110,
-      height: 153,
-      color: "#000000",
-      radius: 10,
-      opacity: 0.6,
-      x: 5,
-      y: 5,
-      style: { marginVertical: 5 },
-    };
     return (
       <View style={{ padding: 2 }}>
         <TouchableOpacity
