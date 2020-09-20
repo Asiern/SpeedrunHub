@@ -27,8 +27,17 @@ class GameInfo extends React.Component {
       variables: [],
       categories: [],
       cheked: 0,
+      favourite: false,
     };
   }
+  _isFavourite = async (id) => {
+    const gameList = JSON.parse(await AsyncStorage.getItem("@MyGames"));
+    for (let GAME of gameList) {
+      if (GAME.id == id) {
+        this.setState({ favourite: true });
+      }
+    }
+  };
   _toggleFavourites = async () => {
     const games = await AsyncStorage.getItem("@MyGames");
     var contains = false;
@@ -50,15 +59,19 @@ class GameInfo extends React.Component {
       gameList.push(game);
       //Game added to list
       await AsyncStorage.setItem("@MyGames", JSON.stringify(gameList));
+      this.setState({ favourite: true });
     } else {
       //Game got removed from list
       await AsyncStorage.setItem("@MyGames", JSON.stringify(gameList));
+      this.setState({ favourite: false });
     }
   };
   async componentDidMount() {
     try {
       //Load gameId & abbreviation from react navigation
       const { id, abbreviation } = this.props.route.params;
+      //Fav?
+      this._isFavourite(id, abbreviation);
       //Get Game Data
       //Fetch Categories from Speedrun.com
       const url =
@@ -253,10 +266,19 @@ class GameInfo extends React.Component {
             </View>
           </View>
         </ImageBackground>
-        <Button
-          title={"Add to favs"}
-          onPress={() => this._toggleFavourites()}
-        />
+        {this.state.favourite == true ? (
+          <Button
+            title={"Remove from favs"}
+            color={colors.red}
+            onPress={() => this._toggleFavourites()}
+          />
+        ) : (
+          <Button
+            color={colors.primary}
+            title={"Add to favs"}
+            onPress={() => this._toggleFavourites()}
+          />
+        )}
         <View style={{ padding: 10 }}></View>
         <FlatList
           keyExtractor={(item) => item.id}
