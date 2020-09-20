@@ -18,7 +18,7 @@ export default function MyGames(props) {
     return function cleanup() {
       mounted = false;
     };
-  });
+  }, []);
   async function _retrieveData() {
     try {
       var games = await AsyncStorage.getItem("@MyGames");
@@ -45,7 +45,7 @@ export default function MyGames(props) {
     }
   }
 
-  async function _storeDatatest(id, abbreviation) {
+  async function _storeDatatest() {
     try {
       let gameList = [];
       for (let game of user.games) {
@@ -72,7 +72,7 @@ export default function MyGames(props) {
         title={"Store Data"}
         style={styles.button}
         color={colors.primary}
-        onPress={() => _storeDatatest("76rkwed8", "na")}
+        onPress={() => _storeDatatest()}
       />
       <Button
         title={"Remove game"}
