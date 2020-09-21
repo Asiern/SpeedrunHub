@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, ImageBackground, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import colors from "../config/colors";
 
 export default function GameCard(props) {
   return (
