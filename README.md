@@ -27,6 +27,9 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
 - Search for users and watch their PBs
 - Search for game leaderboards
 - Manage your favourite games
+- <b>Feasible features</b>
+    - As a moderator verify/reject runs
+    - Remove perosnal runs
 
 ## Expo
 
