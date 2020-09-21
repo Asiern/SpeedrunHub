@@ -36,7 +36,7 @@ export default function About() {
         <Text style={[styles.paragraph, { fontWeight: "bold" }]}>
           Disclaimer: This is not an official app
         </Text>
-        <Text style={styles.title}>How Can I Help?</Text>
+        <Text style={styles.title}>Contribute</Text>
         <Text style={styles.paragraph}>
           If you have any problems or find any improvements to be made, you are
           welcome to open an issue on the GitHub page for it to be fixed.
