@@ -1,54 +1,37 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { StyleSheet, ImageBackground, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import colors from "../config/colors";
 
-class GameCard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      id: this.props.id,
-      abbreviation: this.props.abbreviation,
-      cover:
-        "https://www.speedrun.com/themes/" +
-        this.props.abbreviation +
-        "/cover-256.png",
-    };
-  }
-
-  render() {
-    return (
-      <View style={{ padding: 2 }}>
-        <TouchableOpacity
-          onPress={() =>
-            this.props.navigation.navigate("Game Info", {
-              id: this.state.id,
-              name: "name",
-              abbreviation: this.state.abbreviation,
-            })
-          }
-          style={styles.container}
-        >
-          <ImageBackground
-            source={{ uri: this.state.cover }}
-            style={styles.image}
-            imageStyle={{ borderRadius: 10 }}
-          ></ImageBackground>
-        </TouchableOpacity>
-      </View>
-    );
-  }
+export default function GameCard(props) {
+  return (
+    <View style={{ padding: 2 }}>
+      <TouchableOpacity
+        onPress={() =>
+          props.navigation.navigate("Game Info", {
+            id: props.id,
+            name: "name",
+            abbreviation: props.abbreviation,
+          })
+        }
+        style={styles.container}
+      >
+        <ImageBackground
+          source={{
+            uri:
+              "https://www.speedrun.com/themes/" +
+              props.abbreviation +
+              "/cover-256.png",
+          }}
+          style={styles.image}
+          imageStyle={{ borderRadius: 10 }}
+        ></ImageBackground>
+      </TouchableOpacity>
+    </View>
+  );
 }
-const styles = StyleSheet.create({
-  shadow: {
-    backgroundColor: "white",
-    shadowColor: "gold",
-    shadowOffset: { width: 5, height: 5 },
-    shadowOpacity: 0.9,
 
-    // add shadows for Android only
-    // No options for shadow color, shadow offset, shadow opacity like iOS
-    elevation: 5,
-  },
+const styles = StyleSheet.create({
   container: {
     width: 113,
     height: 160,
@@ -67,5 +50,3 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
 });
-
-export default GameCard;
