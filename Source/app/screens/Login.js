@@ -31,9 +31,7 @@ export default function Login(props) {
         await AsyncStorage.setItem("@API-Key", key);
         await AsyncStorage.setItem("@Loggedin", "true");
 
-        createTwoButtonAlert(
-          "Logged in successfully. The application will restart to save the changes."
-        );
+        createTwoButtonAlert("Logged in successfully.");
       }
     } catch (error) {
       createTwoButtonAlert(
