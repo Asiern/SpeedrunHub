@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Alert, DevSettings } from "react-native";
+import { StyleSheet, Text, View, Alert, Linking } from "react-native";
 import colors from "../config/colors";
 import AsyncStorage from "@react-native-community/async-storage";
 import { TextInput } from "react-native-gesture-handler";
@@ -39,6 +39,11 @@ export default function Login(props) {
       );
     }
   };
+  function loadInBrowser(link) {
+    Linking.openURL(link).catch((err) =>
+      console.error("Couldn't load page", err)
+    );
+  }
   return (
     <LinearGradient
       style={{ flex: 1 }}
@@ -63,7 +68,7 @@ export default function Login(props) {
           <TextInput
             style={styles.textinput}
             autoCapitalize={"none"}
-            placeholder={"API-Key"}
+            placeholder={"API-Key (Optional)"}
             autoCompleteType={"username"}
             onChangeText={(text) => setKeyinput(text)}
             value={keyinput}
@@ -84,6 +89,9 @@ export default function Login(props) {
             title={"SIGN UP"}
             color={colors.white}
             textcolor={colors.primary}
+            function={() => {
+              loadInBrowser("https://speedrun.com");
+            }}
           />
         </View>
         <View style={styles.footerline}>
@@ -95,7 +103,7 @@ export default function Login(props) {
           title={"SKIP"}
           color={colors.white}
           textcolor={colors.darkgrey}
-          function={() => null}
+          function={() => props.function(true)}
         ></Button>
       </View>
     </LinearGradient>
