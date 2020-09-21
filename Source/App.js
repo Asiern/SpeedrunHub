@@ -41,14 +41,18 @@ export default function App() {
     return function cleanup() {
       mounted = false;
     };
-  }, []);
+  }, [Loggedin]);
 
   if (loading) {
     return <ActivityIndicator />;
   } else {
     return (
       <Provider store={store}>
-        {Loggedin == true ? <Navigation /> : <Login />}
+        {Loggedin == true ? (
+          <Navigation function={() => setLoggedin()} />
+        ) : (
+          <Login function={() => setLoggedin()} />
+        )}
       </Provider>
     );
   }

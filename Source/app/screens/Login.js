@@ -15,7 +15,7 @@ export default function Login(props) {
       Alert.alert(
         "Alert",
         msg,
-        [{ text: "OK", onPress: () => DevSettings.reload() }],
+        [{ text: "OK", onPress: () => props.function(true) }],
         { cancelable: true }
       );
     try {
