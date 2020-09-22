@@ -6,7 +6,7 @@
 
 ## Fixes
 
-- Fixed: App not reloading when logging.
+- Fixed: App not reloading when logging in.
 - Fixed: Notifications issue when API-Key was not provided.
 - Fixed: Login screen buttons.
 - Fixed: Profiles with no country not displaying properly.
