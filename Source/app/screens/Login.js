@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Alert, Linking } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Alert,
+  Linking,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+} from "react-native";
 import colors from "../config/colors";
 import AsyncStorage from "@react-native-community/async-storage";
 import { TextInput } from "react-native-gesture-handler";
@@ -53,49 +61,59 @@ export default function Login(props) {
         <View style={styles.header}>
           <Text style={styles.h1}>Welcome back</Text>
           <Text style={styles.h2}>
-            Use your credentials to login into your account
+            Use your credentials to login into your account.{"\n"} API-Key is
+            optional an only used for notifications.
           </Text>
         </View>
-        <View style={styles.textinputs}>
-          <TextInput
-            style={styles.textinput}
-            autoCapitalize={"none"}
-            placeholder={"Username"}
-            autoCompleteType={"username"}
-            onChangeText={(text) => setTextinput(text)}
-            value={textinput}
-          />
-          <TextInput
-            style={styles.textinput}
-            autoCapitalize={"none"}
-            placeholder={"API-Key (Optional)"}
-            autoCompleteType={"username"}
-            onChangeText={(text) => setKeyinput(text)}
-            value={keyinput}
-            secureTextEntry={true}
-          />
-        </View>
+        <KeyboardAvoidingView style={styles.form}>
+          <View style={styles.textinputs}>
+            <TextInput
+              style={styles.textinput}
+              autoCapitalize={"none"}
+              placeholder={"Username"}
+              autoCompleteType={"username"}
+              onChangeText={(text) => setTextinput(text)}
+              value={textinput}
+            />
+            <TextInput
+              style={styles.textinput}
+              autoCapitalize={"none"}
+              placeholder={"API-Key (Optional)"}
+              autoCompleteType={"username"}
+              onChangeText={(text) => setKeyinput(text)}
+              value={keyinput}
+              secureTextEntry={true}
+            />
+          </View>
 
-        <View style={styles.buttons}>
-          <Button
-            title={"LOG IN"}
-            function={() => _storeData(textinput, keyinput)}
-            user={textinput}
-            keyinput={keyinput}
-            color={colors.primary}
-            textcolor={colors.white}
-          />
-          <Button
-            title={"SIGN UP"}
-            color={colors.white}
-            textcolor={colors.primary}
-            function={() => {
-              loadInBrowser("https://speedrun.com");
-            }}
-          />
-        </View>
+          <View style={styles.buttons}>
+            <Button
+              title={"LOG IN"}
+              function={() => _storeData(textinput, keyinput)}
+              user={textinput}
+              keyinput={keyinput}
+              color={colors.primary}
+              textcolor={colors.white}
+            />
+            <Button
+              title={"SIGN UP"}
+              color={colors.white}
+              textcolor={colors.primary}
+              function={() => {
+                loadInBrowser("https://speedrun.com");
+              }}
+            />
+          </View>
+        </KeyboardAvoidingView>
         <View style={styles.footerline}>
-          <Text>Don't have an API-Key? Obtain it here</Text>
+          <View>
+            <Text>Don't have an API-Key? </Text>
+          </View>
+          <TouchableOpacity
+            onPress={() => loadInBrowser("https://www.speedrun.com/api/auth")}
+          >
+            <Text style={{ color: colors.primary }}>Obtain it here</Text>
+          </TouchableOpacity>
         </View>
       </View>
       <View style={styles.footer}>
@@ -130,6 +148,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  form: {
+    flex: 2,
+  },
   textinputs: {
     flex: 0.5,
     justifyContent: "center",
@@ -141,6 +162,7 @@ const styles = StyleSheet.create({
   },
   footerline: {
     flex: 0.4,
+    flexDirection: "row",
     justifyContent: "center",
     alignContent: "center",
     textAlignVertical: "center",
@@ -156,6 +178,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 25,
     alignSelf: "center",
+    color: colors.primary,
   },
   h2: {
     fontSize: 15,
