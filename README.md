@@ -1,10 +1,8 @@
-# SpeedrunHub
+# :trophy:SpeedrunHub
 
 <img src="https://github.com/Asiern/SpeedrunHub/blob/master/Readme/assets/Home.jpg" />
 
 [![runs with expo](https://img.shields.io/badge/Runs%20with%20Expo-000.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000)](https://expo.io/)
-
-[![Get](Readme/assets/google-play-badge.png)](https://play.google.com/store/apps/details?id=com.asiern.speedrun)
 
 ---
 
@@ -14,6 +12,7 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
 **Disclaimer: This is not an official app**
 
 - [:boom:Features](#boom-features)
+- [:arrow_down:Download](#arrow_down-Download)
 - [:email: Send Feedback](#email-send-feedback)
 - [:raised_hands: Contributing](#raised_hands-contributing)
 - [:gear: Project Setup](#gear-project-setup)
@@ -36,6 +35,10 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
 - [Project](https://expo.io/dashboard/asiern/speedruncomapp)
 
 - [Builds](https://expo.io/dashboard/asiern/speedruncomapp/builds)
+
+## :arrow_down: Download
+
+[![Get](Readme/assets/google-play-badge.png)](https://play.google.com/store/apps/details?id=com.asiern.speedrun)
 
 ## :email: Send Feedback
 
