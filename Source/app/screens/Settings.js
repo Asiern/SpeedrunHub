@@ -81,7 +81,7 @@ class Settings extends React.Component {
             </View>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => this.props.navigation.navigate("MyGames")}
+            onPress={() => this.props.navigation.navigate("MyGamesSettings")}
           >
             <View style={styles.button}>
               <View style={styles.icon}>

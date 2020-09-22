@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Button } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
-import user from "../config/user.json";
-import Game from "../components/Game";
-import colors from "../config/colors";
+import user from "../../config/user.json";
+import Game from "../../components/Game";
+import colors from "../../config/colors";
 import { FlatList } from "react-native-gesture-handler";
 
 export default function MyGames(props) {
