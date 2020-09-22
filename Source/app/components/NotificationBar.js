@@ -18,8 +18,9 @@ const NotificationBar = (props) => {
   const key = props.APIKey;
   useEffect(() => {
     let mounted = true;
+
     try {
-      if (data == null) {
+      if (loading) {
         var url = "https://www.speedrun.com/api/v1/notifications";
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url);
