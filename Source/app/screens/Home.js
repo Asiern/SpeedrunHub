@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { switchTheme } from "../redux/themeActions";
 import { lightTheme, darkTheme } from "../config/Themes";
 
-import GameCard from "../components/GameCard";
+import MyGames from "../components/MyGames";
 import UserHeader from "../components/UserHeader";
 import NotificationBar from "../components/NotificationBar";
 import colors from "../config/colors";
@@ -31,6 +31,7 @@ export default function Home(props) {
       const userid = await AsyncStorage.getItem("@userid");
       const APIKey = await AsyncStorage.getItem("@API-Key");
       const GAMES = await AsyncStorage.getItem("@MyGames");
+      console.log(GAMES);
       if (mounted) {
         setUsername(username);
         setUserid(userid);
@@ -45,8 +46,8 @@ export default function Home(props) {
   }, []);
 
   return (
-    <ThemeProvider theme={theme}>
-      <ScrollView style={{ flex: 1 }}>
+    <ThemeProvider theme={theme} style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1, backgroundColor: colors.light }}>
         <View style={styles.container}>
           <View style={styles.profile}>
             <UserHeader
@@ -61,17 +62,13 @@ export default function Home(props) {
             navigation={props.navigation}
           />
           <Text style={styles.headertext}>My Games</Text>
-          <View style={styles.flatList}>
-            {games.map((game) => (
-              <View key={game.id} style={styles.button}>
-                <GameCard
-                  navigation={props.navigation}
-                  id={game.id}
-                  abbreviation={game.abbreviation}
-                />
-              </View>
-            ))}
-          </View>
+          {games == null ? (
+            <View>
+              <Text>No games found</Text>
+            </View>
+          ) : (
+            <MyGames data={games} navigation={props.navigation} />
+          )}
         </View>
       </ScrollView>
     </ThemeProvider>
