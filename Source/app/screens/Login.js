@@ -62,7 +62,7 @@ export default function Login(props) {
           <Text style={styles.h1}>Welcome back</Text>
           <Text style={styles.h2}>
             Use your credentials to login into your account.{"\n"} API-Key is
-            optional an only used for notifications.
+            optional and only used for notifications.
           </Text>
         </View>
         <KeyboardAvoidingView style={styles.form}>
