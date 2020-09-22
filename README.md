@@ -4,7 +4,7 @@
 
 [![runs with expo](https://img.shields.io/badge/Runs%20with%20Expo-000.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000)](https://expo.io/)
 
-<img src="Readme/assets/google-play-badge.png" height="40">
+[![Get](Readme/assets/google-play-badge.png)](https://google.es)
 
 ---
 
@@ -28,8 +28,8 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
 - Search for game leaderboards
 - Manage your favourite games
 - <b>Feasible features</b>
-    - As a moderator verify/reject runs
-    - Submit/remove personal runs
+  - As a moderator verify/reject runs
+  - Submit/remove personal runs
 
 ## Expo
 
