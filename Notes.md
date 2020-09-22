@@ -9,7 +9,7 @@
 - Fixed: App not reloading when logging.
 - Fixed: Notifications issue when API-Key was not provided.
 - Fixed: Login screen buttons.
-- Fixed: Pfofiles with no country not displaying properly.
+- Fixed: Profiles with no country not displaying properly.
 
 ## Performance
 
