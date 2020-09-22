@@ -37,12 +37,18 @@ class Profile extends React.Component {
     const userurl = "https://www.speedrun.com/api/v1/users/" + userid;
     const userresponse = await fetch(userurl);
     const userdata = await userresponse.json();
+    var country = "";
+    if (userdata.data.location == null) {
+      country = "";
+    } else {
+      country = userdata.data.location.country.names.international;
+    }
 
     this.setState({
       loading: false,
       runs: runsdata.data,
       user: userdata.data,
-      country: userdata.data.location.country.names.international,
+      country,
     });
   }
   async componentDidMount() {
