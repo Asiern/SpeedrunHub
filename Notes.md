@@ -1,7 +1,7 @@
 ## What's new?
 
 - Now you can add/remove games from MyGames from GameInfo.
-- Moved MyGames to an unique file `MyGames.js` and changed .map to Flatlist.
+- Moved MyGames to an unique file `MyGames.js` and changed from .map to Flatlist.
 - Added Notification Bar messages when API-Key is missing and Notifications are empty.
 
 ## Fixes
@@ -25,3 +25,5 @@
 - Runs with multiple runners not displaying properly.
 - Japanese users not displaying.
 - OS forced darkmode breaks `UserHeader.js` colors.
+- Login `SKIP` button not working.
+- Profile region.
