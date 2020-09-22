@@ -4,7 +4,7 @@
 
 [![runs with expo](https://img.shields.io/badge/Runs%20with%20Expo-000.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000)](https://expo.io/)
 
-[![Get](Readme/assets/google-play-badge.png)](https://google.es)
+[![Get](Readme/assets/google-play-badge.png)](https://play.google.com/store/apps/details?id=com.asiern.speedrun)
 
 ---
 
