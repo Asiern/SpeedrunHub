@@ -7,7 +7,7 @@ import About from ".//About";
 import GameInfo from "./GameInfo";
 import Search from "./Search";
 import Themes from "./Themes";
-import MyGames from "./MyGames";
+import MyGamesSettings from "./Settings/MyGamesSettings";
 import Login from "./Login";
 import Notifications from "./Notifications";
 import NotificationsSettings from "./Settings/NotificationsSettings";
@@ -56,7 +56,7 @@ export default class Navigation extends Component {
         options={{ title: "My Profile", headerShown: "" }}
       />
       <Stack.Screen name="Themes" component={Themes} />
-      <Stack.Screen name="MyGames" component={MyGames} />
+      <Stack.Screen name="MyGamesSettings" component={MyGamesSettings} />
       <Stack.Screen
         name="NotificationsSettings"
         component={NotificationsSettings}
