@@ -31,7 +31,6 @@ export default function Home(props) {
       const userid = await AsyncStorage.getItem("@userid");
       const APIKey = await AsyncStorage.getItem("@API-Key");
       const GAMES = await AsyncStorage.getItem("@MyGames");
-      console.log(GAMES);
       if (mounted) {
         setUsername(username);
         setUserid(userid);
