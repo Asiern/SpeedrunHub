@@ -32,7 +32,6 @@ const NotificationBar = (props) => {
             response = JSON.parse(xhr.responseText);
 
             setData(response.data);
-            console.log(data);
             setloading(false);
           }
         };
@@ -57,13 +56,23 @@ const NotificationBar = (props) => {
             <Text style={styles.headertext}>Notifications</Text>
           </View>
         </View>
-
-        <NotificationCard
-          width={props.width}
-          text={"No notifications found. Make sure you API-Key is correct"}
-          backgroundColor={colors.white}
-          color={colors.darkgrey}
-        />
+        {key == null ? (
+          <NotificationCard
+            width={props.width}
+            text={
+              "API-Key not found, Please login using you API-Key if your want to receive notifications"
+            }
+            backgroundColor={colors.white}
+            color={colors.darkgrey}
+          />
+        ) : (
+          <NotificationCard
+            width={props.width}
+            text={"No notifications found. Make sure you API-Key is correct"}
+            backgroundColor={colors.white}
+            color={colors.darkgrey}
+          />
+        )}
       </View>
     );
   } else {
