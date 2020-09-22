@@ -32,6 +32,7 @@ const NotificationBar = (props) => {
             response = JSON.parse(xhr.responseText);
 
             setData(response.data);
+            console.log(data);
             setloading(false);
           }
         };
@@ -48,6 +49,23 @@ const NotificationBar = (props) => {
     return <ActivityIndicator />;
   } else if (error) {
     return <Text>Something went wrong</Text>;
+  } else if (data == undefined) {
+    return (
+      <View style={styles.container}>
+        <View style={styles.headerConatiner}>
+          <View>
+            <Text style={styles.headertext}>Notifications</Text>
+          </View>
+        </View>
+
+        <NotificationCard
+          width={props.width}
+          text={"No notifications found. Make sure you API-Key is correct"}
+          backgroundColor={colors.white}
+          color={colors.darkgrey}
+        />
+      </View>
+    );
   } else {
     return (
       <View style={styles.container}>
