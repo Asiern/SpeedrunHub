@@ -10,6 +10,7 @@ import {
 import NotificationCard from "./NotificationCard";
 import { ActivityIndicator } from "react-native-paper";
 import colors from "../config/colors";
+import Feather from "@expo/vector-icons/Feather";
 
 const NotificationBar = (props) => {
   const [data, setData] = useState(null);
