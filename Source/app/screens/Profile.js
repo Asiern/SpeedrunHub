@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import colors from "../config/colors";
-import Icon from "react-native-vector-icons/Ionicons";
+import Feather from "@expo/vector-icons/Feather";
 import Constants from "expo-constants";
 import PB from "../components/PB";
 import { FlatList } from "react-native-gesture-handler";
@@ -77,9 +77,9 @@ class Profile extends React.Component {
         <LinearGradient colors={[colors.primary, colors.primary]}>
           <View style={styles.topbar}>
             <View style={styles.topbarleft}>
-              <Icon
+              <Feather
                 onPress={() => this.props.navigation.navigate("Home")}
-                name="ios-arrow-back"
+                name="arrow-left"
                 color={colors.white}
                 size={35}
                 style={{ paddingLeft: 20 }}

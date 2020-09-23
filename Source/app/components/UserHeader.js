@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import colors from "../config/colors";
 import AsyncStorage from "@react-native-community/async-storage";
-import { FontAwesome5 } from "@expo/vector-icons";
+import Feather from "@expo/vector-icons/Feather";
 import Svgheader from "./svgheader";
 import Constants from "expo-constants";
 const { width, height } = Dimensions.get("screen");
@@ -86,7 +86,7 @@ class UserHeader extends Component {
               createTwoButtonAlert("Are you sure you want to log out?")
             }
           >
-            <FontAwesome5 name="sign-out-alt" color={colors.white} size={30} />
+            <Feather name="log-out" color={colors.white} size={30} />
           </TouchableOpacity>
         </View>
       </View>

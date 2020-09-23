@@ -17,7 +17,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 
-import Ionicons from "@expo/vector-icons/Ionicons";
+import Feather from "@expo/vector-icons/Feather";
 import colors from "../config/colors";
 
 const Stack = createStackNavigator();
@@ -100,7 +100,7 @@ export default class Navigation extends Component {
             options={{
               tabBarLabel: "Home",
               tabBarIcon: ({ color }) => (
-                <Ionicons name="md-home" color={color} size={26} />
+                <Feather name="home" color={color} size={24} />
               ),
             }}
           />
@@ -110,7 +110,7 @@ export default class Navigation extends Component {
             options={{
               tabBarLabel: "Search",
               tabBarIcon: ({ color }) => (
-                <Ionicons name="ios-search" color={color} size={26} />
+                <Feather name="search" color={color} size={24} />
               ),
             }}
           />
@@ -121,7 +121,7 @@ export default class Navigation extends Component {
             options={{
               tabBarLabel: "Settings",
               tabBarIcon: ({ color }) => (
-                <Ionicons name="ios-settings" color={color} size={26} />
+                <Feather name="settings" color={color} size={24} />
               ),
             }}
           />
