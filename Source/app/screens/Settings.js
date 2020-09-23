@@ -32,7 +32,7 @@ class Settings extends React.Component {
               </View>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity
+          {/*<TouchableOpacity
             onPress={() =>
               this.props.navigation.navigate("NotificationsSettings")
             }
@@ -48,8 +48,8 @@ class Settings extends React.Component {
                 <Feather name="arrow-right" color={colors.darkgrey} size={26} />
               </View>
             </View>
-          </TouchableOpacity>
-          <TouchableOpacity
+          </TouchableOpacity>*/}
+          {/*<TouchableOpacity
             onPress={() => this.props.navigation.navigate("Themes")}
           >
             <View style={styles.button}>
@@ -63,8 +63,8 @@ class Settings extends React.Component {
                 <Feather name="arrow-right" color={colors.darkgrey} size={26} />
               </View>
             </View>
-          </TouchableOpacity>
-          <TouchableOpacity
+          </TouchableOpacity>*/}
+          {/*<TouchableOpacity
             onPress={() => this.props.navigation.navigate("MyGamesSettings")}
           >
             <View style={styles.button}>
@@ -78,7 +78,7 @@ class Settings extends React.Component {
                 <Feather name="arrow-right" color={colors.darkgrey} size={26} />
               </View>
             </View>
-          </TouchableOpacity>
+          </TouchableOpacity>*/}
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate("About")}
           >
