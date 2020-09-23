@@ -3,11 +3,11 @@ import React, { Component } from "react";
 import Profile from "./Profile";
 import Home from "./Home";
 import Settings from "./Settings";
-import About from ".//About";
+import About from "./Settings/About";
 import GameInfo from "./GameInfo";
 import Search from "./Search";
-import Themes from "./Themes";
-import MyGames from "./MyGames";
+import Themes from "./Settings/Themes";
+import MyGamesSettings from "./Settings/MyGamesSettings";
 import Login from "./Login";
 import Notifications from "./Notifications";
 import NotificationsSettings from "./Settings/NotificationsSettings";
@@ -17,7 +17,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 
-import Ionicons from "@expo/vector-icons/Ionicons";
+import Feather from "@expo/vector-icons/Feather";
 import colors from "../config/colors";
 
 const Stack = createStackNavigator();
@@ -56,7 +56,7 @@ export default class Navigation extends Component {
         options={{ title: "My Profile", headerShown: "" }}
       />
       <Stack.Screen name="Themes" component={Themes} />
-      <Stack.Screen name="MyGames" component={MyGames} />
+      <Stack.Screen name="MyGamesSettings" component={MyGamesSettings} />
       <Stack.Screen
         name="NotificationsSettings"
         component={NotificationsSettings}
@@ -100,7 +100,7 @@ export default class Navigation extends Component {
             options={{
               tabBarLabel: "Home",
               tabBarIcon: ({ color }) => (
-                <Ionicons name="md-home" color={color} size={26} />
+                <Feather name="home" color={color} size={24} />
               ),
             }}
           />
@@ -110,7 +110,7 @@ export default class Navigation extends Component {
             options={{
               tabBarLabel: "Search",
               tabBarIcon: ({ color }) => (
-                <Ionicons name="ios-search" color={color} size={26} />
+                <Feather name="search" color={color} size={24} />
               ),
             }}
           />
@@ -121,7 +121,7 @@ export default class Navigation extends Component {
             options={{
               tabBarLabel: "Settings",
               tabBarIcon: ({ color }) => (
-                <Ionicons name="ios-settings" color={color} size={26} />
+                <Feather name="settings" color={color} size={24} />
               ),
             }}
           />

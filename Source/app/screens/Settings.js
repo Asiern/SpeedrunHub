@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, View, TouchableOpacity, Linking } from "react-native";
 import { Text } from "react-native-paper";
 import colors from "../config/colors";
-import { FontAwesome5 } from "@expo/vector-icons";
+import Feather from "@expo/vector-icons/Feather";
 class Settings extends React.Component {
   constructor(props) {
     super();
@@ -22,99 +22,75 @@ class Settings extends React.Component {
           >
             <View style={styles.button}>
               <View style={styles.icon}>
-                <FontAwesome5
-                  name="user-alt"
-                  color={colors.primary}
-                  size={20}
-                />
+                <Feather name="user" color={colors.primary} size={26} />
               </View>
               <View style={styles.textcontainer}>
                 <Text style={styles.text}>My Account</Text>
               </View>
               <View style={styles.icon}>
-                <FontAwesome5
-                  name="angle-right"
-                  color={colors.darkgrey}
-                  size={26}
-                />
+                <Feather name="arrow-right" color={colors.darkgrey} size={26} />
               </View>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity
+          {/*<TouchableOpacity
             onPress={() =>
               this.props.navigation.navigate("NotificationsSettings")
             }
           >
             <View style={styles.button}>
               <View style={styles.icon}>
-                <FontAwesome5 name="bell" color={colors.primary} size={20} />
+                <Feather name="bell" color={colors.primary} size={26} />
               </View>
               <View style={styles.textcontainer}>
                 <Text style={styles.text}>Notifications</Text>
               </View>
               <View style={styles.icon}>
-                <FontAwesome5
-                  name="angle-right"
-                  color={colors.darkgrey}
-                  size={26}
-                />
+                <Feather name="arrow-right" color={colors.darkgrey} size={26} />
               </View>
             </View>
-          </TouchableOpacity>
-          <TouchableOpacity
+          </TouchableOpacity>*/}
+          {/*<TouchableOpacity
             onPress={() => this.props.navigation.navigate("Themes")}
           >
             <View style={styles.button}>
               <View style={styles.icon}>
-                <FontAwesome5 name="brush" color={colors.primary} size={20} />
+                <Feather name="droplet" color={colors.primary} size={26} />
               </View>
               <View style={styles.textcontainer}>
                 <Text style={styles.text}>Themes</Text>
               </View>
               <View style={styles.icon}>
-                <FontAwesome5
-                  name="angle-right"
-                  color={colors.darkgrey}
-                  size={26}
-                />
+                <Feather name="arrow-right" color={colors.darkgrey} size={26} />
               </View>
             </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate("MyGames")}
+          </TouchableOpacity>*/}
+          {/*<TouchableOpacity
+            onPress={() => this.props.navigation.navigate("MyGamesSettings")}
           >
             <View style={styles.button}>
               <View style={styles.icon}>
-                <FontAwesome5 name="gamepad" color={colors.primary} size={20} />
+                <Feather name="bookmark" color={colors.primary} size={26} />
               </View>
               <View style={styles.textcontainer}>
                 <Text style={styles.text}>My Games</Text>
               </View>
               <View style={styles.icon}>
-                <FontAwesome5
-                  name="angle-right"
-                  color={colors.darkgrey}
-                  size={26}
-                />
+                <Feather name="arrow-right" color={colors.darkgrey} size={26} />
               </View>
             </View>
-          </TouchableOpacity>
+          </TouchableOpacity>*/}
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate("About")}
           >
             <View style={styles.button}>
               <View style={styles.icon}>
-                <FontAwesome5 name="info" color={colors.primary} size={20} />
+                <Feather name="info" color={colors.primary} size={26} />
               </View>
               <View style={styles.textcontainer}>
                 <Text style={styles.text}>About</Text>
               </View>
               <View style={styles.icon}>
-                <FontAwesome5
-                  name="angle-right"
-                  color={colors.darkgrey}
-                  size={26}
-                />
+                <Feather name="arrow-right" color={colors.darkgrey} size={26} />
               </View>
             </View>
           </TouchableOpacity>
@@ -127,11 +103,7 @@ class Settings extends React.Component {
           >
             <View style={styles.button}>
               <View style={styles.icon}>
-                <FontAwesome5
-                  name="user-shield"
-                  color={colors.primary}
-                  size={20}
-                />
+                <Feather name="book-open" color={colors.primary} size={26} />
               </View>
               <View style={styles.textcontainer}>
                 <Text style={styles.text}>
@@ -139,11 +111,7 @@ class Settings extends React.Component {
                 </Text>
               </View>
               <View style={styles.icon}>
-                <FontAwesome5
-                  name="angle-right"
-                  color={colors.darkgrey}
-                  size={26}
-                />
+                <Feather name="arrow-right" color={colors.darkgrey} size={26} />
               </View>
             </View>
           </TouchableOpacity>
