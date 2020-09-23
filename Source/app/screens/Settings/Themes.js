@@ -3,8 +3,8 @@ import { Button } from "react-native-paper";
 
 import styled, { ThemeConsumer, ThemeProvider } from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { switchTheme } from "../redux/themeActions";
-import { lightTheme, darkTheme } from "../config/Themes";
+import { switchTheme } from "../../redux/themeActions";
+import { lightTheme, darkTheme } from "../../config/Themes";
 
 export default function Themes() {
   const theme = useSelector((state) => state.themeReducer.theme);
