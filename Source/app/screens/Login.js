@@ -118,10 +118,10 @@ export default function Login(props) {
       </View>
       <View style={styles.footer}>
         <Button
-          title={"SKIP"}
+          title={"LOG IN AS GUEST"}
           color={colors.white}
           textcolor={colors.darkgrey}
-          function={() => props.function(true)}
+          function={() => _storeData("Guest", "")}
         ></Button>
       </View>
     </LinearGradient>
