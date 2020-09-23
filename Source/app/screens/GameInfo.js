@@ -32,24 +32,24 @@ class GameInfo extends React.Component {
   }
   _isFavourite = async (id) => {
     const gameList = JSON.parse(await AsyncStorage.getItem("@MyGames"));
-    for (let GAME of gameList) {
-      if (GAME.id == id) {
-        this.setState({ favourite: true });
+    if (gameList != null) {
+      for (let GAME of gameList) {
+        if (GAME.id == id) {
+          this.setState({ favourite: true });
+        }
       }
+    } else {
+      console.log("game List == null _isFav");
     }
   };
   _toggleFavourites = async () => {
     const games = await AsyncStorage.getItem("@MyGames");
-    var contains = false;
     var gameList = JSON.parse(games);
-    for (let GAME of gameList) {
-      if (GAME.id == this.state.id) {
-        const index = gameList.indexOf(GAME);
-        gameList.splice(index, 1);
-        contains = true;
-      }
+    if (gameList == null) {
+      gameList = [];
     }
-    if (!contains) {
+    if (!this.state.favourite) {
+      console.log("enter if toggle");
       //Create game obj
       var game = {
         id: this.state.id,
