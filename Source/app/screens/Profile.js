@@ -11,9 +11,9 @@ import PB from "../components/PB";
 
 export default function Profile(props) {
   const [runs, setRuns] = useState([]);
+  const [country, setCountry] = useState("");
 
   const { username, userid } = props.route.params;
-  var country = "";
 
   useEffect(() => {
     let mounted = true;
@@ -31,10 +31,9 @@ export default function Profile(props) {
         const userresponse = await fetch(userurl);
         const userdata = await userresponse.json();
         if (userdata.data.location != null) {
-          country = userdata.data.location.country.names.international;
+          setCountry(userdata.data.location.country.names.international);
         }
         setRuns(runsdata.data);
-        setUser(userdata.data);
       })();
     }
 
