@@ -21,6 +21,7 @@
 - Removed unused code.
 - Game search, user search and home now use hooks instead of React Components.
 - Small optimizations.
+- Profile
 
 ## Known issues
 
