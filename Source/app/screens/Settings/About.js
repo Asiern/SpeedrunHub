@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import Constants from "expo-constants";
 import colors from "../../config/colors";
-import Icon from "react-native-vector-icons/Ionicons";
+import Feather from "react-native-vector-icons/Feather";
 
 export default function About() {
   function loadInBrowser(link) {
@@ -51,7 +51,7 @@ export default function About() {
           }
         >
           <View style={styles.github}>
-            <Icon name="logo-github" color={colors.white} size={35} />
+            <Feather name="github" color={colors.white} size={35} />
             <Text style={styles.githubtext}>GitHub</Text>
           </View>
         </TouchableOpacity>
@@ -60,7 +60,40 @@ export default function About() {
         <Text style={styles.paragraph}>
           App Refresh{"\n"}
           Themes{"\n"}Animations{"\n"}UI Design{"\n"}Run Info{"\n"}Push
-          Notifications{"\n"}My Games{"\n"}Japanese text support
+          Notifications{"\n"}Japanese text support
+        </Text>
+        <Text style={styles.title}>Release Notes</Text>
+        <Text
+          style={[
+            styles.paragraph,
+            { fontWeight: "bold", paddingBottom: -5, fontSize: 18 },
+          ]}
+        >
+          What's New
+        </Text>
+        <Text style={styles.paragraph}>
+          Now you can add/remove "MyGames" games from GameInfo.
+          {"\n"}
+          {"\n"}Moved MyGames to an unique file `MyGames.js` and changed from
+          .map to Flatlist.{"\n"}
+          {"\n"}Added Notification Bar messages when API-Key is missing and
+          Notifications are empty.
+        </Text>
+        <Text
+          style={[
+            styles.paragraph,
+            { fontWeight: "bold", paddingBottom: -5, fontSize: 18 },
+          ]}
+        >
+          Fixes
+        </Text>
+        <Text style={styles.paragraph}>
+          Fixed: App not reloading when logging in.{"\n"}
+          {"\n"}Fixed: Notifications issue when API-Key was not provided.
+          {"\n"}
+          {"\n"}Fixed: Login screen buttons.{"\n"}
+          {"\n"}Fixed: Profiles with no country not displaying properly.{"\n"}
+          {"\n"}Fixed: Login `SKIP` button not working.
         </Text>
         <Text style={styles.title}>Send Feedback</Text>
         <Text style={styles.paragraph}>
