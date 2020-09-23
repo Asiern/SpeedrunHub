@@ -1,71 +1,85 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Text, Dimensions } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
-import GameCard from "../components/GameCard";
+import { ScrollView } from "react-native-gesture-handler";
+
+import styled, { ThemeProvider } from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+import { switchTheme } from "../redux/themeActions";
+import { lightTheme, darkTheme } from "../config/Themes";
+
+import MyGames from "../components/MyGames";
 import UserHeader from "../components/UserHeader";
 import NotificationBar from "../components/NotificationBar";
+import NotificationCard from "../components/NotificationCard";
 import colors from "../config/colors";
-import user from "../config/user.json";
-import { ScrollView } from "react-native-gesture-handler";
+
 const { width } = Dimensions.get("screen");
 
-class Home extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: "Guest",
-      userid: "",
-      APIKey: "",
-    };
-  }
+export default function Home(props) {
+  const theme = useSelector((state) => state.themeReducer.theme);
+  const dispatch = useDispatch();
 
-  _retrieveData = async () => {
-    try {
+  const [username, setUsername] = useState("Guest");
+  const [userid, setUserid] = useState("");
+  const [APIKey, setAPIKey] = useState("");
+  const [games, setGames] = useState([]);
+
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
       const username = await AsyncStorage.getItem("@user");
       const userid = await AsyncStorage.getItem("@userid");
       const APIKey = await AsyncStorage.getItem("@API-Key");
-      this.setState({ username, userid, APIKey });
-    } catch (error) {
-      // Error retrieving data
-    }
-  };
-  componentDidMount() {
-    this._retrieveData();
-  }
+      const GAMES = await AsyncStorage.getItem("@MyGames");
+      if (mounted) {
+        setUsername(username);
+        setUserid(userid);
+        setAPIKey(APIKey);
+        setGames(JSON.parse(GAMES));
+      }
+    })();
 
-  render() {
-    return (
-      <ScrollView style={{ flex: 1 }}>
+    return function cleanup() {
+      mounted = false;
+    };
+  }, []);
+
+  return (
+    <ThemeProvider theme={theme} style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1, backgroundColor: colors.light }}>
         <View style={styles.container}>
           <View style={styles.profile}>
             <UserHeader
-              username={this.state.username}
-              userid={this.state.userid}
-              navigation={this.props.navigation}
+              username={username}
+              userid={userid}
+              navigation={props.navigation}
             />
           </View>
-
           <NotificationBar
             width={width}
-            APIKey={this.state.APIKey}
-            navigation={this.props.navigation}
+            APIKey={APIKey}
+            navigation={props.navigation}
           />
-          <Text style={styles.headertext}>My Games (WIP)</Text>
-          <View style={styles.flatList}>
-            {user.games.map((game) => (
-              <View key={game.id} style={styles.button}>
-                <GameCard
-                  navigation={this.props.navigation}
-                  id={game.id}
-                  abbreviation={game.abbreviation}
-                />
-              </View>
-            ))}
-          </View>
+          <Text style={styles.headertext}>My Games</Text>
+          {games == null ? (
+            <View>
+              <NotificationCard
+                width={width}
+                text={
+                  "Start searching for your favourite games and add them to MyGames."
+                }
+                backgroundColor={colors.green}
+                color={colors.white}
+              />
+            </View>
+          ) : (
+            <MyGames data={games} navigation={props.navigation} />
+          )}
         </View>
       </ScrollView>
-    );
-  }
+    </ThemeProvider>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -95,5 +109,3 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
 });
-
-export default Home;

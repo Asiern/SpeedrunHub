@@ -12,6 +12,7 @@ import {
 import Run from "../components/Run";
 import colors from "../config/colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import AsyncStorage from "@react-native-community/async-storage";
 
 class GameInfo extends React.Component {
   constructor() {
@@ -26,12 +27,51 @@ class GameInfo extends React.Component {
       variables: [],
       categories: [],
       cheked: 0,
+      favourite: false,
     };
   }
+  _isFavourite = async (id) => {
+    const gameList = JSON.parse(await AsyncStorage.getItem("@MyGames"));
+    if (gameList != null) {
+      for (let GAME of gameList) {
+        if (GAME.id == id) {
+          this.setState({ favourite: true });
+        }
+      }
+    } else {
+      console.log("game List == null _isFav");
+    }
+  };
+  _toggleFavourites = async () => {
+    const games = await AsyncStorage.getItem("@MyGames");
+    var gameList = JSON.parse(games);
+    if (gameList == null) {
+      gameList = [];
+    }
+    if (!this.state.favourite) {
+      console.log("enter if toggle");
+      //Create game obj
+      var game = {
+        id: this.state.id,
+        abbreviation: this.state.abbreviation,
+      };
+      //add game to list
+      gameList.push(game);
+      //Game added to list
+      await AsyncStorage.setItem("@MyGames", JSON.stringify(gameList));
+      this.setState({ favourite: true });
+    } else {
+      //Game got removed from list
+      await AsyncStorage.setItem("@MyGames", JSON.stringify(gameList));
+      this.setState({ favourite: false });
+    }
+  };
   async componentDidMount() {
     try {
       //Load gameId & abbreviation from react navigation
       const { id, abbreviation } = this.props.route.params;
+      //Fav?
+      this._isFavourite(id, abbreviation);
       //Get Game Data
       //Fetch Categories from Speedrun.com
       const url =
@@ -226,6 +266,19 @@ class GameInfo extends React.Component {
             </View>
           </View>
         </ImageBackground>
+        {this.state.favourite == true ? (
+          <Button
+            title={"Remove from favs"}
+            color={colors.red}
+            onPress={() => this._toggleFavourites()}
+          />
+        ) : (
+          <Button
+            color={colors.primary}
+            title={"Add to favs"}
+            onPress={() => this._toggleFavourites()}
+          />
+        )}
         <View style={{ padding: 10 }}></View>
         <FlatList
           keyExtractor={(item) => item.id}

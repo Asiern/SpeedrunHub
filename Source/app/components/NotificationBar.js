@@ -10,6 +10,7 @@ import {
 import NotificationCard from "./NotificationCard";
 import { ActivityIndicator } from "react-native-paper";
 import colors from "../config/colors";
+import Feather from "@expo/vector-icons/Feather";
 
 const NotificationBar = (props) => {
   const [data, setData] = useState(null);
@@ -18,8 +19,9 @@ const NotificationBar = (props) => {
   const key = props.APIKey;
   useEffect(() => {
     let mounted = true;
+
     try {
-      if (data == null) {
+      if (loading) {
         var url = "https://www.speedrun.com/api/v1/notifications";
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url);
@@ -47,6 +49,35 @@ const NotificationBar = (props) => {
     return <ActivityIndicator />;
   } else if (error) {
     return <Text>Something went wrong</Text>;
+  } else if (data == undefined) {
+    return (
+      <View style={styles.container}>
+        <View style={styles.headerConatiner}>
+          <View>
+            <Text style={styles.headertext}>Notifications</Text>
+          </View>
+        </View>
+        {key == null ? (
+          <NotificationCard
+            width={props.width}
+            text={
+              "API-Key not found, Please login using your API-Key if you want to receive notifications"
+            }
+            backgroundColor={colors.white}
+            color={colors.darkgrey}
+          />
+        ) : (
+          <NotificationCard
+            width={props.width}
+            text={
+              "No notifications found. Make sure your API-Key is correct or that your Speedrun.com notifications settings are correct."
+            }
+            backgroundColor={colors.green}
+            color={colors.white}
+          />
+        )}
+      </View>
+    );
   } else {
     return (
       <View style={styles.container}>

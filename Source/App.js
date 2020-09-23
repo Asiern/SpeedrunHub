@@ -1,38 +1,59 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-community/async-storage";
+import { ActivityIndicator } from "react-native";
+
+//Screens
 import Navigation from "./app/screens/Navigation";
 import Login from "./app/screens/Login";
 
-export default class App extends Component {
-  _isMounted = false;
-  constructor(props) {
-    super();
-    this.state = {
-      Loggedin: true,
-    };
-  }
-  async componentDidMount() {
-    this._isMounted = true;
-    if (this._isMounted) {
-      const Loggedin = await AsyncStorage.getItem("@Loggedin");
+//Themes
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware, combineReducers } from "redux";
+import thunk from "redux-thunk";
+import themeReducer from "./app/redux/themeReducer";
 
-      if (Loggedin == "true") {
-        this.setState({ Loggedin: true });
-      } else if (Loggedin == "false") {
-        this.setState({ Loggedin: false });
-      } else {
-        null;
-      }
+const store = createStore(
+  combineReducers({ themeReducer }),
+  applyMiddleware(thunk)
+);
+
+export default function App() {
+  const [loading, setLoading] = useState(true);
+  const [Loggedin, setLoggedin] = useState(false);
+
+  useEffect(() => {
+    let mounted = true;
+    if (mounted) {
+      (async () => {
+        const LOGGEDIN = await AsyncStorage.getItem("@Loggedin");
+        if (LOGGEDIN == "true") {
+          setLoggedin(true);
+          setLoading(false);
+        } else if (LOGGEDIN == "false") {
+          setLoggedin(false);
+          setLoading(false);
+        } else {
+          setLoading(false);
+        }
+      })();
     }
-  }
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
-  render() {
-    if (this.state.Loggedin) {
-      return <Navigation />;
-    } else {
-      return <Login />;
-    }
+
+    return function cleanup() {
+      mounted = false;
+    };
+  }, [Loggedin]);
+
+  if (loading) {
+    return <ActivityIndicator />;
+  } else {
+    return (
+      <Provider store={store}>
+        {Loggedin == true ? (
+          <Navigation function={() => setLoggedin()} />
+        ) : (
+          <Login function={() => setLoggedin()} />
+        )}
+      </Provider>
+    );
   }
 }
