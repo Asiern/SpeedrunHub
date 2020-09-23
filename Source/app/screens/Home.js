@@ -11,6 +11,7 @@ import { lightTheme, darkTheme } from "../config/Themes";
 import MyGames from "../components/MyGames";
 import UserHeader from "../components/UserHeader";
 import NotificationBar from "../components/NotificationBar";
+import NotificationCard from "../components/NotificationCard";
 import colors from "../config/colors";
 
 const { width } = Dimensions.get("screen");
@@ -63,7 +64,14 @@ export default function Home(props) {
           <Text style={styles.headertext}>My Games</Text>
           {games == null ? (
             <View>
-              <Text>No games found</Text>
+              <NotificationCard
+                width={width}
+                text={
+                  "Start searching for your favourite games and add them to MyGames."
+                }
+                backgroundColor={colors.green}
+                color={colors.white}
+              />
             </View>
           ) : (
             <MyGames data={games} navigation={props.navigation} />
