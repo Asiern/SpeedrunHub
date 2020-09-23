@@ -2,7 +2,6 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import GameCard from "./GameCard";
-import colors from "../config/colors";
 
 export default function MyGames(props) {
   return (
