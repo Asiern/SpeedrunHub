@@ -18,6 +18,7 @@ import Button from "../components/Button";
 export default function Login(props) {
   const [textinput, setTextinput] = useState("");
   const [keyinput, setKeyinput] = useState("");
+
   _storeData = async (user, key) => {
     const createTwoButtonAlert = (msg) =>
       Alert.alert(

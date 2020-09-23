@@ -1,63 +1,48 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
-import colors from "../config/colors";
-import Feather from "@expo/vector-icons/Feather";
-import Constants from "expo-constants";
-import PB from "../components/PB";
 import { FlatList } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
 
-class Profile extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      loading: true,
-      username: "",
-      userid: "",
-      userpicture: "",
-      runs: [],
-      user: [],
-      country: "",
-    };
-  }
-  async loadData() {
-    const { username, userid } = this.props.route.params;
-    this.setState({
-      userid,
-      username,
-    });
-    //PBs
-    const runsurl =
-      "https://www.speedrun.com/api/v1/users/" +
-      userid +
-      "/personal-bests?embed=game,category";
-    const runsresponse = await fetch(runsurl);
-    const runsdata = await runsresponse.json();
-    //User
-    const userurl = "https://www.speedrun.com/api/v1/users/" + userid;
-    const userresponse = await fetch(userurl);
-    const userdata = await userresponse.json();
-    var country = "";
-    if (userdata.data.location == null) {
-      country = "";
-    } else {
-      country = userdata.data.location.country.names.international;
+import Feather from "@expo/vector-icons/Feather";
+import Constants from "expo-constants";
+
+import colors from "../config/colors";
+import PB from "../components/PB";
+
+export default function Profile(props) {
+  const [runs, setRuns] = useState([]);
+
+  const { username, userid } = props.route.params;
+  var country = "";
+
+  useEffect(() => {
+    let mounted = true;
+    if (mounted) {
+      (async () => {
+        //PBs
+        const runsurl =
+          "https://www.speedrun.com/api/v1/users/" +
+          userid +
+          "/personal-bests?embed=game,category";
+        const runsresponse = await fetch(runsurl);
+        const runsdata = await runsresponse.json();
+        //User
+        const userurl = "https://www.speedrun.com/api/v1/users/" + userid;
+        const userresponse = await fetch(userurl);
+        const userdata = await userresponse.json();
+        if (userdata.data.location != null) {
+          country = userdata.data.location.country.names.international;
+        }
+        setRuns(runsdata.data);
+        setUser(userdata.data);
+      })();
     }
 
-    this.setState({
-      loading: false,
-      runs: runsdata.data,
-      user: userdata.data,
-      country,
-    });
-  }
-  async componentDidMount() {
-    try {
-      this.loadData();
-    } catch (error) {
-      console.log(error);
-    }
-  }
+    return function cleanup() {
+      mounted = false;
+    };
+  }, []);
+
   renderItem = ({ item }) => (
     <View style={styles.pbs}>
       <PB
@@ -78,7 +63,7 @@ class Profile extends React.Component {
           <View style={styles.topbar}>
             <View style={styles.topbarleft}>
               <Feather
-                onPress={() => this.props.navigation.navigate("Home")}
+                onPress={() => props.navigation.navigate("Home")}
                 name="arrow-left"
                 color={colors.white}
                 size={35}
@@ -93,7 +78,7 @@ class Profile extends React.Component {
               source={{
                 uri:
                   "https://www.speedrun.com/themes/user/" +
-                  this.state.username +
+                  username +
                   "/image.png",
               }}
               style={styles.Image}
@@ -101,10 +86,10 @@ class Profile extends React.Component {
           </View>
           <View style={styles.userinfo}>
             <View style={styles.userinfoitem}>
-              <Text style={styles.h1}>{this.state.username}</Text>
+              <Text style={styles.h1}>{username}</Text>
               <View style={styles.country}>
                 <View>
-                  <Text style={styles.h2}>{this.state.country}</Text>
+                  <Text style={styles.h2}>{country}</Text>
                 </View>
               </View>
             </View>
@@ -132,17 +117,15 @@ class Profile extends React.Component {
   ListFooter = () => {
     return <View style={{ padding: 20 }}></View>;
   };
-  render() {
-    return (
-      <FlatList
-        keyExtractor={(item) => item.run.id}
-        data={this.state.runs}
-        renderItem={this.renderItem}
-        ListHeaderComponent={this.ProfileHeader()}
-        ListFooterComponent={this.ListFooter()}
-      ></FlatList>
-    );
-  }
+  return (
+    <FlatList
+      keyExtractor={(item) => item.run.id}
+      data={runs}
+      renderItem={renderItem}
+      ListHeaderComponent={ProfileHeader()}
+      ListFooterComponent={ListFooter()}
+    ></FlatList>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -268,5 +251,3 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
 });
-
-export default Profile;
