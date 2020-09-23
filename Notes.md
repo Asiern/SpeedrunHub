@@ -1,3 +1,5 @@
+# Version 1.0.8 Notes
+
 ## What's new?
 
 - Now you can add/remove games from MyGames from GameInfo.
@@ -10,6 +12,7 @@
 - Fixed: Notifications issue when API-Key was not provided.
 - Fixed: Login screen buttons.
 - Fixed: Profiles with no country not displaying properly.
+- Fixed: Login `SKIP` button not working.
 
 ## Performance
 
@@ -26,4 +29,3 @@
 - Runs with multiple runners not displaying properly.
 - Japanese users not displaying.
 - OS forced darkmode breaks `UserHeader.js` colors.
-- Login `SKIP` button not working.
