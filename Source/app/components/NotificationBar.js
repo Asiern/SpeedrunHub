@@ -61,7 +61,7 @@ const NotificationBar = (props) => {
           <NotificationCard
             width={props.width}
             text={
-              "API-Key not found, Please login using you API-Key if your want to receive notifications"
+              "API-Key not found, Please login using your API-Key if you want to receive notifications"
             }
             backgroundColor={colors.white}
             color={colors.darkgrey}
