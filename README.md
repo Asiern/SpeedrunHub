@@ -16,6 +16,8 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
 - [:email: Send Feedback](#email-send-feedback)
 - [:raised_hands: Contributing](#raised_hands-contributing)
 - [:gear: Project Setup](#gear-project-setup)
+  - [Linux](#Linux-Installation)
+  - [Windows](#Windows-Installation)
 - [:warning: Issues](#warning-issues)
 - [:construction: Work in progress](#construction-wip)
 - [:page_with_curl: Privacy Policy / Terms & Conditions / License](#page_with_curl-privacy-policy--terms--conditions--license)
@@ -57,10 +59,15 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
    ```
    # Using Ubuntu
    curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-   sudo apt-get install -y nodejs
+   $ sudo apt-get install -y nodejs
    ```
 
 2. Install [Git](https://git-scm.com/)
+
+   ```
+   #Using Ubuntu
+   $ sudo apt install git
+   ```
 
 3. Install [Expo CLI](https://docs.expo.io/get-started/installation/)
 
