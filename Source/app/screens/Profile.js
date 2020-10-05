@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  SectionList,
+  Dimensions,
+} from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -8,13 +15,64 @@ import Constants from "expo-constants";
 
 import colors from "../config/colors";
 import PB from "../components/PB";
+import SectionHeader from "../components/SectionHeader";
+import Run from "../components/Run";
+
+const { width } = Dimensions.get("screen");
 
 export default function Profile(props) {
+  const games = {
+    data: [
+      {
+        abbreviation: "na",
+        data: ["Pizza", "Burger", "Risotto"],
+      },
+      {
+        abbreviation: "smo",
+        data: ["French Fries", "Onion Rings", "Fried Shrimps"],
+      },
+      {
+        abbreviation: "nier",
+        data: ["Water", "Coke", "Beer"],
+      },
+      {
+        abbreviation: "twwhd",
+        data: ["Cheese Cake", "Ice Cream"],
+      },
+    ],
+    pagination: [],
+  };
   const [runs, setRuns] = useState([]);
   const [country, setCountry] = useState("");
-
+  const [sections, setSections] = useState([]);
   const { username, userid } = props.route.params;
 
+  function filterPBS(data) {
+    var sectionList = {
+      data: [],
+      pagination: [],
+    };
+    for (let run of data) {
+      var section = {
+        abbreviation: "",
+        id: "",
+        data: [],
+      };
+      if (!sectionList.pagination.includes(run.game.data.id)) {
+        section.abbreviation = run.game.data.abbreviation;
+        section.id = run.game.data.id;
+
+        sectionList.data.push(section);
+        sectionList.pagination.push(run.game.data.id);
+      }
+      //Create data
+      var r = {};
+      //Push data
+    }
+
+    setSections(sectionList);
+    console.log(sections);
+  }
   useEffect(() => {
     let mounted = true;
     if (mounted) {
@@ -33,6 +91,7 @@ export default function Profile(props) {
         if (userdata.data.location != null) {
           setCountry(userdata.data.location.country.names.international);
         }
+        filterPBS(runsdata.data);
         setRuns(runsdata.data);
       })();
     }
@@ -94,37 +153,47 @@ export default function Profile(props) {
             </View>
           </View>
         </LinearGradient>
-        <View style={{ flex: 1, margin: 10 }}>
-          <View style={styles.runinfo}>
-            <View style={styles.game}>
-              <Text>Game</Text>
-            </View>
-            <View style={styles.category}>
-              <Text>Category</Text>
-            </View>
-            <View style={styles.place}>
-              <Text>Place</Text>
-            </View>
-            <View style={styles.time}>
-              <Text>Time</Text>
-            </View>
-          </View>
-        </View>
       </View>
     );
   };
+  const Item = ({ title }) => (
+    <View style={styles.item}>
+      <Text style={styles.title}>{title}</Text>
+    </View>
+  );
   ListFooter = () => {
     return <View style={{ padding: 20 }}></View>;
   };
-  return (
-    <FlatList
-      keyExtractor={(item) => item.run.id}
-      data={runs}
-      renderItem={renderItem}
-      ListHeaderComponent={ProfileHeader()}
-      ListFooterComponent={ListFooter()}
-    ></FlatList>
-  );
+  if (sections == null) {
+    return (
+      <View style={{ flex: 1, backgroundColor: "gold" }}>
+        <Text>asd</Text>
+      </View>
+    );
+  } else {
+    return (
+      <SectionList
+        sections={sections.data}
+        keyExtractor={(item, index) => item + index}
+        ListHeaderComponent={ProfileHeader()}
+        ListFooterComponent={ListFooter()}
+        renderItem={({ item }) => (
+          <Run
+            place={"1"}
+            runnerid={"48g3q2rx"}
+            time={item}
+            abbreviation={"na"}
+            categoryid={""}
+            category={"[A]"}
+            weblink={""}
+          />
+        )}
+        renderSectionHeader={({ section }) => (
+          <SectionHeader abbreviation={section.abbreviation} width={width} />
+        )}
+      />
+    );
+  }
 }
 
 const styles = StyleSheet.create({
