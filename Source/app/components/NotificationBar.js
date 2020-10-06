@@ -72,7 +72,7 @@ const NotificationBar = (props) => {
             text={
               "No notifications found. Make sure your API-Key is correct or that your Speedrun.com notifications settings are correct."
             }
-            backgroundColor={colors.green}
+            backgroundColor={colors.primary}
             color={colors.white}
           />
         )}
