@@ -29,9 +29,6 @@ const PB = (props) => {
       <View style={styles.category}>
         <Text style={styles.text}>{props.category}</Text>
       </View>
-      <View style={styles.runner}>
-        <Text style={styles.text}>{props.runner}</Text>
-      </View>
       <View style={styles.time}>
         <Text style={styles.text}>{timeConverter(props.time)}</Text>
       </View>
