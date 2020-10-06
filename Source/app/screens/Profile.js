@@ -16,40 +16,17 @@ import Constants from "expo-constants";
 import colors from "../config/colors";
 import PB from "../components/PB";
 import SectionHeader from "../components/SectionHeader";
-import Run from "../components/Run";
 
 const { width } = Dimensions.get("screen");
 
 export default function Profile(props) {
-  const games = {
-    data: [
-      {
-        abbreviation: "na",
-        data: ["Pizza", "Burger", "Risotto"],
-      },
-      {
-        abbreviation: "smo",
-        data: ["French Fries", "Onion Rings", "Fried Shrimps"],
-      },
-      {
-        abbreviation: "nier",
-        data: ["Water", "Coke", "Beer"],
-      },
-      {
-        abbreviation: "twwhd",
-        data: ["Cheese Cake", "Ice Cream"],
-      },
-    ],
-    pagination: [],
-  };
-  const [runs, setRuns] = useState([]);
   const [country, setCountry] = useState("");
   const [sections, setSections] = useState([]);
   const { username, userid } = props.route.params;
 
   function filterPBS(data) {
     var sectionList = {
-      data: [],
+      data: [], //sections
       pagination: [],
     };
     for (let run of data) {
@@ -65,13 +42,20 @@ export default function Profile(props) {
         sectionList.data.push(section);
         sectionList.pagination.push(run.game.data.id);
       }
-      //Create data
-      var r = {};
+      //Create run object
+      var r = {
+        place: run.place,
+        runnerid: run.run.players[0].id,
+        time: run.run.times.primary,
+        category: run.category.data.name,
+        weblink: "",
+      };
       //Push data
+      var index = sectionList.pagination.indexOf(run.game.data.id);
+      sectionList.data[index].data.push(r);
     }
 
     setSections(sectionList);
-    console.log(sections);
   }
   useEffect(() => {
     let mounted = true;
@@ -92,7 +76,6 @@ export default function Profile(props) {
           setCountry(userdata.data.location.country.names.international);
         }
         filterPBS(runsdata.data);
-        setRuns(runsdata.data);
       })();
     }
 
@@ -100,20 +83,6 @@ export default function Profile(props) {
       mounted = false;
     };
   }, []);
-
-  renderItem = ({ item }) => (
-    <View style={styles.pbs}>
-      <PB
-        place={item.place}
-        runnerid={item.run.players[0].id}
-        time={item.run.times.primary}
-        abbreviation={item.game.data.abbreviation}
-        category={item.category.data.name}
-        weblink={item.run.weblink}
-      />
-    </View>
-  );
-
   ProfileHeader = () => {
     return (
       <View>
@@ -156,44 +125,32 @@ export default function Profile(props) {
       </View>
     );
   };
-  const Item = ({ title }) => (
-    <View style={styles.item}>
-      <Text style={styles.title}>{title}</Text>
-    </View>
-  );
+
   ListFooter = () => {
     return <View style={{ padding: 20 }}></View>;
   };
-  if (sections == null) {
-    return (
-      <View style={{ flex: 1, backgroundColor: "gold" }}>
-        <Text>asd</Text>
-      </View>
-    );
-  } else {
-    return (
-      <SectionList
-        sections={sections.data}
-        keyExtractor={(item, index) => item + index}
-        ListHeaderComponent={ProfileHeader()}
-        ListFooterComponent={ListFooter()}
-        renderItem={({ item }) => (
-          <Run
-            place={"1"}
-            runnerid={"48g3q2rx"}
-            time={item}
-            abbreviation={"na"}
-            categoryid={""}
-            category={"[A]"}
-            weblink={""}
-          />
-        )}
-        renderSectionHeader={({ section }) => (
-          <SectionHeader abbreviation={section.abbreviation} width={width} />
-        )}
-      />
-    );
-  }
+
+  return (
+    <SectionList
+      sections={sections.data}
+      keyExtractor={(item, index) => item + index}
+      ListHeaderComponent={ProfileHeader()}
+      ListFooterComponent={ListFooter()}
+      renderItem={({ item }) => (
+        <PB
+          place={item.place}
+          runnerid={item.userid}
+          runner={username}
+          time={item.time}
+          category={item.category}
+          weblink={item.weblink}
+        />
+      )}
+      renderSectionHeader={({ section }) => (
+        <SectionHeader abbreviation={section.abbreviation} width={width} />
+      )}
+    />
+  );
 }
 
 const styles = StyleSheet.create({
