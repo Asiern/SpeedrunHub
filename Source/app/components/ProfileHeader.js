@@ -1,6 +1,5 @@
 import React from "react";
 import { Text, View, StyleSheet, Image } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 
 import Constants from "expo-constants";
 import Feather from "@expo/vector-icons/Feather";
