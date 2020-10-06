@@ -48,7 +48,7 @@ export default function Profile(props) {
         runnerid: run.run.players[0].id,
         time: run.run.times.primary,
         category: run.category.data.name,
-        weblink: "",
+        weblink: run.run.weblink,
       };
       //Push data
       var index = sectionList.pagination.indexOf(run.game.data.id);
