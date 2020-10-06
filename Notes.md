@@ -1,3 +1,20 @@
+# Version 1.0.9 Notes
+
+## What's new?
+
+- Personal Bests are now sorted by games.
+
+## Known issues
+
+- Cannot remove games from `MyGames`.
+- App not reloading when logging out.
+- MyGames not reloading when adding/removing games.
+- Runs with multiple runners not displaying properly.
+- Japanese users not displaying.
+- OS forced darkmode breaks `UserHeader.js` colors.
+
+---
+
 # Version 1.0.8 Notes
 
 ## What's new?
