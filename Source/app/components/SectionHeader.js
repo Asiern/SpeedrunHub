@@ -22,7 +22,9 @@ const SectionHeader = (props) => {
         }}
         style={styles.image}
         imageStyle={{ borderRadius: 10 }}
-      ></ImageBackground>
+      >
+        <Text style={styles.text}>{props.name}</Text>
+      </ImageBackground>
     </View>
   );
 };
@@ -46,17 +48,18 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     flexDirection: "row",
     opacity: 1,
-  },
-  textContainer: {
-    flex: 1,
+    textAlign: "center",
     justifyContent: "center",
-    alignContent: "center",
   },
   text: {
     color: colors.white,
-    fontSize: 25,
+    fontSize: 20,
     fontWeight: "bold",
     alignSelf: "center",
+    textShadowColor: "#2e2e2e",
+    textShadowOffset: { width: 1, height: 2 },
+    textShadowRadius: 5,
+    marginHorizontal: 20,
   },
 });
 export default SectionHeader;
