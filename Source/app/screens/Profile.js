@@ -21,12 +21,14 @@ export default function Profile(props) {
     for (let run of data) {
       var section = {
         abbreviation: "",
+        name: "",
         id: "",
         data: [],
       };
       if (!sectionList.pagination.includes(run.game.data.id)) {
         section.abbreviation = run.game.data.abbreviation;
         section.id = run.game.data.id;
+        section.name = run.game.data.names.international;
 
         sectionList.data.push(section);
         sectionList.pagination.push(run.game.data.id);
@@ -100,7 +102,11 @@ export default function Profile(props) {
         />
       )}
       renderSectionHeader={({ section }) => (
-        <SectionHeader abbreviation={section.abbreviation} width={width} />
+        <SectionHeader
+          abbreviation={section.abbreviation}
+          name={section.name}
+          width={width}
+        />
       )}
     />
   );
