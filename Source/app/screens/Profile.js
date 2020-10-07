@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, SectionList, Dimensions } from "react-native";
+import { View, SectionList, Dimensions } from "react-native";
 
-import colors from "../config/colors";
+import styled, { ThemeProvider } from "styled-components";
+import { useSelector } from "react-redux";
+
 import ProfileHeader from "../components/ProfileHeader";
 import PB from "../components/PB";
 import SectionHeader from "../components/SectionHeader";
@@ -12,6 +14,8 @@ export default function Profile(props) {
   const [country, setCountry] = useState("");
   const [sections, setSections] = useState([]);
   const { username, userid } = props.route.params;
+
+  const theme = useSelector((state) => state.themeReducer.theme);
 
   function filterPBS(data) {
     var sectionList = {
@@ -80,41 +84,43 @@ export default function Profile(props) {
   };
 
   return (
-    <SectionList
-      sections={sections.data}
-      keyExtractor={(item, index) => item + index}
-      ListHeaderComponent={
-        <ProfileHeader
-          username={username}
-          country={country}
-          navigation={props.navigation}
+    <ThemeProvider theme={theme}>
+      <Container>
+        <SectionList
+          sections={sections.data}
+          keyExtractor={(item, index) => item + index}
+          ListHeaderComponent={
+            <ProfileHeader
+              username={username}
+              country={country}
+              navigation={props.navigation}
+            />
+          }
+          ListFooterComponent={ListFooter()}
+          renderItem={({ item }) => (
+            <PB
+              place={item.place}
+              runnerid={item.userid}
+              runner={username}
+              time={item.time}
+              category={item.category}
+              weblink={item.weblink}
+            />
+          )}
+          renderSectionHeader={({ section }) => (
+            <SectionHeader
+              abbreviation={section.abbreviation}
+              name={section.name}
+              width={width}
+            />
+          )}
         />
-      }
-      ListFooterComponent={ListFooter()}
-      renderItem={({ item }) => (
-        <PB
-          place={item.place}
-          runnerid={item.userid}
-          runner={username}
-          time={item.time}
-          category={item.category}
-          weblink={item.weblink}
-        />
-      )}
-      renderSectionHeader={({ section }) => (
-        <SectionHeader
-          abbreviation={section.abbreviation}
-          name={section.name}
-          width={width}
-        />
-      )}
-    />
+      </Container>
+    </ThemeProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.light,
-  },
-});
+const Container = styled.View`
+  flex: 1;
+  background-color: ${(props) => props.theme.SECONDARY_BACKGROUND};
+`;
