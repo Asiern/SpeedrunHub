@@ -46,9 +46,11 @@ export default function Home(props) {
   }, []);
 
   return (
-    <ThemeProvider theme={theme} style={{ flex: 1 }}>
+    <ThemeProvider theme={theme}>
       <Container>
-        <ScrollView style={{ flex: 1, backgroundColor: colors.light }}>
+        <ScrollView
+          style={{ flex: 1, backgroundColor: theme.SECONDARY_BACKGROUND }}
+        >
           <View style={styles.container}>
             <View style={styles.profile}>
               <UserHeader
@@ -70,8 +72,8 @@ export default function Home(props) {
                   text={
                     "Start searching for your favourite games and add them to MyGames."
                   }
-                  backgroundColor={colors.green}
-                  color={theme.PRIMARY_ACCENT}
+                  backgroundColor={theme.PRIMARY_ACCENT}
+                  color={theme.PRIMARY_TEXT}
                 />
               </View>
             ) : (
