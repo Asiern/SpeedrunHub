@@ -1,125 +1,63 @@
 import React from "react";
 import { StyleSheet, View, TouchableOpacity, Linking } from "react-native";
 import { Text } from "react-native-paper";
+
 import colors from "../config/colors";
 import Feather from "@expo/vector-icons/Feather";
-class Settings extends React.Component {
-  constructor(props) {
-    super();
-  }
-  loadInBrowser = (link) => {
-    Linking.openURL(link).catch((err) =>
-      console.error("Couldn't load page", err)
-    );
-  };
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.buttons}>
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate("AccountSettings")}
-          >
-            <View style={styles.button}>
-              <View style={styles.icon}>
-                <Feather name="user" color={colors.primary} size={26} />
-              </View>
-              <View style={styles.textcontainer}>
-                <Text style={styles.text}>My Account</Text>
-              </View>
-              <View style={styles.icon}>
-                <Feather name="arrow-right" color={colors.darkgrey} size={26} />
-              </View>
-            </View>
-          </TouchableOpacity>
-          {/*<TouchableOpacity
-            onPress={() =>
-              this.props.navigation.navigate("NotificationsSettings")
-            }
-          >
-            <View style={styles.button}>
-              <View style={styles.icon}>
-                <Feather name="bell" color={colors.primary} size={26} />
-              </View>
-              <View style={styles.textcontainer}>
-                <Text style={styles.text}>Notifications</Text>
-              </View>
-              <View style={styles.icon}>
-                <Feather name="arrow-right" color={colors.darkgrey} size={26} />
-              </View>
-            </View>
-          </TouchableOpacity>*/}
-          {/*<TouchableOpacity
-            onPress={() => this.props.navigation.navigate("Themes")}
-          >
-            <View style={styles.button}>
-              <View style={styles.icon}>
-                <Feather name="droplet" color={colors.primary} size={26} />
-              </View>
-              <View style={styles.textcontainer}>
-                <Text style={styles.text}>Themes</Text>
-              </View>
-              <View style={styles.icon}>
-                <Feather name="arrow-right" color={colors.darkgrey} size={26} />
-              </View>
-            </View>
-          </TouchableOpacity>*/}
-          {/*<TouchableOpacity
-            onPress={() => this.props.navigation.navigate("MyGamesSettings")}
-          >
-            <View style={styles.button}>
-              <View style={styles.icon}>
-                <Feather name="bookmark" color={colors.primary} size={26} />
-              </View>
-              <View style={styles.textcontainer}>
-                <Text style={styles.text}>My Games</Text>
-              </View>
-              <View style={styles.icon}>
-                <Feather name="arrow-right" color={colors.darkgrey} size={26} />
-              </View>
-            </View>
-          </TouchableOpacity>*/}
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate("About")}
-          >
-            <View style={styles.button}>
-              <View style={styles.icon}>
-                <Feather name="info" color={colors.primary} size={26} />
-              </View>
-              <View style={styles.textcontainer}>
-                <Text style={styles.text}>About</Text>
-              </View>
-              <View style={styles.icon}>
-                <Feather name="arrow-right" color={colors.darkgrey} size={26} />
-              </View>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() =>
-              this.loadInBrowser(
-                "https://github.com/Asiern/Speerun.comApp/blob/master/Readme/Privacy%20Policy.md"
-              )
-            }
-          >
-            <View style={styles.button}>
-              <View style={styles.icon}>
-                <Feather name="book-open" color={colors.primary} size={26} />
-              </View>
-              <View style={styles.textcontainer}>
-                <Text style={styles.text}>
-                  Privacy Policy / Terms & Conditions
-                </Text>
-              </View>
-              <View style={styles.icon}>
-                <Feather name="arrow-right" color={colors.darkgrey} size={26} />
-              </View>
-            </View>
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  }
+import SettingsSection from "../components/SettingsSection";
+
+import styled, { ThemeProvider } from "styled-components";
+import { useSelector } from "react-redux";
+import { FlatList } from "react-native-gesture-handler";
+
+export default function Settings(props) {
+  const theme = useSelector((state) => state.themeReducer.theme);
+
+  const DATA = [
+    {
+      title: "My Account",
+      icon: "user",
+      navigateTo: "AccountSettings",
+    },
+    {
+      title: "Notifications",
+      icon: "bell",
+      navigateTo: "NotificationSettings",
+    },
+    {
+      title: "Themes",
+      icon: "droplet",
+      navigateTo: "Themes",
+    },
+  ];
+  return (
+    <ThemeProvider theme={theme}>
+      <Container>
+        <FlatList
+          data={DATA}
+          renderItem={({ item }) => (
+            <SettingsSection
+              navigateTO={item.navigateTo}
+              title={item.title}
+              icon={item.icon}
+              backgroundColor={theme.PRIMARY_BACKGROUND}
+              accentColor={theme.PRIMARY_ACCENT}
+              textPrimaryColor={theme.PRIMARY_TEXT}
+              navigation={props.navigation}
+            />
+          )}
+          keyExtractor={(item, index) => "key" + index}
+        ></FlatList>
+      </Container>
+    </ThemeProvider>
+  );
 }
+
+const Container = styled.View`
+  flex: 1;
+  background-color: ${(props) => props.theme.SECONDARY_BACKGROUND};
+`;
 
 const styles = StyleSheet.create({
   container: {
@@ -152,5 +90,3 @@ const styles = StyleSheet.create({
   },
   h2: {},
 });
-
-export default Settings;

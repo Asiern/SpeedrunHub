@@ -1,9 +1,10 @@
 import { lightTheme } from "../config/Themes";
+import { darkTheme } from "../config/Themes";
 
 import { SWITCH_THEME } from "./themeActions";
 
 const initialState = {
-  theme: lightTheme,
+  theme: darkTheme,
 };
 const themeReducer = (state = initialState, action) => {
   switch (action.type) {

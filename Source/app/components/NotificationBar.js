@@ -10,7 +10,6 @@ import {
 import NotificationCard from "./NotificationCard";
 import { ActivityIndicator } from "react-native-paper";
 import colors from "../config/colors";
-import Feather from "@expo/vector-icons/Feather";
 
 const NotificationBar = (props) => {
   const [data, setData] = useState(null);
@@ -44,7 +43,7 @@ const NotificationBar = (props) => {
     return function cleanup() {
       mounted = false;
     };
-  }, [data]);
+  }, [data, loading]);
   if (loading) {
     return <ActivityIndicator />;
   } else if (error) {
