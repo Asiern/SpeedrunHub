@@ -20,10 +20,15 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import Feather from "@expo/vector-icons/Feather";
 import colors from "../config/colors";
 
+import styled, { ThemeProvider } from "styled-components";
+import { useSelector } from "react-redux";
+
 const Stack = createStackNavigator();
 const BottomTabs = createMaterialBottomTabNavigator();
 
-export default class Navigation extends Component {
+const theme = useSelector((state) => state.themeReducer.theme);
+
+class Navigation extends Component {
   createHomeStack = (props) => (
     <Stack.Navigator>
       <Stack.Screen
@@ -87,46 +92,57 @@ export default class Navigation extends Component {
   );
   render() {
     return (
-      <NavigationContainer>
-        <BottomTabs.Navigator
-          initialRouteName="Home"
-          activeColor={colors.primary}
-          inactiveColor={colors.darkgrey}
-          barStyle={{ backgroundColor: colors.white }}
-        >
-          <BottomTabs.Screen
-            name="Home"
-            children={this.createHomeStack}
-            options={{
-              tabBarLabel: "Home",
-              tabBarIcon: ({ color }) => (
-                <Feather name="home" color={color} size={24} />
-              ),
-            }}
-          />
-          <BottomTabs.Screen
-            name="Search"
-            component={this.createSearchStack}
-            options={{
-              tabBarLabel: "Search",
-              tabBarIcon: ({ color }) => (
-                <Feather name="search" color={color} size={24} />
-              ),
-            }}
-          />
+      <ThemeProvider theme={theme}>
+        <Container>
+          <NavigationContainer>
+            <BottomTabs.Navigator
+              initialRouteName="Home"
+              activeColor={colors.primary}
+              inactiveColor={colors.darkgrey}
+              barStyle={{ backgroundColor: colors.white }}
+            >
+              <BottomTabs.Screen
+                name="Home"
+                children={this.createHomeStack}
+                options={{
+                  tabBarLabel: "Home",
+                  tabBarIcon: ({ color }) => (
+                    <Feather name="home" color={color} size={24} />
+                  ),
+                }}
+              />
+              <BottomTabs.Screen
+                name="Search"
+                component={this.createSearchStack}
+                options={{
+                  tabBarLabel: "Search",
+                  tabBarIcon: ({ color }) => (
+                    <Feather name="search" color={color} size={24} />
+                  ),
+                }}
+              />
 
-          <BottomTabs.Screen
-            name="Settings"
-            component={this.createSettingsStack}
-            options={{
-              tabBarLabel: "Settings",
-              tabBarIcon: ({ color }) => (
-                <Feather name="settings" color={color} size={24} />
-              ),
-            }}
-          />
-        </BottomTabs.Navigator>
-      </NavigationContainer>
+              <BottomTabs.Screen
+                name="Settings"
+                component={this.createSettingsStack}
+                options={{
+                  tabBarLabel: "Settings",
+                  tabBarIcon: ({ color }) => (
+                    <Feather name="settings" color={color} size={24} />
+                  ),
+                }}
+              />
+            </BottomTabs.Navigator>
+          </NavigationContainer>
+        </Container>
+      </ThemeProvider>
     );
   }
 }
+
+const Container = styled.View`
+  flex: 1;
+  background-color: ${(props) => props.theme.SECONDARY_BACKGROUND};
+`;
+
+export default Navigation;
