@@ -3,6 +3,8 @@ import { StyleSheet, View, Text, Dimensions } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import { ScrollView } from "react-native-gesture-handler";
 
+import { useNavigation } from "@react-navigation/native";
+
 import styled, { ThemeProvider } from "styled-components";
 import { useSelector } from "react-redux";
 
@@ -16,6 +18,7 @@ const { width } = Dimensions.get("screen");
 
 export default function Home(props) {
   const theme = useSelector((state) => state.themeReducer.theme);
+  const navigation = useNavigation();
 
   const [username, setUsername] = useState("Guest");
   const [userid, setUserid] = useState("");
@@ -51,13 +54,13 @@ export default function Home(props) {
               <UserHeader
                 username={username}
                 userid={userid}
-                navigation={props.navigation}
+                navigation={navigation}
               />
             </View>
             <NotificationBar
               width={width}
               APIKey={APIKey}
-              navigation={props.navigation}
+              navigation={navigation}
             />
             <Text style={styles.headertext}>My Games</Text>
             {games == null ? (
@@ -72,7 +75,7 @@ export default function Home(props) {
                 />
               </View>
             ) : (
-              <MyGames data={games} navigation={props.navigation} />
+              <MyGames data={games} navigation={navigation} />
             )}
           </View>
         </ScrollView>
