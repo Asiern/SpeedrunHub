@@ -15,7 +15,6 @@ const NotificationBar = (props) => {
   const [data, setData] = useState(null);
   const [loading, setloading] = useState(true);
   const [error, seterror] = useState(false);
-  const key = props.APIKey;
   useEffect(() => {
     let mounted = true;
 
@@ -26,11 +25,10 @@ const NotificationBar = (props) => {
         xhr.open("GET", url);
         xhr.setRequestHeader("Host", "www.speedrun.com");
         xhr.setRequestHeader("Accept", "application/json");
-        xhr.setRequestHeader("X-API-Key", key);
+        xhr.setRequestHeader("X-API-Key", props.APIKey);
         xhr.onreadystatechange = function () {
           if (xhr.readyState === 4 && mounted) {
             response = JSON.parse(xhr.responseText);
-
             setData(response.data);
             setloading(false);
           }
@@ -56,7 +54,7 @@ const NotificationBar = (props) => {
             <Text style={styles.headertext}>Notifications</Text>
           </View>
         </View>
-        {key == null ? (
+        {props.APIKey == null ? (
           <NotificationCard
             width={props.width}
             text={
