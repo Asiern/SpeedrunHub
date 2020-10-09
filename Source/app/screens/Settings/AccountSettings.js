@@ -30,12 +30,9 @@ const AccountSettings = (props) => {
 
   async function signOut() {
     const createTwoButtonAlert = (msg) =>
-      Alert.alert(
-        "Alert",
-        msg,
-        [{ text: "OK", onPress: () => props.function(true) }],
-        { cancelable: true }
-      );
+      Alert.alert("Alert", msg, [{ text: "OK", onPress: () => null }], {
+        cancelable: true,
+      });
     //Remove user
     await AsyncStorage.setItem("@user", "");
     await AsyncStorage.setItem("@userid", "");
