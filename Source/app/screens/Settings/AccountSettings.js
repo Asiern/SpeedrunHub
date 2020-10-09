@@ -6,7 +6,7 @@ import {
   Image,
   TextInput,
   Clipboard,
-  DevSettings,
+  Alert,
 } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import colors from "../../config/colors";
@@ -16,6 +16,7 @@ const AccountSettings = (props) => {
   const [user, setUser] = useState("");
   const [userId, setUserId] = useState("");
   const [key, setKey] = useState("");
+
   useEffect(() => {
     (async () => {
       const tempuser = await AsyncStorage.getItem("@user");
@@ -26,15 +27,24 @@ const AccountSettings = (props) => {
       setKey(tempuserkey);
     })();
   }, []);
+
   async function signOut() {
+    const createTwoButtonAlert = (msg) =>
+      Alert.alert(
+        "Alert",
+        msg,
+        [{ text: "OK", onPress: () => props.function(true) }],
+        { cancelable: true }
+      );
     //Remove user
     await AsyncStorage.setItem("@user", "");
     await AsyncStorage.setItem("@userid", "");
     //Set login to 1
     await AsyncStorage.setItem("@Loggedin", "false");
     //Restart app
-    DevSettings.reload();
+    createTwoButtonAlert("Please restart the app.");
   }
+
   return (
     <View style={styles.container}>
       <View style={styles.user}>
