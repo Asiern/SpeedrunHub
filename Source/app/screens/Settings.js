@@ -21,14 +21,14 @@ export default function Settings(props) {
       navigateTo: "AccountSettings",
     },
     {
-      title: "Notifications",
-      icon: "bell",
-      navigateTo: "NotificationSettings",
-    },
-    {
       title: "Themes",
       icon: "droplet",
       navigateTo: "Themes",
+    },
+    {
+      title: "About",
+      icon: "info",
+      navigateTo: "About",
     },
   ];
   return (

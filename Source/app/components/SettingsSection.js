@@ -5,7 +5,9 @@ import Feather from "@expo/vector-icons/Feather";
 
 const SettingsSection = (props) => {
   return (
-    <TouchableOpacity onPress={() => props.navigation.navigate("Themes")}>
+    <TouchableOpacity
+      onPress={() => props.navigation.navigate(props.navigateTO)}
+    >
       <View
         style={[styles.container, { backgroundColor: props.backgroundColor }]}
       >
