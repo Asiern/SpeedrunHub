@@ -1,6 +1,10 @@
 import React from "react";
 import { Text, View, StyleSheet, Image } from "react-native";
 
+import { StackActions } from "@react-navigation/native";
+
+const goBack = StackActions.pop();
+
 import Constants from "expo-constants";
 import Feather from "@expo/vector-icons/Feather";
 import colors from "../config/colors";
@@ -11,7 +15,7 @@ const ProfileHeader = (props) => {
       <View style={styles.topbar}>
         <View style={styles.topbarleft}>
           <Feather
-            onPress={() => props.navigation.navigate("Home")}
+            onPress={() => props.navigation.dispatch(goBack)}
             name="arrow-left"
             color={colors.white}
             size={35}
