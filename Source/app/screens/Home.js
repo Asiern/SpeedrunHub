@@ -27,31 +27,27 @@ export default function Home(props) {
 
   useEffect(() => {
     let mounted = true;
-    (async () => {
-      const username = await AsyncStorage.getItem("@user");
-      const userid = await AsyncStorage.getItem("@userid");
-      const APIKey = await AsyncStorage.getItem("@API-Key");
-      const GAMES = await AsyncStorage.getItem("@MyGames");
-      if (mounted) {
-        setUsername(username);
-        setUserid(userid);
-        setAPIKey(APIKey);
-        setGames(JSON.parse(GAMES));
-      }
-    })();
 
+    if (mounted) {
+      fetchData();
+    }
     return function cleanup() {
       mounted = false;
     };
   }, []);
-  async function fetchGames() {
+  async function fetchData() {
     const GAMES = await AsyncStorage.getItem("@MyGames");
+    const username = await AsyncStorage.getItem("@user");
+    const userid = await AsyncStorage.getItem("@userid");
+    const APIKey = await AsyncStorage.getItem("@API-Key");
     setGames(JSON.parse(GAMES));
+    setUsername(username);
+    setUserid(userid);
+    setAPIKey(APIKey);
   }
   useFocusEffect(
     React.useCallback(() => {
-      console.log("Use callback");
-      fetchGames();
+      fetchData();
     }, [])
   );
   return (
