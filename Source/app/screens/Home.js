@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Dimensions } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import { ScrollView } from "react-native-gesture-handler";
 
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
 import styled, { ThemeProvider } from "styled-components";
 import { useSelector } from "react-redux";
@@ -44,7 +44,16 @@ export default function Home(props) {
       mounted = false;
     };
   }, []);
-
+  async function fetchGames() {
+    const GAMES = await AsyncStorage.getItem("@MyGames");
+    setGames(JSON.parse(GAMES));
+  }
+  useFocusEffect(
+    React.useCallback(() => {
+      console.log("Use callback");
+      fetchGames();
+    }, [])
+  );
   return (
     <ThemeProvider theme={theme}>
       <Container>
