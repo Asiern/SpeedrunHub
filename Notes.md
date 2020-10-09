@@ -3,13 +3,16 @@
 ## What's new?
 
 - Personal Bests are now sorted by games.
-- Themes.
+- Dark/Light Themes.
+
+## Fixes
+
+- Fixed: Cannot remove games from `MyGames`.
+- Fixed: MyGames not reloading when adding/removing games.
 
 ## Known issues
 
-- Cannot remove games from `MyGames`.
 - App not reloading when logging out.
-- MyGames not reloading when adding/removing games.
 - Runs with multiple runners not displaying properly.
 - Japanese users not displaying.
 - OS forced darkmode breaks `UserHeader.js` colors.
