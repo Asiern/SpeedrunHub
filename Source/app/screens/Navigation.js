@@ -18,78 +18,73 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 
 import Feather from "@expo/vector-icons/Feather";
-import colors from "../config/colors";
 
+import { theme } from "../config/Themes";
 import styled, { ThemeProvider } from "styled-components";
-import { useSelector } from "react-redux";
 
 const Stack = createStackNavigator();
 const BottomTabs = createMaterialBottomTabNavigator();
-
+HomeStack = (props) => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{ title: "Home", headerShown: "" }}
+      />
+      <Stack.Screen name="Game Info" component={GameInfo} />
+      <Stack.Screen name="Notifications" component={Notifications} />
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
+        options={{ title: "Profile", headerShown: "" }}
+      />
+    </Stack.Navigator>
+  );
+};
+SearchStack = (props) => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Search"
+        component={Search}
+        options={{ title: "Search", headerShown: "" }}
+      />
+      <Stack.Screen name="Game Info" component={GameInfo} />
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
+        options={{ title: "My Profile", headerShown: "" }}
+      />
+    </Stack.Navigator>
+  );
+};
+SettingsStack = (props) => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Settings" component={Settings} />
+      <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{ title: "My Profile", headerShown: "" }}
+      />
+      <Stack.Screen name="Themes" component={Themes} />
+      <Stack.Screen name="MyGamesSettings" component={MyGamesSettings} />
+      <Stack.Screen
+        name="NotificationsSettings"
+        component={NotificationsSettings}
+        options={{ title: "Notifications Settings" }}
+      />
+      <Stack.Screen
+        name="AccountSettings"
+        component={AccountSettings}
+        options={{ title: "Account Settings" }}
+      />
+      <Stack.Screen name="About" component={About} />
+    </Stack.Navigator>
+  );
+};
 export default function Navigation() {
-  const theme = useSelector((state) => state.themeReducer.theme);
-
-  function HomeStack(props) {
-    return (
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{ title: "Home", headerShown: "" }}
-        />
-        <Stack.Screen name="Game Info" component={GameInfo} />
-        <Stack.Screen name="Notifications" component={Notifications} />
-        <Stack.Screen
-          name="Profile"
-          component={Profile}
-          options={{ title: "Profile", headerShown: "" }}
-        />
-      </Stack.Navigator>
-    );
-  }
-  function SearchStack(props) {
-    return (
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Search"
-          component={Search}
-          options={{ title: "Search", headerShown: "" }}
-        />
-        <Stack.Screen name="Game Info" component={GameInfo} />
-        <Stack.Screen
-          name="Profile"
-          component={Profile}
-          options={{ title: "My Profile", headerShown: "" }}
-        />
-      </Stack.Navigator>
-    );
-  }
-  function SettingsStack(props) {
-    return (
-      <Stack.Navigator>
-        <Stack.Screen name="Settings" component={Settings} />
-        <Stack.Screen
-          name="Login"
-          component={Login}
-          options={{ title: "My Profile", headerShown: "" }}
-        />
-        <Stack.Screen name="Themes" component={Themes} />
-        <Stack.Screen name="MyGamesSettings" component={MyGamesSettings} />
-        <Stack.Screen
-          name="NotificationsSettings"
-          component={NotificationsSettings}
-          options={{ title: "Notifications Settings" }}
-        />
-        <Stack.Screen
-          name="AccountSettings"
-          component={AccountSettings}
-          options={{ title: "Account Settings" }}
-        />
-        <Stack.Screen name="About" component={About} />
-      </Stack.Navigator>
-    );
-  }
-
   return (
     <ThemeProvider theme={theme}>
       <Container>
