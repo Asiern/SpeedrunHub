@@ -45,16 +45,17 @@ class GameInfo extends React.Component {
   _toggleFavourites = async () => {
     const games = await AsyncStorage.getItem("@MyGames");
     var gameList = JSON.parse(games);
+    var game = {
+      id: this.state.id,
+      abbreviation: this.state.abbreviation,
+    };
     if (gameList == null) {
       gameList = [];
     }
     if (!this.state.favourite) {
       console.log("enter if toggle");
       //Create game obj
-      var game = {
-        id: this.state.id,
-        abbreviation: this.state.abbreviation,
-      };
+
       //add game to list
       gameList.push(game);
       //Game added to list
@@ -62,6 +63,11 @@ class GameInfo extends React.Component {
       this.setState({ favourite: true });
     } else {
       //Game got removed from list
+      for (let GAME of gameList) {
+        if (game.id == GAME.id) {
+          gameList.splice(gameList.indexOf(GAME), 1);
+        }
+      }
       await AsyncStorage.setItem("@MyGames", JSON.stringify(gameList));
       this.setState({ favourite: false });
     }
