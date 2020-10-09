@@ -72,12 +72,9 @@ export default function About() {
           What's New
         </Text>
         <Text style={styles.paragraph}>
-          Now you can add/remove "MyGames" games from GameInfo.
+          Personal Bests are now sorted by games.
           {"\n"}
-          {"\n"}Moved MyGames to an unique file `MyGames.js` and changed from
-          .map to Flatlist.{"\n"}
-          {"\n"}Added Notification Bar messages when API-Key is missing and
-          Notifications are empty.
+          {"\n"}Dark/Light Themes.
         </Text>
         <Text
           style={[
@@ -88,12 +85,10 @@ export default function About() {
           Fixes
         </Text>
         <Text style={styles.paragraph}>
-          Fixed: App not reloading when logging in.{"\n"}
-          {"\n"}Fixed: Notifications issue when API-Key was not provided.
+          Fixed: Cannot remove games from `MyGames`.
           {"\n"}
-          {"\n"}Fixed: Login screen buttons.{"\n"}
-          {"\n"}Fixed: Profiles with no country not displaying properly.{"\n"}
-          {"\n"}Fixed: Login `SKIP` button not working.
+          {"\n"}
+          Fixed: MyGames not reloading when adding/removing games.
         </Text>
         <Text style={styles.title}>Send Feedback</Text>
         <Text style={styles.paragraph}>
