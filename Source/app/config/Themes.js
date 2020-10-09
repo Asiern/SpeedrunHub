@@ -1,3 +1,12 @@
+export const theme = {
+  mode: "light",
+  PRIMARY_BACKGROUND: "#fff",
+  SECONDARY_BACKGROUND: "#ededed",
+  PRIMARY_TEXT: "#242c37",
+  PRIMARY_ACCENT: "#e57373",
+  INACTIVE: "#242c37",
+  STATUS_BAR_STYILE: "dark-content",
+};
 export const lightTheme = {
   mode: "light",
   PRIMARY_BACKGROUND: "#fff",
