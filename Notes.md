@@ -9,6 +9,7 @@
 
 - Fixed: Cannot remove games from `MyGames`.
 - Fixed: MyGames not reloading when adding/removing games.
+- Fixed: Notifications not loading due to API-Key missing.
 
 ## Known issues
 
