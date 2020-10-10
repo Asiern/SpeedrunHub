@@ -72,12 +72,7 @@ export default function About() {
           What's New
         </Text>
         <Text style={styles.paragraph}>
-          Now you can add/remove "MyGames" games from GameInfo.
-          {"\n"}
-          {"\n"}Moved MyGames to an unique file `MyGames.js` and changed from
-          .map to Flatlist.{"\n"}
-          {"\n"}Added Notification Bar messages when API-Key is missing and
-          Notifications are empty.
+          Personal Bests are now sorted by games.
         </Text>
         <Text
           style={[
@@ -88,17 +83,47 @@ export default function About() {
           Fixes
         </Text>
         <Text style={styles.paragraph}>
-          Fixed: App not reloading when logging in.{"\n"}
-          {"\n"}Fixed: Notifications issue when API-Key was not provided.
+          Fixed: Cannot remove games from `MyGames`.
           {"\n"}
-          {"\n"}Fixed: Login screen buttons.{"\n"}
-          {"\n"}Fixed: Profiles with no country not displaying properly.{"\n"}
-          {"\n"}Fixed: Login `SKIP` button not working.
+          {"\n"}
+          Fixed: MyGames not reloading when adding/removing games.
+          {"\n"}
+          {"\n"}
+          Fixed: Back button not working properly.
         </Text>
         <Text style={styles.title}>Send Feedback</Text>
         <Text style={styles.paragraph}>
           Send me an email at asiern.dev@gmail.com
         </Text>
+        <TouchableOpacity
+          onPress={() =>
+            loadInBrowser("https://github.com/Asiern/SpeedrunHub/blob/master/LICENSE")
+          }
+        >
+          <View style={styles.legal}>
+            <Text style={styles.githubtext}>License</Text>
+          </View>
+        </TouchableOpacity>
+        <View style={{padding:10}}></View>
+        <TouchableOpacity
+          onPress={() =>
+            loadInBrowser("https://github.com/Asiern/SpeedrunHub/blob/master/Readme/Privacy%20Policy.md")
+          }
+        >
+          <View style={styles.legal}>
+            <Text style={styles.githubtext}>Privacy Policy</Text>
+          </View>
+        </TouchableOpacity>
+        <View style={{padding:10}}></View>
+        <TouchableOpacity
+          onPress={() =>
+            loadInBrowser("https://github.com/Asiern/SpeedrunHub/blob/master/Readme/Terms%20%26%20Conditions.md")
+          }
+        >
+          <View style={styles.legal}>
+            <Text style={styles.githubtext}>Terms & Conditions</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
@@ -141,6 +166,14 @@ const styles = StyleSheet.create({
     alignContent: "center",
     justifyContent: "center",
     backgroundColor: colors.darkgrey,
+    padding: 10,
+    borderRadius: 10,
+  },
+  legal: {
+    flexDirection: "row",
+    alignContent: "center",
+    justifyContent: "center",
+    backgroundColor: colors.primary,
     padding: 10,
     borderRadius: 10,
   },
