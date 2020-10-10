@@ -64,14 +64,14 @@ const NotificationBar = (props) => {
             color={colors.darkgrey}
           />
         ) : (
-          <NotificationCard
-            width={props.width}
-            text={
-              "No notifications were found. Make sure your API-Key and your Speedrun.com notifications settings are correct. Otherwise try restarting the app."
-            }
-            backgroundColor={colors.primary}
-            color={colors.white}
-          />
+            <NotificationCard
+              width={props.width}
+              text={
+                "No notifications were found. Make sure your API-Key and your Speedrun.com notifications settings are correct. Otherwise try restarting the app."
+              }
+              backgroundColor={colors.primary}
+              color={colors.white}
+            />
         )}
       </View>
     );
