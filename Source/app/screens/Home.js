@@ -70,20 +70,7 @@ export default function Home(props) {
               navigation={navigation}
             />
             <Text style={styles.headertext}>My Games</Text>
-            {games == null ? (
-              <View>
-                <NotificationCard
-                  width={width}
-                  text={
-                    "Start searching for your favourite games and add them to MyGames."
-                  }
-                  backgroundColor={theme.PRIMARY_ACCENT}
-                  color={theme.PRIMARY_TEXT}
-                />
-              </View>
-            ) : (
               <MyGames data={games} navigation={navigation} />
-            )}
           </View>
         </ScrollView>
       </Container>
