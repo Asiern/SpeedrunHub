@@ -6,6 +6,7 @@
     "version": "1.0.9",
     "orientation": "portrait",
     "icon": "./app/assets/trophy.png",
+    
     "splash": {
       "image": "./app/assets/trophy.png",
       "resizeMode": "contain",
@@ -22,7 +23,8 @@
     "githubUrl": "https://github.com/Asiern/SpeedrunHub",
     "android": {
       "package": "com.asiern.speedrun",
-      "versionCode": 9
+      "versionCode": 9,
+      "permissions" : []
     }
   }
 }
