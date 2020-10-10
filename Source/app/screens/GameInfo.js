@@ -45,6 +45,7 @@ class GameInfo extends React.Component {
   _toggleFavourites = async () => {
     const games = await AsyncStorage.getItem("@MyGames");
     var gameList = JSON.parse(games);
+    //Create game obj
     var game = {
       id: this.state.id,
       abbreviation: this.state.abbreviation,
@@ -52,10 +53,7 @@ class GameInfo extends React.Component {
     if (gameList == null) {
       gameList = [];
     }
-    if (!this.state.favourite) {
-      console.log("enter if toggle");
-      //Create game obj
-
+    if (!this.state.favourite) {     
       //add game to list
       gameList.push(game);
       //Game added to list
