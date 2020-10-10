@@ -272,14 +272,14 @@ class GameInfo extends React.Component {
         </ImageBackground>
         {this.state.favourite == true ? (
           <Button
-            title={"Remove from favs"}
+            title={"Remove from MyGames"}
             color={colors.red}
             onPress={() => this._toggleFavourites()}
           />
         ) : (
           <Button
             color={colors.primary}
-            title={"Add to favs"}
+            title={"Add to MyGames"}
             onPress={() => this._toggleFavourites()}
           />
         )}
