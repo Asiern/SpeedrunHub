@@ -11,7 +11,6 @@ import { useSelector } from "react-redux";
 import MyGames from "../components/MyGames";
 import UserHeader from "../components/UserHeader";
 import NotificationBar from "../components/NotificationBar";
-import NotificationCard from "../components/NotificationCard";
 import colors from "../config/colors";
 
 const { width } = Dimensions.get("screen");
