@@ -73,8 +73,6 @@ export default function About() {
         </Text>
         <Text style={styles.paragraph}>
           Personal Bests are now sorted by games.
-          {"\n"}
-          {"\n"}Dark/Light Themes.
         </Text>
         <Text
           style={[
@@ -89,11 +87,43 @@ export default function About() {
           {"\n"}
           {"\n"}
           Fixed: MyGames not reloading when adding/removing games.
+          {"\n"}
+          {"\n"}
+          Fixed: Back button not working properly.
         </Text>
         <Text style={styles.title}>Send Feedback</Text>
         <Text style={styles.paragraph}>
           Send me an email at asiern.dev@gmail.com
         </Text>
+        <TouchableOpacity
+          onPress={() =>
+            loadInBrowser("https://github.com/Asiern/SpeedrunHub/blob/master/LICENSE")
+          }
+        >
+          <View style={styles.legal}>
+            <Text style={styles.githubtext}>License</Text>
+          </View>
+        </TouchableOpacity>
+        <View style={{padding:10}}></View>
+        <TouchableOpacity
+          onPress={() =>
+            loadInBrowser("https://github.com/Asiern/SpeedrunHub/blob/master/Readme/Privacy%20Policy.md")
+          }
+        >
+          <View style={styles.legal}>
+            <Text style={styles.githubtext}>Privacy Policy</Text>
+          </View>
+        </TouchableOpacity>
+        <View style={{padding:10}}></View>
+        <TouchableOpacity
+          onPress={() =>
+            loadInBrowser("https://github.com/Asiern/SpeedrunHub/blob/master/Readme/Terms%20%26%20Conditions.md")
+          }
+        >
+          <View style={styles.legal}>
+            <Text style={styles.githubtext}>Terms & Conditions</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
@@ -136,6 +166,14 @@ const styles = StyleSheet.create({
     alignContent: "center",
     justifyContent: "center",
     backgroundColor: colors.darkgrey,
+    padding: 10,
+    borderRadius: 10,
+  },
+  legal: {
+    flexDirection: "row",
+    alignContent: "center",
+    justifyContent: "center",
+    backgroundColor: colors.primary,
     padding: 10,
     borderRadius: 10,
   },
