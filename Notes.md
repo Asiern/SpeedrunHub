@@ -3,7 +3,6 @@
 ## What's new?
 
 - Personal Bests are now sorted by games.
-- Dark/Light Themes.
 
 ## Fixes
 
