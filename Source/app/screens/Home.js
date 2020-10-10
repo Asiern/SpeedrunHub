@@ -3,10 +3,10 @@ import { StyleSheet, View, Text, Dimensions } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import { ScrollView } from "react-native-gesture-handler";
 
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
+
 import styled, { ThemeProvider } from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
-import { switchTheme } from "../redux/themeActions";
-import { lightTheme, darkTheme } from "../config/Themes";
+import { useSelector } from "react-redux";
 
 import MyGames from "../components/MyGames";
 import UserHeader from "../components/UserHeader";
@@ -18,7 +18,7 @@ const { width } = Dimensions.get("screen");
 
 export default function Home(props) {
   const theme = useSelector((state) => state.themeReducer.theme);
-  const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   const [username, setUsername] = useState("Guest");
   const [userid, setUserid] = useState("");
@@ -27,61 +27,60 @@ export default function Home(props) {
 
   useEffect(() => {
     let mounted = true;
-    (async () => {
-      const username = await AsyncStorage.getItem("@user");
-      const userid = await AsyncStorage.getItem("@userid");
-      const APIKey = await AsyncStorage.getItem("@API-Key");
-      const GAMES = await AsyncStorage.getItem("@MyGames");
-      if (mounted) {
-        setUsername(username);
-        setUserid(userid);
-        setAPIKey(APIKey);
-        setGames(JSON.parse(GAMES));
-      }
-    })();
 
+    if (mounted) {
+      fetchData();
+    }
     return function cleanup() {
       mounted = false;
     };
   }, []);
-
+  async function fetchData() {
+    const GAMES = await AsyncStorage.getItem("@MyGames");
+    const username = await AsyncStorage.getItem("@user");
+    const userid = await AsyncStorage.getItem("@userid");
+    const APIKey = await AsyncStorage.getItem("@API-Key");
+    setGames(JSON.parse(GAMES));
+    setUsername(username);
+    setUserid(userid);
+    setAPIKey(APIKey);
+  }
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchData();
+    }, [])
+  );
   return (
-    <ThemeProvider theme={theme} style={{ flex: 1 }}>
-      <ScrollView style={{ flex: 1, backgroundColor: colors.light }}>
-        <View style={styles.container}>
-          <View style={styles.profile}>
-            <UserHeader
-              username={username}
-              userid={userid}
-              navigation={props.navigation}
-            />
-          </View>
-          <NotificationBar
-            width={width}
-            APIKey={APIKey}
-            navigation={props.navigation}
-          />
-          <Text style={styles.headertext}>My Games</Text>
-          {games == null ? (
-            <View>
-              <NotificationCard
-                width={width}
-                text={
-                  "Start searching for your favourite games and add them to MyGames."
-                }
-                backgroundColor={colors.green}
-                color={colors.white}
+    <ThemeProvider theme={theme}>
+      <Container>
+        <ScrollView
+          style={{ flex: 1, backgroundColor: theme.SECONDARY_BACKGROUND }}
+        >
+          <View style={styles.container}>
+            <View style={styles.profile}>
+              <UserHeader
+                username={username}
+                userid={userid}
+                navigation={navigation}
               />
             </View>
-          ) : (
-            <MyGames data={games} navigation={props.navigation} />
-          )}
-        </View>
-      </ScrollView>
+            <NotificationBar
+              width={width}
+              APIKey={APIKey}
+              navigation={navigation}
+            />
+            <Text style={styles.headertext}>My Games</Text>
+              <MyGames data={games} navigation={navigation} />
+          </View>
+        </ScrollView>
+      </Container>
     </ThemeProvider>
   );
 }
-
+const Container = styled.View`
+  flex: 1;
+  background-color: ${(props) => props.theme.SECONDARY_BACKGROUND};
+`;
 const styles = StyleSheet.create({
   container: {
     flex: 1,

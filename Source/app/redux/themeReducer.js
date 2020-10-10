@@ -1,5 +1,7 @@
 import { lightTheme } from "../config/Themes";
+import { darkTheme } from "../config/Themes";
 
+import AsyncStorage from "@react-native-community/async-storage";
 import { SWITCH_THEME } from "./themeActions";
 
 const initialState = {

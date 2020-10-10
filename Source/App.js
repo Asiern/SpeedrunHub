@@ -12,6 +12,7 @@ import { createStore, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
 import themeReducer from "./app/redux/themeReducer";
 
+import { useSelector } from "react-redux";
 const store = createStore(
   combineReducers({ themeReducer }),
   applyMiddleware(thunk)

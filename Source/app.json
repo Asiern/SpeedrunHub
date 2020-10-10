@@ -3,7 +3,7 @@
     "name": "SpeedrunHub",
     "slug": "speedruncomapp",
     "platforms": ["ios", "android", "web"],
-    "version": "1.0.8",
+    "version": "1.0.9",
     "orientation": "portrait",
     "icon": "./app/assets/trophy.png",
     "splash": {
@@ -22,7 +22,7 @@
     "githubUrl": "https://github.com/Asiern/SpeedrunHub",
     "android": {
       "package": "com.asiern.speedrun",
-      "versionCode": 8
+      "versionCode": 9
     }
   }
 }

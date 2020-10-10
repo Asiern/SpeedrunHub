@@ -10,13 +10,11 @@ import {
 import NotificationCard from "./NotificationCard";
 import { ActivityIndicator } from "react-native-paper";
 import colors from "../config/colors";
-import Feather from "@expo/vector-icons/Feather";
 
 const NotificationBar = (props) => {
   const [data, setData] = useState(null);
   const [loading, setloading] = useState(true);
   const [error, seterror] = useState(false);
-  const key = props.APIKey;
   useEffect(() => {
     let mounted = true;
 
@@ -27,11 +25,10 @@ const NotificationBar = (props) => {
         xhr.open("GET", url);
         xhr.setRequestHeader("Host", "www.speedrun.com");
         xhr.setRequestHeader("Accept", "application/json");
-        xhr.setRequestHeader("X-API-Key", key);
+        xhr.setRequestHeader("X-API-Key", props.APIKey);
         xhr.onreadystatechange = function () {
           if (xhr.readyState === 4 && mounted) {
             response = JSON.parse(xhr.responseText);
-
             setData(response.data);
             setloading(false);
           }
@@ -44,7 +41,7 @@ const NotificationBar = (props) => {
     return function cleanup() {
       mounted = false;
     };
-  }, [data]);
+  }, [data, loading]);
   if (loading) {
     return <ActivityIndicator />;
   } else if (error) {
@@ -57,7 +54,7 @@ const NotificationBar = (props) => {
             <Text style={styles.headertext}>Notifications</Text>
           </View>
         </View>
-        {key == null ? (
+        {props.APIKey == null ? (
           <NotificationCard
             width={props.width}
             text={
@@ -67,14 +64,14 @@ const NotificationBar = (props) => {
             color={colors.darkgrey}
           />
         ) : (
-          <NotificationCard
-            width={props.width}
-            text={
-              "No notifications found. Make sure your API-Key is correct or that your Speedrun.com notifications settings are correct."
-            }
-            backgroundColor={colors.green}
-            color={colors.white}
-          />
+            <NotificationCard
+              width={props.width}
+              text={
+                "No notifications were found. Make sure your API-Key and your Speedrun.com notifications settings are correct. Otherwise try restarting the app."
+              }
+              backgroundColor={colors.primary}
+              color={colors.white}
+            />
         )}
       </View>
     );
