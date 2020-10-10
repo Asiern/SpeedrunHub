@@ -21,11 +21,6 @@ export default function Settings(props) {
       navigateTo: "AccountSettings",
     },
     {
-      title: "Themes",
-      icon: "droplet",
-      navigateTo: "Themes",
-    },
-    {
       title: "About",
       icon: "info",
       navigateTo: "About",
