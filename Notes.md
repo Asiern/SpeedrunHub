@@ -5,6 +5,7 @@
 ## Fixes
 
 - Fixed: Notifications
+- Fixed: Security issues.
 
 ## Known issues
 
