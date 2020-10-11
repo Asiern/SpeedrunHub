@@ -2,8 +2,8 @@
   "expo": {
     "name": "SpeedrunHub",
     "slug": "speedruncomapp",
-    "platforms": ["ios", "android", "web"],
-    "version": "1.0.9",
+    "platforms": ["ios", "android"],
+    "version": "1.0.10",
     "orientation": "portrait",
     "icon": "./app/assets/trophy.png",
     
@@ -23,7 +23,7 @@
     "githubUrl": "https://github.com/Asiern/SpeedrunHub",
     "android": {
       "package": "com.asiern.speedrun",
-      "versionCode": 9,
+      "versionCode": 10,
       "permissions" : []
     }
   }
