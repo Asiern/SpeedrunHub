@@ -11,7 +11,6 @@ import { useSelector } from "react-redux";
 import MyGames from "../components/MyGames";
 import UserHeader from "../components/UserHeader";
 import NotificationBar from "../components/NotificationBar";
-import NotificationCard from "../components/NotificationCard";
 import colors from "../config/colors";
 
 const { width } = Dimensions.get("screen");
@@ -22,28 +21,35 @@ export default function Home(props) {
 
   const [username, setUsername] = useState("Guest");
   const [userid, setUserid] = useState("");
-  const [APIKey, setAPIKey] = useState("");
   const [games, setGames] = useState([]);
-
-  useEffect(() => {
-    let mounted = true;
-
-    if (mounted) {
-      fetchData();
-    }
-    return function cleanup() {
-      mounted = false;
-    };
-  }, []);
+  const [notifications,setNotifications]= useState(null);
+  const [APIKey,setAPIKey] = useState(props.APIKey);
+ 
+  function fetchNotifications(){
+    var url = "https://www.speedrun.com/api/v1/notifications";
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", url);
+        xhr.setRequestHeader("Host", "www.speedrun.com");
+        xhr.setRequestHeader("Accept", "application/json");
+        xhr.setRequestHeader("X-API-Key", APIKey);
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+            response = JSON.parse(xhr.responseText);
+            setNotifications(response.data);
+          }
+        };
+        xhr.send();
+  }
   async function fetchData() {
+    fetchNotifications();
     const GAMES = await AsyncStorage.getItem("@MyGames");
     const username = await AsyncStorage.getItem("@user");
     const userid = await AsyncStorage.getItem("@userid");
-    const APIKey = await AsyncStorage.getItem("@API-Key");
+    const key = await AsyncStorage.getItem("@API-Key");
+    setAPIKey(key);
     setGames(JSON.parse(GAMES));
     setUsername(username);
     setUserid(userid);
-    setAPIKey(APIKey);
   }
   useFocusEffect(
     React.useCallback(() => {
@@ -66,8 +72,9 @@ export default function Home(props) {
             </View>
             <NotificationBar
               width={width}
-              APIKey={APIKey}
+              APIKey={props.APIKey}
               navigation={navigation}
+              data={notifications}
             />
             <Text style={styles.headertext}>My Games</Text>
               <MyGames data={games} navigation={navigation} />
