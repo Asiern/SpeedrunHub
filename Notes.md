@@ -1,3 +1,20 @@
+# Version 1.0.10 Notes
+
+## What's new?
+
+## Fixes
+
+- Fixed: Notifications
+
+## Known issues
+
+- App not reloading when logging out.
+- Runs with multiple runners not displaying properly.
+- Japanese users not displaying.
+- OS forced darkmode breaks `UserHeader.js` colors.
+
+---
+
 # Version 1.0.9 Notes
 
 ## What's new?
