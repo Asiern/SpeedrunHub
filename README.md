@@ -3,6 +3,7 @@
 <img src="https://github.com/Asiern/SpeedrunHub/blob/master/Readme/assets/Home.jpg" />
 
 [![runs with expo](https://img.shields.io/badge/Runs%20with%20Expo-000.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000)](https://expo.io/)
+
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/P5P32EN5L)
 
 ---
