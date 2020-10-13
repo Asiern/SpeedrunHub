@@ -1,4 +1,4 @@
-# :trophy:SpeedrunHub
+# :trophy:SpeedrunHub 1.0.11
 
 <img src="https://github.com/Asiern/SpeedrunHub/blob/master/Readme/assets/Home.jpg" />
 
