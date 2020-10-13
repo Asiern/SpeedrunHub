@@ -3,7 +3,7 @@
     "name": "SpeedrunHub",
     "slug": "speedruncomapp",
     "platforms": ["ios", "android"],
-    "version": "1.0.10",
+    "version": "1.0.11",
     "orientation": "portrait",
     "icon": "./app/assets/trophy.png",
     
@@ -23,7 +23,7 @@
     "githubUrl": "https://github.com/Asiern/SpeedrunHub",
     "android": {
       "package": "com.asiern.speedrun",
-      "versionCode": 10,
+      "versionCode": 11,
       "permissions" : []
     }
   }
