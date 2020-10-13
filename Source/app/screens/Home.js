@@ -32,7 +32,6 @@ export default function Home(props) {
         xhr.open("GET", url);
         xhr.setRequestHeader("Host", "www.speedrun.com");
         xhr.setRequestHeader("Accept", "application/json");
-        console.log("key: "+ key)
         xhr.setRequestHeader("X-API-Key",key);
         xhr.onreadystatechange = function () {
           if (xhr.readyState === 4) {
