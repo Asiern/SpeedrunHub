@@ -12,6 +12,8 @@ import NotificationCard from "./NotificationCard";
 import colors from "../config/colors";
 
 const NotificationBar = (props) => {
+    useEffect(() => {
+    });
     return (
       <View style={styles.container}>
         <View style={styles.headerConatiner}>
