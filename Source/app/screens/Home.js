@@ -14,7 +14,9 @@ import NotificationBar from "../components/NotificationBar";
 import colors from "../config/colors";
 
 const { width } = Dimensions.get("screen");
-
+async function getKey(){
+  return await AsyncStorage.getItem("@API-Key");
+}
 export default function Home(props) {
   const theme = useSelector((state) => state.themeReducer.theme);
   const navigation = useNavigation();
@@ -23,15 +25,14 @@ export default function Home(props) {
   const [userid, setUserid] = useState("");
   const [games, setGames] = useState([]);
   const [notifications,setNotifications]= useState(null);
-  const [APIKey,setAPIKey] = useState(props.APIKey);
  
-  function fetchNotifications(){
+  function fetchNotifications(key){
     var url = "https://www.speedrun.com/api/v1/notifications";
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url);
         xhr.setRequestHeader("Host", "www.speedrun.com");
         xhr.setRequestHeader("Accept", "application/json");
-        xhr.setRequestHeader("X-API-Key", APIKey);
+        xhr.setRequestHeader("X-API-Key",key);
         xhr.onreadystatechange = function () {
           if (xhr.readyState === 4) {
             response = JSON.parse(xhr.responseText);
@@ -41,20 +42,19 @@ export default function Home(props) {
         xhr.send();
   }
   async function fetchData() {
-    fetchNotifications();
+    const key = await AsyncStorage.getItem("@API-Key");
     const GAMES = await AsyncStorage.getItem("@MyGames");
     const username = await AsyncStorage.getItem("@user");
     const userid = await AsyncStorage.getItem("@userid");
-    const key = await AsyncStorage.getItem("@API-Key");
-    setAPIKey(key);
     setGames(JSON.parse(GAMES));
     setUsername(username);
-    setUserid(userid);
+    setUserid(userid);    
+    fetchNotifications(key);
   }
   useFocusEffect(
     React.useCallback(() => {
       fetchData();
-    }, [])
+    },[])
   );
   return (
     <ThemeProvider theme={theme}>
