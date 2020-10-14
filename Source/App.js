@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import AsyncStorage from "@react-native-community/async-storage";
-import { ActivityIndicator } from "react-native";
+import { AppLoading } from "expo"
 
 //Screens
 import Navigation from "./app/screens/Navigation";
@@ -22,30 +22,21 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [Loggedin, setLoggedin] = useState(false);
 
-  useEffect(() => {
-    let mounted = true;
-    if (mounted) {
-      (async () => {
-        const LOGGEDIN = await AsyncStorage.getItem("@Loggedin");
+  async function getData(){
+    const LOGGEDIN = await AsyncStorage.getItem("@Loggedin");
         if (LOGGEDIN == "true") {
           setLoggedin(true);
-          setLoading(false);
-        } else if (LOGGEDIN == "false") {
+        } else  {
           setLoggedin(false);
-          setLoading(false);
-        } else {
-          setLoading(false);
         }
-      })();
-    }
-
-    return function cleanup() {
-      mounted = false;
-    };
-  }, [Loggedin]);
+  }
 
   if (loading) {
-    return <ActivityIndicator />;
+    return <AppLoading
+    startAsync={getData}
+    onFinish={() => setLoading(false)}
+    onError={console.warn}
+  />;
   } else {
     return (
       <Provider store={store}>
