@@ -29,7 +29,7 @@ class GameInfo extends React.Component {
       runs: [],
       variables: [],
       categories: [],
-      cheked: 0,
+      checked: 0,
       favourite: false,
     };
   }
@@ -106,7 +106,7 @@ class GameInfo extends React.Component {
         id,
         abbreviation,
         categories: outCategories,
-        cheked: selectedCategory,
+        checked: selectedCategory,
       });
     } catch (error) {
       console.log(error);
@@ -174,7 +174,7 @@ class GameInfo extends React.Component {
           index++;
         }
       }
-      this.setState({ variables: outSubcategoies, cheked: categoryid });
+      this.setState({ variables: outSubcategoies, checked: categoryid });
       this.LoadRuns(urlExt);
     } catch (error) {
       console.log(error);
@@ -264,7 +264,7 @@ class GameInfo extends React.Component {
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
             <View>
-              {this.state.cheked == item.id ? (
+              {this.state.checked == item.id ? (
                 <TouchableOpacity
                   style={styles.selectedcategorybuttoncontainer}
                   onPress={() => this.LoadVariables(item.id)}
