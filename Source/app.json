@@ -10,7 +10,7 @@
     "splash": {
       "image": "./app/assets/trophy.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#4FC3F7"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
