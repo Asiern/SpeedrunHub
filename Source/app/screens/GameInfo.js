@@ -9,7 +9,10 @@ import {
   FlatList,
   Button,
 } from "react-native";
+
 import Run from "../components/Run";
+import GameHeader from "../components/GameHeader"
+
 import colors from "../config/colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-community/async-storage";
@@ -239,37 +242,7 @@ class GameInfo extends React.Component {
   GameHeader = () => {
     return (
       <View>
-        <ImageBackground
-          style={styles.profileBG}
-          source={{
-            uri:
-              "https://www.speedrun.com/themes/" +
-              this.state.abbreviation +
-              "/cover-256.png",
-          }}
-          opacity={0.3}
-        >
-          <View style={styles.profile}>
-            <View style={styles.imagecontainer}>
-              <Image
-                source={{
-                  uri:
-                    "https://www.speedrun.com/themes/" +
-                    this.state.abbreviation +
-                    "/cover-256.png",
-                }}
-                style={styles.Image}
-              ></Image>
-            </View>
-          </View>
-          <View style={styles.userinfo}>
-            <View style={styles.userinfoitem}>
-              <Text style={styles.h1}>
-                {this.state.game.names.international}
-              </Text>
-            </View>
-          </View>
-        </ImageBackground>
+        <GameHeader abbreviation={this.state.abbreviation} name={this.state.game.names.international}/>        
         {this.state.favourite == true ? (
           <Button
             title={"Remove from MyGames"}
