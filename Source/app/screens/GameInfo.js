@@ -340,6 +340,7 @@ class GameInfo extends React.Component {
     } else {
       return (
         <View style={{ flex: 1 }}>
+         
           <FlatList
             keyExtractor={(item) => item.run.id}
             data={this.state.runs}
