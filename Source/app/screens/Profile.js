@@ -110,8 +110,10 @@ export default function Profile(props) {
           renderSectionHeader={({ section }) => (
             <SectionHeader
               abbreviation={section.abbreviation}
+              id={section.id}
               name={section.name}
               width={width}
+              navigation={props.navigation}
             />
           )}
         />
