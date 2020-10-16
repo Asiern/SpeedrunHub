@@ -221,7 +221,6 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
 - UI Design
 - Run Info
 - Push Notifications
-- My Games
 - Japanese text support
 - Internet connection msg (ToastAndroid)
 - Add HTTP request Header User-Agent
