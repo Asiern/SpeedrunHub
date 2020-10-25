@@ -105,6 +105,7 @@ export default function Profile(props) {
               time={item.time}
               category={item.category}
               weblink={item.weblink}
+              navigation={props.navigation}
             />
           )}
           renderSectionHeader={({ section }) => (
