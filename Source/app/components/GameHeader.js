@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, ImageBackground, StyleSheet, Image } from 'react-native';
 import colors from "../config/colors"
-
+import { h1w } from "../themes/Styles"
 const GameHeader = ({abbreviation,name}) => {
     return(
         <ImageBackground
@@ -28,7 +28,7 @@ const GameHeader = ({abbreviation,name}) => {
           </View>
         </View>
         <View style={styles.userinfo}>
-            <Text style={styles.h1}>
+            <Text style={h1w}>
               {name}
             </Text>
         </View>
@@ -64,11 +64,5 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         padding: 30,
     },
-    h1: {
-        color: colors.white,
-        fontSize: 30,
-        fontWeight: "bold",
-        alignSelf: "center",
-      },
 })
 export default GameHeader;

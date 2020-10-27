@@ -12,6 +12,7 @@ import MyGames from "../components/MyGames";
 import UserHeader from "../components/UserHeader";
 import NotificationBar from "../components/NotificationBar";
 import colors from "../config/colors";
+import { h1 } from "../themes/Styles"
 
 const { width } = Dimensions.get("screen");
 async function getKey(){
@@ -76,7 +77,7 @@ export default function Home(props) {
               navigation={navigation}
               data={notifications}
             />
-            <Text style={styles.headertext}>My Games</Text>
+            <Text style={[h1,{marginLeft:20}]}>My Games</Text>
               <MyGames data={games} navigation={navigation} />
           </View>
         </ScrollView>
@@ -95,12 +96,6 @@ const styles = StyleSheet.create({
   },
   profile: {
     height: 250,
-  },
-  headertext: {
-    color: colors.darkgrey,
-    fontSize: 30,
-    marginLeft: 20,
-    fontWeight: "bold",
   },
   flatList: {
     flexDirection: "row",

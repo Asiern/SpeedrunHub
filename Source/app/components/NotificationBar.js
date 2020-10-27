@@ -10,6 +10,7 @@ import {
 import NotificationCard from "./NotificationCard";
 
 import colors from "../config/colors";
+import { h1, h3p } from "../themes/Styles"
 
 const NotificationBar = (props) => {
     useEffect(() => {
@@ -18,7 +19,7 @@ const NotificationBar = (props) => {
       <View style={styles.container}>
         <View style={styles.headerConatiner}>
           <View>
-            <Text style={styles.headertext}>Notifications</Text>
+            <Text style={[h1,{marginLeft:20}]}>Notifications</Text>
           </View>
           <TouchableOpacity
             onPress={() =>
@@ -27,7 +28,7 @@ const NotificationBar = (props) => {
               })
             }
           >
-            <Text style={styles.h2}>View All</Text>
+            <Text style={[h3p,{marginRight:20}]}>View All</Text>
           </TouchableOpacity>
         </View>
 
@@ -74,17 +75,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-  },
-  headertext: {
-    color: colors.darkgrey,
-    fontSize: 30,
-    marginLeft: 20,
-    fontWeight: "bold",
-  },
-  h2: {
-    color: colors.primary,
-    marginRight: 20,
-    fontSize: 17,
   },
 });
 export default NotificationBar;
