@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet, FlatList } from "react-native";
-import NotificationCard from "../components/NotificationCard";
+import NotificationCard from "../components/Notifications/NotificationCard";
 import colors from "../config/colors";
 
 const Notifications = (props) => {

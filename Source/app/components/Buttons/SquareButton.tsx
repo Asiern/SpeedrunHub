@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet, Text, ColorValue } from 'react-native';
-import { h3 } from "../themes/Styles"
+import { h3 } from "../../themes/Styles"
 
 export interface SquareButtonProps {
     title: String;

@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 
 import MyGames from "../components/MyGames";
 import UserHeader from "../components/UserHeader";
-import NotificationBar from "../components/NotificationBar";
+import NotificationBar from "../components/Notifications/NotificationBar";
 import colors from "../config/colors";
 import { h1 } from "../themes/Styles"
 

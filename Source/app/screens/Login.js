@@ -13,7 +13,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { TextInput } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
 
-import Button from "../components/Button";
+import Button from "../components/Buttons/Button";
 
 export default function Login(props) {
   const [textinput, setTextinput] = useState("");

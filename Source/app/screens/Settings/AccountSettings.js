@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import colors from "../../config/colors";
-import Button from "../../components/Button";
+import Button from "../../components/Buttons/Button";
 
 const AccountSettings = (props) => {
   const [user, setUser] = useState("");
