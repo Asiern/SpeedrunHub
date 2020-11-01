@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  Linking,
 } from "react-native";
 import colors from "../config/colors";
 
@@ -16,7 +15,7 @@ const PB = (props) => {
   return (
     <TouchableOpacity
       onPress={() => props.navigation.navigate("RunInfo",{
-        weblink:props.weblink
+        weblink: props.weblink
       })}
       style={styles.container}
     >
