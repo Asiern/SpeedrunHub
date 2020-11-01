@@ -1,8 +1,8 @@
 import React,{ useEffect, useState } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, ScrollView } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
 
-import { h1, h2 } from "../themes/Styles"
+import { h2, h3 } from "../themes/Styles"
 import VideoPreview from "../components/VideoPreview"
 import colors from "../config/colors"
 
@@ -38,7 +38,7 @@ export default function RunInfo (props) {
             const data = await response.json();
             setData(data.data);
             setLoading(false);
-            console.log(data.data)
+            console.log(data.data);
             
           })();
         }    
@@ -46,18 +46,29 @@ export default function RunInfo (props) {
           mounted = false;
         };
       }, []);
+      if(loading){
+        return(<ActivityIndicator size="large" color={colors.blue}/>)
+      }
+      else{
     return(
-    <View style={styles.container}>
-        <View style={styles.video}>
-          {loading?
-          <ActivityIndicator size="large" color={colors.blue}/>:  
-          <VideoPreview link={"http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4"}/>      
-          }
-        </View>
-        <View style={styles.info}>
-        {loading?<ActivityIndicator size="medium" color={colors.blue}/>:<Text style={h2}>{getPlayers(data)}</Text>}
-        </View>
-    </View>);
+      <ScrollView style={styles.container}>
+          <View style={styles.video}>
+            {loading?
+              <ActivityIndicator size="large" color={colors.blue}/>:  
+              <VideoPreview link={"http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4"} weblink={data.videos.links[0].uri}/>      
+            }
+          </View>
+          <View style={styles.title}>
+          <Text style={h3}>GSR in 1h 13m 31s by {getPlayers(data)}</Text>
+            <Text style={h3}>1st place</Text>
+          </View>        
+          <View style={styles.infocard}>
+            <View style={styles.info}>
+              {loading?<ActivityIndicator size="medium" color={colors.blue}/>:<Text style={h3}>Splits</Text>}
+            </View>
+          </View>
+      </ScrollView>);
+    }
 }
 
 const styles = StyleSheet.create({
@@ -69,7 +80,12 @@ const styles = StyleSheet.create({
       flex:1,
       backgroundColor: colors.green,
     },
-    info:{
+    title:{
+      padding:20,
+      justifyContent:"center",
+      alignItems:"center",
+    },
+    infocard:{
       flex:1,
       margin:20,
       borderRadius:30,
@@ -79,5 +95,8 @@ const styles = StyleSheet.create({
       shadowOffset: { width: 5, height: 5 },
       shadowOpacity: 0.9,
       elevation: 5,
+    },
+    info:{
+      paddingVertical:20,
     }
 })
