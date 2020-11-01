@@ -2,10 +2,10 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Video } from 'expo-av';
 
-const VideoPreview = ({link}) => (
+const VideoPreview = ({ link, weblink}) => (
     <View style={styles.container}>
         <Video
-            source={{ uri: link }}
+            source={{ uri: weblink }}
             rate={1.0}
             volume={1.0}
             isMuted={true}
