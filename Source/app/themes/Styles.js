@@ -22,22 +22,27 @@ export const h2w = {
 }
 export const h3 = {
     color: colors.darkgrey,
+    fontSize: 20,
+    fontWeight: "bold",
+}
+export const h4 = {
+    color: colors.darkgrey,
     fontSize: 17,
 }
-export const h3w = {
+export const h4w = {
     color: colors.white,
     fontSize: 17,
 }
-export const h3p = {
+export const h4p = {
     color: colors.primary,
     fontSize: 17,
 }
-export const h4 = {
+export const h5 = {
     color: colors.darkgrey,
     fontSize: 15,
     fontWeight: "bold",
 }
-export const h4w = {
+export const h5w = {
     color: colors.white,
     fontSize: 15,
     fontWeight: "bold",
