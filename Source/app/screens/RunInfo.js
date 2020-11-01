@@ -2,6 +2,8 @@ import React,{ useEffect, useState } from 'react';
 import { View, StyleSheet, Text, ScrollView } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
 
+import Button from "../components/SquareButton"
+
 import { h2, h3 } from "../themes/Styles"
 import VideoPreview from "../components/VideoPreview"
 import colors from "../config/colors"
@@ -62,11 +64,9 @@ export default function RunInfo (props) {
           <Text style={h3}>GSR in 1h 13m 31s by {getPlayers(data)}</Text>
             <Text style={h3}>1st place</Text>
           </View>        
-          <View style={styles.infocard}>
-            <View style={styles.info}>
-              {loading?<ActivityIndicator size="medium" color={colors.blue}/>:<Text style={h3}>Splits</Text>}
-            </View>
-          </View>
+          {data.splits == null?(null):
+          <Button backgroundColor={colors.green} color={colors.white} title={"Splits"} />
+          }
       </ScrollView>);
     }
 }
