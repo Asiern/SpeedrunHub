@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 
-import colors from "../config/colors"
+import colors from "../../config/colors"
 
 const componentName = ({categories, checked, onPress,id}) => {
     

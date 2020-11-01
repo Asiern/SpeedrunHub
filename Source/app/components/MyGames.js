@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, View,Dimestions, Dimensions } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import GameCard from "./GameCard";
-import NotificationCard from "../components/NotificationCard"
+import NotificationCard from "../components/Notifications/NotificationCard"
 import colors from "../config/colors"
 const {width} = Dimensions.get("screen")
 export default function MyGames(props) {

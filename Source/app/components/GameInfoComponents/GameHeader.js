@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, ImageBackground, StyleSheet, Image } from 'react-native';
-import colors from "../config/colors"
-import { h1w } from "../themes/Styles"
+import colors from "../../config/colors"
+import { h1w } from "../../themes/Styles"
 const GameHeader = ({abbreviation,name}) => {
     return(
         <ImageBackground

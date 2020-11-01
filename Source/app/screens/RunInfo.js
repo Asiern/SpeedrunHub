@@ -2,7 +2,7 @@ import React,{ useEffect, useState } from 'react';
 import { View, StyleSheet, Text, ScrollView } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
 
-import Button from "../components/SquareButton"
+import Button from "../components/Buttons/SquareButton"
 
 import { h2, h3 } from "../themes/Styles"
 import VideoPreview from "../components/VideoPreview"

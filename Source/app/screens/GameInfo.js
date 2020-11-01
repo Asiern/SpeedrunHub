@@ -11,7 +11,7 @@ import {
 } from "react-native";
 
 import Run from "../components/Run";
-import GameHeader from "../components/GameHeader"
+import GameHeader from "../components/GameInfoComponents/GameHeader"
 
 import colors from "../config/colors";
 import { TouchableOpacity } from "react-native-gesture-handler";

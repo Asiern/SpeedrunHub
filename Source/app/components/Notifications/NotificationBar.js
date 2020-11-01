@@ -9,8 +9,8 @@ import {
 } from "react-native";
 import NotificationCard from "./NotificationCard";
 
-import colors from "../config/colors";
-import { h1, h3p } from "../themes/Styles"
+import colors from "../../config/colors";
+import { h1, h3p } from "../../themes/Styles"
 
 const NotificationBar = (props) => {
     useEffect(() => {
