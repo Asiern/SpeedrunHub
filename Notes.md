@@ -1,3 +1,22 @@
+# Version 1.0.12 Notes
+
+## What's new?
+
+- Now you can view Runs.
+- Now you can view run splits (splits i/o).
+
+## Fixes
+
+## Known issues
+
+- RunInfo shows first video.
+- App not reloading when logging out.
+- Runs with multiple runners not displaying properly.
+- Japanese users not displaying.
+- OS forced darkmode breaks `UserHeader.js` colors.
+
+---
+
 # Version 1.0.11 Notes
 
 ## What's new?
