@@ -12,7 +12,7 @@ import Login from "./Login";
 import Notifications from "./Notifications";
 import NotificationsSettings from "./Settings/NotificationsSettings";
 import AccountSettings from "./Settings/AccountSettings";
-import RunInfo from "./RunInfo"
+import RunInfo from "./RunInfo";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -40,7 +40,11 @@ export default class Navigation extends Component {
         options={{ title: "Profile", headerShown: "" }}
       />
       <Stack.Screen name="Settings" component={Settings} />
-      <Stack.Screen name="RunInfo" component={RunInfo} />
+      <Stack.Screen
+        name="RunInfo"
+        component={RunInfo}
+        options={{ title: "Run Info" }}
+      />
       <Stack.Screen
         name="Login"
         component={Login}
