@@ -5,7 +5,7 @@ import { ActivityIndicator } from "react-native-paper";
 import Button from "../components/Buttons/SquareButton";
 import Split from "../components/Splits";
 
-import { h3 } from "../themes/Styles";
+import { h3, h4 } from "../themes/Styles";
 import VideoPreview from "../components/VideoPreview";
 import colors from "../config/colors";
 import { FlatList } from "react-native-gesture-handler";
@@ -48,6 +48,7 @@ export default function RunInfo(props) {
         const response = await fetch(url);
         const data = await response.json();
         setData(data.data);
+        console.log(data.data);
         //Splits
         if (data.data.splits != null) {
           const splitUrl = data.data.splits.uri;
@@ -73,19 +74,21 @@ export default function RunInfo(props) {
   } else {
     return (
       <ScrollView style={styles.container}>
-        <View style={styles.video}>
-          {loading ? (
-            <ActivityIndicator size="large" color={colors.blue} />
-          ) : (
-            <VideoPreview
-              link={"http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4"}
-              weblink={data.videos.links[0].uri}
-            />
-          )}
-        </View>
         <View style={styles.title}>
           <Text style={h3}>GSR in 1h 13m 31s by {getPlayers(data)}</Text>
           <Text style={h3}>1st place</Text>
+        </View>
+        <View style={styles.title}>
+          <Text style={h4}>Verified by ffleret</Text>
+        </View>
+        <View style={styles.video}>
+          <Button
+            title={"Open video"}
+            color={colors.white}
+            backgroundColor={colors.red}
+            icon={"youtube"}
+            onPress={() => loadInBrowser(data.videos.links[0].uri)}
+          />
         </View>
         {data.splits == null ? null : (
           <View style={styles.splitsContainer}>
@@ -109,12 +112,6 @@ export default function RunInfo(props) {
             <Text style={{ alignSelf: "center" }}>Powered by: splits i/o</Text>
           </View>
         )}
-        <Button
-          backgroundColor={colors.primary}
-          color={colors.white}
-          title={"Open In Browser"}
-          onPress={() => loadInBrowser(weblink)}
-        />
       </ScrollView>
     );
   }
@@ -127,12 +124,14 @@ const styles = StyleSheet.create({
   },
   video: {
     flex: 1,
-    backgroundColor: colors.green,
   },
   title: {
     padding: 20,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: colors.white,
+    borderRadius: 20,
+    margin: 20,
   },
   infocard: {
     flex: 1,
