@@ -3,12 +3,12 @@ import { View, StyleSheet, Text, ScrollView, Linking } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 
 import Button from "../components/Buttons/SquareButton";
+import Split from "../components/Splits";
 
-import { h2, h3 } from "../themes/Styles";
+import { h3 } from "../themes/Styles";
 import VideoPreview from "../components/VideoPreview";
 import colors from "../config/colors";
 import { FlatList } from "react-native-gesture-handler";
-import Split from "../components/Splits";
 
 function loadInBrowser(link) {
   Linking.openURL(link).catch((err) =>
@@ -48,6 +48,7 @@ export default function RunInfo(props) {
         const response = await fetch(url);
         const data = await response.json();
         setData(data.data);
+        //Splits
         if (data.data.splits != null) {
           const splitUrl = data.data.splits.uri;
           const splitresponse = await fetch(splitUrl);
@@ -105,6 +106,7 @@ export default function RunInfo(props) {
                 />
               )}
             ></FlatList>
+            <Text style={{ alignSelf: "center" }}>Powered by: splits i/o</Text>
           </View>
         )}
         <Button
