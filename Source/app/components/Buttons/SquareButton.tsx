@@ -6,6 +6,7 @@ export interface SquareButtonProps {
     title: String;
     color: ColorValue;
     backgroundColor: ColorValue;
+    onPress?:  () => void;
 }
 
 class SquareButtonComponent extends React.Component<SquareButtonProps, any> {
@@ -15,7 +16,7 @@ class SquareButtonComponent extends React.Component<SquareButtonProps, any> {
   
   public render() {
     return (
-      <TouchableOpacity style={[styles.container,{ backgroundColor: this.props.backgroundColor }]} >
+      <TouchableOpacity style={[styles.container,{ backgroundColor: this.props.backgroundColor }]} onPress={this.props.onPress}>
          <Text style={[h3,{color: this.props.color}]}>{this.props.title}</Text>
       </TouchableOpacity>
     );
