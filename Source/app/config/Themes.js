@@ -3,7 +3,7 @@ export const theme = {
   PRIMARY_BACKGROUND: "#fff",
   SECONDARY_BACKGROUND: "#ededed",
   PRIMARY_TEXT: "#242c37",
-  PRIMARY_ACCENT: "#4FC3F7",
+  PRIMARY_ACCENT: "#FF8A65",
   INACTIVE: "#242c37",
   STATUS_BAR_STYILE: "dark-content",
 };
@@ -12,7 +12,7 @@ export const lightTheme = {
   PRIMARY_BACKGROUND: "#fff",
   SECONDARY_BACKGROUND: "#ededed",
   PRIMARY_TEXT: "#242c37",
-  PRIMARY_ACCENT: "#4FC3F7",
+  PRIMARY_ACCENT: "#FF8A65",
   INACTIVE: "#242c37",
   STATUS_BAR_STYILE: "dark-content",
 };

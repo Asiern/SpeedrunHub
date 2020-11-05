@@ -10,7 +10,7 @@ import {
 import NotificationCard from "./NotificationCard";
 
 import colors from "../../config/colors";
-import { h1, h3p } from "../../themes/Styles"
+import { h1, h4p } from "../../themes/Styles"
 
 const NotificationBar = (props) => {
     useEffect(() => {
@@ -28,7 +28,7 @@ const NotificationBar = (props) => {
               })
             }
           >
-            <Text style={[h3p,{marginRight:20}]}>View All</Text>
+            <Text style={[h4p,{marginRight:20}]}>View All</Text>
           </TouchableOpacity>
         </View>
 
