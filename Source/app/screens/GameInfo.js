@@ -3,15 +3,13 @@ import {
   StyleSheet,
   Text,
   View,
-  ImageBackground,
-  Image,
   ActivityIndicator,
   FlatList,
   Button,
 } from "react-native";
 
 import Run from "../components/Run";
-import GameHeader from "../components/GameInfoComponents/GameHeader"
+import GameHeader from "../components/GameInfoComponents/GameHeader";
 
 import colors from "../config/colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -56,7 +54,7 @@ class GameInfo extends React.Component {
     if (gameList == null) {
       gameList = [];
     }
-    if (!this.state.favourite) {     
+    if (!this.state.favourite) {
       //add game to list
       gameList.push(game);
       //Game added to list
@@ -242,7 +240,10 @@ class GameInfo extends React.Component {
   GameHeader = () => {
     return (
       <View>
-        <GameHeader abbreviation={this.state.abbreviation} name={this.state.game.names.international}/>        
+        <GameHeader
+          abbreviation={this.state.abbreviation}
+          name={this.state.game.names.international}
+        />
         {this.state.favourite == true ? (
           <Button
             title={"Remove from MyGames"}
@@ -340,7 +341,6 @@ class GameInfo extends React.Component {
     } else {
       return (
         <View style={{ flex: 1 }}>
-         
           <FlatList
             keyExtractor={(item) => item.run.id}
             data={this.state.runs}
