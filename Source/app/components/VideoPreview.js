@@ -1,24 +1,25 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Video } from 'expo-av';
+import React from "react";
+import { View, StyleSheet } from "react-native";
+import { WebView } from "react-native-webview";
 
-const VideoPreview = ({ link, weblink}) => (
-    <View style={styles.container}>
-        <Video
-            source={{ uri: weblink }}
-            rate={1.0}
-            volume={1.0}
-            isMuted={true}
-            resizeMode="cover"
-            style={{ width: 300, height: 300 }}
-          />
-    </View>
+const VideoPreview = ({ link, weblink }) => (
+  <View style={styles.container}>
+    <WebView
+      style={{ marginTop: Platform.OS == "ios" ? 20 : 0 }}
+      javaScriptEnabled={true}
+      domStorageEnabled={true}
+      source={{
+        uri: "https://expo.io",
+      }}
+    />
+  </View>
 );
 const styles = StyleSheet.create({
-    container:{
-        justifyContent:"center",
-        alignItems:"center",
-        padding:20,
-    }
-})
+  container: {
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+    flex: 1,
+  },
+});
 export default VideoPreview;
