@@ -1,5 +1,5 @@
 import React,{ useEffect, useState } from 'react';
-import { View, StyleSheet, Text, ScrollView } from 'react-native';
+import { View, StyleSheet, Text, ScrollView, Linking } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
 
 import Button from "../components/Buttons/SquareButton"
@@ -8,6 +8,11 @@ import { h2, h3 } from "../themes/Styles"
 import VideoPreview from "../components/VideoPreview"
 import colors from "../config/colors"
 
+function loadInBrowser(link) {
+  Linking.openURL(link).catch((err) =>
+    console.error("Couldn't load page", err)
+  );
+}
 function getId(weblink){
     const first = weblink.lastIndexOf("/")+1;
     const last = weblink.length;
@@ -40,7 +45,7 @@ export default function RunInfo (props) {
             const data = await response.json();
             setData(data.data);
             setLoading(false);
-            console.log(data.data);
+            //console.log(data.data);
             
           })();
         }    
@@ -65,8 +70,9 @@ export default function RunInfo (props) {
             <Text style={h3}>1st place</Text>
           </View>        
           {data.splits == null?(null):
-          <Button backgroundColor={colors.green} color={colors.white} title={"Splits"} />
+          <Button backgroundColor={colors.primary} color={colors.white} title={"Splits"} />          
           }
+          <Button backgroundColor={colors.primary} color={colors.white} title={"Open In Browser"} onPress={()=>loadInBrowser(weblink)}/>
       </ScrollView>);
     }
 }
