@@ -25,6 +25,11 @@ export const h3 = {
     fontSize: 20,
     fontWeight: "bold",
 }
+export const h3p = {
+    color: colors.primary,
+    fontSize: 20,
+    fontWeight: "bold",
+}
 export const h4 = {
     color: colors.darkgrey,
     fontSize: 17,
