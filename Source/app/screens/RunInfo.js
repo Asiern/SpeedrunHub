@@ -5,8 +5,7 @@ import { ActivityIndicator } from "react-native-paper";
 import Button from "../components/Buttons/SquareButton";
 import Split from "../components/Splits";
 
-import { h3, h4 } from "../themes/Styles";
-import VideoPreview from "../components/VideoPreview";
+import { h2, h3, h4 } from "../themes/Styles";
 import colors from "../config/colors";
 import { FlatList } from "react-native-gesture-handler";
 
@@ -31,6 +30,10 @@ function getPlayers(data) {
   }
   return outString;
 }
+function timeConverter(time) {
+  var result = time.toLowerCase();
+  return result.substr(2, result.lenght);
+}
 export default function RunInfo(props) {
   const { weblink } = props.route.params;
   const [data, setData] = useState([]);
@@ -44,11 +47,11 @@ export default function RunInfo(props) {
         const url =
           "https://www.speedrun.com/api/v1/runs/" +
           getId(weblink) +
-          "?embed=players";
+          "?embed=players,category";
         const response = await fetch(url);
         const data = await response.json();
         setData(data.data);
-        console.log(data.data);
+        //console.log(data.data);
         //Splits
         if (data.data.splits != null) {
           const splitUrl = data.data.splits.uri;
@@ -74,13 +77,6 @@ export default function RunInfo(props) {
   } else {
     return (
       <ScrollView style={styles.container}>
-        <View style={styles.title}>
-          <Text style={h3}>GSR in 1h 13m 31s by {getPlayers(data)}</Text>
-          <Text style={h3}>1st place</Text>
-        </View>
-        <View style={styles.title}>
-          <Text style={h4}>Verified by ffleret</Text>
-        </View>
         <View style={styles.video}>
           <Button
             title={"Open video"}
@@ -90,26 +86,58 @@ export default function RunInfo(props) {
             onPress={() => loadInBrowser(data.videos.links[0].uri)}
           />
         </View>
+        <View style={styles.title}>
+          <Text style={h4}>
+            {data.category.data.name} in {timeConverter(data.times.primary)} by{" "}
+            {getPlayers(data)}
+          </Text>
+          <Text style={h4}>1st place</Text>
+        </View>
+        <View style={styles.title}>
+          {data.times.ingame == null ? null : (
+            <Text style={h4}>IGT {timeConverter(data.times.ingame)}</Text>
+          )}
+          {data.times.primary == null ? null : (
+            <Text style={h4}>Primary {timeConverter(data.times.primary)}</Text>
+          )}
+          {data.times.realtime == null ? null : (
+            <Text style={h4}>
+              Real Time: {timeConverter(data.times.realtime)}
+            </Text>
+          )}
+          <Text></Text>
+          <Text style={h4}>Submitted: {data.submitted}</Text>
+          <Text style={h4}>Verified by {data.status.examiner}</Text>
+          <Text style={h4}>Verify-date: {data.status["verify-date"]}</Text>
+        </View>
+
         {data.splits == null ? null : (
-          <View style={styles.splitsContainer}>
-            <FlatList
-              ListHeaderComponent={
-                <Split
-                  name={"Name"}
-                  duration={"Duration"}
-                  finished={"Finished at"}
-                />
-              }
-              data={splits.splits}
-              renderItem={({ item }) => (
-                <Split
-                  name={item.name}
-                  duration={item.duration}
-                  finished={item.finish_time}
-                />
-              )}
-            ></FlatList>
-            <Text style={{ alignSelf: "center" }}>Powered by: splits i/o</Text>
+          <View>
+            <Text style={[h2, { alignSelf: "center", paddingTop: 20 }]}>
+              Siplits
+            </Text>
+            <View style={styles.splitsContainer}>
+              <FlatList
+                ListHeaderComponent={
+                  <Split
+                    name={"Name"}
+                    duration={"Duration"}
+                    finished={"Finished at"}
+                  />
+                }
+                data={splits.splits}
+                renderItem={({ item }) => (
+                  <Split
+                    name={item.name}
+                    duration={item.duration}
+                    finished={item.finish_time}
+                  />
+                )}
+              ></FlatList>
+              <Text style={{ alignSelf: "center" }}>
+                Powered by: splits i/o
+              </Text>
+            </View>
           </View>
         )}
       </ScrollView>
@@ -132,25 +160,19 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderRadius: 20,
     margin: 20,
-  },
-  infocard: {
-    flex: 1,
-    margin: 20,
-    borderRadius: 30,
-    backgroundColor: colors.white,
-    alignItems: "center",
-    shadowColor: "gold",
+    shadowColor: colors.darkgrey,
     shadowOffset: { width: 5, height: 5 },
     shadowOpacity: 0.9,
-    elevation: 5,
-  },
-  info: {
-    paddingVertical: 20,
+    elevation: 2,
   },
   splitsContainer: {
     backgroundColor: colors.white,
     borderRadius: 20,
     margin: 20,
     paddingVertical: 20,
+    shadowColor: colors.darkgrey,
+    shadowOffset: { width: 5, height: 5 },
+    shadowOpacity: 0.9,
+    elevation: 2,
   },
 });
