@@ -45,11 +45,6 @@ export default class Navigation extends Component {
         component={RunInfo}
         options={{ title: "Run Info" }}
       />
-      <Stack.Screen
-        name="Login"
-        component={Login}
-        options={{ title: "My Profile", headerShown: "" }}
-      />
     </Stack.Navigator>
   );
   createSettingsStack = (props) => (
