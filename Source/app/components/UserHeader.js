@@ -30,14 +30,24 @@ class UserHeader extends Component {
   }
 
   async signOut() {
+    const createTwoButtonAlert = (msg) =>
+      Alert.alert(
+        "Alert",
+        msg,
+        [
+          { text: "OK", onPress: () => null },
+          { text: "Cancel", onPress: () => null },
+        ],
+
+        { cancelable: false }
+      );
     //Remove user
     await AsyncStorage.multiSet([
       ["@user", ""],
       ["@userid", ""],
       ["@Loggedin", "false"],
     ]);
-    //Restart app
-    DevSettings.reload();
+    createTwoButtonAlert("Please restart the app.");
   }
   render() {
     const createTwoButtonAlert = (msg) =>
