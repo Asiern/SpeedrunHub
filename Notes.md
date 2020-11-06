@@ -7,12 +7,14 @@
 
 ## Fixes
 
+- Fixed Login.
+
 ## Known issues
 
 - RunInfo shows first video.
-- App not reloading when logging out.
+- App not reloading when logging out. Manual reload required.
 - Runs with multiple runners not displaying properly.
-- Japanese users not displaying.
+- Japanese names not displaying.
 - OS forced darkmode breaks `UserHeader.js` colors.
 
 ---
