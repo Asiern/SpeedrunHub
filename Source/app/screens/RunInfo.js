@@ -4,6 +4,7 @@ import { ActivityIndicator } from "react-native-paper";
 
 import Button from "../components/Buttons/SquareButton";
 import Split from "../components/Splits";
+import RunHeader from "../components/RunHeader";
 
 import { h2, h3, h4 } from "../themes/Styles";
 import colors from "../config/colors";
@@ -47,11 +48,11 @@ export default function RunInfo(props) {
         const url =
           "https://www.speedrun.com/api/v1/runs/" +
           getId(weblink) +
-          "?embed=players,category";
+          "?embed=players,category,game";
         const response = await fetch(url);
         const data = await response.json();
         setData(data.data);
-        //console.log(data.data);
+        console.log(data.data);
         //Splits
         if (data.data.splits != null) {
           const splitUrl = data.data.splits.uri;
@@ -77,28 +78,35 @@ export default function RunInfo(props) {
   } else {
     return (
       <ScrollView style={styles.container}>
-        <View style={styles.video}>
-          <Button
-            title={"Open video"}
-            color={colors.white}
-            backgroundColor={colors.red}
-            icon={"youtube"}
-            onPress={() => loadInBrowser(data.videos.links[0].uri)}
-          />
-        </View>
+        <RunHeader
+          id={data.game.data.id}
+          backgroundUri={data.game.data.assets["cover-large"].uri}
+        />
+        <FlatList
+          data={data.videos.links}
+          renderItem={({ item }) => (
+            <Button
+              title={"Video"}
+              color={colors.white}
+              backgroundColor={colors.red}
+              icon={"youtube"}
+              onPress={() => loadInBrowser(item.uri)}
+            />
+          )}
+        ></FlatList>
         <View style={styles.title}>
           <Text style={h4}>
             {data.category.data.name} in {timeConverter(data.times.primary)} by{" "}
             {getPlayers(data)}
           </Text>
-          <Text style={h4}>1st place</Text>
+          <Text style={h4}>n place</Text>
         </View>
         <View style={styles.title}>
           {data.times.ingame == null ? null : (
-            <Text style={h4}>IGT {timeConverter(data.times.ingame)}</Text>
+            <Text style={h4}>IGT: {timeConverter(data.times.ingame)}</Text>
           )}
           {data.times.primary == null ? null : (
-            <Text style={h4}>Primary {timeConverter(data.times.primary)}</Text>
+            <Text style={h4}>Primary: {timeConverter(data.times.primary)}</Text>
           )}
           {data.times.realtime == null ? null : (
             <Text style={h4}>
@@ -107,7 +115,7 @@ export default function RunInfo(props) {
           )}
           <Text></Text>
           <Text style={h4}>Submitted: {data.submitted}</Text>
-          <Text style={h4}>Verified by {data.status.examiner}</Text>
+          <Text style={h4}>Verified by: {data.status.examiner}</Text>
           <Text style={h4}>Verify-date: {data.status["verify-date"]}</Text>
         </View>
 
@@ -149,9 +157,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.light,
-  },
-  video: {
-    flex: 1,
   },
   title: {
     padding: 20,
