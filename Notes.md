@@ -9,11 +9,10 @@
 
 - Fixed Login.
 - Fixed Account Settings user image not loading properly.
+- Fixed Navigation.
 
 ## Known issues
 
-- RunInfo shows first video.
-- App not reloading when logging out. Manual reload required.
 - Runs with multiple runners not displaying properly.
 - Japanese names not displaying.
 - OS forced darkmode breaks `UserHeader.js` colors.
