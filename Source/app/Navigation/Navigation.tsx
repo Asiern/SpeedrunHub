@@ -1,13 +1,13 @@
 import * as React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import { NavigationContainer } from "@react-navigation/native";
 
 import colors from "../config/colors";
 import Feather from "@expo/vector-icons/Feather";
 
-//Components
-import { NavigationContainer } from "@react-navigation/native";
-import LOGIN from "../screens/Login";
+//Screens
+import Login from "../screens/Login";
 import Home from "../screens/Home";
 import SETTINGS from "../screens/Settings";
 import Profile from "../screens/Profile";
@@ -148,7 +148,7 @@ function Navigation() {
         />
         <Root.Screen
           name="Login"
-          component={LOGIN}
+          component={Login}
           options={{ headerShown: false }}
         />
       </Root.Navigator>
