@@ -12,11 +12,6 @@ export default function Settings(props) {
       navigateTo: "AccountSettings",
       weblink: null,
     },
-    // {
-    //   title: "Notifications",
-    //   icon: "bell",
-    //   navigateTo: "NotificationsSettings",
-    // },
     {
       title: "Unlock Pro Version",
       icon: "unlock",
