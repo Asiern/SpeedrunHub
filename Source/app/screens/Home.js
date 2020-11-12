@@ -80,7 +80,7 @@ export default function Home(props) {
         <MyGames data={games} navigation={navigation} />
         <AdMobBanner
           bannerSize="fullBanner"
-          adUnitID="ca-app-pub-3940256099942544/6300978111"
+          adUnitID="ca-app-pub-3552758561036628/7487974176"
           servePersonalizedAds
         />
       </View>
