@@ -16,7 +16,7 @@ export default function Settings(props) {
     },
     {
       title: "Unlock Pro Version",
-      icon: "lock",
+      icon: "unlock",
       navigateTo: "About",
     },
     {
