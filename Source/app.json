@@ -3,14 +3,14 @@
     "name": "SpeedrunHub",
     "slug": "speedruncomapp",
     "platforms": ["ios", "android"],
-    "version": "1.0.11",
+    "version": "1.0.12",
     "orientation": "portrait",
     "icon": "./app/assets/trophy.png",
-    
+
     "splash": {
       "image": "./app/assets/trophy.png",
       "resizeMode": "contain",
-      "backgroundColor": "#4FC3F7"
+      "backgroundColor": "#fff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -23,8 +23,11 @@
     "githubUrl": "https://github.com/Asiern/SpeedrunHub",
     "android": {
       "package": "com.asiern.speedrun",
-      "versionCode": 11,
-      "permissions" : []
+      "versionCode": 12,
+      "permissions": [],
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-3552758561036628~8801055846"
+      }
     }
   }
 }
