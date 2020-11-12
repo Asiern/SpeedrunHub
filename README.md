@@ -16,11 +16,7 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
 - [:boom:Features](#boom-features)
 - [:arrow_down:Download](#arrow_down-Download)
 - [:email: Send Feedback](#email-send-feedback)
-- [:raised_hands: Contributing](#raised_hands-contributing)
 - [:gear: Project Setup](#gear-project-setup)
-  - [Linux](#Linux-Setup)
-  - [Windows](#Windows-Setup)
-  - [MacOS](#MacOS-Setup)
 - [:warning: Issues](#warning-issues)
 - [:construction: Work in progress](#construction-wip)
 - [:page_with_curl: Privacy Policy / Terms & Conditions / License](#page_with_curl-privacy-policy--terms--conditions--license)
@@ -51,11 +47,7 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
 
 - [Open an issue](https://github.com/Asiern/SpeedrunHub/issues/new/choose)
 
-## :raised_hands: Contributing
-
 ## :gear: Project Setup
-
-### Linux Setup
 
 1. Install [Node.js](https://nodejs.org/en/)
 
@@ -112,106 +104,11 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
    $ npm start
    # Expo Metro Bundler should open if all went well
    ```
-
-### Windows Setup
-
-1. Install [Node.js](https://nodejs.org/en/)
-
-2. Install [Git](https://git-scm.com/)
-
-3. Install [Expo CLI](https://docs.expo.io/get-started/installation/)
-
-   ```
-   # Install the command line tools
-   $ npm install --global expo-cli
-   ```
-
-4. Clone the repository using Git
-
-   ```
-   # Navigate to the location in which you would like to store this repository
-   # by using the next command "cd <directory>"
-   $ cd "Documents\GitHub\SpeedrunHub"
-   ```
-
-   **Note: you can skip the previous step with the next command**
-
-   ```
-   $ git clone <repo-url> <directory>
-   ```
-
-   ```
-   # Use this command to clone the repository "git clone <repo-url>"
-   $ git clone https://github.com/Asiern/SpeedrunHub.git
-   ```
-
-5. Install missing packages
-
-   ```
-   # Navigate to the "...\SpeedrunHub\Source" folder and run the following command
-   $ npm update
-   ```
-
-6. Run
-
-   ```
-   # At "...\SpeedrunHub\Source" run
-   $ npm start
-   # Expo Metro Bundler should open if all went well
-   ```
-
-### MacOS Setup
-
-1. Install [Node.js](https://nodejs.org/en/)
-
-2. Install [Git](https://git-scm.com/download/mac)
-
-3. Install [Expo CLI](https://docs.expo.io/get-started/installation/)
-
-   ```
-   # Install the command line tools
-   $ sudo npm install --global expo-cli
-   ```
-
-4. Clone the repository using Git
-
-   ```
-   # Navigate to the location in which you would like to store this repository
-   # by using the next command "cd <directory>"
-   $ cd "Documents\GitHub\SpeedrunHub"
-   ```
-
-   **Note: you can skip the previous step with the next command**
-
-   ```
-   $ git clone <repo-url> <directory>
-   ```
-
-   ```
-   # Use this command to clone the repository "git clone <repo-url>"
-   $ git clone https://github.com/Asiern/SpeedrunHub.git
-   ```
-
-5. Install missing packages
-
-   ```
-   # Navigate to the "...\SpeedrunHub\Source" folder and run the following command
-   $ npm update
-   ```
-
-6. Run
-
-   ```
-   # At "...\SpeedrunHub\Source" run
-   $ npm start
-   # Expo Metro Bundler should open if all went well
-   ```
-
+   
 ## :warning: Issues
 
 - IOS version not tested
 - MIUI 12 (Android 11) Dark Theme
-- App reload
 - Runs with multiple runners not displaying properly
 
 ## :construction: WIP
