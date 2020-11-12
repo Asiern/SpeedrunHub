@@ -8,6 +8,7 @@
 ## Fixes
 
 - Fixed Login.
+- Fixed Account Settings user image not loading properly.
 
 ## Known issues
 
