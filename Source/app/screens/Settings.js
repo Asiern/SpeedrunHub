@@ -15,6 +15,11 @@ export default function Settings(props) {
       navigateTo: "AccountSettings",
     },
     {
+      title: "Notifications",
+      icon: "bell",
+      navigateTo: "NotificationsSettings",
+    },
+    {
       title: "Unlock Pro Version",
       icon: "unlock",
       navigateTo: "About",
@@ -22,6 +27,16 @@ export default function Settings(props) {
     {
       title: "About",
       icon: "info",
+      navigateTo: "About",
+    },
+    {
+      title: "Privacy Policy",
+      icon: "book-open",
+      navigateTo: "About",
+    },
+    {
+      title: "Terms & Conditions",
+      icon: "book",
       navigateTo: "About",
     },
   ];
