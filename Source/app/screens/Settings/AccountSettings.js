@@ -7,6 +7,7 @@ import {
   TextInput,
   Clipboard,
   Alert,
+  ToastAndroid,
 } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import colors from "../../config/colors";
@@ -19,6 +20,13 @@ const AccountSettings = (props) => {
   const [key, setKey] = useState("");
   const navigation = useNavigation();
 
+  const showToastWithGravity = (text) => {
+    ToastAndroid.showWithGravity(text, ToastAndroid.SHORT, ToastAndroid.CENTER);
+  };
+  function copyKey() {
+    Clipboard.setString(key);
+    showToastWithGravity("API-Key copied to clipboard");
+  }
   useEffect(() => {
     (async () => {
       const tempuser = await AsyncStorage.getItem("@user");
@@ -83,7 +91,7 @@ const AccountSettings = (props) => {
             title={"COPY API-KEY"}
             textcolor={colors.darkgrey}
             color={colors.white}
-            function={() => Clipboard.setString(key)}
+            function={() => copyKey()}
           />
         </View>
       </View>
