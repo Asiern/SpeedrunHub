@@ -9,7 +9,6 @@ export default function GameCard(props) {
         onPress={() =>
           props.navigation.navigate("Game Info", {
             id: props.id,
-            name: "name",
             abbreviation: props.abbreviation,
           })
         }

@@ -28,16 +28,25 @@ class UserHeader extends Component {
         "/image.png",
     };
   }
-
   async signOut() {
+    const createTwoButtonAlert = (msg) =>
+      Alert.alert(
+        "Alert",
+        msg,
+        [
+          { text: "OK", onPress: () => null },
+          { text: "Cancel", onPress: () => null },
+        ],
+
+        { cancelable: false }
+      );
     //Remove user
     await AsyncStorage.multiSet([
       ["@user", ""],
       ["@userid", ""],
       ["@Loggedin", "false"],
     ]);
-    //Restart app
-    DevSettings.reload();
+    this.props.navigation.navigate("Login", { screen: "Login" });
   }
   render() {
     const createTwoButtonAlert = (msg) =>

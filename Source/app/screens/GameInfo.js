@@ -3,13 +3,14 @@ import {
   StyleSheet,
   Text,
   View,
-  ImageBackground,
-  Image,
   ActivityIndicator,
   FlatList,
   Button,
 } from "react-native";
+
 import Run from "../components/Run";
+import GameHeader from "../components/GameInfoComponents/GameHeader";
+
 import colors from "../config/colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-community/async-storage";
@@ -26,7 +27,7 @@ class GameInfo extends React.Component {
       runs: [],
       variables: [],
       categories: [],
-      cheked: 0,
+      checked: 0,
       favourite: false,
     };
   }
@@ -53,7 +54,7 @@ class GameInfo extends React.Component {
     if (gameList == null) {
       gameList = [];
     }
-    if (!this.state.favourite) {     
+    if (!this.state.favourite) {
       //add game to list
       gameList.push(game);
       //Game added to list
@@ -103,7 +104,7 @@ class GameInfo extends React.Component {
         id,
         abbreviation,
         categories: outCategories,
-        cheked: selectedCategory,
+        checked: selectedCategory,
       });
     } catch (error) {
       console.log(error);
@@ -171,7 +172,7 @@ class GameInfo extends React.Component {
           index++;
         }
       }
-      this.setState({ variables: outSubcategoies, cheked: categoryid });
+      this.setState({ variables: outSubcategoies, checked: categoryid });
       this.LoadRuns(urlExt);
     } catch (error) {
       console.log(error);
@@ -239,37 +240,10 @@ class GameInfo extends React.Component {
   GameHeader = () => {
     return (
       <View>
-        <ImageBackground
-          style={styles.profileBG}
-          source={{
-            uri:
-              "https://www.speedrun.com/themes/" +
-              this.state.abbreviation +
-              "/cover-256.png",
-          }}
-          opacity={0.3}
-        >
-          <View style={styles.profile}>
-            <View style={styles.imagecontainer}>
-              <Image
-                source={{
-                  uri:
-                    "https://www.speedrun.com/themes/" +
-                    this.state.abbreviation +
-                    "/cover-256.png",
-                }}
-                style={styles.Image}
-              ></Image>
-            </View>
-          </View>
-          <View style={styles.userinfo}>
-            <View style={styles.userinfoitem}>
-              <Text style={styles.h1}>
-                {this.state.game.names.international}
-              </Text>
-            </View>
-          </View>
-        </ImageBackground>
+        <GameHeader
+          abbreviation={this.state.abbreviation}
+          name={this.state.game.names.international}
+        />
         {this.state.favourite == true ? (
           <Button
             title={"Remove from MyGames"}
@@ -291,7 +265,7 @@ class GameInfo extends React.Component {
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
             <View>
-              {this.state.cheked == item.id ? (
+              {this.state.checked == item.id ? (
                 <TouchableOpacity
                   style={styles.selectedcategorybuttoncontainer}
                   onPress={() => this.LoadVariables(item.id)}

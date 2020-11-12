@@ -8,6 +8,7 @@ const goBack = StackActions.pop();
 import Constants from "expo-constants";
 import Feather from "@expo/vector-icons/Feather";
 import colors from "../config/colors";
+import { h2w, h4w } from "../themes/Styles"
 
 const ProfileHeader = (props) => {
   return (
@@ -37,10 +38,10 @@ const ProfileHeader = (props) => {
         ></Image>
       </View>
       <View style={styles.userinfo}>
-        <Text style={styles.h1}>{props.username}</Text>
+        <Text style={h2w}>{props.username}</Text>
         <View style={styles.country}>
           <View>
-            <Text style={styles.h2}>{props.country}</Text>
+            <Text style={h4w}>{props.country}</Text>
           </View>
         </View>
       </View>
@@ -96,18 +97,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     padding: 20,
-  },
-  h1: {
-    color: colors.white,
-    fontSize: 25,
-    fontWeight: "bold",
-    alignSelf: "center",
-  },
-  h2: {
-    color: colors.white,
-    fontSize: 15,
-    fontWeight: "bold",
-    alignSelf: "center",
   },
 });
 export default ProfileHeader;

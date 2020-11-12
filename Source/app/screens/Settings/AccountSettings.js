@@ -10,12 +10,14 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import colors from "../../config/colors";
-import Button from "../../components/Button";
+import Button from "../../components/Buttons/Button";
+import { useNavigation } from "@react-navigation/native";
 
 const AccountSettings = (props) => {
   const [user, setUser] = useState("");
   const [userId, setUserId] = useState("");
   const [key, setKey] = useState("");
+  const navigation = useNavigation();
 
   useEffect(() => {
     (async () => {
@@ -39,7 +41,7 @@ const AccountSettings = (props) => {
     //Set login to 1
     await AsyncStorage.setItem("@Loggedin", "false");
     //Restart app
-    createTwoButtonAlert("Please restart the app.");
+    navigation.navigate("Login", { screen: "Login" });
   }
 
   return (
@@ -48,7 +50,8 @@ const AccountSettings = (props) => {
         <View style={styles.imagecontainer}>
           <Image
             source={{
-              uri: "https://www.speedrun.com/themes/user/Asiern/image.png",
+              uri:
+                "https://www.speedrun.com/themes/user/" + user + "/image.png",
             }}
             style={styles.image}
           ></Image>

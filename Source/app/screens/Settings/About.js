@@ -9,14 +9,8 @@ import {
 } from "react-native";
 import Constants from "expo-constants";
 import colors from "../../config/colors";
-import Feather from "react-native-vector-icons/Feather";
 
 export default function About() {
-  function loadInBrowser(link) {
-    Linking.openURL(link).catch((err) =>
-      console.error("Couldn't load page", err)
-    );
-  }
   return (
     <ScrollView style={styles.container}>
       <View style={styles.info}>
@@ -36,25 +30,6 @@ export default function About() {
         <Text style={[styles.paragraph, { fontWeight: "bold" }]}>
           Disclaimer: This is not an official app
         </Text>
-        <Text style={styles.title}>Contribute</Text>
-        <Text style={styles.paragraph}>
-          If you have any problems or find any improvements to be made, you are
-          welcome to open an issue on the GitHub page for it to be fixed.
-          {"\n"}
-          {"\n"}
-          As this project is completely open source, if you want to contribute,
-          you can find the GitHub page at the link below.
-        </Text>
-        <TouchableOpacity
-          onPress={() =>
-            loadInBrowser("https://github.com/Asiern/Speerun.comApp")
-          }
-        >
-          <View style={styles.github}>
-            <Feather name="github" color={colors.white} size={35} />
-            <Text style={styles.githubtext}>GitHub</Text>
-          </View>
-        </TouchableOpacity>
 
         <Text style={styles.title}>WIP</Text>
         <Text style={styles.paragraph}>
@@ -95,35 +70,6 @@ export default function About() {
         <Text style={styles.paragraph}>
           Send me an email at asiern.dev@gmail.com
         </Text>
-        <TouchableOpacity
-          onPress={() =>
-            loadInBrowser("https://github.com/Asiern/SpeedrunHub/blob/master/LICENSE")
-          }
-        >
-          <View style={styles.legal}>
-            <Text style={styles.githubtext}>License</Text>
-          </View>
-        </TouchableOpacity>
-        <View style={{padding:10}}></View>
-        <TouchableOpacity
-          onPress={() =>
-            loadInBrowser("https://github.com/Asiern/SpeedrunHub/blob/master/Readme/Privacy%20Policy.md")
-          }
-        >
-          <View style={styles.legal}>
-            <Text style={styles.githubtext}>Privacy Policy</Text>
-          </View>
-        </TouchableOpacity>
-        <View style={{padding:10}}></View>
-        <TouchableOpacity
-          onPress={() =>
-            loadInBrowser("https://github.com/Asiern/SpeedrunHub/blob/master/Readme/Terms%20%26%20Conditions.md")
-          }
-        >
-          <View style={styles.legal}>
-            <Text style={styles.githubtext}>Terms & Conditions</Text>
-          </View>
-        </TouchableOpacity>
       </View>
     </ScrollView>
   );

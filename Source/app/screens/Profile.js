@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { View, SectionList, Dimensions } from "react-native";
 
-import styled, { ThemeProvider } from "styled-components";
-import { useSelector } from "react-redux";
-
 import ProfileHeader from "../components/ProfileHeader";
 import PB from "../components/PB";
 import SectionHeader from "../components/SectionHeader";
+
+import { AdMobBanner } from "expo-ads-admob";
 
 const { width } = Dimensions.get("screen");
 
@@ -14,8 +13,6 @@ export default function Profile(props) {
   const [country, setCountry] = useState("");
   const [sections, setSections] = useState([]);
   const { username, userid } = props.route.params;
-
-  const theme = useSelector((state) => state.themeReducer.theme);
 
   function filterPBS(data) {
     var sectionList = {
@@ -79,48 +76,46 @@ export default function Profile(props) {
     };
   }, []);
 
-  ListFooter = () => {
-    return <View style={{ padding: 20 }}></View>;
-  };
-
   return (
-    <ThemeProvider theme={theme}>
-      <Container>
-        <SectionList
-          sections={sections.data}
-          keyExtractor={(item, index) => item + index}
-          ListHeaderComponent={
-            <ProfileHeader
-              username={username}
-              country={country}
-              navigation={props.navigation}
-            />
-          }
-          ListFooterComponent={ListFooter()}
-          renderItem={({ item }) => (
-            <PB
-              place={item.place}
-              runnerid={item.userid}
-              runner={username}
-              time={item.time}
-              category={item.category}
-              weblink={item.weblink}
-            />
-          )}
-          renderSectionHeader={({ section }) => (
-            <SectionHeader
-              abbreviation={section.abbreviation}
-              name={section.name}
-              width={width}
-            />
-          )}
+    <SectionList
+      sections={sections.data}
+      keyExtractor={(item, index) => item + index}
+      ListFooterComponent={
+        <View style={{ paddingTop: 20 }}>
+          <AdMobBanner
+            bannerSize="fullBanner"
+            adUnitID="ca-app-pub-3552758561036628/7487974176"
+            servePersonalizedAds
+          />
+        </View>
+      }
+      ListHeaderComponent={
+        <ProfileHeader
+          username={username}
+          country={country}
+          navigation={props.navigation}
         />
-      </Container>
-    </ThemeProvider>
+      }
+      renderItem={({ item }) => (
+        <PB
+          place={item.place}
+          runnerid={item.userid}
+          runner={username}
+          time={item.time}
+          category={item.category}
+          weblink={item.weblink}
+          navigation={props.navigation}
+        />
+      )}
+      renderSectionHeader={({ section }) => (
+        <SectionHeader
+          abbreviation={section.abbreviation}
+          id={section.id}
+          name={section.name}
+          width={width}
+          navigation={props.navigation}
+        />
+      )}
+    />
   );
 }
-
-const Container = styled.View`
-  flex: 1;
-  background-color: ${(props) => props.theme.SECONDARY_BACKGROUND};
-`;
