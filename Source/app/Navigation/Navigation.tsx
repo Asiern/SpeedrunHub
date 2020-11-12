@@ -1,45 +1,44 @@
-import React, { Component } from "react";
-
-import Profile from "./Profile";
-import Home from "./Home";
-import Settings from "./Settings";
-import About from "./Settings/About";
-import GameInfo from "./GameInfo";
-import Search from "./Search";
-import Themes from "./Settings/Themes";
-import MyGamesSettings from "./Settings/MyGamesSettings";
-import Login from "./Login";
-import Notifications from "./Notifications";
-import NotificationsSettings from "./Settings/NotificationsSettings";
-import AccountSettings from "./Settings/AccountSettings";
-import RunInfo from "./RunInfo";
-
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import * as React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 
-import Feather from "@expo/vector-icons/Feather";
 import colors from "../config/colors";
+import Feather from "@expo/vector-icons/Feather";
 
+//Components
+import { NavigationContainer } from '@react-navigation/native';
+import LOGIN from "../screens/Login"
+import Home from "../screens/Home"
+import SETTINGS from "../screens/Settings"
+import Profile from "../screens/Profile";
+import About from "../screens/Settings/About";
+import GameInfo from "../screens/GameInfo";
+import Search from "../screens/Search";
+import MyGamesSettings from "../screens/Settings/MyGamesSettings";
+import Notifications from "../screens/Notifications";
+import NotificationsSettings from "../screens/Settings/NotificationsSettings";
+import AccountSettings from "../screens/Settings/AccountSettings";
+import RunInfo from "../screens/RunInfo";
+
+const Root = createStackNavigator();
 const Stack = createStackNavigator();
 const BottomTabs = createMaterialBottomTabNavigator();
 
-export default class Navigation extends Component {
-  createHomeStack = (props) => (
+const createHomeStack = (props) => (
     <Stack.Navigator>
       <Stack.Screen
         name="Home"
         component={Home}
-        options={{ title: "Home", headerShown: "" }}
+        options={{ headerShown: false }}
       />
       <Stack.Screen name="Game Info" component={GameInfo} />
       <Stack.Screen name="Notifications" component={Notifications} />
       <Stack.Screen
         name="Profile"
         component={Profile}
-        options={{ title: "Profile", headerShown: "" }}
+        options={{ headerShown: false }}
       />
-      <Stack.Screen name="Settings" component={Settings} />
+      <Stack.Screen name="Settings" component={SETTINGS} />
       <Stack.Screen
         name="RunInfo"
         component={RunInfo}
@@ -47,15 +46,9 @@ export default class Navigation extends Component {
       />
     </Stack.Navigator>
   );
-  createSettingsStack = (props) => (
+  const createSettingsStack = (props) => (
     <Stack.Navigator>
-      <Stack.Screen name="Settings" component={Settings} />
-      <Stack.Screen
-        name="Login"
-        component={Login}
-        options={{ title: "My Profile", headerShown: "" }}
-      />
-      <Stack.Screen name="Themes" component={Themes} />
+      <Stack.Screen name="Settings" component={SETTINGS} />
       <Stack.Screen name="MyGamesSettings" component={MyGamesSettings} />
       <Stack.Screen
         name="NotificationsSettings"
@@ -70,25 +63,24 @@ export default class Navigation extends Component {
       <Stack.Screen name="About" component={About} />
     </Stack.Navigator>
   );
-  createSearchStack = (props) => (
+  const createSearchStack = (props) => (
     <Stack.Navigator>
       <Stack.Screen
         name="Search"
         component={Search}
-        options={{ title: "Search", headerShown: "" }}
+        options={{ headerShown: false }}
       />
       <Stack.Screen name="Game Info" component={GameInfo} />
       <Stack.Screen
         name="Profile"
         component={Profile}
-        options={{ title: "My Profile", headerShown: "" }}
+       options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );
-  render() {
+function MainNavigator () {
     return (
-      <NavigationContainer>
-        <BottomTabs.Navigator
+      <BottomTabs.Navigator
           initialRouteName="Home"
           activeColor={colors.primary}
           inactiveColor={colors.darkgrey}
@@ -96,7 +88,7 @@ export default class Navigation extends Component {
         >
           <BottomTabs.Screen
             name="Home"
-            children={this.createHomeStack}
+            children={createHomeStack}
             options={{
               tabBarLabel: "Home",
               tabBarIcon: ({ color }) => (
@@ -106,7 +98,7 @@ export default class Navigation extends Component {
           />
           <BottomTabs.Screen
             name="Search"
-            component={this.createSearchStack}
+            component={createSearchStack}
             options={{
               tabBarLabel: "Search",
               tabBarIcon: ({ color }) => (
@@ -117,7 +109,7 @@ export default class Navigation extends Component {
 
           <BottomTabs.Screen
             name="Settings"
-            component={this.createSettingsStack}
+            component={createSettingsStack}
             options={{
               tabBarLabel: "Settings",
               tabBarIcon: ({ color }) => (
@@ -126,7 +118,18 @@ export default class Navigation extends Component {
             }}
           />
         </BottomTabs.Navigator>
+    );
+}
+
+function Navigation () {
+    return (
+      <NavigationContainer>
+        <Root.Navigator>   
+          <Root.Screen name="Main" component={MainNavigator}  options={{ headerShown: false }}/>    
+          <Root.Screen name="Login" component={LOGIN}  options={{ headerShown: false }}/>          
+        </Root.Navigator>
       </NavigationContainer>
     );
-  }
 }
+
+export default Navigation;

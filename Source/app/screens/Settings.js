@@ -1,13 +1,10 @@
 import React from "react";
 
 import SettingsSection from "../components/SettingsSection";
-
-import { useSelector } from "react-redux";
+import colors from "../config/colors";
 import { FlatList } from "react-native-gesture-handler";
 
 export default function Settings(props) {
-  const theme = useSelector((state) => state.themeReducer.theme);
-
   const DATA = [
     {
       title: "My Account",
@@ -48,9 +45,9 @@ export default function Settings(props) {
           navigateTO={item.navigateTo}
           title={item.title}
           icon={item.icon}
-          backgroundColor={theme.PRIMARY_BACKGROUND}
-          accentColor={theme.PRIMARY_ACCENT}
-          textPrimaryColor={theme.PRIMARY_TEXT}
+          backgroundColor={colors.white}
+          accentColor={colors.primary}
+          textPrimaryColor={colors.darkgrey}
           navigation={props.navigation}
         />
       )}
