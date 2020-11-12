@@ -48,7 +48,8 @@ const AccountSettings = (props) => {
         <View style={styles.imagecontainer}>
           <Image
             source={{
-              uri: "https://www.speedrun.com/themes/user/Asiern/image.png",
+              uri:
+                "https://www.speedrun.com/themes/user/" + user + "/image.png",
             }}
             style={styles.image}
           ></Image>
