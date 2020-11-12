@@ -28,7 +28,6 @@ class UserHeader extends Component {
         "/image.png",
     };
   }
-
   async signOut() {
     const createTwoButtonAlert = (msg) =>
       Alert.alert(
@@ -47,7 +46,7 @@ class UserHeader extends Component {
       ["@userid", ""],
       ["@Loggedin", "false"],
     ]);
-    createTwoButtonAlert("Please restart the app.");
+    this.props.navigation.navigate("Login", { screen: "Login" });
   }
   render() {
     const createTwoButtonAlert = (msg) =>

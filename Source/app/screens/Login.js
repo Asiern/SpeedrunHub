@@ -14,17 +14,23 @@ import { TextInput } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
 
 import Button from "../components/Buttons/Button";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Login(props) {
   const [textinput, setTextinput] = useState("");
   const [keyinput, setKeyinput] = useState("");
-
+  const navigation = useNavigation();
   _storeData = async (user, key) => {
     const createTwoButtonAlert = (msg) =>
       Alert.alert(
         "Alert",
         msg,
-        [{ text: "OK", onPress: () => props.function(true) }],
+        [
+          {
+            text: "OK",
+            onPress: () => navigation.navigate("Main", { screen: "Home" }),
+          },
+        ],
         { cancelable: true }
       );
     try {
