@@ -24,6 +24,7 @@ export default function Home(props) {
   const [userid, setUserid] = useState("");
   const [games, setGames] = useState([]);
   const [notifications, setNotifications] = useState(null);
+  const [loggedin, setLoggedin] = useState(false);
 
   function fetchNotifications(key) {
     var url = "https://www.speedrun.com/api/v1/notifications";
@@ -41,10 +42,14 @@ export default function Home(props) {
     xhr.send();
   }
   async function fetchData() {
+    const LOGGEDIN = await AsyncStorage.getItem("@Loggedin");
     const key = await AsyncStorage.getItem("@API-Key");
     const GAMES = await AsyncStorage.getItem("@MyGames");
     const username = await AsyncStorage.getItem("@user");
     const userid = await AsyncStorage.getItem("@userid");
+    LOGGEDIN == "true"
+      ? null
+      : navigation.navigate("Login", { screem: "Login" });
     setGames(JSON.parse(GAMES));
     setUsername(username);
     setUserid(userid);
