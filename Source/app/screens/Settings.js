@@ -11,15 +11,15 @@ export default function Settings(props) {
       icon: "user",
       navigateTo: "AccountSettings",
     },
-    {
-      title: "Notifications",
-      icon: "bell",
-      navigateTo: "NotificationsSettings",
-    },
+    // {
+    //   title: "Notifications",
+    //   icon: "bell",
+    //   navigateTo: "NotificationsSettings",
+    // },
     {
       title: "Unlock Pro Version",
       icon: "unlock",
-      navigateTo: "About",
+      navigateTo: "Unlock",
     },
     {
       title: "About",
@@ -29,12 +29,12 @@ export default function Settings(props) {
     {
       title: "Privacy Policy",
       icon: "book-open",
-      navigateTo: "About",
+      navigateTo: "PrivacyPolicy",
     },
     {
       title: "Terms & Conditions",
       icon: "book",
-      navigateTo: "About",
+      navigateTo: "TermsConditions",
     },
   ];
   return (
