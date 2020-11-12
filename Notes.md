@@ -1,3 +1,41 @@
+# Version 1.0.12 Notes
+
+## What's new?
+
+- Now you can view Runs.
+- Now you can view run splits (splits i/o).
+
+## Fixes
+
+- Fixed Login.
+- Fixed Account Settings user image not loading properly.
+- Fixed Navigation.
+
+## Known issues
+
+- Runs with multiple runners not displaying properly.
+- Japanese names not displaying.
+- OS forced darkmode breaks `UserHeader.js` colors.
+
+---
+
+# Version 1.0.11 Notes
+
+## What's new?
+
+- Now you can access to games from user profiles.
+
+## Fixes
+
+## Known issues
+
+- App not reloading when logging out.
+- Runs with multiple runners not displaying properly.
+- Japanese users not displaying.
+- OS forced darkmode breaks `UserHeader.js` colors.
+
+---
+
 # Version 1.0.10 Notes
 
 ## What's new?

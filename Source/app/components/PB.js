@@ -1,26 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  Linking,
 } from "react-native";
 import colors from "../config/colors";
 
 const PB = (props) => {
-  function loadInBrowser(link) {
-    Linking.openURL(link).catch((err) =>
-      console.error("Couldn't load page", err)
-    );
-  }
   function timeConverter(time) {
     var result = time.toLowerCase();
     return result.substr(2, result.lenght);
   }
   return (
     <TouchableOpacity
-      onPress={() => loadInBrowser(props.weblink)}
+      onPress={() => props.navigation.navigate("RunInfo",{
+        weblink: props.weblink
+      })}
       style={styles.container}
     >
       <View style={styles.place}>

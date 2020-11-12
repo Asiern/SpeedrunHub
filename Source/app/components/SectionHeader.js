@@ -1,7 +1,7 @@
 import React from "react";
 import {
   Text,
-  View,
+  TouchableOpacity,
   StyleSheet,
   ImageBackground,
   Dimensions,
@@ -12,7 +12,10 @@ import colors from "../config/colors";
 const { width } = Dimensions.get("screen");
 const SectionHeader = (props) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={()=>props.navigation.navigate("Game Info", {
+      id: props.id,
+      abbreviation: props.abbreviation,
+    })}>
       <ImageBackground
         source={{
           uri:
@@ -25,7 +28,7 @@ const SectionHeader = (props) => {
       >
         <Text style={styles.text}>{props.name}</Text>
       </ImageBackground>
-    </View>
+    </TouchableOpacity>
   );
 };
 const styles = StyleSheet.create({
