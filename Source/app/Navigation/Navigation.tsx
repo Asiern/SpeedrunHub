@@ -14,7 +14,6 @@ import Profile from "../screens/Profile";
 import About from "../screens/Settings/About";
 import GameInfo from "../screens/GameInfo";
 import Search from "../screens/Search";
-import MyGamesSettings from "../screens/Settings/MyGamesSettings";
 import Notifications from "../screens/Notifications";
 import NotificationsSettings from "../screens/Settings/NotificationsSettings";
 import AccountSettings from "../screens/Settings/AccountSettings";
@@ -49,7 +48,6 @@ const createHomeStack = (props) => (
   const createSettingsStack = (props) => (
     <Stack.Navigator>
       <Stack.Screen name="Settings" component={SETTINGS} />
-      <Stack.Screen name="MyGamesSettings" component={MyGamesSettings} />
       <Stack.Screen
         name="NotificationsSettings"
         component={NotificationsSettings}
