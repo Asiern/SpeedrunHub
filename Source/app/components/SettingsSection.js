@@ -1,12 +1,22 @@
 import React from "react";
-import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  Linking,
+} from "react-native";
 import colors from "../config/colors";
 import Feather from "@expo/vector-icons/Feather";
 
 const SettingsSection = (props) => {
   return (
     <TouchableOpacity
-      onPress={() => props.navigation.navigate(props.navigateTO)}
+      onPress={
+        props.navigateTO == null
+          ? () => Linking.openURL(props.weblink)
+          : () => props.navigation.navigate(props.navigateTO)
+      }
     >
       <View
         style={[styles.container, { backgroundColor: props.backgroundColor }]}
