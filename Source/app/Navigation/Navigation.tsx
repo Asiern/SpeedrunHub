@@ -58,7 +58,7 @@ const createSettingsStack = (props) => (
     <Stack.Screen
       name="AccountSettings"
       component={AccountSettings}
-      options={{ title: "Account Settings" }}
+      options={{ title: "My Account" }}
     />
     <Stack.Screen name="About" component={About} />
     <Stack.Screen
