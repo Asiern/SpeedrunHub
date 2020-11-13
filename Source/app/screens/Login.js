@@ -7,6 +7,7 @@ import {
   Linking,
   TouchableOpacity,
   KeyboardAvoidingView,
+  ToastAndroid,
 } from "react-native";
 import colors from "../config/colors";
 import AsyncStorage from "@react-native-community/async-storage";
@@ -21,18 +22,13 @@ export default function Login(props) {
   const [keyinput, setKeyinput] = useState("");
   const navigation = useNavigation();
   _storeData = async (user, key) => {
-    const createTwoButtonAlert = (msg) =>
-      Alert.alert(
-        "Alert",
-        msg,
-        [
-          {
-            text: "OK",
-            onPress: () => navigation.navigate("Main", { screen: "Home" }),
-          },
-        ],
-        { cancelable: true }
+    const showToastWithGravity = (text) => {
+      ToastAndroid.showWithGravity(
+        text,
+        ToastAndroid.SHORT,
+        ToastAndroid.CENTER
       );
+    };
     try {
       const url = "https://www.speedrun.com/api/v1/users/" + user;
       const response = await fetch(url);
@@ -46,17 +42,18 @@ export default function Login(props) {
         await AsyncStorage.setItem("@API-Key", key);
         await AsyncStorage.setItem("@Loggedin", "true");
 
-        createTwoButtonAlert("Logged in successfully.");
+        showToastWithGravity("Logged in successfully.");
+        navigation.navigate("Main", { screen: "Home" });
       }
     } catch (error) {
-      createTwoButtonAlert(
+      showToastWithGravity(
         "User not found, please type the username as shown on Speedrun.com"
       );
     }
   };
   function loadInBrowser(link) {
     Linking.openURL(link).catch((err) =>
-      console.error("Couldn't load page", err)
+      showToastWithGravity("Couldn't load page")
     );
   }
   return (
