@@ -18,8 +18,6 @@ import Notifications from "../screens/Notifications";
 import NotificationsSettings from "../screens/Settings/NotificationsSettings";
 import AccountSettings from "../screens/Settings/AccountSettings";
 import RunInfo from "../screens/RunInfo";
-import PrivacyPolicy from "../screens/Settings/PrivacyPolicy";
-import TermsConditions from "../screens/Settings/TermsConditions";
 import Unlock from "../screens/Settings/Unlock";
 
 const Root = createStackNavigator();
@@ -62,16 +60,6 @@ const createSettingsStack = (props) => (
       options={{ title: "Account Settings" }}
     />
     <Stack.Screen name="About" component={About} />
-    <Stack.Screen
-      name="PrivacyPolicy"
-      component={PrivacyPolicy}
-      options={{ title: "Privacy Policy" }}
-    />
-    <Stack.Screen
-      name="TermsConditions"
-      component={TermsConditions}
-      options={{ title: "Terms & Conditions" }}
-    />
     <Stack.Screen
       name="Unlock"
       component={Unlock}
