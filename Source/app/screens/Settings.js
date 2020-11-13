@@ -18,12 +18,12 @@ export default function Settings(props) {
       navigateTo: null,
       weblink: "https://play.google.com/store",
     },
-    {
-      title: "About",
-      icon: "info",
-      navigateTo: "About",
-      weblink: null,
-    },
+    // {
+    //   title: "About",
+    //   icon: "info",
+    //   navigateTo: "About",
+    //   weblink: null,
+    // },
     {
       title: "Privacy Policy",
       icon: "book-open",
