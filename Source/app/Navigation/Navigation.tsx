@@ -20,6 +20,7 @@ import AccountSettings from "../screens/Settings/AccountSettings";
 import RunInfo from "../screens/RunInfo";
 import Unlock from "../screens/Settings/Unlock";
 
+//Stacks
 const Root = createStackNavigator();
 const Stack = createStackNavigator();
 const BottomTabs = createMaterialBottomTabNavigator();
