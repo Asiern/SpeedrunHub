@@ -7,7 +7,7 @@ import colors from "../config/colors";
 
 export interface RunProps {
   place: string;
-  runnerid: string;
+  runner: string;
   time: string;
   abbreviation: string;
   categoryid: string;
@@ -29,7 +29,7 @@ export default function Run(props: RunProps) {
         <Text style={styles.accenttext}>{props.place}</Text>
       </View>
       <View style={styles.runner}>
-        <Text style={styles.text}>{props.runnerid}</Text>
+        <Text style={styles.text}>{props.runner}</Text>
       </View>
       <View style={styles.time}>
         <Text style={styles.text}>{props.time}</Text>
