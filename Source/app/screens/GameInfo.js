@@ -253,7 +253,7 @@ class GameInfo extends React.Component {
               onPress={() => this._toggleFavourites()}
               name="heart"
               color={colors.white}
-              size={35}
+              size={30}
               style={{ paddingRight: 20 }}
             />
           ) : (
@@ -261,7 +261,7 @@ class GameInfo extends React.Component {
               onPress={() => this._toggleFavourites()}
               name="heart-o"
               color={colors.white}
-              size={35}
+              size={30}
               style={{ paddingRight: 20 }}
             />
           )}

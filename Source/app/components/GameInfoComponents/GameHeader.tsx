@@ -6,7 +6,8 @@ import { StackActions } from "@react-navigation/native";
 import Constants from "expo-constants";
 import Feather from "@expo/vector-icons/Feather";
 import colors from "../../config/colors";
-import { h1w } from "../../themes/Styles";
+import { h2w } from "../../themes/Styles";
+import { StatusBar } from "expo-status-bar";
 
 export interface GameHeaderProps {
   abbreviation: string;
@@ -26,6 +27,7 @@ const GameHeader = ({ abbreviation, name, children }: GameHeaderProps) => {
           "https://www.speedrun.com/themes/" + abbreviation + "/cover-256.png",
       }}
     >
+      <StatusBar style={"light"}></StatusBar>
       <View style={styles.topbar}>
         <View style={styles.topbarleft}>
           <Feather
@@ -53,7 +55,7 @@ const GameHeader = ({ abbreviation, name, children }: GameHeaderProps) => {
         </View>
       </View>
       <View style={styles.userinfo}>
-        <Text style={h1w}>{name}</Text>
+        <Text style={h2w}>{name}</Text>
       </View>
     </ImageBackground>
   );
@@ -85,7 +87,6 @@ const styles = StyleSheet.create({
   },
   imagecontainer: {
     flex: 1,
-    paddingTop: 30,
     alignContent: "center",
     justifyContent: "flex-end",
     alignItems: "center",
