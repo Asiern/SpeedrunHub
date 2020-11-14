@@ -14,9 +14,7 @@ import { h1 } from "../themes/Styles";
 import { AdMobBanner } from "expo-ads-admob";
 
 const { width } = Dimensions.get("screen");
-async function getKey() {
-  return await AsyncStorage.getItem("@API-Key");
-}
+
 export default function Home(props) {
   const navigation = useNavigation();
 
@@ -24,7 +22,6 @@ export default function Home(props) {
   const [userid, setUserid] = useState("");
   const [games, setGames] = useState([]);
   const [notifications, setNotifications] = useState(null);
-  const [loggedin, setLoggedin] = useState(false);
 
   function fetchNotifications(key) {
     var url = "https://www.speedrun.com/api/v1/notifications";
@@ -49,7 +46,7 @@ export default function Home(props) {
     const userid = await AsyncStorage.getItem("@userid");
     LOGGEDIN == "true"
       ? null
-      : navigation.navigate("Login", { screem: "Login" });
+      : navigation.navigate("Login", { screen: "Login" });
     setGames(JSON.parse(GAMES));
     setUsername(username);
     setUserid(userid);
@@ -78,11 +75,11 @@ export default function Home(props) {
         />
         <Text style={[h1, { marginLeft: 20 }]}>My Games</Text>
         <MyGames data={games} navigation={navigation} />
-        <AdMobBanner
+        {/* <AdMobBanner
           bannerSize="fullBanner"
           adUnitID="ca-app-pub-3552758561036628/7487974176"
           servePersonalizedAds
-        />
+        /> */}
       </View>
     </ScrollView>
   );
