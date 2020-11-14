@@ -31,7 +31,11 @@ const createHomeStack = (props) => (
       component={Home}
       options={{ headerShown: false }}
     />
-    <Stack.Screen name="Game Info" component={GameInfo} />
+    <Stack.Screen
+      name="Game Info"
+      component={GameInfo}
+      options={{ headerShown: false }}
+    />
     <Stack.Screen name="Notifications" component={Notifications} />
     <Stack.Screen
       name="Profile"

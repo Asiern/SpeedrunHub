@@ -8,8 +8,9 @@ import {
   Button,
 } from "react-native";
 
-import Run from "../components/Run";
+import Run from "../components/Run.tsx";
 import GameHeader from "../components/GameInfoComponents/GameHeader";
+import Feather from "@expo/vector-icons/Feather";
 
 import colors from "../config/colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -243,20 +244,25 @@ class GameInfo extends React.Component {
         <GameHeader
           abbreviation={this.state.abbreviation}
           name={this.state.game.names.international}
-        />
-        {this.state.favourite == true ? (
-          <Button
-            title={"Remove from MyGames"}
-            color={colors.red}
-            onPress={() => this._toggleFavourites()}
-          />
-        ) : (
-          <Button
-            color={colors.primary}
-            title={"Add to MyGames"}
-            onPress={() => this._toggleFavourites()}
-          />
-        )}
+        >
+          {this.state.favourite == true ? (
+            <Feather
+              onPress={() => this._toggleFavourites()}
+              name="heart"
+              color={colors.white}
+              size={35}
+              style={{ paddingRight: 20 }}
+            />
+          ) : (
+            <Feather
+              onPress={() => this._toggleFavourites()}
+              name="heart"
+              color={colors.primary}
+              size={35}
+              style={{ paddingRight: 20 }}
+            />
+          )}
+        </GameHeader>
         <View style={{ padding: 10 }}></View>
         <FlatList
           keyExtractor={(item) => item.id}
