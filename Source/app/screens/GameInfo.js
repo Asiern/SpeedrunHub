@@ -7,14 +7,14 @@ import {
   FlatList,
   Button,
 } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import AsyncStorage from "@react-native-community/async-storage";
 
 import Run from "../components/Run.tsx";
 import GameHeader from "../components/GameInfoComponents/GameHeader";
-import { FontAwesome } from "@expo/vector-icons";
 
+import { FontAwesome } from "@expo/vector-icons";
 import colors from "../config/colors";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import AsyncStorage from "@react-native-community/async-storage";
 
 class GameInfo extends React.Component {
   constructor() {
@@ -218,23 +218,21 @@ class GameInfo extends React.Component {
   };
   async LoadRuns(url) {
     try {
-      this.setState({ loading: true });
       //Fetch Runs from Speedrun.com
       const response = await fetch(url);
       const data = await response.json();
-      this.setState({ runs: data.data.runs, loading: false, url });
+      this.setState({ runs: data.data.runs, url });
     } catch (error) {
       console.log(error);
     }
   }
-  renderItem = ({ item }) => (
+  renderRun = ({ item }) => (
     <Run
       place={item.place}
       runnerid={item.run.players[0].id}
       time={item.run.times.primary}
       abbreviation={this.props.abbreviation}
       categoryid={item.run.category}
-      category={item.run.category}
       weblink={item.run.weblink}
     />
   );
@@ -336,17 +334,27 @@ class GameInfo extends React.Component {
     );
   };
   render() {
-    return (
-      <View style={{ flex: 1 }}>
-        <FlatList
-          keyExtractor={(item) => item.run.id}
-          data={this.state.runs}
-          renderItem={this.renderItem}
-          ListHeaderComponent={this.GameHeader}
-          ListFooterComponent={this.ListFooter}
-        ></FlatList>
-      </View>
-    );
+    if (this.state.loading) {
+      return (
+        <ActivityIndicator
+          style={{ alignSelf: "center", flex: 1 }}
+          size="large"
+          color={colors.primary}
+        />
+      );
+    } else {
+      return (
+        <View style={{ flex: 1 }}>
+          <FlatList
+            keyExtractor={(item) => item.run.id}
+            data={this.state.runs}
+            renderItem={this.renderRun}
+            ListHeaderComponent={this.GameHeader}
+            ListFooterComponent={this.ListFooter}
+          ></FlatList>
+        </View>
+      );
+    }
   }
 }
 
