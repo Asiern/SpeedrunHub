@@ -4,6 +4,7 @@
 
 - Now you can view Runs.
 - Now you can view run splits (splits i/o).
+- Increased Game leaderboard `FlatList` performance.
 
 ## Fixes
 
