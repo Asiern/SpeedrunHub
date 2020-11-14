@@ -73,7 +73,11 @@ const createSearchStack = (props) => (
       component={Search}
       options={{ headerShown: false }}
     />
-    <Stack.Screen name="Game Info" component={GameInfo} />
+    <Stack.Screen
+      name="Game Info"
+      component={GameInfo}
+      options={{ headerShown: false }}
+    />
     <Stack.Screen
       name="Profile"
       component={Profile}
