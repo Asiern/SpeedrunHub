@@ -31,6 +31,7 @@ class GameInfo extends React.Component {
       categories: [],
       checked: 0,
       favourite: false,
+      players: [],
     };
   }
   _isFavourite = async (id) => {
@@ -41,8 +42,6 @@ class GameInfo extends React.Component {
           this.setState({ favourite: true });
         }
       }
-    } else {
-      console.log("game List == null _isFav");
     }
   };
   _toggleFavourites = async () => {
@@ -176,6 +175,11 @@ class GameInfo extends React.Component {
           index++;
         }
       }
+      if (urlExt.includes("?")) {
+        urlExt = urlExt + "&embed=players";
+      } else {
+        urlExt = urlExt + "?embed=players";
+      }
       this.setState({ variables: outSubcategoies, checked: categoryid });
       this.LoadRuns(urlExt);
     } catch (error) {
@@ -221,15 +225,15 @@ class GameInfo extends React.Component {
       //Fetch Runs from Speedrun.com
       const response = await fetch(url);
       const data = await response.json();
-      this.setState({ runs: data.data.runs, url });
+      this.setState({ runs: data.data.runs, url, players: data.data.players });
     } catch (error) {
       console.log(error);
     }
   }
-  renderRun = ({ item }) => (
+  renderRun = ({ item, index }) => (
     <Run
       place={item.place}
-      runnerid={item.run.players[0].id}
+      runner={this.state.players.data[index].names.international}
       time={item.run.times.primary}
       abbreviation={this.props.abbreviation}
       categoryid={item.run.category}
@@ -346,6 +350,11 @@ class GameInfo extends React.Component {
       return (
         <View style={{ flex: 1 }}>
           <FlatList
+            // getItemLayout={(data, index) => ({
+            //   length: 50,
+            //   offset: 10 * index,
+            //   index,
+            // })}
             keyExtractor={(item) => item.run.id}
             data={this.state.runs}
             renderItem={this.renderRun}
