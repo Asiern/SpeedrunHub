@@ -10,7 +10,7 @@ import {
 
 import Run from "../components/Run.tsx";
 import GameHeader from "../components/GameInfoComponents/GameHeader";
-import Feather from "@expo/vector-icons/Feather";
+import { FontAwesome } from "@expo/vector-icons";
 
 import colors from "../config/colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -23,6 +23,7 @@ class GameInfo extends React.Component {
       loading: true,
       id: "",
       abbreviation: "",
+      name: "",
       game: [],
       url: "",
       runs: [],
@@ -102,6 +103,7 @@ class GameInfo extends React.Component {
       this.setState({
         loading: false,
         game: data.data,
+        name: data.data.names.international,
         id,
         abbreviation,
         categories: outCategories,
@@ -113,6 +115,7 @@ class GameInfo extends React.Component {
   }
   async LoadVariables(categoryid) {
     try {
+      this.setState({ runs: [] });
       //Fetch Variables from Speedrun.com
       const variablesUrl =
         "https://www.speedrun.com/api/v1/categories/" +
@@ -243,10 +246,10 @@ class GameInfo extends React.Component {
       <View>
         <GameHeader
           abbreviation={this.state.abbreviation}
-          name={this.state.game.names.international}
+          name={this.state.name}
         >
           {this.state.favourite == true ? (
-            <Feather
+            <FontAwesome
               onPress={() => this._toggleFavourites()}
               name="heart"
               color={colors.white}
@@ -254,10 +257,10 @@ class GameInfo extends React.Component {
               style={{ paddingRight: 20 }}
             />
           ) : (
-            <Feather
+            <FontAwesome
               onPress={() => this._toggleFavourites()}
-              name="heart"
-              color={colors.primary}
+              name="heart-o"
+              color={colors.white}
               size={35}
               style={{ paddingRight: 20 }}
             />
@@ -333,30 +336,17 @@ class GameInfo extends React.Component {
     );
   };
   render() {
-    if (this.state.loading) {
-      return (
-        <ActivityIndicator
-          style={{
-            alignSelf: "center",
-            flex: 1,
-            scaleX: 2,
-            scaleY: 2,
-          }}
-        />
-      );
-    } else {
-      return (
-        <View style={{ flex: 1 }}>
-          <FlatList
-            keyExtractor={(item) => item.run.id}
-            data={this.state.runs}
-            renderItem={this.renderItem}
-            ListHeaderComponent={this.GameHeader}
-            ListFooterComponent={this.ListFooter}
-          ></FlatList>
-        </View>
-      );
-    }
+    return (
+      <View style={{ flex: 1 }}>
+        <FlatList
+          keyExtractor={(item) => item.run.id}
+          data={this.state.runs}
+          renderItem={this.renderItem}
+          ListHeaderComponent={this.GameHeader}
+          ListFooterComponent={this.ListFooter}
+        ></FlatList>
+      </View>
+    );
   }
 }
 

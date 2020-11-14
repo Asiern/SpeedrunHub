@@ -10,7 +10,7 @@ import { h1w } from "../../themes/Styles";
 
 export interface GameHeaderProps {
   abbreviation: string;
-  name: string;
+  name?: string;
   children: ReactNode;
 }
 
@@ -19,6 +19,7 @@ const GameHeader = ({ abbreviation, name, children }: GameHeaderProps) => {
   const goBack = StackActions.pop();
   return (
     <ImageBackground
+      imageStyle={{ opacity: 0.3 }}
       style={styles.profileBG}
       source={{
         uri:
