@@ -20,7 +20,11 @@ const GameHeader = ({ abbreviation, name, children }: GameHeaderProps) => {
   const goBack = StackActions.pop();
   return (
     <ImageBackground
-      imageStyle={{ opacity: 0.3 }}
+      imageStyle={{
+        opacity: 0.3,
+        borderBottomLeftRadius: 15,
+        borderBottomRightRadius: 15,
+      }}
       style={styles.profileBG}
       source={{
         uri:
@@ -66,6 +70,12 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: "cover",
     backgroundColor: colors.black,
+    borderBottomLeftRadius: 15,
+    borderBottomRightRadius: 15,
+    shadowColor: colors.darkgrey,
+    shadowOffset: { width: 20, height: 10 },
+    shadowOpacity: 0.9,
+    elevation: 10,
   },
   topbar: {
     flex: 1,
