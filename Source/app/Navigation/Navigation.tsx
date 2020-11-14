@@ -69,11 +69,6 @@ const createSettingsStack = (props) => (
 const createSearchStack = (props) => (
   <Stack.Navigator>
     <Stack.Screen
-      name="RunInfo"
-      component={RunInfo}
-      options={{ title: "Run Info" }}
-    />
-    <Stack.Screen
       name="Search"
       component={Search}
       options={{ headerShown: false }}
@@ -87,6 +82,11 @@ const createSearchStack = (props) => (
       name="Profile"
       component={Profile}
       options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="RunInfo"
+      component={RunInfo}
+      options={{ title: "Run Info" }}
     />
   </Stack.Navigator>
 );
