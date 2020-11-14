@@ -10,6 +10,7 @@ import UserHeader from "../components/UserHeader";
 import NotificationBar from "../components/Notifications/NotificationBar";
 import colors from "../config/colors";
 import { h1 } from "../themes/Styles";
+import { StatusBar } from "expo-status-bar";
 
 import { AdMobBanner } from "expo-ads-admob";
 
@@ -59,6 +60,7 @@ export default function Home(props) {
   );
   return (
     <ScrollView style={{ flex: 1, backgroundColor: colors.white }}>
+      <StatusBar style={"dark"}></StatusBar>
       <View style={styles.container}>
         <View style={styles.profile}>
           <UserHeader
