@@ -225,21 +225,33 @@ class GameInfo extends React.Component {
       //Fetch Runs from Speedrun.com
       const response = await fetch(url);
       const data = await response.json();
-      this.setState({ runs: data.data.runs, url, players: data.data.players });
+      this.setState({
+        runs: data.data.runs,
+        url,
+        players: data.data.players.data,
+      });
     } catch (error) {
       console.log(error);
     }
   }
-  renderRun = ({ item, index }) => (
-    <Run
-      place={item.place}
-      runner={this.state.players.data[index].names.international}
-      time={item.run.times.primary}
-      abbreviation={this.props.abbreviation}
-      categoryid={item.run.category}
-      weblink={item.run.weblink}
-    />
-  );
+  renderRun = ({ item, index }) => {
+    try {
+      const name =
+        this.state.players[index].names.international != null
+          ? this.state.players[index].names.international
+          : "null";
+      return (
+        <Run
+          place={item.place}
+          runner={name}
+          time={item.run.times.primary}
+          abbreviation={this.props.abbreviation}
+          categoryid={item.run.category}
+          weblink={item.run.weblink}
+        />
+      );
+    } catch (error) {}
+  };
   ListFooter = () => {
     return <View style={{ padding: 20 }}></View>;
   };
