@@ -18,7 +18,6 @@ import Notifications from "../screens/Notifications";
 import NotificationsSettings from "../screens/Settings/NotificationsSettings";
 import AccountSettings from "../screens/Settings/AccountSettings";
 import RunInfo from "../screens/RunInfo";
-import Unlock from "../screens/Settings/Unlock";
 
 //Stacks
 const Root = createStackNavigator();
@@ -61,11 +60,6 @@ const createSettingsStack = (props) => (
       options={{ title: "My Account" }}
     />
     <Stack.Screen name="About" component={About} />
-    <Stack.Screen
-      name="Unlock"
-      component={Unlock}
-      options={{ title: "Unlock Pro Version" }}
-    />
   </Stack.Navigator>
 );
 const createSearchStack = (props) => (
