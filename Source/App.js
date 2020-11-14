@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-community/async-storage";
-import { ActivityIndicator, View } from "react-native";
+import { ActivityIndicator } from "react-native";
 
 //Screens
 import Navigation from "./app/Navigation/Navigation";
