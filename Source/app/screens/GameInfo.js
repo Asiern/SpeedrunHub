@@ -10,7 +10,7 @@ import {
 import { TouchableOpacity } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-community/async-storage";
 
-import Run from "../components/Run.tsx";
+import Run from "../components/Run";
 import GameHeader from "../components/GameInfoComponents/GameHeader";
 
 import { FontAwesome } from "@expo/vector-icons";
