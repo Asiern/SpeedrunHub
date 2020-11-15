@@ -1,22 +1,23 @@
 import React from "react";
 import { Text, View, StyleSheet, Image } from "react-native";
 
-import { StackActions } from "@react-navigation/native";
-
-const goBack = StackActions.pop();
+import { StackActions, useNavigation } from "@react-navigation/native";
 
 import Constants from "expo-constants";
 import Feather from "@expo/vector-icons/Feather";
 import colors from "../config/colors";
-import { h2w, h4w } from "../themes/Styles"
+import { h2w, h4w } from "../themes/Styles";
+
+const goBack = StackActions.pop();
 
 const ProfileHeader = (props) => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.topbar}>
         <View style={styles.topbarleft}>
           <Feather
-            onPress={() => props.navigation.dispatch(goBack)}
+            onPress={() => navigation.dispatch(goBack)}
             name="arrow-left"
             color={colors.white}
             size={35}
@@ -39,7 +40,7 @@ const ProfileHeader = (props) => {
       </View>
       <View style={styles.userinfo}>
         <Text style={h2w}>{props.username}</Text>
-        <View style={styles.country}>
+        <View>
           <View>
             <Text style={h4w}>{props.country}</Text>
           </View>

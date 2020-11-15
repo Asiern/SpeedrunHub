@@ -1,15 +1,22 @@
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 import { StyleSheet, ImageBackground, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-export default function GameCard(props) {
+export interface GameCardProps {
+  id: string;
+  abbreviation: string;
+}
+
+export default function GameCard({ id, abbreviation }: GameCardProps) {
+  const navigation = useNavigation();
   return (
     <View style={{ padding: 2 }}>
       <TouchableOpacity
         onPress={() =>
-          props.navigation.navigate("Game Info", {
-            id: props.id,
-            abbreviation: props.abbreviation,
+          navigation.navigate("Game Info", {
+            id,
+            abbreviation,
           })
         }
         style={styles.container}
@@ -18,7 +25,7 @@ export default function GameCard(props) {
           source={{
             uri:
               "https://www.speedrun.com/themes/" +
-              props.abbreviation +
+              abbreviation +
               "/cover-256.png",
           }}
           style={styles.image}

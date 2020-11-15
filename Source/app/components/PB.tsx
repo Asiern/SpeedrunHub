@@ -1,32 +1,40 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import colors from "../config/colors";
 
-const PB = (props) => {
-  function timeConverter(time) {
-    var result = time.toLowerCase();
-    return result.substr(2, result.lenght);
-  }
+function timeConverter(time) {
+  var result = time.toLowerCase();
+  return result.substr(2, result.lenght);
+}
+
+export interface PBProps {
+  weblink: string;
+  place: string;
+  category: string;
+  time: string;
+}
+
+const PB = ({ weblink, place, category, time }: PBProps) => {
+  const navigation = useNavigation();
+
   return (
     <TouchableOpacity
-      onPress={() => props.navigation.navigate("RunInfo",{
-        weblink: props.weblink
-      })}
+      onPress={() =>
+        navigation.navigate("RunInfo", {
+          weblink: weblink,
+        })
+      }
       style={styles.container}
     >
       <View style={styles.place}>
-        <Text style={styles.accenttext}>{props.place}</Text>
+        <Text style={styles.accenttext}>{place}</Text>
       </View>
       <View style={styles.category}>
-        <Text style={styles.text}>{props.category}</Text>
+        <Text style={styles.text}>{category}</Text>
       </View>
       <View style={styles.time}>
-        <Text style={styles.text}>{timeConverter(props.time)}</Text>
+        <Text style={styles.text}>{timeConverter(time)}</Text>
       </View>
     </TouchableOpacity>
   );
