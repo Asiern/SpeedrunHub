@@ -33,7 +33,7 @@ export default function Home(props) {
     xhr.setRequestHeader("X-API-Key", key);
     xhr.onreadystatechange = function () {
       if (xhr.readyState === 4) {
-        response = JSON.parse(xhr.responseText);
+        var response = JSON.parse(xhr.responseText);
         setNotifications(response.data);
       }
     };
