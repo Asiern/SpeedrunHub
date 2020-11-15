@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 import {
   Text,
   TouchableOpacity,
@@ -9,24 +10,35 @@ import {
 
 import colors from "../config/colors";
 
+export interface SectionHeaderProps {
+  id: string;
+  abbreviation: string;
+  name: string;
+}
 const { width } = Dimensions.get("screen");
-const SectionHeader = (props) => {
+const SectionHeader = ({ id, abbreviation, name }: SectionHeaderProps) => {
+  const navigation = useNavigation();
   return (
-    <TouchableOpacity style={styles.container} onPress={()=>props.navigation.navigate("Game Info", {
-      id: props.id,
-      abbreviation: props.abbreviation,
-    })}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() =>
+        navigation.navigate("Game Info", {
+          id,
+          abbreviation,
+        })
+      }
+    >
       <ImageBackground
         source={{
           uri:
             "https://www.speedrun.com/themes/" +
-            props.abbreviation +
+            abbreviation +
             "/cover-256.png",
         }}
         style={styles.image}
         imageStyle={{ borderRadius: 10 }}
       >
-        <Text style={styles.text}>{props.name}</Text>
+        <Text style={styles.text}>{name}</Text>
       </ImageBackground>
     </TouchableOpacity>
   );

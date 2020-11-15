@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 import {
   Text,
   View,
@@ -9,28 +10,44 @@ import {
 import colors from "../config/colors";
 import Feather from "@expo/vector-icons/Feather";
 
-const SettingsSection = (props) => {
+export interface SettingsSectionProps {
+  navigateTO?: string;
+  weblink?: string;
+  icon: string;
+  backgroundColor: string;
+  accentColor: string;
+  title: string;
+  textPrimaryColor: string;
+}
+const SettingsSection = ({
+  navigateTO,
+  weblink,
+  icon,
+  backgroundColor,
+  title,
+  accentColor,
+  textPrimaryColor,
+}: SettingsSectionProps) => {
+  const navigation = useNavigation();
   return (
     <TouchableOpacity
       onPress={
-        props.navigateTO == null
-          ? () => Linking.openURL(props.weblink)
-          : () => props.navigation.navigate(props.navigateTO)
+        navigateTO == null
+          ? () => Linking.openURL(weblink)
+          : () => navigation.navigate(navigateTO)
       }
     >
-      <View
-        style={[styles.container, { backgroundColor: props.backgroundColor }]}
-      >
+      <View style={[styles.container, { backgroundColor }]}>
         <View style={styles.icon}>
-          <Feather name={props.icon} color={props.accentColor} size={26} />
+          <Feather name={icon} color={accentColor} size={26} />
         </View>
         <View style={styles.textcontainer}>
-          <Text style={[styles.text, { color: props.textPrimaryColor }]}>
-            {props.title}
+          <Text style={[styles.text, { color: textPrimaryColor }]}>
+            {title}
           </Text>
         </View>
         <View style={styles.icon}>
-          <Feather name="arrow-right" color={props.accentColor} size={26} />
+          <Feather name="arrow-right" color={accentColor} size={26} />
         </View>
       </View>
     </TouchableOpacity>
