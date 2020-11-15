@@ -1,10 +1,10 @@
 import React from "react";
-import { StyleSheet, View,Dimestions, Dimensions } from "react-native";
+import { StyleSheet, View, Dimensions } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import GameCard from "./GameCard";
-import NotificationCard from "../components/Notifications/NotificationCard"
-import colors from "../config/colors"
-const {width} = Dimensions.get("screen")
+import NotificationCard from "../components/Notifications/NotificationCard";
+import colors from "../config/colors";
+const { width } = Dimensions.get("screen");
 export default function MyGames(props) {
   return (
     <View style={styles.conatiner}>
@@ -13,7 +13,7 @@ export default function MyGames(props) {
         numColumns={3}
         keyExtractor={(item) => item.id}
         ListEmptyComponent={
-          <NotificationCard  
+          <NotificationCard
             width={width}
             text={
               "Start searching for your favourite games and add them to MyGames."
@@ -21,13 +21,9 @@ export default function MyGames(props) {
             backgroundColor={colors.primary}
             color={colors.white}
           />
-      }
+        }
         renderItem={({ item }) => (
-          <GameCard
-            navigation={props.navigation}
-            id={item.id}
-            abbreviation={item.abbreviation}
-          />
+          <GameCard id={item.id} abbreviation={item.abbreviation} />
         )}
       ></FlatList>
     </View>

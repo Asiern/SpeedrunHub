@@ -5,22 +5,18 @@ import User from "./User";
 import colors from "../config/colors";
 import { SearchBar } from "react-native-elements";
 
-export default function Users(props) {
+export default function Users() {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
   function updateSearch(input) {
     setSearch(input);
-    const usereurl = "https://www.speedrun.com/api/v1/users?name=" + input;
-    //Fetch url for users
-    Fetch(usereurl);
+    const url = "https://www.speedrun.com/api/v1/users?name=" + input;
+    Fetch(url);
   }
-  async function Fetch(userurl) {
-    //Users
-    const userresponse = await fetch(userurl);
-    const userdata = await userresponse.json();
-
-    //Load data to state
-    setUsers(userdata.data);
+  async function Fetch(url) {
+    const response = await fetch(url);
+    const data = await response.json();
+    setUsers(data.data);
   }
 
   return (
@@ -35,11 +31,7 @@ export default function Users(props) {
         keyExtractor={(item) => item.id}
         data={users}
         renderItem={({ item }) => (
-          <User
-            username={item.names.international}
-            userid={item.id}
-            navigation={props.navigation}
-          />
+          <User username={item.names.international} userid={item.id} />
         )}
       ></FlatList>
     </View>

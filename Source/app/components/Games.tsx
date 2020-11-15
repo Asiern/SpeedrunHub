@@ -5,23 +5,19 @@ import GameCard from "./GameCard";
 import colors from "../config/colors";
 import { SearchBar } from "react-native-elements";
 
-export default function Games(props) {
+export default function Games() {
   const [games, setGames] = useState([]);
   const [search, setSearch] = useState("");
 
   function updateSearch(input) {
     setSearch(input);
-    const gameeurl = "https://www.speedrun.com/api/v1/games?name=" + input;
-    //Fetch url for users
-    Fetch(gameeurl);
+    const url = "https://www.speedrun.com/api/v1/games?name=" + input;
+    Fetch(url);
   }
-  async function Fetch(gameurl) {
-    //Users
-    const gameresponse = await fetch(gameurl);
-    const gamedata = await gameresponse.json();
-
-    //Load data to state
-    setGames(gamedata.data);
+  async function Fetch(url) {
+    const response = await fetch(url);
+    const data = await response.json();
+    setGames(data.data);
   }
   return (
     <View style={styles.container}>
@@ -37,11 +33,7 @@ export default function Games(props) {
         keyExtractor={(item) => item.id}
         data={games}
         renderItem={({ item }) => (
-          <GameCard
-            navigation={props.navigation}
-            id={item.id}
-            abbreviation={item.abbreviation}
-          />
+          <GameCard id={item.id} abbreviation={item.abbreviation} />
         )}
       ></FlatList>
     </View>
