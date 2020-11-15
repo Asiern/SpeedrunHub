@@ -4,13 +4,12 @@ import Svg, { NumberProp, Path } from "react-native-svg";
 import colors from "../config/colors";
 
 export interface svgheaderProps {
-  customStyles: ViewStyle;
   height: NumberProp;
   width: NumberProp;
 }
-export default function svgheader({ customStyles, height, width }) {
+export default function svgheader({ height, width }) {
   return (
-    <View style={customStyles}>
+    <View>
       <View
         style={{
           backgroundColor: colors.primary,
