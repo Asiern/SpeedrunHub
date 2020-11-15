@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  Alert,
   Linking,
   TouchableOpacity,
   KeyboardAvoidingView,
@@ -17,18 +16,14 @@ import { LinearGradient } from "expo-linear-gradient";
 import Button from "../components/Buttons/Button";
 import { useNavigation } from "@react-navigation/native";
 
-export default function Login(props) {
+export default function Login() {
   const [textinput, setTextinput] = useState("");
   const [keyinput, setKeyinput] = useState("");
   const navigation = useNavigation();
-  _storeData = async (user, key) => {
-    const showToastWithGravity = (text) => {
-      ToastAndroid.showWithGravity(
-        text,
-        ToastAndroid.SHORT,
-        ToastAndroid.CENTER
-      );
-    };
+  function showToastWithGravity(text) {
+    ToastAndroid.showWithGravity(text, ToastAndroid.SHORT, ToastAndroid.CENTER);
+  }
+  async function _storeData(user, key) {
     try {
       const url = "https://www.speedrun.com/api/v1/users/" + user;
       const response = await fetch(url);
@@ -50,7 +45,7 @@ export default function Login(props) {
         "User not found, please type the username as shown on Speedrun.com"
       );
     }
-  };
+  }
   function loadInBrowser(link) {
     Linking.openURL(link).catch((err) =>
       showToastWithGravity("Couldn't load page")
