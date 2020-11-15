@@ -11,7 +11,7 @@ export interface RunProps {
   time: string;
   abbreviation: string;
   categoryid: string;
-  weblink?: string;
+  weblink: string;
 }
 
 export default function Run(props: RunProps) {
