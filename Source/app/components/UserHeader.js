@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   Alert,
   Dimensions,
-  DevSettings,
 } from "react-native";
 import colors from "../config/colors";
 import AsyncStorage from "@react-native-community/async-storage";
@@ -29,17 +28,6 @@ class UserHeader extends Component {
     };
   }
   async signOut() {
-    const createTwoButtonAlert = (msg) =>
-      Alert.alert(
-        "Alert",
-        msg,
-        [
-          { text: "OK", onPress: () => null },
-          { text: "Cancel", onPress: () => null },
-        ],
-
-        { cancelable: false }
-      );
     //Remove user
     await AsyncStorage.multiSet([
       ["@user", ""],
