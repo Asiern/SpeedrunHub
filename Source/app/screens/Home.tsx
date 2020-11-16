@@ -63,11 +63,7 @@ export default function Home(props) {
       <StatusBar style={"dark"}></StatusBar>
       <View style={styles.container}>
         <View style={styles.profile}>
-          <UserHeader
-            username={username}
-            userid={userid}
-            navigation={navigation}
-          />
+          <UserHeader username={username} userid={userid} />
         </View>
         <NotificationBar
           width={width}
