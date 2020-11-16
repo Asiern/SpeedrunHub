@@ -81,11 +81,13 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     marginTop: Constants.statusBarHeight,
-    paddingTop: 10,
+    paddingTop: 15,
     paddingBottom: 10,
   },
   topbarleft: {
     flex: 1,
+    justifyContent: "center",
+    alignItems: "flex-start",
   },
   topbarcenter: {
     flex: 1,
@@ -94,6 +96,7 @@ const styles = StyleSheet.create({
   topbarright: {
     flex: 1,
     alignItems: "flex-end",
+    justifyContent: "center",
   },
   imagecontainer: {
     flex: 1,
