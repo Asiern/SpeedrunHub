@@ -1,19 +1,27 @@
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, ColorValue } from "react-native";
 import colors from "../../config/colors";
-
-const NotificationCard = (props) => {
+export interface NotificationCardProps {
+  width: string;
+  color: ColorValue;
+  backgroundColor: ColorValue;
+  text: string;
+}
+const NotificationCard = ({
+  width,
+  color,
+  backgroundColor,
+  text,
+}: NotificationCardProps) => {
   function stripHtml(html) {
     const regex = /(<([^>]+)>)/gi;
     const result = html.replace(regex, "");
     return result;
   }
   return (
-    <View style={[styles.container, { width: props.width }]}>
-      <View style={[styles.card, { backgroundColor: props.backgroundColor }]}>
-        <Text style={[styles.text, { color: props.color }]}>
-          {stripHtml(props.text)}
-        </Text>
+    <View style={[styles.container, { width }]}>
+      <View style={[styles.card, { backgroundColor }]}>
+        <Text style={[styles.text, { color }]}>{stripHtml(text)}</Text>
       </View>
     </View>
   );
