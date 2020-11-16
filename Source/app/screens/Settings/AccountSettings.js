@@ -10,7 +10,7 @@ import {
   ToastAndroid,
 } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
-import colors from "../../config/colors";
+import { colors } from "../../themes/theme";
 import Button from "../../components/Buttons/Button";
 import { useNavigation } from "@react-navigation/native";
 

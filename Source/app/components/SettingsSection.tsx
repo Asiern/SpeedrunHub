@@ -7,7 +7,7 @@ import {
   StyleSheet,
   Linking,
 } from "react-native";
-import colors from "../config/colors";
+import { colors } from "../themes/theme";
 import Feather from "@expo/vector-icons/Feather";
 
 export interface SettingsSectionProps {

@@ -8,7 +8,7 @@ import {
   ScrollView,
 } from "react-native";
 import Constants from "expo-constants";
-import colors from "../../config/colors";
+import { colors } from "../../themes/theme";
 
 export default function About() {
   return (

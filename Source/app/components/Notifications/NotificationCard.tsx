@@ -1,8 +1,8 @@
 import React from "react";
 import { Text, View, StyleSheet, ColorValue } from "react-native";
-import colors from "../../config/colors";
+import { colors } from "../../themes/theme";
 export interface NotificationCardProps {
-  width: string;
+  width: number;
   color: ColorValue;
   backgroundColor: ColorValue;
   text: string;

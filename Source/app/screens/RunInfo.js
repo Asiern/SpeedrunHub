@@ -7,7 +7,7 @@ import Split from "../components/Splits";
 import RunHeader from "../components/RunHeader";
 
 import { h2, h3, h4 } from "../themes/Styles";
-import colors from "../config/colors";
+import { colors } from "../themes/theme";
 import { FlatList } from "react-native-gesture-handler";
 
 function loadInBrowser(link) {

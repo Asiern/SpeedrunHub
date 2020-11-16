@@ -8,7 +8,7 @@ import {
   KeyboardAvoidingView,
   ToastAndroid,
 } from "react-native";
-import colors from "../config/colors";
+import { colors } from "../themes/theme";
 import AsyncStorage from "@react-native-community/async-storage";
 import { TextInput } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";

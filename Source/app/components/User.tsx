@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-import colors from "../config/colors";
+import { colors } from "../themes/theme";
 
 export interface UserProps {
   username: string;

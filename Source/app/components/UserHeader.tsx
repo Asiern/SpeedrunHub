@@ -12,7 +12,7 @@ import {
 import AsyncStorage from "@react-native-community/async-storage";
 
 import Constants from "expo-constants";
-import colors from "../config/colors";
+import { colors } from "../themes/theme";
 
 //Components
 import Svgheader from "./svgheader";

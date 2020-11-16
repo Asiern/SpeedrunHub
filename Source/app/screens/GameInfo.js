@@ -14,7 +14,7 @@ import Run from "../components/Run";
 import GameHeader from "../components/GameInfoComponents/GameHeader";
 
 import { FontAwesome } from "@expo/vector-icons";
-import colors from "../config/colors";
+import { colors } from "../themes/theme";
 
 class GameInfo extends React.Component {
   constructor() {

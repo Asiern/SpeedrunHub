@@ -5,7 +5,7 @@ import { StackActions, useNavigation } from "@react-navigation/native";
 
 import Constants from "expo-constants";
 import Feather from "@expo/vector-icons/Feather";
-import colors from "../config/colors";
+import { colors } from "../themes/theme";
 import { h2w, h4w } from "../themes/Styles";
 
 const goBack = StackActions.pop();

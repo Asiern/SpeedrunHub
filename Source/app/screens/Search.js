@@ -2,7 +2,7 @@ import { StyleSheet, View } from "react-native";
 import React from "react";
 import { SearchBar } from "react-native-elements";
 import Constants from "expo-constants";
-import colors from "../config/colors";
+import { colors } from "../themes/theme";
 import User from "../components/User";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import Games from "../components/Games";

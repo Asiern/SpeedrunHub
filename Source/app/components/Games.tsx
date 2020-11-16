@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import GameCard from "./GameCard";
-import colors from "../config/colors";
+import { colors } from "../themes/theme";
 import { SearchBar } from "react-native-elements";
 
 export default function Games() {

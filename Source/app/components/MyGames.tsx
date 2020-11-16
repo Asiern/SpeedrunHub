@@ -3,7 +3,7 @@ import { StyleSheet, View, Dimensions } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import GameCard from "./GameCard";
 import NotificationCard from "../components/Notifications/NotificationCard";
-import colors from "../config/colors";
+import { colors } from "../themes/theme";
 const { width } = Dimensions.get("screen");
 export default function MyGames(props) {
   return (

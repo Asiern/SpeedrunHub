@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import colors from "../config/colors";
+import { colors } from "../themes/theme";
 
 function timeConverter(time) {
   var result = time.toLowerCase();

@@ -1,7 +1,7 @@
 import React from "react";
-import { View, ViewStyle } from "react-native";
+import { View } from "react-native";
 import Svg, { NumberProp, Path } from "react-native-svg";
-import colors from "../config/colors";
+import { colors } from "../themes/theme";
 
 export interface svgheaderProps {
   height: NumberProp;

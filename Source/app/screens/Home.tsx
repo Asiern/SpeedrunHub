@@ -8,8 +8,7 @@ import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import MyGames from "../components/MyGames";
 import UserHeader from "../components/UserHeader";
 import NotificationBar from "../components/Notifications/NotificationBar";
-import colors from "../config/colors";
-import { h1 } from "../themes/Styles";
+import { colors, h1 } from "../themes/theme";
 import { StatusBar } from "expo-status-bar";
 
 import { AdMobBanner } from "expo-ads-admob";
@@ -65,12 +64,7 @@ export default function Home(props) {
         <View style={styles.profile}>
           <UserHeader username={username} userid={userid} />
         </View>
-        <NotificationBar
-          width={width}
-          APIKey={props.APIKey}
-          navigation={navigation}
-          data={notifications}
-        />
+        <NotificationBar width={width} data={notifications} />
         <Text style={[h1, { marginLeft: 20 }]}>My Games</Text>
         <MyGames data={games} navigation={navigation} />
         {/* <AdMobBanner
