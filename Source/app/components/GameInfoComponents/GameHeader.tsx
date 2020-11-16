@@ -1,7 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { ReactNode } from "react";
-import { Text, View, ImageBackground, StyleSheet, Image } from "react-native";
+import { Text, View, ImageBackground, StyleSheet } from "react-native";
 import { StackActions } from "@react-navigation/native";
+import Carousel from "../Carousel";
 
 import Constants from "expo-constants";
 import Feather from "@expo/vector-icons/Feather";
@@ -46,17 +47,7 @@ const GameHeader = ({ abbreviation, name, children }: GameHeaderProps) => {
         <View style={styles.topbarright}>{children}</View>
       </View>
       <View style={styles.profile}>
-        <View style={styles.imagecontainer}>
-          <Image
-            source={{
-              uri:
-                "https://www.speedrun.com/themes/" +
-                abbreviation +
-                "/cover-256.png",
-            }}
-            style={styles.Image}
-          ></Image>
-        </View>
+        <Carousel abbreviation={abbreviation} />
       </View>
       <View style={styles.userinfo}>
         <Text style={h2w}>{name}</Text>
