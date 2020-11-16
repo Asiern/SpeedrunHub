@@ -262,7 +262,7 @@ class GameInfo extends React.Component {
           abbreviation={this.state.abbreviation}
           name={this.state.name}
         >
-          {this.state.favourite == true ? (
+          {this.state.favourite ? (
             <FontAwesome
               onPress={() => this._toggleFavourites()}
               name="heart"
@@ -284,7 +284,7 @@ class GameInfo extends React.Component {
         <FlatList
           keyExtractor={(item) => item.id}
           data={this.state.categories}
-          horizontal={true}
+          horizontal
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
             <View>
@@ -318,11 +318,11 @@ class GameInfo extends React.Component {
             <FlatList
               keyExtractor={(item) => item.id}
               data={item.values}
-              horizontal={true}
+              horizontal
               showsHorizontalScrollIndicator={false}
               renderItem={({ item }) => (
                 <View>
-                  {this.state.url.includes(item.id) == true ? (
+                  {this.state.url.includes(item.id) ? (
                     <View style={styles.button}>
                       <Button
                         title={item.label}
