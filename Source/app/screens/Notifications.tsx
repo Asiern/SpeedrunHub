@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 import NotificationCard from "../components/Notifications/NotificationCard";
-import colors from "../config/colors";
+import { colors } from "../themes/theme";
 
 const Notifications = (props) => {
   const { data } = props.route.params;

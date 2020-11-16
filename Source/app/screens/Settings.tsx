@@ -1,7 +1,7 @@
 import React from "react";
 
 import SettingsSection from "../components/SettingsSection";
-import colors from "../config/colors";
+import { colors } from "../themes/theme";
 import { FlatList } from "react-native-gesture-handler";
 
 export default function Settings(props) {
@@ -50,7 +50,6 @@ export default function Settings(props) {
           backgroundColor={colors.white}
           accentColor={colors.primary}
           textPrimaryColor={colors.darkgrey}
-          navigation={props.navigation}
           weblink={item.weblink}
         />
       )}

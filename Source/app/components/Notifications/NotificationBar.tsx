@@ -9,13 +9,13 @@ import {
 } from "react-native";
 import NotificationCard from "./NotificationCard";
 
-import colors from "../../config/colors";
+import { colors } from "../../themes/theme";
 import { h1, h4p } from "../../themes/Styles";
 import { useNavigation } from "@react-navigation/native";
 
 export interface NotificationBarProps {
   data: any[];
-  width: string;
+  width: number;
 }
 
 const NotificationBar = ({ data, width }: NotificationBarProps) => {

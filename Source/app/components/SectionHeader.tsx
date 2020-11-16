@@ -8,7 +8,7 @@ import {
   Dimensions,
 } from "react-native";
 
-import colors from "../config/colors";
+import { colors } from "../themes/theme";
 
 export interface SectionHeaderProps {
   id: string;
