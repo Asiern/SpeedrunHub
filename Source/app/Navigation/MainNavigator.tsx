@@ -2,7 +2,7 @@ import * as React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 
-import colors from "../config/colors";
+import { colors } from "../themes/theme";
 import Feather from "@expo/vector-icons/Feather";
 
 //Screens
@@ -10,7 +10,7 @@ import Home from "../screens/Home";
 import SETTINGS from "../screens/Settings";
 import Profile from "../screens/Profile";
 import About from "../screens/Settings/About";
-import GameInfo from "../screens/GameInfo";
+import GameInfo from "../screens/GameInfo.js";
 import Search from "../screens/Search";
 import Notifications from "../screens/Notifications";
 import NotificationsSettings from "../screens/Settings/NotificationsSettings";
