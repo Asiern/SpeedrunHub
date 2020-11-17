@@ -65,7 +65,9 @@ export default function Home(props) {
           <UserHeader username={username} userid={userid} />
         </View>
         <NotificationBar width={width} data={notifications} />
-        <Text style={[h1, { marginLeft: 20 }]}>My Games</Text>
+        <Text style={[h1, { marginLeft: 20, fontWeight: "bold" }]}>
+          My Games
+        </Text>
         <MyGames data={games} navigation={navigation} />
         {/* <AdMobBanner
           bannerSize="fullBanner"
