@@ -6,17 +6,24 @@ import Carousel from "../Carousel";
 
 import Constants from "expo-constants";
 import Feather from "@expo/vector-icons/Feather";
-import { colors } from "../../themes/theme";
-import { h2w } from "../../themes/Styles";
+import { colors, h2w } from "../../themes/theme";
 import { StatusBar } from "expo-status-bar";
 
 export interface GameHeaderProps {
   abbreviation: string;
   name?: string;
   children: ReactNode;
+  date?: string;
+  platforms: any[];
 }
 
-const GameHeader = ({ abbreviation, name, children }: GameHeaderProps) => {
+const GameHeader = ({
+  abbreviation,
+  name,
+  children,
+  date,
+  platforms,
+}: GameHeaderProps) => {
   const navigation = useNavigation();
   const goBack = StackActions.pop();
   return (
@@ -47,10 +54,14 @@ const GameHeader = ({ abbreviation, name, children }: GameHeaderProps) => {
         <View style={styles.topbarright}>{children}</View>
       </View>
       <View style={styles.profile}>
-        <Carousel abbreviation={abbreviation} />
+        <Carousel
+          abbreviation={abbreviation}
+          date={date}
+          platforms={platforms}
+        />
       </View>
       <View style={styles.userinfo}>
-        <Text style={h2w}>{name}</Text>
+        <Text style={[h2w, { fontWeight: "bold" }]}>{name}</Text>
       </View>
     </ImageBackground>
   );

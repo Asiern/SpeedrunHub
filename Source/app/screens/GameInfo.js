@@ -261,6 +261,8 @@ class GameInfo extends React.Component {
         <GameHeader
           abbreviation={this.state.abbreviation}
           name={this.state.name}
+          date={this.state.game["release-date"]}
+          platforms={this.state.game.platforms}
         >
           {this.state.favourite ? (
             <FontAwesome
@@ -380,24 +382,10 @@ class GameInfo extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.light,
-  },
   profileBG: {
     flex: 1,
     resizeMode: "cover",
     backgroundColor: colors.black,
-  },
-  profile: {
-    flex: 1,
-  },
-  country: {
-    flexDirection: "row",
-  },
-  flag: {
-    height: 18,
-    width: 25,
   },
   imagecontainer: {
     flex: 1,
@@ -405,24 +393,6 @@ const styles = StyleSheet.create({
     alignContent: "center",
     justifyContent: "flex-end",
     alignItems: "center",
-  },
-  Image: {
-    width: 110,
-    height: 150,
-    padding: 10,
-    borderRadius: 10,
-  },
-  userinfo: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 30,
-  },
-  h1: {
-    color: colors.white,
-    fontSize: 30,
-    fontWeight: "bold",
-    alignSelf: "center",
   },
   //Category Button
   categorybuttoncontainer: {
