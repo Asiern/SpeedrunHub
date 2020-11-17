@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from "react";
+import React, { useState } from "react";
 import {
   ScrollView,
   StyleSheet,
@@ -7,17 +7,32 @@ import {
   Text,
   Image,
 } from "react-native";
-import { colors } from "../themes/theme";
+import { colors, h4w } from "../themes/theme";
 
 export interface CarouselProps {
   abbreviation: string;
+  date: string;
+  platforms: any[];
 }
 
-export default function Carousel({ abbreviation }: CarouselProps) {
+export default function Carousel({
+  abbreviation,
+  date,
+  platforms,
+}: CarouselProps) {
   const { width } = Dimensions.get("screen");
   const [selected, setSelected] = useState(true);
+
+  function getPlatforms(platforms) {
+    var out = "";
+    for (let platform of platforms) {
+      out = out + " " + platform.toString();
+    }
+    return out;
+  }
+
   return (
-    <View>
+    <View style={styles.container}>
       <ScrollView
         horizontal
         pagingEnabled
@@ -35,18 +50,9 @@ export default function Carousel({ abbreviation }: CarouselProps) {
             style={styles.Image}
           ></Image>
         </View>
-        <View
-          style={{
-            backgroundColor: "#fff",
-            width: width,
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Text>2009</Text>
-          <Text>PS3,PS4,PC</Text>
-          <Text>Moderators</Text>
+        <View style={[styles.info, { width }]}>
+          <Text style={h4w}>Release Date: {date}</Text>
+          <Text style={h4w}>{getPlatforms(platforms)}</Text>
         </View>
       </ScrollView>
       <View
@@ -54,18 +60,18 @@ export default function Carousel({ abbreviation }: CarouselProps) {
           flex: 1,
           flexDirection: "row",
           justifyContent: "center",
-          paddingVertical: 20,
+          paddingTop: 20,
         }}
       >
         {selected == false ? (
-          <View style={styles.offbtn} />
+          <View style={[styles.circle, { backgroundColor: colors.white }]} />
         ) : (
-          <View style={styles.onbtn} />
+          <View style={[styles.circle, { backgroundColor: colors.primary }]} />
         )}
         {selected == true ? (
-          <View style={styles.offbtn} />
+          <View style={[styles.circle, { backgroundColor: colors.white }]} />
         ) : (
-          <View style={styles.onbtn} />
+          <View style={[styles.circle, { backgroundColor: colors.primary }]} />
         )}
       </View>
     </View>
@@ -76,7 +82,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    flexDirection: "row",
   },
   Image: {
     width: 110,
@@ -90,18 +95,15 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     alignItems: "center",
   },
-  onbtn: {
-    height: 7,
-    width: 7,
-    borderRadius: 10,
-    backgroundColor: colors.primary,
-    marginHorizontal: 5,
+  info: {
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
   },
-  offbtn: {
+  circle: {
     height: 7,
     width: 7,
     borderRadius: 10,
-    backgroundColor: colors.light,
     marginHorizontal: 5,
   },
 });
