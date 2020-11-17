@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { View, SectionList, Dimensions } from "react-native";
+import { View, SectionList } from "react-native";
 
-import ProfileHeader from "../components/ProfileHeader";
+import ProfileHeader from "../components/Profile/ProfileHeader";
 import PB from "../components/PB";
 import SectionHeader from "../components/SectionHeader";
 
 import { AdMobBanner } from "expo-ads-admob";
 
-const { width } = Dimensions.get("screen");
-
 export default function Profile(props) {
   const [country, setCountry] = useState("");
   const [sections, setSections] = useState([]);
+  const [user, setUser] = useState([]);
   const { username, userid } = props.route.params;
 
   function filterPBS(data) {
@@ -58,12 +57,14 @@ export default function Profile(props) {
           "https://www.speedrun.com/api/v1/users/" +
           userid +
           "/personal-bests?embed=game,category";
+        console.log(userid);
         const runsresponse = await fetch(runsurl);
         const runsdata = await runsresponse.json();
         //User
         const userurl = "https://www.speedrun.com/api/v1/users/" + userid;
         const userresponse = await fetch(userurl);
         const userdata = await userresponse.json();
+        setUser(userdata.data);
         if (userdata.data.location != null) {
           setCountry(userdata.data.location.country.names.international);
         }
@@ -93,18 +94,15 @@ export default function Profile(props) {
         <ProfileHeader
           username={username}
           country={country}
-          navigation={props.navigation}
+          signup={user.signup}
         />
       }
       renderItem={({ item }) => (
         <PB
           place={item.place}
-          runnerid={item.userid}
-          runner={username}
           time={item.time}
           category={item.category}
           weblink={item.weblink}
-          navigation={props.navigation}
         />
       )}
       renderSectionHeader={({ section }) => (
@@ -112,8 +110,6 @@ export default function Profile(props) {
           abbreviation={section.abbreviation}
           id={section.id}
           name={section.name}
-          width={width}
-          navigation={props.navigation}
         />
       )}
     />

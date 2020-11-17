@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import React, { ReactNode } from "react";
 import { Text, View, ImageBackground, StyleSheet } from "react-native";
 import { StackActions } from "@react-navigation/native";
-import Carousel from "../Carousel";
+import Carousel from "./GameInfoCarousel";
 
 import Constants from "expo-constants";
 import Feather from "@expo/vector-icons/Feather";

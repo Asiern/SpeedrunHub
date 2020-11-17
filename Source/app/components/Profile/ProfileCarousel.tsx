@@ -7,29 +7,16 @@ import {
   Text,
   Image,
 } from "react-native";
-import { colors, h4w } from "../themes/theme";
+import { colors, h4w } from "../../themes/theme";
 
 export interface CarouselProps {
-  abbreviation: string;
-  date: string;
-  platforms: any[];
+  username: string;
+  signup: string;
 }
 
-export default function Carousel({
-  abbreviation,
-  date,
-  platforms,
-}: CarouselProps) {
+export default function Carousel({ username, signup }: CarouselProps) {
   const { width } = Dimensions.get("screen");
   const [selected, setSelected] = useState(true);
-
-  function getPlatforms(platforms) {
-    var out = "";
-    for (let platform of platforms) {
-      out = out + " " + platform.toString();
-    }
-    return out;
-  }
 
   return (
     <View style={styles.container}>
@@ -43,16 +30,15 @@ export default function Carousel({
           <Image
             source={{
               uri:
-                "https://www.speedrun.com/themes/" +
-                abbreviation +
-                "/cover-256.png",
+                "https://www.speedrun.com/themes/user/" +
+                username +
+                "/image.png",
             }}
             style={styles.Image}
           ></Image>
         </View>
         <View style={[styles.info, { width }]}>
-          <Text style={h4w}>Release Date: {date}</Text>
-          <Text style={h4w}>{getPlatforms(platforms)}</Text>
+          <Text style={h4w}>Signup: {signup}</Text>
         </View>
       </ScrollView>
       <View
@@ -63,15 +49,15 @@ export default function Carousel({
           paddingTop: 20,
         }}
       >
-        {selected == false ? (
-          <View style={[styles.circle, { backgroundColor: colors.white }]} />
-        ) : (
-          <View style={[styles.circle, { backgroundColor: colors.primary }]} />
-        )}
         {selected == true ? (
           <View style={[styles.circle, { backgroundColor: colors.white }]} />
         ) : (
-          <View style={[styles.circle, { backgroundColor: colors.primary }]} />
+          <View style={[styles.circunference, { borderColor: colors.white }]} />
+        )}
+        {selected == false ? (
+          <View style={[styles.circle, { backgroundColor: colors.white }]} />
+        ) : (
+          <View style={[styles.circunference, { borderColor: colors.white }]} />
         )}
       </View>
     </View>
@@ -84,10 +70,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   Image: {
-    width: 110,
-    height: 150,
-    padding: 10,
-    borderRadius: 10,
+    height: 100,
+    width: 100,
+    borderWidth: 1,
+    borderRadius: 50,
   },
   imagecontainer: {
     flex: 1,
@@ -101,9 +87,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   circle: {
-    height: 7,
-    width: 7,
+    height: 8,
+    width: 8,
     borderRadius: 10,
+    marginHorizontal: 5,
+  },
+  circunference: {
+    height: 8,
+    width: 8,
+    borderRadius: 10,
+    borderWidth: 2,
     marginHorizontal: 5,
   },
 });

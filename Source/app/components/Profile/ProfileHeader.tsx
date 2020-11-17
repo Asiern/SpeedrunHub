@@ -5,12 +5,18 @@ import { StackActions, useNavigation } from "@react-navigation/native";
 
 import Constants from "expo-constants";
 import Feather from "@expo/vector-icons/Feather";
-import { colors } from "../themes/theme";
-import { h2w, h4w } from "../themes/Styles";
+import { colors, h2w, h4w } from "../../themes/theme";
+import Carousel from "./ProfileCarousel";
 
 const goBack = StackActions.pop();
 
-const ProfileHeader = (props) => {
+export interface ProfileHeaderProps {
+  username: string;
+  country?: string;
+  signup?: string;
+}
+
+const ProfileHeader = ({ username, country, signup }: ProfileHeaderProps) => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
@@ -28,21 +34,13 @@ const ProfileHeader = (props) => {
         <View style={styles.topbarright}></View>
       </View>
       <View style={styles.imagecontainer}>
-        <Image
-          source={{
-            uri:
-              "https://www.speedrun.com/themes/user/" +
-              props.username +
-              "/image.png",
-          }}
-          style={styles.Image}
-        ></Image>
+        <Carousel username={username} signup={signup} />
       </View>
       <View style={styles.userinfo}>
-        <Text style={h2w}>{props.username}</Text>
+        <Text style={[h2w, { fontWeight: "bold" }]}>{username}</Text>
         <View>
           <View>
-            <Text style={h4w}>{props.country}</Text>
+            <Text style={h4w}>{country}</Text>
           </View>
         </View>
       </View>
