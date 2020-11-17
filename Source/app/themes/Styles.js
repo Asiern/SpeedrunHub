@@ -18,7 +18,6 @@ export const h2 = {
 export const h2w = {
   color: colors.white,
   fontSize: 25,
-  fontWeight: "bold",
 };
 export const h3 = {
   color: colors.darkgrey,
