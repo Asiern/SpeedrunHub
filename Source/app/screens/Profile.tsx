@@ -57,7 +57,6 @@ export default function Profile(props) {
           "https://www.speedrun.com/api/v1/users/" +
           userid +
           "/personal-bests?embed=game,category";
-        console.log(userid);
         const runsresponse = await fetch(runsurl);
         const runsdata = await runsresponse.json();
         //User
