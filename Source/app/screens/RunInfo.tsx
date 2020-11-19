@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { StatusBar } from "expo-status-bar";
 import { View, StyleSheet, Text, ScrollView, Linking } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 
 import Button from "../components/Buttons/SquareButton";
 import Split from "../components/Splits";
 import RunHeader from "../components/RunHeader";
+import User from "../components/Search/User";
 
-import { h2, h3, h4 } from "../themes/Styles";
+import { h2, h4 } from "../themes/Styles";
 import { colors } from "../themes/theme";
 import { FlatList } from "react-native-gesture-handler";
 
@@ -40,6 +42,8 @@ export default function RunInfo(props) {
   const [data, setData] = useState([]);
   const [splits, setSplits] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [runners, setRunners] = useState([]);
+
   useEffect(() => {
     let mounted = true;
     if (mounted) {
@@ -52,13 +56,13 @@ export default function RunInfo(props) {
         const response = await fetch(url);
         const data = await response.json();
         setData(data.data);
-        console.log(data.data);
+        setRunners(data.data.players.data);
         //Splits
         if (data.data.splits != null) {
           const splitUrl = data.data.splits.uri;
           const splitresponse = await fetch(splitUrl);
           const splitdata = await splitresponse.json();
-          setSplits(splitdata.run);
+          setSplits(splitdata.run.splits);
         }
         setLoading(false);
       })();
@@ -67,6 +71,7 @@ export default function RunInfo(props) {
       mounted = false;
     };
   }, []);
+
   if (loading) {
     return (
       <ActivityIndicator
@@ -78,22 +83,23 @@ export default function RunInfo(props) {
   } else {
     return (
       <ScrollView style={styles.container}>
-        <RunHeader
+        <StatusBar style={"dark"}></StatusBar>
+        {/* <RunHeader
           id={data.game.data.id}
           backgroundUri={data.game.data.assets["cover-large"].uri}
-        />
-        <FlatList
+        /> */}
+        {/* <FlatList
           data={data.videos.links}
           renderItem={({ item }) => (
             <Button
               title={"Video"}
               color={colors.white}
-              backgroundColor={colors.red}
+              backgroundColor={colors.primary}
               icon={"youtube"}
               onPress={() => loadInBrowser(item.uri)}
             />
           )}
-        ></FlatList>
+        ></FlatList> */}
         <View style={styles.title}>
           <Text style={h4}>
             {data.category.data.name} in {timeConverter(data.times.primary)} by{" "}
@@ -101,6 +107,14 @@ export default function RunInfo(props) {
           </Text>
           <Text style={h4}>n place</Text>
         </View>
+        <FlatList
+          data={runners}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          renderItem={({ item }) => (
+            <User username={item.names.international} userid={item.id} />
+          )}
+        ></FlatList>
         <View style={styles.title}>
           {data.times.ingame == null ? null : (
             <Text style={h4}>IGT: {timeConverter(data.times.ingame)}</Text>
@@ -119,10 +133,10 @@ export default function RunInfo(props) {
           <Text style={h4}>Verify-date: {data.status["verify-date"]}</Text>
         </View>
 
-        {data.splits == null ? null : (
+        {splits == null ? null : (
           <View>
             <Text style={[h2, { alignSelf: "center", paddingTop: 20 }]}>
-              Siplits
+              Splits
             </Text>
             <View style={styles.splitsContainer}>
               <FlatList
@@ -133,7 +147,7 @@ export default function RunInfo(props) {
                     finished={"Finished at"}
                   />
                 }
-                data={splits.splits}
+                data={splits}
                 renderItem={({ item }) => (
                   <Split
                     name={item.name}
