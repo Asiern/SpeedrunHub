@@ -6,7 +6,6 @@ import {
   Image,
   TextInput,
   Clipboard,
-  Alert,
   ToastAndroid,
 } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
