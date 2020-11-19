@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -16,51 +16,47 @@ import GameHeader from "../components/GameInfoComponents/GameHeader";
 import { FontAwesome } from "@expo/vector-icons";
 import { colors } from "../themes/theme";
 
-class GameInfo extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      loading: true,
-      id: "",
-      abbreviation: "",
-      name: "",
-      game: [],
-      url: "",
-      runs: [],
-      variables: [],
-      categories: [],
-      checked: 0,
-      favourite: false,
-      players: [],
-    };
-  }
-  _isFavourite = async (id) => {
+export default function GameInfo(props) {
+  const { id, abbreviation } = props.route.params;
+  const [loading, setLoading] = useState(true);
+  const [name, setName] = useState("");
+  const [game, setGame] = useState([]);
+  const [url, setUrl] = useState("");
+  const [runs, setRuns] = useState([]);
+  const [variables, setVariables] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [favourite, setFavourite] = useState(false);
+  const [players, setPlayers] = useState([]);
+  const [checked, setChecked] = useState(0);
+
+  const _isFavourite = async (id) => {
     const gameList = JSON.parse(await AsyncStorage.getItem("@MyGames"));
     if (gameList != null) {
       for (let GAME of gameList) {
         if (GAME.id == id) {
-          this.setState({ favourite: true });
+          setFavourite(true);
         }
       }
     }
   };
-  _toggleFavourites = async () => {
+
+  const _toggleFavourites = async () => {
     const games = await AsyncStorage.getItem("@MyGames");
     var gameList = JSON.parse(games);
     //Create game obj
     var game = {
-      id: this.state.id,
-      abbreviation: this.state.abbreviation,
+      id: id,
+      abbreviation: abbreviation,
     };
     if (gameList == null) {
       gameList = [];
     }
-    if (!this.state.favourite) {
+    if (favourite) {
       //add game to list
       gameList.push(game);
       //Game added to list
       await AsyncStorage.setItem("@MyGames", JSON.stringify(gameList));
-      this.setState({ favourite: true });
+      setFavourite(true);
     } else {
       //Game got removed from list
       for (let GAME of gameList) {
@@ -69,52 +65,50 @@ class GameInfo extends React.Component {
         }
       }
       await AsyncStorage.setItem("@MyGames", JSON.stringify(gameList));
-      this.setState({ favourite: false });
+      setFavourite(false);
     }
   };
-  async componentDidMount() {
-    try {
-      //Load gameId & abbreviation from react navigation
-      const { id, abbreviation } = this.props.route.params;
-      //Fav?
-      this._isFavourite(id, abbreviation);
-      //Get Game Data
-      //Fetch Categories from Speedrun.com
-      const url =
-        "https://www.speedrun.com/api/v1/games/" +
-        this.props.route.params.id +
-        "?embed=categories";
-      const response = await fetch(url);
-      const data = await response.json();
-      //Categories output
-      var outCategories = [];
-      //Filter Categories (type == Per-Game)
-      for (var category of data.data.categories.data) {
-        if (category.type == "per-game") {
-          outCategories.push(category);
+  useEffect(() => {
+    let mounted = true;
+    if (mounted) {
+      (async () => {
+        //Load gameId & abbreviation from react navigation
+        //Fav?
+        _isFavourite(id);
+        //Get Game Data
+        //Fetch Categories from Speedrun.com
+        const url =
+          "https://www.speedrun.com/api/v1/games/" + id + "?embed=categories";
+        const response = await fetch(url);
+        const data = await response.json();
+        //Categories output
+        var outCategories = [];
+        //Filter Categories (type == Per-Game)
+        for (var category of data.data.categories.data) {
+          if (category.type == "per-game") {
+            outCategories.push(category);
+          }
         }
-      }
-      //Select Default Category
-      const selectedCategory = outCategories[0].id;
-      //Fetch Variables
-      this.LoadVariables(selectedCategory);
-      //Set State
-      this.setState({
-        loading: false,
-        game: data.data,
-        name: data.data.names.international,
-        id,
-        abbreviation,
-        categories: outCategories,
-        checked: selectedCategory,
-      });
-    } catch (error) {
-      console.log(error);
+        //Select Default Category
+        const selectedCategory = outCategories[0].id;
+        //Fetch Variables
+        LoadVariables(selectedCategory);
+        //Set State
+        setLoading(false);
+        setGame(data.data);
+        setName(data.data.names.international);
+        setCategories(outCategories);
+        setChecked(selectedCategory);
+      })();
     }
-  }
-  async LoadVariables(categoryid) {
+    return function cleanup() {
+      mounted = false;
+    };
+  }, []);
+
+  async function LoadVariables(categoryid) {
     try {
-      this.setState({ runs: [] });
+      setRuns([]);
       //Fetch Variables from Speedrun.com
       const variablesUrl =
         "https://www.speedrun.com/api/v1/categories/" +
@@ -129,7 +123,7 @@ class GameInfo extends React.Component {
       //Url extension
       var urlExt =
         "https://www.speedrun.com/api/v1/leaderboards/" +
-        this.props.route.params.id +
+        id +
         "/category/" +
         categoryid;
       for (let subcategory of varData.data) {
@@ -165,7 +159,7 @@ class GameInfo extends React.Component {
           //Load subcategory into list
           outSubcategoies.push(outSubcategory);
           //Add url var
-          urlExt = this.buildUrl(
+          urlExt = buildUrl(
             subcategory.id,
             subcategory.values.default,
             urlExt,
@@ -180,13 +174,14 @@ class GameInfo extends React.Component {
       } else {
         urlExt = urlExt + "?embed=players";
       }
-      this.setState({ variables: outSubcategoies, checked: categoryid });
-      this.LoadRuns(urlExt);
+      setVariables(outSubcategoies);
+      setChecked(categoryid);
+      LoadRuns(urlExt);
     } catch (error) {
       console.log(error);
     }
   }
-  buildUrl = (id, value, url, index) => {
+  const buildUrl = (id, value, url, index) => {
     try {
       //index = number of values loaded on the url
       if (index == 1) {
@@ -198,75 +193,69 @@ class GameInfo extends React.Component {
       console.log(error);
     }
   };
-  modifyUrl = (id, value) => {
-    var url = this.state.url;
+  const modifyUrl = (id, value) => {
+    setRuns([]);
     var outUrl;
-    if (url.includes(id)) {
-      //Url contains id
-      //Id lenght
-      var lenght = id.length;
-      var i = url.search(id) + lenght + 1;
-      //i = value first char position
-      var start = url.substr(0, i);
-      var end = url.substr(i, url.length);
-      if (end.includes("&")) {
-        end = end.substr(end.indexOf("&"), url.length);
-        outUrl = start + value + end;
-      } else {
-        outUrl = start + value;
-      }
-      this.LoadRuns(outUrl);
+    //Url contains id
+    //Id lenght
+    var lenght = id.length;
+    var i = url.search(id) + lenght + 1;
+    //i = value first char position
+    var start = url.substr(0, i);
+    var end = url.substr(i, url.length);
+    if (end.includes("&")) {
+      end = end.substr(end.indexOf("&"), url.length);
+      outUrl = start + value + end;
     } else {
-      console.log("Error: Category Id not found on Url");
+      outUrl = start + value;
     }
+    LoadRuns(outUrl);
   };
-  async LoadRuns(url) {
+  async function LoadRuns(url) {
     try {
       //Fetch Runs from Speedrun.com
       const response = await fetch(url);
       const data = await response.json();
-      this.setState({
-        runs: data.data.runs,
-        url,
-        players: data.data.players.data,
-      });
+      setRuns(data.data.runs);
+      setUrl(url);
+      setPlayers(data.data.players.data);
     } catch (error) {
       console.log(error);
     }
   }
-  renderRun = ({ item, index }) => {
+  const renderRun = ({ item, index }) => {
     try {
       const name =
-        this.state.players[index].names.international != null
-          ? this.state.players[index].names.international
+        players[index].names.international != null
+          ? players[index].names.international
           : "null";
       return (
         <Run
           place={item.place}
           runner={name}
           time={item.run.times.primary}
-          abbreviation={this.props.abbreviation}
+          abbreviation={abbreviation}
           categoryid={item.run.category}
           weblink={item.run.weblink}
         />
       );
     } catch (error) {}
   };
-  ListFooter = () => {
+  const ListFooter = () => {
     return <View style={{ padding: 20 }}></View>;
   };
-  GameHeader = () => {
+  const ListHeader = () => {
     return (
       <View>
         <GameHeader
-          abbreviation={this.state.abbreviation}
-          name={this.state.name}
-          date={this.state.game["release-date"]}
-          platforms={this.state.game.platforms}
+          abbreviation={abbreviation}
+          name={name}
+          date={game["release-date"]}
+          // platforms={game.platforms}
         >
-          {this.state.favourite ? (
+          {favourite ? (
             <FontAwesome
-              onPress={() => this._toggleFavourites()}
+              onPress={() => _toggleFavourites()}
               name="heart"
               color={colors.white}
               size={30}
@@ -274,7 +263,7 @@ class GameInfo extends React.Component {
             />
           ) : (
             <FontAwesome
-              onPress={() => this._toggleFavourites()}
+              onPress={() => _toggleFavourites()}
               name="heart-o"
               color={colors.white}
               size={30}
@@ -285,15 +274,15 @@ class GameInfo extends React.Component {
         <View style={{ padding: 10 }}></View>
         <FlatList
           keyExtractor={(item) => item.id}
-          data={this.state.categories}
+          data={categories}
           horizontal
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
             <View>
-              {this.state.checked == item.id ? (
+              {checked == item.id ? (
                 <TouchableOpacity
                   style={styles.selectedcategorybuttoncontainer}
-                  onPress={() => this.LoadVariables(item.id)}
+                  onPress={() => LoadVariables(item.id)}
                 >
                   <View style={styles.selectedcategorybuttontext}>
                     <Text style={styles.selectedtext}>{item.name}</Text>
@@ -302,7 +291,7 @@ class GameInfo extends React.Component {
               ) : (
                 <TouchableOpacity
                   style={styles.categorybuttoncontainer}
-                  onPress={() => this.LoadVariables(item.id)}
+                  onPress={() => LoadVariables(item.id)}
                 >
                   <View style={styles.categorybuttontext}>
                     <Text style={styles.text}>{item.name}</Text>
@@ -314,7 +303,7 @@ class GameInfo extends React.Component {
         ></FlatList>
         <FlatList
           keyExtractor={(subcategory) => subcategory.id}
-          data={this.state.variables}
+          data={variables}
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
             <FlatList
@@ -324,13 +313,13 @@ class GameInfo extends React.Component {
               showsHorizontalScrollIndicator={false}
               renderItem={({ item }) => (
                 <View>
-                  {this.state.url.includes(item.id) ? (
+                  {url.includes(item.id) ? (
                     <View style={styles.button}>
                       <Button
                         title={item.label}
                         style={styles.button}
                         color={colors.primary}
-                        onPress={() => this.modifyUrl(item.categoryid, item.id)}
+                        onPress={() => modifyUrl(item.categoryid, item.id)}
                       />
                     </View>
                   ) : (
@@ -339,7 +328,7 @@ class GameInfo extends React.Component {
                         title={item.label}
                         style={styles.button}
                         color={colors.darkgrey}
-                        onPress={() => this.modifyUrl(item.categoryid, item.id)}
+                        onPress={() => modifyUrl(item.categoryid, item.id)}
                       />
                     </View>
                   )}
@@ -351,33 +340,32 @@ class GameInfo extends React.Component {
       </View>
     );
   };
-  render() {
-    if (this.state.loading) {
-      return (
-        <ActivityIndicator
-          style={{ alignSelf: "center", flex: 1 }}
-          size="large"
-          color={colors.primary}
-        />
-      );
-    } else {
-      return (
-        <View style={{ flex: 1 }}>
-          <FlatList
-            // getItemLayout={(data, index) => ({
-            //   length: 50,
-            //   offset: 10 * index,
-            //   index,
-            // })}
-            keyExtractor={(item) => item.run.id}
-            data={this.state.runs}
-            renderItem={this.renderRun}
-            ListHeaderComponent={this.GameHeader}
-            ListFooterComponent={this.ListFooter}
-          ></FlatList>
-        </View>
-      );
-    }
+
+  if (loading) {
+    return (
+      <ActivityIndicator
+        style={{ alignSelf: "center", flex: 1 }}
+        size="large"
+        color={colors.primary}
+      />
+    );
+  } else {
+    return (
+      <View style={{ flex: 1 }}>
+        <FlatList
+          // getItemLayout={(data, index) => ({
+          //   length: 50,
+          //   offset: 10 * index,
+          //   index,
+          // })}
+          keyExtractor={(item) => item.run.id}
+          data={runs}
+          renderItem={renderRun}
+          ListHeaderComponent={ListHeader}
+          ListFooterComponent={ListFooter}
+        ></FlatList>
+      </View>
+    );
   }
 }
 
@@ -463,5 +451,3 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
 });
-
-export default GameInfo;
