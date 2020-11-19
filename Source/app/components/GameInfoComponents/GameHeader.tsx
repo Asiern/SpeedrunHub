@@ -14,7 +14,7 @@ export interface GameHeaderProps {
   name?: string;
   children: ReactNode;
   date?: string;
-  platforms: any[];
+  platforms?: any[];
 }
 
 const GameHeader = ({

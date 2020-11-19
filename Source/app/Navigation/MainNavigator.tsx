@@ -10,7 +10,7 @@ import Home from "../screens/Home";
 import SETTINGS from "../screens/Settings";
 import Profile from "../screens/Profile";
 import About from "../screens/Settings/About";
-import GameInfo from "../screens/GameInfo.js";
+import GameInfo from "../screens/GameInfo";
 import Search from "../screens/Search";
 import Notifications from "../screens/Notifications";
 import NotificationsSettings from "../screens/Settings/NotificationsSettings";
