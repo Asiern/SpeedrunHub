@@ -12,22 +12,27 @@ export const colors = {
 export const h1: TextStyle = {
   color: colors.darkgrey,
   fontSize: 30,
+  fontWeight: "bold",
 };
-export const h2 = {
+export const h2: TextStyle = {
   color: colors.darkgrey,
   fontSize: 25,
+  fontWeight: "bold",
 };
-export const h2w = {
+export const h2w: TextStyle = {
   color: colors.white,
   fontSize: 25,
+  fontWeight: "bold",
 };
 export const h3: TextStyle = {
   color: colors.white,
   fontSize: 20,
+  fontWeight: "bold",
 };
 export const h3w: TextStyle = {
   color: colors.white,
   fontSize: 20,
+  fontWeight: "bold",
 };
 export const h4: TextStyle = {
   color: colors.white,
@@ -35,5 +40,9 @@ export const h4: TextStyle = {
 };
 export const h4w: TextStyle = {
   color: colors.white,
+  fontSize: 17,
+};
+export const h4p: TextStyle = {
+  color: colors.primary,
   fontSize: 17,
 };

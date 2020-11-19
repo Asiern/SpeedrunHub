@@ -61,7 +61,7 @@ const GameHeader = ({
         />
       </View>
       <View style={styles.userinfo}>
-        <Text style={[h2w, { fontWeight: "bold" }]}>{name}</Text>
+        <Text style={h2w}>{name}</Text>
       </View>
     </ImageBackground>
   );
