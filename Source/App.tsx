@@ -4,7 +4,6 @@ import { ActivityIndicator } from "react-native";
 
 //Screens
 import Navigation from "./app/Navigation/Navigation";
-import { useNavigation } from "@react-navigation/native";
 
 export default function App() {
   const [loading, setLoading] = useState(true);

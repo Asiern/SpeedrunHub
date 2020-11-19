@@ -39,10 +39,6 @@ const AccountSettings = (props) => {
   }, []);
 
   async function signOut() {
-    const createTwoButtonAlert = (msg) =>
-      Alert.alert("Alert", msg, [{ text: "OK", onPress: () => null }], {
-        cancelable: true,
-      });
     //Remove user
     await AsyncStorage.setItem("@user", "");
     await AsyncStorage.setItem("@userid", "");
@@ -64,10 +60,9 @@ const AccountSettings = (props) => {
             style={styles.image}
           ></Image>
         </View>
-        <View style></View>
       </View>
       <View style={styles.logout}>
-        <View style={styles.textinputs}>
+        <View>
           <Text style={styles.text}>User Name</Text>
           <TextInput style={styles.textinput} value={user} editable={false} />
           <Text style={styles.text}>User ID</Text>
