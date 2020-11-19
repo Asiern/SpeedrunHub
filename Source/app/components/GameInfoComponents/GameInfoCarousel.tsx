@@ -23,13 +23,13 @@ export default function Carousel({
   const { width } = Dimensions.get("screen");
   const [selected, setSelected] = useState(true);
 
-  function getPlatforms(platforms) {
-    var out = "";
-    for (let platform of platforms) {
-      out = out + " " + platform.toString();
-    }
-    return out;
-  }
+  // function getPlatforms(platforms) {
+  //   var out = "";
+  //   for (let platform of platforms) {
+  //     out = out + " " + platform.toString();
+  //   }
+  //   return out;
+  // }
 
   return (
     <View style={styles.container}>
@@ -52,7 +52,7 @@ export default function Carousel({
         </View>
         <View style={[styles.info, { width }]}>
           <Text style={h4w}>Release Date: {date}</Text>
-          <Text style={h4w}>{getPlatforms(platforms)}</Text>
+          <Text style={h4w}>a</Text>
         </View>
       </ScrollView>
       <View

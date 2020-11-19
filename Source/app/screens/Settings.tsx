@@ -12,12 +12,12 @@ export default function Settings(props) {
       navigateTo: "AccountSettings",
       weblink: null,
     },
-    {
-      title: "Unlock Pro Version",
-      icon: "unlock",
-      navigateTo: null,
-      weblink: "https://play.google.com/store",
-    },
+    // {
+    //   title: "Unlock Pro Version",
+    //   icon: "unlock",
+    //   navigateTo: null,
+    //   weblink: "https://play.google.com/store",
+    // },
     // {
     //   title: "About",
     //   icon: "info",
