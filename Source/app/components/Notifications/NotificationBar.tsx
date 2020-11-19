@@ -9,8 +9,7 @@ import {
 } from "react-native";
 import NotificationCard from "./NotificationCard";
 
-import { colors } from "../../themes/theme";
-import { h1, h4p } from "../../themes/Styles";
+import { colors, h1, h4p } from "../../themes/theme";
 import { useNavigation } from "@react-navigation/native";
 
 export interface NotificationBarProps {
