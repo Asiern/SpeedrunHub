@@ -4,7 +4,7 @@ import Split from "./Split";
 import { colors, h2 } from "../../themes/theme";
 
 export interface SplitsProps {
-  data?: any[];
+  data: any[];
 }
 
 export default function Splits({ data }: SplitsProps) {

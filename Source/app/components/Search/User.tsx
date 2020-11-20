@@ -45,7 +45,7 @@ export default function User(props: UserProps) {
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 10,
+    marginHorizontal: 20,
     flexDirection: "row",
     flex: 1,
     alignItems: "center",
@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
     borderColor: colors.primary,
     borderWidth: 1,
     borderRadius: 30,
+    backgroundColor: colors.light,
   },
   imagecontainer: {
     flex: 1,
