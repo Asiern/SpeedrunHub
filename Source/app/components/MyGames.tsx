@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     flexWrap: "wrap",
     flexDirection: "row",
-    justifyContent: "space-evenly",
-    marginHorizontal: 10,
+    justifyContent: "space-between",
+    marginHorizontal: 20,
   },
 });
