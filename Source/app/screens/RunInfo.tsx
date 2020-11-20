@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { View, StyleSheet, Text, ScrollView, Linking } from "react-native";
+import { View, StyleSheet, Text, ScrollView, Dimensions } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 
 import User from "../components/Search/User";
@@ -8,6 +8,8 @@ import User from "../components/Search/User";
 import { colors, h4 } from "../themes/theme";
 import { FlatList } from "react-native-gesture-handler";
 import Splits from "../components/Splits/Splits";
+
+const { width } = Dimensions.get("window");
 
 function getId(weblink) {
   const first = weblink.lastIndexOf("/") + 1;
@@ -86,9 +88,12 @@ export default function RunInfo(props) {
         <FlatList
           data={runners}
           horizontal
+          pagingEnabled
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
-            <User username={item.names.international} userid={item.id} />
+            <View style={{ width, marginVertical: 10 }}>
+              <User username={item.names.international} userid={item.id} />
+            </View>
           )}
         ></FlatList>
         <View style={styles.title}>
@@ -109,7 +114,7 @@ export default function RunInfo(props) {
           <Text style={h4}>Verify-date: {data.status["verify-date"]}</Text>
         </View>
 
-        {splits == null ? null : <Splits data={splits} />}
+        {splits[0] != undefined ? <Splits data={splits} /> : null}
       </ScrollView>
     );
   }

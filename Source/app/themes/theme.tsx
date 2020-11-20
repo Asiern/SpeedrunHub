@@ -35,7 +35,7 @@ export const h3w: TextStyle = {
   fontWeight: "bold",
 };
 export const h4: TextStyle = {
-  color: colors.white,
+  color: colors.darkgrey,
   fontSize: 17,
 };
 export const h4w: TextStyle = {
