@@ -3,20 +3,12 @@ import { StatusBar } from "expo-status-bar";
 import { View, StyleSheet, Text, ScrollView, Linking } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 
-import Button from "../components/Buttons/SquareButton";
-import Split from "../components/Splits/Split";
-import RunHeader from "../components/RunHeader";
 import User from "../components/Search/User";
 
-import { colors, h2, h4 } from "../themes/theme";
+import { colors, h4 } from "../themes/theme";
 import { FlatList } from "react-native-gesture-handler";
 import Splits from "../components/Splits/Splits";
 
-function loadInBrowser(link) {
-  Linking.openURL(link).catch((err) =>
-    console.error("Couldn't load page", err)
-  );
-}
 function getId(weblink) {
   const first = weblink.lastIndexOf("/") + 1;
   const last = weblink.length;
@@ -84,22 +76,6 @@ export default function RunInfo(props) {
     return (
       <ScrollView style={styles.container}>
         <StatusBar style={"dark"}></StatusBar>
-        {/* <RunHeader
-          id={data.game.data.id}
-          backgroundUri={data.game.data.assets["cover-large"].uri}
-        /> */}
-        {/* <FlatList
-          data={data.videos.links}
-          renderItem={({ item }) => (
-            <Button
-              title={"Video"}
-              color={colors.white}
-              backgroundColor={colors.primary}
-              icon={"youtube"}
-              onPress={() => loadInBrowser(item.uri)}
-            />
-          )}
-        ></FlatList> */}
         <View style={styles.title}>
           <Text style={h4}>
             {data.category.data.name} in {timeConverter(data.times.primary)} by{" "}

@@ -5,12 +5,14 @@ import { colors } from "../themes/theme";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import Games from "../components/Search/Games";
 import Users from "../components/Search/Users";
+import { StatusBar } from "expo-status-bar";
 
 const Tab = createMaterialTopTabNavigator();
 
 export default function Search() {
   return (
     <View style={styles.container}>
+      <StatusBar style={"dark"}></StatusBar>
       <Tab.Navigator
         style={styles.navigator}
         tabBarOptions={{

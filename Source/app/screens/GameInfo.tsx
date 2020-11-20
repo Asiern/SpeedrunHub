@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-community/async-storage";
+import { StatusBar } from "expo-status-bar";
 
 import Run from "../components/Run";
 import GameHeader from "../components/GameInfoComponents/GameHeader";
@@ -352,6 +353,7 @@ export default function GameInfo(props) {
   } else {
     return (
       <View style={{ flex: 1 }}>
+        <StatusBar style={"light"}></StatusBar>
         <FlatList
           // getItemLayout={(data, index) => ({
           //   length: 50,

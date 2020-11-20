@@ -15,6 +15,7 @@ import { LinearGradient } from "expo-linear-gradient";
 
 import Button from "../components/Buttons/Button";
 import { useNavigation } from "@react-navigation/native";
+import { StatusBar } from "expo-status-bar";
 
 export default function Login() {
   const [textinput, setTextinput] = useState("");
@@ -57,6 +58,7 @@ export default function Login() {
       colors={[colors.primary, colors.primary]}
     >
       <View style={styles.login}>
+        <StatusBar style={"dark"}></StatusBar>
         <View style={styles.header}>
           <Text style={styles.h1}>Welcome back</Text>
           <Text style={styles.h2}>

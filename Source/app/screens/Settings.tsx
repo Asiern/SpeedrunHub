@@ -1,11 +1,10 @@
 import React from "react";
-
 import SettingsSection from "../components/SettingsSection";
 import { colors } from "../themes/theme";
-import { FlatList } from "react-native-gesture-handler";
+import { StatusBar } from "expo-status-bar";
 
-export default function Settings(props) {
-  const DATA = [
+export default function Settings() {
+  const Sections = [
     {
       title: "My Account",
       icon: "user",
@@ -40,20 +39,22 @@ export default function Settings(props) {
     },
   ];
   return (
-    <FlatList
-      data={DATA}
-      renderItem={({ item }) => (
-        <SettingsSection
-          navigateTO={item.navigateTo}
-          title={item.title}
-          icon={item.icon}
-          backgroundColor={colors.white}
-          accentColor={colors.primary}
-          textPrimaryColor={colors.darkgrey}
-          weblink={item.weblink}
-        />
-      )}
-      keyExtractor={(item, index) => "key" + index}
-    ></FlatList>
+    <>
+      <StatusBar style={"dark"}></StatusBar>
+      {Sections.map((section, index) => {
+        return (
+          <SettingsSection
+            key={index}
+            navigateTO={section.navigateTo}
+            title={section.title}
+            icon={section.icon}
+            backgroundColor={colors.white}
+            accentColor={colors.primary}
+            textPrimaryColor={colors.darkgrey}
+            weblink={section.weblink}
+          />
+        );
+      })}
+    </>
   );
 }

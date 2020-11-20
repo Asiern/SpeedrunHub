@@ -6,10 +6,11 @@ import PB from "../components/PB";
 import SectionHeader from "../components/SectionHeader";
 
 import { AdMobBanner } from "expo-ads-admob";
+import { StatusBar } from "expo-status-bar";
 
 export default function Profile(props) {
   const [country, setCountry] = useState("");
-  const [sections, setSections] = useState([]);
+  const [sections, setSections] = useState({});
   const [user, setUser] = useState([]);
   const { username, userid } = props.route.params;
 
@@ -77,40 +78,43 @@ export default function Profile(props) {
   }, []);
 
   return (
-    <SectionList
-      sections={sections.data}
-      keyExtractor={(item, index) => item + index}
-      ListFooterComponent={
-        <View style={{ paddingTop: 20 }}>
-          {/* <AdMobBanner
+    <>
+      <StatusBar style={"dark"}></StatusBar>
+      <SectionList
+        sections={sections.data}
+        keyExtractor={(item, index) => item + index}
+        ListFooterComponent={
+          <View style={{ paddingTop: 20 }}>
+            {/* <AdMobBanner
             bannerSize="fullBanner"
             adUnitID="ca-app-pub-3552758561036628/7487974176"
             servePersonalizedAds
           /> */}
-        </View>
-      }
-      ListHeaderComponent={
-        <ProfileHeader
-          username={username}
-          country={country}
-          signup={user.signup}
-        />
-      }
-      renderItem={({ item }) => (
-        <PB
-          place={item.place}
-          time={item.time}
-          category={item.category}
-          weblink={item.weblink}
-        />
-      )}
-      renderSectionHeader={({ section }) => (
-        <SectionHeader
-          abbreviation={section.abbreviation}
-          id={section.id}
-          name={section.name}
-        />
-      )}
-    />
+          </View>
+        }
+        ListHeaderComponent={
+          <ProfileHeader
+            username={username}
+            country={country}
+            signup={user.signup}
+          />
+        }
+        renderItem={({ item }) => (
+          <PB
+            place={item.place}
+            time={item.time}
+            category={item.category}
+            weblink={item.weblink}
+          />
+        )}
+        renderSectionHeader={({ section }) => (
+          <SectionHeader
+            abbreviation={section.abbreviation}
+            id={section.id}
+            name={section.name}
+          />
+        )}
+      />
+    </>
   );
 }
