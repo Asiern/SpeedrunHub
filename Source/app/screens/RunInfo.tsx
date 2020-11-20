@@ -4,12 +4,13 @@ import { View, StyleSheet, Text, ScrollView, Linking } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 
 import Button from "../components/Buttons/SquareButton";
-import Split from "../components/Splits";
+import Split from "../components/Splits/Split";
 import RunHeader from "../components/RunHeader";
 import User from "../components/Search/User";
 
 import { colors, h2, h4 } from "../themes/theme";
 import { FlatList } from "react-native-gesture-handler";
+import Splits from "../components/Splits/Splits";
 
 function loadInBrowser(link) {
   Linking.openURL(link).catch((err) =>
@@ -132,35 +133,7 @@ export default function RunInfo(props) {
           <Text style={h4}>Verify-date: {data.status["verify-date"]}</Text>
         </View>
 
-        {splits == null ? null : (
-          <View>
-            <Text style={[h2, { alignSelf: "center", paddingTop: 20 }]}>
-              Splits
-            </Text>
-            <View style={styles.splitsContainer}>
-              <FlatList
-                ListHeaderComponent={
-                  <Split
-                    name={"Name"}
-                    duration={"Duration"}
-                    finished={"Finished at"}
-                  />
-                }
-                data={splits}
-                renderItem={({ item }) => (
-                  <Split
-                    name={item.name}
-                    duration={item.duration}
-                    finished={item.finish_time}
-                  />
-                )}
-              ></FlatList>
-              <Text style={{ alignSelf: "center" }}>
-                Powered by: splits i/o
-              </Text>
-            </View>
-          </View>
-        )}
+        {splits == null ? null : <Splits data={splits} />}
       </ScrollView>
     );
   }
@@ -178,16 +151,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderRadius: 20,
     margin: 20,
-    shadowColor: colors.darkgrey,
-    shadowOffset: { width: 5, height: 5 },
-    shadowOpacity: 0.9,
-    elevation: 2,
-  },
-  splitsContainer: {
-    backgroundColor: colors.white,
-    borderRadius: 20,
-    margin: 20,
-    paddingVertical: 20,
     shadowColor: colors.darkgrey,
     shadowOffset: { width: 5, height: 5 },
     shadowOpacity: 0.9,
