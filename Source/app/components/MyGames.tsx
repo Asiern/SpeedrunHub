@@ -1,31 +1,23 @@
 import React from "react";
-import { StyleSheet, View, Dimensions } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
+import { StyleSheet, View } from "react-native";
 import GameCard from "./GameCard";
-import NotificationCard from "../components/Notifications/NotificationCard";
-import { colors } from "../themes/theme";
-const { width } = Dimensions.get("screen");
-export default function MyGames(props) {
+
+export interface MyGamesProps {
+  data: any[];
+}
+
+export default function MyGames({ data }: MyGamesProps) {
   return (
     <View style={styles.conatiner}>
-      <FlatList
-        data={props.data}
-        numColumns={3}
-        keyExtractor={(item) => item.id}
-        ListEmptyComponent={
-          <NotificationCard
-            width={width}
-            text={
-              "Start searching for your favourite games and add them to MyGames."
-            }
-            backgroundColor={colors.primary}
-            color={colors.white}
+      {data.map((game) => {
+        return (
+          <GameCard
+            key={game.id}
+            id={game.id}
+            abbreviation={game.abbreviation}
           />
-        }
-        renderItem={({ item }) => (
-          <GameCard id={item.id} abbreviation={item.abbreviation} />
-        )}
-      ></FlatList>
+        );
+      })}
     </View>
   );
 }
@@ -35,5 +27,9 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     paddingVertical: 20,
+    flexWrap: "wrap",
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    marginHorizontal: 10,
   },
 });
