@@ -7,7 +7,6 @@ import Carousel from "./GameInfoCarousel";
 import Constants from "expo-constants";
 import Feather from "@expo/vector-icons/Feather";
 import { colors, h2w } from "../../themes/theme";
-import { StatusBar } from "expo-status-bar";
 
 export interface GameHeaderProps {
   abbreviation: string;
@@ -39,7 +38,6 @@ const GameHeader = ({
           "https://www.speedrun.com/themes/" + abbreviation + "/cover-256.png",
       }}
     >
-      <StatusBar style={"light"}></StatusBar>
       <View style={styles.topbar}>
         <View style={styles.topbarleft}>
           <Feather

@@ -1,3 +1,4 @@
+import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 import NotificationCard from "../components/Notifications/NotificationCard";
@@ -7,6 +8,7 @@ const Notifications = (props) => {
   const { data } = props.route.params;
   return (
     <View style={styles.container}>
+      <StatusBar style={"auto"}></StatusBar>
       <FlatList
         keyExtractor={(item) => item.id}
         data={data}
