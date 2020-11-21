@@ -30,13 +30,13 @@ const slides = [
     title: "My Games",
     description: "Manage your favourite games.",
     color: "#d5ffd1",
-    image: require("../assets/Onboarding/Notifications.png"),
+    image: require("../assets/Onboarding/MyGames.png"),
   },
   {
-    title: "Wellcome!",
+    title: "Welcome!",
     description: "",
     color: "#FF8A65",
-    image: require("../assets/Onboarding/Notifications.png"),
+    image: require("../assets/Onboarding/welcome.png"),
   },
 ];
 
