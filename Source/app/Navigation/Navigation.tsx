@@ -6,6 +6,7 @@ import MainNavigator from "./MainNavigator";
 
 //Screens
 import Login from "../screens/Login";
+import OnboardingScreen from "../screens/Onboarding";
 
 //Stacks
 const Root = createStackNavigator();
@@ -14,6 +15,11 @@ function Navigation() {
   return (
     <NavigationContainer>
       <Root.Navigator>
+        <Root.Screen
+          name="Onboarding"
+          component={OnboardingScreen}
+          options={{ headerShown: false }}
+        />
         <Root.Screen
           name="Main"
           component={MainNavigator}

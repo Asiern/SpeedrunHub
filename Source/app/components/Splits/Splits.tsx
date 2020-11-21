@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Text, FlatList, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import Split from "./Split";
 import { colors, h2 } from "../../themes/theme";
 
