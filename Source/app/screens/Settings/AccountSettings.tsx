@@ -88,7 +88,7 @@ const AccountSettings = (props) => {
           <Button
             label={"COPY API-KEY"}
             variant={"default"}
-            onPress={() => save()}
+            onPress={() => copyKey()}
           />
         </View>
       </View>
