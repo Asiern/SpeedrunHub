@@ -7,16 +7,13 @@ export interface Slide {
   width: number;
   title: string;
   description: string;
-  image: string;
+  image: number;
 }
 
 export default function Slide({ width, image }: Slide) {
   return (
     <View style={[styles.container, { width }]}>
-      <Image
-        style={styles.image}
-        source={require("../assets/Onboarding/Notifications.png")}
-      />
+      <Image style={styles.image} source={image} />
     </View>
   );
 }
