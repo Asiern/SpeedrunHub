@@ -1,8 +1,7 @@
-import { useTheme } from "@shopify/restyle";
 import * as React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { h2, h4 } from "../themes/theme";
-import Button from "./Button";
+import Button from "./Buttons/Button";
 export interface SubslideProps {
   title: string;
   description: string;
@@ -16,7 +15,6 @@ export default function Subslide({
   last,
   onPress,
 }: SubslideProps) {
-  const theme = useTheme();
   return (
     <View style={styles.container}>
       <View style={styles.textcontainer}>
@@ -41,7 +39,8 @@ const styles = StyleSheet.create({
   },
   textcontainer: {
     marginVertical: 20,
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center",
+    flex: 1,
   },
 });

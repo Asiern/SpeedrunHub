@@ -40,13 +40,16 @@ export default function Home(props) {
   }
   async function fetchData() {
     const LOGGEDIN = await AsyncStorage.getItem("@Loggedin");
+    const Onboarding = await AsyncStorage.getItem("@Onboarding");
     const key = await AsyncStorage.getItem("@API-Key");
     const GAMES = await AsyncStorage.getItem("@MyGames");
     const username = await AsyncStorage.getItem("@user");
     const userid = await AsyncStorage.getItem("@userid");
-    LOGGEDIN == "true"
-      ? null
-      : navigation.navigate("Login", { screen: "Login" });
+    if (Onboarding != "true") {
+      navigation.navigate("Onboarding", { screen: "Onboarding" });
+    } else if (LOGGEDIN != "true") {
+      navigation.navigate("Login", { screen: "Login" });
+    }
     setGames(JSON.parse(GAMES));
     setUsername(username);
     setUserid(userid);

@@ -89,18 +89,14 @@ export default function Login() {
 
           <View style={styles.buttons}>
             <Button
-              title={"LOG IN"}
-              function={() => _storeData(textinput, keyinput)}
-              user={textinput}
-              keyinput={keyinput}
-              color={colors.primary}
-              textcolor={colors.white}
+              label={"LOG IN"}
+              variant={"primary"}
+              onPress={() => _storeData(textinput, keyinput)}
             />
             <Button
-              title={"SIGN UP"}
-              color={colors.white}
-              textcolor={colors.primary}
-              function={() => {
+              label={"SIGN UP"}
+              variant={"default"}
+              onPress={() => {
                 loadInBrowser("https://speedrun.com");
               }}
             />
@@ -119,10 +115,9 @@ export default function Login() {
       </View>
       <View style={styles.footer}>
         <Button
-          title={"LOG IN AS GUEST"}
-          color={colors.white}
-          textcolor={colors.darkgrey}
-          function={() => _storeData("Guest", "")}
+          label={"LOG IN AS GUEST"}
+          variant={"default"}
+          onPress={() => _storeData("Guest", "")}
         ></Button>
       </View>
     </LinearGradient>

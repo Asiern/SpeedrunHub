@@ -16,13 +16,13 @@ function Navigation() {
     <NavigationContainer>
       <Root.Navigator>
         <Root.Screen
-          name="Onboarding"
-          component={OnboardingScreen}
+          name="Main"
+          component={MainNavigator}
           options={{ headerShown: false }}
         />
         <Root.Screen
-          name="Main"
-          component={MainNavigator}
+          name="Onboarding"
+          component={OnboardingScreen}
           options={{ headerShown: false }}
         />
         <Root.Screen

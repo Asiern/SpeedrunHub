@@ -1,42 +1,42 @@
-import React from "react";
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import * as React from "react";
+import { Text, StyleSheet } from "react-native";
+import { RectButton } from "react-native-gesture-handler";
 import { colors } from "../../themes/theme";
 
-const Button = (props) => {
-  function _storeData() {
-    props.function(props.user, props.keyinput);
-  }
+export interface ButtonProps {
+  label: string;
+  variant: "default" | "primary";
+  onPress: () => void;
+}
+
+const Button = ({ label, variant, onPress }: ButtonProps) => {
+  const backgroundColor = variant === "primary" ? colors.primary : colors.light;
+  const color = variant === "primary" ? colors.white : colors.darkgrey;
   return (
-    <TouchableOpacity
-      style={[styles.container, { backgroundColor: props.color }]}
-      onPress={() => _storeData()}
+    <RectButton
+      style={[styles.container, { backgroundColor }]}
+      {...{ onPress }}
     >
-      <Text style={[styles.text, { color: props.textcolor }]}>
-        {props.title}
-      </Text>
-    </TouchableOpacity>
+      <Text style={[styles.label, { color }]}>{label}</Text>
+    </RectButton>
   );
+};
+
+Button.defaultProps = {
+  varian: "default",
 };
 
 const styles = StyleSheet.create({
   container: {
-    height: 45,
-    width: 200,
-    borderRadius: 30,
+    borderRadius: 25,
+    height: 50,
+    width: 250,
     justifyContent: "center",
     alignItems: "center",
     marginVertical: 10,
-    shadowColor: "gold",
-    shadowOffset: { width: 5, height: 5 },
-    shadowOpacity: 0.9,
-    elevation: 5,
-    backgroundColor: colors.primary,
   },
-  text: {
-    fontWeight: "bold",
-    fontSize: 20,
-    color: colors.white,
+  label: {
+    fontSize: 15,
   },
 });
-
 export default Button;
