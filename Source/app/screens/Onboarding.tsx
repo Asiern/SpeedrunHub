@@ -11,23 +11,30 @@ import Subslide from "../components/Subslide";
 import { colors } from "../themes/theme";
 import Dot from "../components/Dot";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-community/async-storage";
 const { width } = Dimensions.get("window");
 const slides = [
   {
     title: "Speedrun Hub",
-    description: "Your android speedrun.com client",
-    color: "#81C784",
+    description: "Your speedrun.com client.",
+    color: "#ffc1c1",
     image: require("../assets/Onboarding/race.png"),
   },
   {
     title: "Notifications",
-    description: "Get your notifications directly to your phone",
-    color: "#4FC3F7",
+    description: "Receive notifications directly to your phone.",
+    color: "#fffbd8",
     image: require("../assets/Onboarding/Notifications.png"),
   },
   {
-    title: "Notifications",
-    description: "Orenage",
+    title: "My Games",
+    description: "Manage your favourite games.",
+    color: "#d5ffd1",
+    image: require("../assets/Onboarding/Notifications.png"),
+  },
+  {
+    title: "Wellcome!",
+    description: "",
     color: "#FF8A65",
     image: require("../assets/Onboarding/Notifications.png"),
   },
@@ -42,6 +49,12 @@ export default function OnboardingScreen() {
     outputRange: slides.map((page) => page.color),
   });
   const onScroll = onScrollEvent({ x });
+
+  async function save() {
+    try {
+      await AsyncStorage.setItem("@Onboarding", "true");
+    } catch (error) {}
+  }
   return (
     <View style={styles.container}>
       <Animated.View style={[styles.slider, { backgroundColor }]}>
@@ -89,8 +102,8 @@ export default function OnboardingScreen() {
                 key={index}
                 onPress={() => {
                   if (index === slides.length - 1) {
+                    save();
                     navigation.navigate("Login");
-                    console.log("aaaaaaa");
                   }
                   if (scroll.current) {
                     scroll.current

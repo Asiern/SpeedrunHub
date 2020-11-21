@@ -14,6 +14,11 @@ import Button from "../../components/Buttons/Button";
 import { useNavigation } from "@react-navigation/native";
 
 const AccountSettings = (props) => {
+  async function save() {
+    try {
+      await AsyncStorage.removeItem("@Onboarding");
+    } catch (error) {}
+  }
   const [user, setUser] = useState("");
   const [userId, setUserId] = useState("");
   const [key, setKey] = useState("");
@@ -76,16 +81,14 @@ const AccountSettings = (props) => {
         </View>
         <View style={styles.buttonContainer}>
           <Button
-            title={"LOG OUT"}
-            textcolor={colors.white}
-            color={colors.primary}
-            function={() => signOut()}
+            label={"LOG OUT"}
+            variant={"primary"}
+            onPress={() => signOut()}
           />
           <Button
-            title={"COPY API-KEY"}
-            textcolor={colors.darkgrey}
-            color={colors.white}
-            function={() => copyKey()}
+            label={"COPY API-KEY"}
+            variant={"default"}
+            onPress={() => save()}
           />
         </View>
       </View>
@@ -95,7 +98,7 @@ const AccountSettings = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.light,
+    backgroundColor: colors.white,
     justifyContent: "center",
     alignContent: "center",
   },
