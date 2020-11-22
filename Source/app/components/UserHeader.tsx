@@ -36,7 +36,7 @@ function UserHeader({ username, userid }: UserHeaderProps) {
     ]);
     navigation.navigate("Login", { screen: "Login" });
   }
-  const createAlert = (msg) =>
+  const createAlert = (msg: string) =>
     Alert.alert(
       "Alert",
       msg,
