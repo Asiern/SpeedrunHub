@@ -37,6 +37,12 @@ export default function Settings() {
       weblink:
         "https://github.com/Asiern/SpeedrunHub/blob/master/Readme/Terms%20%26%20Conditions.md",
     },
+    {
+      title: "Dev Settings",
+      icon: "alert-triangle",
+      navigateTo: "DevSettings",
+      weblink: null,
+    },
   ];
   return (
     <>
