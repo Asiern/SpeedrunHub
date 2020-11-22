@@ -63,7 +63,7 @@ export default function GameInfo({ route }) {
         }
       }
       await AsyncStorage.setItem("@MyGames", JSON.stringify(gameList));
-      setFavourite(true);
+      setFavourite(false);
     }
   };
   useEffect(() => {
