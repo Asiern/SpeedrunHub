@@ -9,15 +9,17 @@ export interface MyGamesProps {
 export default function MyGames({ data }: MyGamesProps) {
   return (
     <View style={styles.conatiner}>
-      {data.map((game) => {
-        return (
-          <GameCard
-            key={game.id}
-            id={game.id}
-            abbreviation={game.abbreviation}
-          />
-        );
-      })}
+      {data != null
+        ? data.map((game) => {
+            return (
+              <GameCard
+                key={game.id}
+                id={game.id}
+                abbreviation={game.abbreviation}
+              />
+            );
+          })
+        : null}
     </View>
   );
 }

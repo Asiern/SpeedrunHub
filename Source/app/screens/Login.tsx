@@ -21,10 +21,10 @@ export default function Login() {
   const [textinput, setTextinput] = useState("");
   const [keyinput, setKeyinput] = useState("");
   const navigation = useNavigation();
-  function showToastWithGravity(text) {
+  function showToastWithGravity(text: string) {
     ToastAndroid.showWithGravity(text, ToastAndroid.SHORT, ToastAndroid.CENTER);
   }
-  async function _storeData(user, key) {
+  async function _storeData(user: string, key: string) {
     try {
       const url = "https://www.speedrun.com/api/v1/users/" + user;
       const response = await fetch(url);
@@ -47,7 +47,7 @@ export default function Login() {
       );
     }
   }
-  function loadInBrowser(link) {
+  function loadInBrowser(link: string) {
     Linking.openURL(link).catch((err) =>
       showToastWithGravity("Couldn't load page")
     );
