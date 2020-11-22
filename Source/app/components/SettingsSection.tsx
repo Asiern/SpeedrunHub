@@ -33,7 +33,7 @@ const SettingsSection = ({
     <TouchableOpacity
       onPress={
         navigateTO === null
-          ? () => Linking.openURL(weblink)
+          ? () => Linking.openURL(weblink == null ? "" : weblink)
           : () => navigation.navigate(navigateTO)
       }
     >

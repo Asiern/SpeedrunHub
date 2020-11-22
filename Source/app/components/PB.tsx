@@ -3,9 +3,9 @@ import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { colors } from "../themes/theme";
 
-function timeConverter(time) {
+function timeConverter(time: string) {
   var result = time.toLowerCase();
-  return result.substr(2, result.lenght);
+  return result.substr(2, result.length);
 }
 
 export interface PBProps {
