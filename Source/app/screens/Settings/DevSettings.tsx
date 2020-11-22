@@ -26,15 +26,13 @@ export default function DevSettings() {
       <Button
         variant={"primary"}
         label={"Delete MyGames"}
-        onPress={() => async () => {
-          await AsyncStorage.removeItem("@MyGames");
-        }}
-      />
-      <Button
-        variant={"primary"}
-        label={"Delete MyGames"}
-        onPress={() => async () => {
-          await AsyncStorage.removeItem("@MyGames");
+        onPress={async () => {
+          try {
+            await AsyncStorage.removeItem("@MyGames");
+            Toast("Async Storage deleted");
+          } catch (error) {
+            Toast("Error");
+          }
         }}
       />
     </View>
