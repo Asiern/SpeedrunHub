@@ -61,23 +61,19 @@ export default function Home() {
     }, [])
   );
   return (
-    <ScrollView style={{ flex: 1 }}>
+    <ScrollView style={styles.container}>
       <StatusBar style={"dark"}></StatusBar>
-      <View style={styles.container}>
-        <View style={styles.profile}>
-          <UserHeader username={username} userid={userid} />
-        </View>
-        <NotificationBar width={width} data={notifications} />
-        <Text style={[h1, { marginLeft: 20, fontWeight: "bold" }]}>
-          My Games
-        </Text>
-        <MyGames data={games} />
-        {/* <AdMobBanner
+      <View style={styles.profile}>
+        <UserHeader username={username} userid={userid} />
+      </View>
+      <NotificationBar width={width} data={notifications} />
+      <Text style={[h1, { marginLeft: 20, fontWeight: "bold" }]}>My Games</Text>
+      <MyGames data={games} />
+      {/* <AdMobBanner
           bannerSize="fullBanner"
           adUnitID="ca-app-pub-3552758561036628/7487974176"
           servePersonalizedAds
         /> */}
-      </View>
     </ScrollView>
   );
 }
