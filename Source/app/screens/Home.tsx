@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { StyleSheet, View, Text, Dimensions } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import { ScrollView } from "react-native-gesture-handler";
@@ -15,15 +15,15 @@ import { AdMobBanner } from "expo-ads-admob";
 
 const { width } = Dimensions.get("screen");
 
-export default function Home(props) {
+export default function Home() {
   const navigation = useNavigation();
 
   const [username, setUsername] = useState("Guest");
   const [userid, setUserid] = useState("");
   const [games, setGames] = useState([]);
-  const [notifications, setNotifications] = useState(null);
+  const [notifications, setNotifications] = useState([]);
 
-  function fetchNotifications(key) {
+  function fetchNotifications(key: string) {
     var url = "https://www.speedrun.com/api/v1/notifications";
     var xhr = new XMLHttpRequest();
     xhr.open("GET", url);
@@ -50,10 +50,10 @@ export default function Home(props) {
     } else if (LOGGEDIN != "true") {
       navigation.navigate("Login", { screen: "Login" });
     }
-    setGames(JSON.parse(GAMES));
-    setUsername(username);
-    setUserid(userid);
-    fetchNotifications(key);
+    setGames(JSON.parse(GAMES === null ? "[]" : GAMES));
+    setUsername(username === null ? "" : username);
+    setUserid(userid === null ? "" : userid);
+    fetchNotifications(key === null ? "" : key);
   }
   useFocusEffect(
     React.useCallback(() => {
@@ -61,7 +61,7 @@ export default function Home(props) {
     }, [])
   );
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: colors.white }}>
+    <ScrollView style={{ flex: 1 }}>
       <StatusBar style={"dark"}></StatusBar>
       <View style={styles.container}>
         <View style={styles.profile}>

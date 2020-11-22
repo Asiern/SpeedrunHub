@@ -17,8 +17,8 @@ import GameHeader from "../components/GameInfoComponents/GameHeader";
 import { FontAwesome } from "@expo/vector-icons";
 import { colors } from "../themes/theme";
 
-export default function GameInfo(props) {
-  const { id, abbreviation } = props.route.params;
+export default function GameInfo({ route }) {
+  const { id, abbreviation } = route.params;
   const [loading, setLoading] = useState(true);
   const [name, setName] = useState("");
   const [game, setGame] = useState([]);
@@ -30,8 +30,9 @@ export default function GameInfo(props) {
   const [players, setPlayers] = useState([]);
   const [checked, setChecked] = useState(0);
 
-  const _isFavourite = async (id) => {
-    const gameList = JSON.parse(await AsyncStorage.getItem("@MyGames"));
+  const _isFavourite = async (id: string) => {
+    const MyGames = await AsyncStorage.getItem("@MyGames");
+    const gameList = JSON.parse(MyGames === null ? "[]" : MyGames);
     if (gameList != null) {
       for (let GAME of gameList) {
         if (GAME.id == id) {
@@ -40,19 +41,15 @@ export default function GameInfo(props) {
       }
     }
   };
-
   const _toggleFavourites = async () => {
     const games = await AsyncStorage.getItem("@MyGames");
-    var gameList = JSON.parse(games);
+    var gameList = JSON.parse(games === null ? "[]" : games);
     //Create game obj
     var game = {
       id: id,
       abbreviation: abbreviation,
     };
-    if (gameList == null) {
-      gameList = [];
-    }
-    if (favourite) {
+    if (!favourite) {
       //add game to list
       gameList.push(game);
       //Game added to list
@@ -66,7 +63,7 @@ export default function GameInfo(props) {
         }
       }
       await AsyncStorage.setItem("@MyGames", JSON.stringify(gameList));
-      setFavourite(false);
+      setFavourite(true);
     }
   };
   useEffect(() => {
@@ -107,7 +104,7 @@ export default function GameInfo(props) {
     };
   }, []);
 
-  async function LoadVariables(categoryid) {
+  async function LoadVariables(categoryid: string) {
     try {
       setRuns([]);
       //Fetch Variables from Speedrun.com
@@ -182,7 +179,7 @@ export default function GameInfo(props) {
       console.log(error);
     }
   }
-  const buildUrl = (id, value, url, index) => {
+  const buildUrl = (id: string, value: string, url: string, index: number) => {
     try {
       //index = number of values loaded on the url
       if (index == 1) {
@@ -194,7 +191,7 @@ export default function GameInfo(props) {
       console.log(error);
     }
   };
-  const modifyUrl = (id, value) => {
+  const modifyUrl = (id: string, value: string) => {
     setRuns([]);
     var outUrl;
     //Url contains id
@@ -212,7 +209,7 @@ export default function GameInfo(props) {
     }
     LoadRuns(outUrl);
   };
-  async function LoadRuns(url) {
+  async function LoadRuns(url: string) {
     try {
       //Fetch Runs from Speedrun.com
       const response = await fetch(url);

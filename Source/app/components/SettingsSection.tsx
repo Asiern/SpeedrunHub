@@ -11,8 +11,8 @@ import { colors } from "../themes/theme";
 import Feather from "@expo/vector-icons/Feather";
 
 export interface SettingsSectionProps {
-  navigateTO?: string;
-  weblink?: string;
+  navigateTO: string | null;
+  weblink: string | null;
   icon: string;
   backgroundColor: string;
   accentColor: string;
@@ -32,7 +32,7 @@ const SettingsSection = ({
   return (
     <TouchableOpacity
       onPress={
-        navigateTO == null
+        navigateTO === null
           ? () => Linking.openURL(weblink)
           : () => navigation.navigate(navigateTO)
       }
