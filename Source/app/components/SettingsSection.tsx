@@ -8,7 +8,7 @@ import {
   Linking,
 } from "react-native";
 import { colors } from "../themes/theme";
-import Feather from "@expo/vector-icons/Feather";
+import { Feather } from "@expo/vector-icons";
 
 export interface SettingsSectionProps {
   navigateTO: string | null;

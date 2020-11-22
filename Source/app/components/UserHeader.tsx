@@ -16,7 +16,7 @@ import { colors } from "../themes/theme";
 
 //Components
 import Svgheader from "./svgheader";
-import Feather from "@expo/vector-icons/Feather";
+import { Feather } from "@expo/vector-icons";
 
 const { width, height } = Dimensions.get("screen");
 
