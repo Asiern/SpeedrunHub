@@ -228,15 +228,17 @@ export default function GameInfo({ route }) {
       }
     }
   };
-  const renderRun = ({ item }) => {
+  const renderRun = ({ item, index }) => {
     try {
       var names = "";
+      var i = index;
       for (let player of item.run.players) {
-        if (player.name == undefined) {
-          names += getPlayerName(player.id) + " ";
+        if (player.name === undefined) {
+          names += players[i].names.international + " ";
         } else {
           names += player.name + " ";
         }
+        i++;
       }
       return (
         <Run
@@ -249,7 +251,7 @@ export default function GameInfo({ route }) {
         />
       );
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
   const ListFooter = () => {
