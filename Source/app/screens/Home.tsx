@@ -69,11 +69,11 @@ export default function Home() {
       <NotificationBar width={width} data={notifications} />
       <Text style={[h1, { marginLeft: 20, fontWeight: "bold" }]}>My Games</Text>
       <MyGames data={games} />
-      {/* <AdMobBanner
-          bannerSize="fullBanner"
-          adUnitID="ca-app-pub-3552758561036628/7487974176"
-          servePersonalizedAds
-        /> */}
+      <AdMobBanner
+        bannerSize="fullBanner"
+        adUnitID="ca-app-pub-3552758561036628/7487974176"
+        servePersonalizedAds
+      />
     </ScrollView>
   );
 }
