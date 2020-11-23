@@ -28,7 +28,7 @@ export default function GameInfo({ route }) {
   const [categories, setCategories] = useState([]);
   const [favourite, setFavourite] = useState(false);
   const [players, setPlayers] = useState([]);
-  const [checked, setChecked] = useState(0);
+  const [checked, setChecked] = useState("");
 
   const _isFavourite = async (id: string) => {
     const MyGames = await AsyncStorage.getItem("@MyGames");
