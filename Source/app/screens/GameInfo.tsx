@@ -380,18 +380,6 @@ export default function GameInfo({ route }) {
 }
 
 const styles = StyleSheet.create({
-  profileBG: {
-    flex: 1,
-    resizeMode: "cover",
-    backgroundColor: colors.black,
-  },
-  imagecontainer: {
-    flex: 1,
-    paddingTop: 30,
-    alignContent: "center",
-    justifyContent: "flex-end",
-    alignItems: "center",
-  },
   //Category Button
   categorybuttoncontainer: {
     backgroundColor: colors.white,
@@ -440,24 +428,5 @@ const styles = StyleSheet.create({
     alignContent: "center",
     marginHorizontal: 10,
     marginVertical: 10,
-  },
-  buttontext: {
-    flex: 1,
-    backgroundColor: colors.white,
-    alignContent: "center",
-    justifyContent: "center",
-    alignItems: "center",
-    alignSelf: "center",
-    textAlign: "center",
-    color: colors.primary,
-    fontWeight: "bold",
-    fontSize: 15,
-    borderRadius: 5,
-    textAlignVertical: "center",
-    paddingHorizontal: 20,
-    shadowColor: colors.darkgrey,
-    shadowOffset: { width: 5, height: 5 },
-    shadowOpacity: 0.9,
-    elevation: 2,
   },
 });
