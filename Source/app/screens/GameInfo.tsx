@@ -221,23 +221,36 @@ export default function GameInfo({ route }) {
       console.log(error);
     }
   }
-  const renderRun = ({ item, index }) => {
+  const getPlayerName = (id) => {
+    for (let player of players) {
+      if (player.id === id) {
+        return player.names.international;
+      }
+    }
+  };
+  const renderRun = ({ item }) => {
     try {
-      const name =
-        players[index].names.international != null
-          ? players[index].names.international
-          : "null";
+      var names = "";
+      for (let player of item.run.players) {
+        if (player.name == undefined) {
+          names += getPlayerName(player.id) + " ";
+        } else {
+          names += player.name + " ";
+        }
+      }
       return (
         <Run
           place={item.place}
-          runner={name}
+          runner={names}
           time={item.run.times.primary}
           abbreviation={abbreviation}
           categoryid={item.run.category}
           weblink={item.run.weblink}
         />
       );
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
   const ListFooter = () => {
     return <View style={{ padding: 20 }}></View>;
@@ -315,7 +328,6 @@ export default function GameInfo({ route }) {
                     <View style={styles.button}>
                       <Button
                         title={item.label}
-                        style={styles.button}
                         color={colors.primary}
                         onPress={() => modifyUrl(item.categoryid, item.id)}
                       />
@@ -324,7 +336,6 @@ export default function GameInfo({ route }) {
                     <View style={styles.button}>
                       <Button
                         title={item.label}
-                        style={styles.button}
                         color={colors.darkgrey}
                         onPress={() => modifyUrl(item.categoryid, item.id)}
                       />
