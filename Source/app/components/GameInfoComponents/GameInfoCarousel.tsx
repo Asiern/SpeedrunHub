@@ -52,7 +52,6 @@ export default function Carousel({
         </View>
         <View style={[styles.info, { width }]}>
           <Text style={h4w}>Release Date: {date}</Text>
-          <Text style={h4w}>a</Text>
         </View>
       </ScrollView>
       <View
