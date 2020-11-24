@@ -72,7 +72,7 @@ export default function Login() {
             <View style={styles.textinput}>
               <Feather name={"user"} size={18} color={colors.primary} />
               <TextInput
-                style={{ marginLeft: 10 }}
+                style={{ marginLeft: 10, flex: 1 }}
                 autoCapitalize={"none"}
                 placeholder={"Username"}
                 autoCompleteType={"username"}
@@ -83,7 +83,7 @@ export default function Login() {
             <View style={styles.textinput}>
               <Feather name={"key"} size={18} color={colors.primary} />
               <TextInput
-                style={{ marginLeft: 10 }}
+                style={{ marginLeft: 10, flex: 1 }}
                 autoCapitalize={"none"}
                 placeholder={"API-Key (Optional)"}
                 autoCompleteType={"username"}
