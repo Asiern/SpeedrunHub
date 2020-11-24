@@ -11,6 +11,7 @@
 - Fixed Account Settings user image not loading properly.
 - Fixed Navigation.
 - Fixed Runs with multiple runners not displaying properly.
+- Fixed Text inputs.
 
 ## Known issues
 
