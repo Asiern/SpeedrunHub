@@ -15,7 +15,7 @@ export default function MyGames({ data }: MyGamesProps) {
   const { width } = Dimensions.get("window");
   return (
     <>
-      {data != null ? (
+      {data[0] !== undefined ? (
         <View style={styles.conatiner}>
           {data.map((game) => {
             return (
