@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ScrollView,
   StyleSheet,
@@ -15,21 +15,48 @@ import Animated, { divide } from "react-native-reanimated";
 export interface CarouselProps {
   abbreviation: string;
   date: string;
-  platforms: any[];
+  platformIDs: any[];
 }
 
-export default function Carousel({ abbreviation, date }: CarouselProps) {
+export default function Carousel({
+  abbreviation,
+  date,
+  platformIDs,
+}: CarouselProps) {
   const { width } = Dimensions.get("window");
+  const [platforms, setPlatforms] = useState("");
   const x = useValue(0);
   const onScroll = onScrollEvent({ x });
+  useEffect(() => {
+    console.log("render");
+    let mounted = true;
+    if (mounted) {
+      (async () => {
+        const url = "https://www.speedrun.com/api/v1/platforms?max=200";
+        const response = await fetch(url);
+        const data = await response.json();
+        getPlatforms(data.data);
+      })();
+    }
 
-  // function getPlatforms(platforms) {
-  //   var out = "";
-  //   for (let platform of platforms) {
-  //     out = out + " " + platform.toString();
-  //   }
-  //   return out;
-  // }
+    return function cleanup() {
+      mounted = false;
+    };
+  }, []);
+
+  function getPlatforms(data) {
+    var out = "";
+    for (let p of platformIDs) {
+      for (let platform of data) {
+        if (platform.id === p) {
+          out += platform.name + " ";
+          break;
+        }
+      }
+      console.log(out);
+    }
+    setPlatforms(out);
+  }
 
   return (
     <View style={styles.container}>
@@ -56,6 +83,7 @@ export default function Carousel({ abbreviation, date }: CarouselProps) {
         </View>
         <View style={[styles.info, { width }]}>
           <Text style={h4w}>Release Date: {date}</Text>
+          <Text style={h4w}>{platforms}</Text>
         </View>
       </Animated.ScrollView>
       <Animated.View
