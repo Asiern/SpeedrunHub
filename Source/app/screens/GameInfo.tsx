@@ -264,7 +264,7 @@ export default function GameInfo({ route }) {
           abbreviation={abbreviation}
           name={name}
           date={game["release-date"]}
-          // platforms={game.platforms}
+          platforms={game.platforms}
         >
           {favourite ? (
             <FontAwesome
