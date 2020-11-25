@@ -8,6 +8,9 @@ import {
   Image,
 } from "react-native";
 import { colors, h4w } from "../../themes/theme";
+import { useValue, onScrollEvent } from "react-native-redash/lib/module/v1";
+import Dot from "../Dot";
+import Animated, { divide } from "react-native-reanimated";
 
 export interface CarouselProps {
   abbreviation: string;
@@ -15,13 +18,10 @@ export interface CarouselProps {
   platforms: any[];
 }
 
-export default function Carousel({
-  abbreviation,
-  date,
-  platforms,
-}: CarouselProps) {
-  const { width } = Dimensions.get("screen");
-  const [selected, setSelected] = useState(true);
+export default function Carousel({ abbreviation, date }: CarouselProps) {
+  const { width } = Dimensions.get("window");
+  const x = useValue(0);
+  const onScroll = onScrollEvent({ x });
 
   // function getPlatforms(platforms) {
   //   var out = "";
@@ -33,11 +33,15 @@ export default function Carousel({
 
   return (
     <View style={styles.container}>
-      <ScrollView
+      <Animated.ScrollView
         horizontal
         pagingEnabled
         showsHorizontalScrollIndicator={false}
-        onScrollEndDrag={() => setSelected(!selected)}
+        snapToInterval={width}
+        decelerationRate={"fast"}
+        bounces={false}
+        scrollEventThrottle={1}
+        {...{ onScroll }}
       >
         <View style={[styles.imagecontainer, { width }]}>
           <Image
@@ -53,8 +57,8 @@ export default function Carousel({
         <View style={[styles.info, { width }]}>
           <Text style={h4w}>Release Date: {date}</Text>
         </View>
-      </ScrollView>
-      <View
+      </Animated.ScrollView>
+      <Animated.View
         style={{
           flex: 1,
           flexDirection: "row",
@@ -62,17 +66,9 @@ export default function Carousel({
           paddingTop: 20,
         }}
       >
-        {selected == true ? (
-          <View style={[styles.circle, { backgroundColor: colors.white }]} />
-        ) : (
-          <View style={[styles.circunference, { borderColor: colors.white }]} />
-        )}
-        {selected == false ? (
-          <View style={[styles.circle, { backgroundColor: colors.white }]} />
-        ) : (
-          <View style={[styles.circunference, { borderColor: colors.white }]} />
-        )}
-      </View>
+        <Dot index={0} currentIndex={divide(x, width)} color={colors.primary} />
+        <Dot index={1} currentIndex={divide(x, width)} color={colors.primary} />
+      </Animated.View>
     </View>
   );
 }
