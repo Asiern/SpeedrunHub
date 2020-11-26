@@ -15,9 +15,10 @@ import Animated, { divide } from "react-native-reanimated";
 export interface CarouselProps {
   username: string;
   signup: string;
+  country?: string;
 }
 
-export default function Carousel({ username, signup }: CarouselProps) {
+export default function Carousel({ username, signup, country }: CarouselProps) {
   const { width } = Dimensions.get("window");
   const x = useValue(0);
   const onScroll = onScrollEvent({ x });
@@ -47,6 +48,7 @@ export default function Carousel({ username, signup }: CarouselProps) {
         </View>
         <View style={[styles.info, { width }]}>
           <Text style={h4w}>Signup: {signup}</Text>
+          <Text style={h4w}>{country}</Text>
         </View>
       </Animated.ScrollView>
       <Animated.View
