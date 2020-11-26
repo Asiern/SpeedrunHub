@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from "react";
-import {
-  ScrollView,
-  StyleSheet,
-  View,
-  Dimensions,
-  Text,
-  Image,
-} from "react-native";
+import React from "react";
+import { StyleSheet, View, Dimensions, Text, Image } from "react-native";
 import { colors, h4w } from "../../themes/theme";
-import { useValue, onScrollEvent } from "react-native-redash/lib/module/v1";
 import Dot from "../Dot";
-import Animated, { divide } from "react-native-reanimated";
+import Animated, {
+  useSharedValue,
+  useAnimatedScrollHandler,
+  useDerivedValue,
+} from "react-native-reanimated";
 
 import platfroms from "../../assets/Platforms.json";
 
@@ -26,8 +22,14 @@ export default function Carousel({
   platformIDs,
 }: CarouselProps) {
   const { width } = Dimensions.get("window");
-  const x = useValue(0);
-  const onScroll = onScrollEvent({ x });
+  const x = useSharedValue(0);
+  const onScroll = useAnimatedScrollHandler({
+    onScroll: ({ contentOffset }) => {
+      x.value = contentOffset.x;
+    },
+  });
+
+  const currentIndex = useDerivedValue(() => x.value / width);
 
   function getPlatforms() {
     console.log("GetPlatforms");
@@ -56,8 +58,8 @@ export default function Carousel({
         snapToInterval={width}
         decelerationRate={"fast"}
         bounces={false}
-        scrollEventThrottle={1}
-        {...{ onScroll }}
+        scrollEventThrottle={16}
+        onScroll={onScroll}
       >
         <View style={[styles.imagecontainer, { width }]}>
           <Image
@@ -83,8 +85,8 @@ export default function Carousel({
           paddingTop: 20,
         }}
       >
-        <Dot index={0} currentIndex={divide(x, width)} color={colors.primary} />
-        <Dot index={1} currentIndex={divide(x, width)} color={colors.primary} />
+        <Dot index={0} currentIndex={currentIndex} color={colors.primary} />
+        <Dot index={1} currentIndex={currentIndex} color={colors.primary} />
       </Animated.View>
     </View>
   );

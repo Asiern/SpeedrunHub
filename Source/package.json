@@ -2,6 +2,7 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "expo": "expo start",
+    "clear": "expo start -c",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "web": "expo start --web",
@@ -32,7 +33,7 @@
     "react-native-elements": "^2.3.2",
     "react-native-gesture-handler": "~1.7.0",
     "react-native-paper": "^4.2.0",
-    "react-native-reanimated": "^1.13.1",
+    "react-native-reanimated": "2.0.0-alpha.6.1",
     "react-native-redash": "^15.11.1",
     "react-native-screens": "~2.10.1",
     "react-native-svg": "12.1.0",

@@ -1,17 +1,18 @@
 import React, { useRef } from "react";
 import { View, StyleSheet, Dimensions } from "react-native";
 import Slide from "../components/Slide";
-import {
-  interpolateColor,
-  useValue,
-  onScrollEvent,
-} from "react-native-redash/lib/module/v1";
-import Animated, { divide, multiply } from "react-native-reanimated";
+import Animated, {
+  useAnimatedScrollHandler,
+  useAnimatedStyle,
+  useDerivedValue,
+  useSharedValue,
+} from "react-native-reanimated";
 import Subslide from "../components/Subslide";
 import { colors } from "../themes/theme";
 import Dot from "../components/Dot";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-community/async-storage";
+import { interpolateColor } from "react-native-redash";
 const { width } = Dimensions.get("window");
 const slides = [
   {
@@ -43,12 +44,29 @@ const slides = [
 export default function OnboardingScreen() {
   const navigation = useNavigation();
   const scroll = useRef<Animated.ScrollView>(null);
-  const x = useValue();
-  const backgroundColor = interpolateColor(x, {
-    inputRange: slides.map((_, i) => i * width),
-    outputRange: slides.map((page) => page.color),
+  const x = useSharedValue(0);
+  const onScroll = useAnimatedScrollHandler({
+    onScroll: ({ contentOffset }) => {
+      x.value = contentOffset.x;
+    },
   });
-  const onScroll = onScrollEvent({ x });
+
+  const backgroundColor = useDerivedValue(() =>
+    interpolateColor(
+      x.value,
+      slides.map((_, i) => i * width),
+      slides.map((page) => page.color)
+    )
+  );
+
+  const slider = useAnimatedStyle(() => ({
+    backgroundColor: backgroundColor.value,
+  }));
+
+  const currentIndex = useDerivedValue(() => x.value / width);
+  const footerStyle = useAnimatedStyle(() => ({
+    transform: [{ translateX: -x.value }],
+  }));
 
   async function save() {
     try {
@@ -57,7 +75,7 @@ export default function OnboardingScreen() {
   }
   return (
     <View style={styles.container}>
-      <Animated.View style={[styles.slider, { backgroundColor }]}>
+      <Animated.View style={[styles.slider, slider]}>
         <Animated.ScrollView
           ref={scroll}
           horizontal
@@ -66,8 +84,8 @@ export default function OnboardingScreen() {
           snapToInterval={width}
           decelerationRate={"fast"}
           bounces={false}
-          scrollEventThrottle={1}
-          {...{ onScroll }}
+          scrollEventThrottle={16}
+          onScroll={onScroll}
         >
           {slides.map((slide, index) => {
             return (
@@ -86,16 +104,23 @@ export default function OnboardingScreen() {
         <Animated.View style={styles.footercontent}>
           <View style={styles.pagination}>
             {slides.map((_, index) => (
-              <Dot currentIndex={divide(x, width)} key={index} {...{ index }} />
+              <Dot
+                currentIndex={currentIndex}
+                key={index}
+                color={colors.primary}
+                {...{ index }}
+              />
             ))}
           </View>
           <Animated.View
-            style={{
-              flexDirection: "row",
-              width: width * slides.length,
-              flex: 1,
-              transform: [{ translateX: multiply(x, -1) }],
-            }}
+            style={[
+              {
+                flexDirection: "row",
+                width: width * slides.length,
+                flex: 1,
+              },
+              footerStyle,
+            ]}
           >
             {slides.map(({ title, description }, index) => (
               <Subslide
@@ -104,10 +129,9 @@ export default function OnboardingScreen() {
                   if (index === slides.length - 1) {
                     save();
                     navigation.navigate("Login");
-                  }
-                  if (scroll.current) {
+                  } else {
                     scroll.current
-                      .getNode()
+                      ?.getNode()
                       .scrollTo({ x: width * (index + 1), animated: true });
                   }
                 }}
