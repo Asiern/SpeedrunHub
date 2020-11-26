@@ -92,7 +92,6 @@ export default function GameInfo({ route }) {
         //Fetch Variables
         LoadVariables(selectedCategory);
         //Set State
-        setLoading(false);
         setGame(data.data);
         setName(data.data.names.international);
         setCategories(outCategories);
@@ -217,6 +216,7 @@ export default function GameInfo({ route }) {
       setRuns(data.data.runs);
       setUrl(url);
       setPlayers(data.data.players.data);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -264,7 +264,6 @@ export default function GameInfo({ route }) {
           abbreviation={abbreviation}
           name={name}
           date={game["release-date"]}
-          platforms={game.platforms}
         >
           {favourite ? (
             <FontAwesome
