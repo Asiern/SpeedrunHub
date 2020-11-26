@@ -12,6 +12,8 @@ import { useValue, onScrollEvent } from "react-native-redash/lib/module/v1";
 import Dot from "../Dot";
 import Animated, { divide } from "react-native-reanimated";
 
+import platfroms from "../../assets/Platforms.json";
+
 export interface CarouselProps {
   abbreviation: string;
   date: string;
@@ -24,38 +26,25 @@ export default function Carousel({
   platformIDs,
 }: CarouselProps) {
   const { width } = Dimensions.get("window");
-  const [platforms, setPlatforms] = useState("");
   const x = useValue(0);
   const onScroll = onScrollEvent({ x });
-  useEffect(() => {
-    console.log("render");
-    let mounted = true;
-    if (mounted) {
-      (async () => {
-        const url = "https://www.speedrun.com/api/v1/platforms?max=200";
-        const response = await fetch(url);
-        const data = await response.json();
-        getPlatforms(data.data);
-      })();
-    }
 
-    return function cleanup() {
-      mounted = false;
-    };
-  }, []);
-
-  function getPlatforms(data) {
-    var out = "";
-    for (let p of platformIDs) {
-      for (let platform of data) {
-        if (platform.id === p) {
-          out += platform.name + " ";
-          break;
+  function getPlatforms() {
+    console.log("GetPlatforms");
+    if (platformIDs !== undefined) {
+      var out = "";
+      for (var i = 0; i < platformIDs.length; i++) {
+        for (let platform of platfroms.data) {
+          if (platform.id === platformIDs[i]) {
+            out += platform.name + " ";
+            break;
+          }
         }
       }
-      console.log(out);
+      return out;
+    } else {
+      return "Undefined";
     }
-    setPlatforms(out);
   }
 
   return (
@@ -81,9 +70,9 @@ export default function Carousel({
             style={styles.Image}
           ></Image>
         </View>
-        <View style={[styles.info, { width }]}>
+        <View style={[styles.info, { width, padding: 20 }]}>
           <Text style={h4w}>Release Date: {date}</Text>
-          <Text style={h4w}>{platforms}</Text>
+          <Text style={h4w}>{getPlatforms()}</Text>
         </View>
       </Animated.ScrollView>
       <Animated.View
