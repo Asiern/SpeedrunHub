@@ -1,16 +1,12 @@
-import React, { useState } from "react";
-import {
-  ScrollView,
-  StyleSheet,
-  View,
-  Dimensions,
-  Text,
-  Image,
-} from "react-native";
+import React from "react";
+import { StyleSheet, View, Dimensions, Text, Image } from "react-native";
 import { colors, h4w } from "../../themes/theme";
-import { useValue, onScrollEvent } from "react-native-redash/lib/module/v1";
 import Dot from "../Dot";
-import Animated, { divide } from "react-native-reanimated";
+import Animated, {
+  useAnimatedScrollHandler,
+  useDerivedValue,
+  useSharedValue,
+} from "react-native-reanimated";
 
 export interface CarouselProps {
   username: string;
@@ -20,8 +16,14 @@ export interface CarouselProps {
 
 export default function Carousel({ username, signup, country }: CarouselProps) {
   const { width } = Dimensions.get("window");
-  const x = useValue(0);
-  const onScroll = onScrollEvent({ x });
+  const x = useSharedValue(0);
+  const onScroll = useAnimatedScrollHandler({
+    onScroll: ({ contentOffset }) => {
+      x.value = contentOffset.x;
+    },
+  });
+
+  const currentIndex = useDerivedValue(() => x.value / width);
 
   return (
     <View style={styles.container}>
@@ -59,8 +61,8 @@ export default function Carousel({ username, signup, country }: CarouselProps) {
           paddingTop: 20,
         }}
       >
-        <Dot index={0} currentIndex={divide(x, width)} color={colors.white} />
-        <Dot index={1} currentIndex={divide(x, width)} color={colors.white} />
+        <Dot index={0} currentIndex={currentIndex} color={colors.white} />
+        <Dot index={1} currentIndex={currentIndex} color={colors.white} />
       </Animated.View>
     </View>
   );
