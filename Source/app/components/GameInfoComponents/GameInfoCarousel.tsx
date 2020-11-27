@@ -8,8 +8,6 @@ import Animated, {
   useDerivedValue,
 } from "react-native-reanimated";
 
-import platfroms from "../../assets/Platforms.json";
-
 export interface CarouselProps {
   abbreviation: string;
   date: string;
@@ -31,23 +29,23 @@ export default function Carousel({
 
   const currentIndex = useDerivedValue(() => x.value / width);
 
-  function getPlatforms() {
-    console.log("GetPlatforms");
-    if (platformIDs !== undefined) {
-      var out = "";
-      for (var i = 0; i < platformIDs.length; i++) {
-        for (let platform of platfroms.data) {
-          if (platform.id === platformIDs[i]) {
-            out += platform.name + " ";
-            break;
-          }
-        }
-      }
-      return out;
-    } else {
-      return "Undefined";
-    }
-  }
+  // function getPlatforms() {
+  //   console.log("GetPlatforms");
+  //   if (platformIDs !== undefined) {
+  //     var out = "";
+  //     for (var i = 0; i < platformIDs.length; i++) {
+  //       for (let platform of platfroms.data) {
+  //         if (platform.id === platformIDs[i]) {
+  //           out += platform.name + " ";
+  //           break;
+  //         }
+  //       }
+  //     }
+  //     return out;
+  //   } else {
+  //     return "Undefined";
+  //   }
+  // }
 
   return (
     <View style={styles.container}>
@@ -74,7 +72,6 @@ export default function Carousel({
         </View>
         <View style={[styles.info, { width, padding: 20 }]}>
           <Text style={h4w}>Release Date: {date}</Text>
-          <Text style={h4w}>{getPlatforms()}</Text>
         </View>
       </Animated.ScrollView>
       <Animated.View
