@@ -26,7 +26,7 @@ const PB = ({ weblink, place, category, time }: PBProps) => {
 
   return (
     <TouchableOpacity
-      onPress={() => Linking.openURL(weblink)}
+      onPress={() => navigation.navigate("RunInfo", { weblink })}
       style={styles.container}
     >
       <View style={styles.place}>

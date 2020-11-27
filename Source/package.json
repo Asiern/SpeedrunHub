@@ -39,6 +39,7 @@
     "react-native-svg": "12.1.0",
     "react-native-tab-view": "^2.15.1",
     "react-native-web": "~0.13.7",
+    "react-native-webview": "10.7.0",
     "redash": "^0.23.0"
   },
   "devDependencies": {
