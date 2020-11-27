@@ -8,7 +8,9 @@ import User from "../components/Search/User";
 import { colors, h4 } from "../themes/theme";
 import { FlatList } from "react-native-gesture-handler";
 import Splits from "../components/Splits/Splits";
+import WebView from "react-native-webview";
 
+const aspectRatio = 1080 / 1920;
 const { width } = Dimensions.get("window");
 
 function getId(weblink: string) {
@@ -78,6 +80,10 @@ export default function RunInfo(props) {
     return (
       <ScrollView style={styles.container}>
         <StatusBar style={"dark"}></StatusBar>
+        <WebView
+          source={{ uri: "https://www.youtube.com/embed/hOqBkH69ZHE" }}
+          style={{ width, height: width * aspectRatio }}
+        ></WebView>
         <View style={styles.title}>
           <Text style={h4}>
             {data.category.data.name} in {timeConverter(data.times.primary)} by{" "}
