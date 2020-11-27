@@ -111,12 +111,10 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
 
 - IOS version not tested
 - MIUI 12 (Android 11) Dark Theme
-- Runs with multiple runners not displaying properly
 
 ## :construction: WIP
 
 - Themes
-- Animations
 - UI Design
 - Push Notifications
 - Japanese text support
