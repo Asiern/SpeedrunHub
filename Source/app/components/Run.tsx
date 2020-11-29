@@ -9,7 +9,6 @@ export interface RunProps {
   place: string;
   runner: string;
   time: string;
-  abbreviation: string;
   categoryid: string;
   weblink: string;
 }
