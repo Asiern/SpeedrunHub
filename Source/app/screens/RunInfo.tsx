@@ -8,9 +8,26 @@ import User from "../components/Search/User";
 import { colors, h4 } from "../themes/theme";
 import { FlatList } from "react-native-gesture-handler";
 import Splits from "../components/Splits/Splits";
-import WebView from "react-native-webview";
+import VideoCarousel from "../components/RunInfo/VideoCarousel";
 
-const aspectRatio = 1080 / 1920;
+//Interface
+import { run } from "../interface/runInterface";
+import { game } from "../interface/gameInterface";
+import { category } from "../interface/categoryInterface";
+import { player } from "../interface/playersInterface";
+
+interface dataProps {
+  game: {
+    data: game;
+  };
+  players: {
+    data: player[];
+  };
+  category: {
+    data: category;
+  };
+}
+
 const { width } = Dimensions.get("window");
 
 function getId(weblink: string) {
@@ -18,7 +35,7 @@ function getId(weblink: string) {
   const last = weblink.length;
   return weblink.slice(first, last);
 }
-function getPlayers(data: any[]) {
+function getPlayers(data: run & dataProps) {
   var outString = "";
   for (let player of data.players.data) {
     if (player.names.international != "null") {
@@ -33,9 +50,10 @@ function timeConverter(time: string) {
   var result = time.toLowerCase();
   return result.substr(2, result.length);
 }
+
 export default function RunInfo(props) {
   const { weblink } = props.route.params;
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<dataProps & run>();
   const [splits, setSplits] = useState([]);
   const [loading, setLoading] = useState(true);
   const [runners, setRunners] = useState([]);
@@ -49,6 +67,7 @@ export default function RunInfo(props) {
           "https://www.speedrun.com/api/v1/runs/" +
           getId(weblink) +
           "?embed=players,category,game";
+        console.log(url);
         const response = await fetch(url);
         const data = await response.json();
         setData(data.data);
@@ -80,11 +99,21 @@ export default function RunInfo(props) {
     return (
       <ScrollView style={styles.container}>
         <StatusBar style={"dark"}></StatusBar>
-        <WebView
-          source={{ uri: "https://www.youtube.com/embed/hOqBkH69ZHE" }}
-          style={{ width, height: width * aspectRatio }}
-        ></WebView>
-        <View style={styles.title}>
+        {/* <VideoCarousel links={data.videos.links} /> */}
+        <View
+          style={{
+            backgroundColor: "white",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: 20,
+            borderBottomLeftRadius: 20,
+            borderBottomRightRadius: 20,
+            shadowColor: colors.darkgrey,
+            shadowOffset: { width: 5, height: 5 },
+            shadowOpacity: 0.9,
+            elevation: 2,
+          }}
+        >
           <Text style={h4}>
             {data.category.data.name} in {timeConverter(data.times.primary)} by{" "}
             {getPlayers(data)}
