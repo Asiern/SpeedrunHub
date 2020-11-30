@@ -7,6 +7,7 @@ import {
   TextInput,
   Clipboard,
   ToastAndroid,
+  ScrollView,
 } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import { colors } from "../../themes/theme";
@@ -53,7 +54,7 @@ const AccountSettings = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.user}>
         <View style={styles.imagecontainer}>
           <Image
@@ -92,14 +93,13 @@ const AccountSettings = () => {
           />
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
-    justifyContent: "center",
     alignContent: "center",
   },
   user: {
@@ -120,6 +120,8 @@ const styles = StyleSheet.create({
     alignContent: "center",
     justifyContent: "center",
     alignSelf: "center",
+    paddingVertical: 20,
+    marginBottom: 10,
   },
   textinput: {
     height: 50,
