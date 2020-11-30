@@ -5,18 +5,20 @@ import {
   View,
   Linking,
   TouchableOpacity,
-  KeyboardAvoidingView,
   ToastAndroid,
+  Dimensions,
 } from "react-native";
 import { colors } from "../themes/theme";
 import AsyncStorage from "@react-native-community/async-storage";
 import { TextInput } from "react-native-gesture-handler";
-import { LinearGradient } from "expo-linear-gradient";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import { Feather } from "@expo/vector-icons";
 import Button from "../components/Buttons/Button";
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
+
+const { height } = Dimensions.get("window");
 
 export default function Login() {
   const [textinput, setTextinput] = useState("");
@@ -54,46 +56,44 @@ export default function Login() {
     );
   }
   return (
-    <LinearGradient
-      style={{ flex: 1 }}
-      colors={[colors.primary, colors.primary]}
-    >
-      <View style={styles.login}>
-        <StatusBar style={"dark"}></StatusBar>
-        <View style={styles.header}>
-          <Text style={styles.h1}>Welcome back</Text>
-          <Text style={styles.h2}>
-            Use your credentials to login into your account.{"\n\n"} API-Key is
-            optional and only used for notifications.
-          </Text>
-        </View>
-        <KeyboardAvoidingView style={styles.form}>
-          <View style={styles.textinputs}>
-            <View style={styles.textinput}>
-              <Feather name={"user"} size={18} color={colors.primary} />
-              <TextInput
-                style={{ marginLeft: 10, flex: 1 }}
-                autoCapitalize={"none"}
-                placeholder={"Username"}
-                autoCompleteType={"username"}
-                onChangeText={(text) => setTextinput(text)}
-                value={textinput}
-              />
-            </View>
-            <View style={styles.textinput}>
-              <Feather name={"key"} size={18} color={colors.primary} />
-              <TextInput
-                style={{ marginLeft: 10, flex: 1 }}
-                autoCapitalize={"none"}
-                placeholder={"API-Key (Optional)"}
-                autoCompleteType={"username"}
-                onChangeText={(text) => setKeyinput(text)}
-                value={keyinput}
-                secureTextEntry={true}
-              />
+    <KeyboardAwareScrollView style={{ flex: 1, backgroundColor: "green" }}>
+      <StatusBar style={"dark"}></StatusBar>
+      <View style={styles.container}>
+        <View style={styles.login}>
+          <View style={styles.header}>
+            <Text style={styles.h1}>Welcome back</Text>
+            <Text style={styles.h2}>
+              Use your credentials to login into your account.{"\n\n"} API-Key
+              is optional and only used for notifications.
+            </Text>
+          </View>
+          <View style={styles.form}>
+            <View style={styles.textinputs}>
+              <View style={styles.textinput}>
+                <Feather name={"user"} size={18} color={colors.primary} />
+                <TextInput
+                  style={{ marginLeft: 10, flex: 1 }}
+                  autoCapitalize={"none"}
+                  placeholder={"Username"}
+                  autoCompleteType={"username"}
+                  onChangeText={(text) => setTextinput(text)}
+                  value={textinput}
+                />
+              </View>
+              <View style={styles.textinput}>
+                <Feather name={"key"} size={18} color={colors.primary} />
+                <TextInput
+                  style={{ marginLeft: 10, flex: 1 }}
+                  autoCapitalize={"none"}
+                  placeholder={"API-Key (Optional)"}
+                  autoCompleteType={"username"}
+                  onChangeText={(text) => setKeyinput(text)}
+                  value={keyinput}
+                  secureTextEntry={true}
+                />
+              </View>
             </View>
           </View>
-
           <View style={styles.buttons}>
             <Button
               label={"LOG IN"}
@@ -108,36 +108,37 @@ export default function Login() {
               }}
             />
           </View>
-        </KeyboardAvoidingView>
-        <View style={styles.footerline}>
-          <View>
-            <Text>Don't have an API-Key? </Text>
+          <View style={styles.footerline}>
+            <View>
+              <Text>Don't have an API-Key? </Text>
+            </View>
+            <TouchableOpacity
+              onPress={() => loadInBrowser("https://www.speedrun.com/api/auth")}
+            >
+              <Text style={{ color: colors.primary }}>Obtain it here</Text>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            onPress={() => loadInBrowser("https://www.speedrun.com/api/auth")}
-          >
-            <Text style={{ color: colors.primary }}>Obtain it here</Text>
-          </TouchableOpacity>
+        </View>
+        <View style={styles.footer}>
+          <Button
+            label={"LOG IN AS GUEST"}
+            variant={"default"}
+            onPress={() => _storeData("Guest", "")}
+          ></Button>
         </View>
       </View>
-      <View style={styles.footer}>
-        <Button
-          label={"LOG IN AS GUEST"}
-          variant={"default"}
-          onPress={() => _storeData("Guest", "")}
-        ></Button>
-      </View>
-    </LinearGradient>
+    </KeyboardAwareScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.white,
+    height,
+    backgroundColor: colors.primary,
   },
   login: {
-    flex: 4,
+    flex: 1,
     backgroundColor: colors.white,
     justifyContent: "center",
     alignContent: "center",
@@ -147,7 +148,7 @@ const styles = StyleSheet.create({
   },
 
   header: {
-    flex: 1.5,
+    flex: 2,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -155,7 +156,7 @@ const styles = StyleSheet.create({
     flex: 2,
   },
   textinputs: {
-    flex: 0.5,
+    flex: 0.7,
     justifyContent: "center",
   },
   buttons: {
@@ -175,7 +176,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
-    flex: 0.5,
+    flex: 0.15,
   },
   h1: {
     fontWeight: "bold",
