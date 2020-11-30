@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { ReactNode } from "react";
+import React, { useEffect, useState } from "react";
 import { Text, View, ImageBackground, StyleSheet } from "react-native";
 import { StackActions } from "@react-navigation/native";
 import Carousel from "./GameInfoCarousel";
@@ -7,24 +7,75 @@ import Carousel from "./GameInfoCarousel";
 import Constants from "expo-constants";
 import Feather from "@expo/vector-icons/Feather";
 import { colors, h2w } from "../../themes/theme";
+import { FontAwesome } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-community/async-storage";
 
 export interface GameHeaderProps {
   abbreviation: string;
-  name?: string;
-  children: ReactNode;
-  date?: string;
-  platforms?: any[];
+  name: string;
+  date: string;
+  platforms: any[];
+  id: string;
 }
 
 const GameHeader = ({
   abbreviation,
   name,
-  children,
   date,
   platforms,
+  id,
 }: GameHeaderProps) => {
+  const [isFav, setFav] = useState(false);
   const navigation = useNavigation();
   const goBack = StackActions.pop();
+  const _isFavourite = async (id: string) => {
+    const MyGames = await AsyncStorage.getItem("@MyGames");
+    const gameList = JSON.parse(MyGames === null ? "[]" : MyGames);
+    if (gameList != null) {
+      for (let GAME of gameList) {
+        if (GAME.id == id) {
+          setFav(true);
+        }
+      }
+    }
+  };
+  const _toggleFavourites = async () => {
+    const games = await AsyncStorage.getItem("@MyGames");
+    var gameList = JSON.parse(games === null ? "[]" : games);
+    //Create game obj
+    var game = {
+      id: id,
+      abbreviation: abbreviation,
+    };
+    if (!isFav) {
+      //add game to list
+      gameList.push(game);
+      //Game added to list
+      await AsyncStorage.setItem("@MyGames", JSON.stringify(gameList));
+      setFav(true);
+    } else {
+      //Game got removed from list
+      for (let GAME of gameList) {
+        if (game.id == GAME.id) {
+          gameList.splice(gameList.indexOf(GAME), 1);
+        }
+      }
+      await AsyncStorage.setItem("@MyGames", JSON.stringify(gameList));
+      setFav(false);
+    }
+  };
+  useEffect(() => {
+    console.log("render GH");
+    let mounted = true;
+    if (mounted) {
+      (async () => {
+        _isFavourite(id);
+      })();
+    }
+    return function cleanup() {
+      mounted = false;
+    };
+  }, []);
   return (
     <ImageBackground
       imageStyle={{
@@ -49,7 +100,25 @@ const GameHeader = ({
           />
         </View>
         <View style={styles.topbarcenter}></View>
-        <View style={styles.topbarright}>{children}</View>
+        <View style={styles.topbarright}>
+          {isFav ? (
+            <FontAwesome
+              onPress={() => _toggleFavourites()}
+              name="heart"
+              color={colors.white}
+              size={30}
+              style={{ paddingRight: 20 }}
+            />
+          ) : (
+            <FontAwesome
+              onPress={() => _toggleFavourites()}
+              name="heart-o"
+              color={colors.white}
+              size={30}
+              style={{ paddingRight: 20 }}
+            />
+          )}
+        </View>
       </View>
       <View style={styles.profile}>
         <Carousel

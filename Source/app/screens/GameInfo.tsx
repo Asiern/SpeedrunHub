@@ -245,7 +245,6 @@ export default function GameInfo({ route }) {
           place={item.place}
           runner={names}
           time={item.run.times.primary}
-          abbreviation={abbreviation}
           categoryid={item.run.category}
           weblink={item.run.weblink}
         />
@@ -264,25 +263,9 @@ export default function GameInfo({ route }) {
           abbreviation={abbreviation}
           name={name}
           date={game["release-date"]}
-        >
-          {favourite ? (
-            <FontAwesome
-              onPress={() => _toggleFavourites()}
-              name="heart"
-              color={colors.white}
-              size={30}
-              style={{ paddingRight: 20 }}
-            />
-          ) : (
-            <FontAwesome
-              onPress={() => _toggleFavourites()}
-              name="heart-o"
-              color={colors.white}
-              size={30}
-              style={{ paddingRight: 20 }}
-            />
-          )}
-        </GameHeader>
+          id={id}
+          platforms={[]}
+        />
         <View style={{ padding: 10 }}></View>
         <FlatList
           keyExtractor={(item) => item.id}
