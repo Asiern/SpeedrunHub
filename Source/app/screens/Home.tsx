@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Dimensions } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import { ScrollView } from "react-native-gesture-handler";
 
-import { useNavigation, useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect } from "@react-navigation/native";
 
 import MyGames from "../components/MyGames";
 import UserHeader from "../components/UserHeader";
@@ -16,8 +16,6 @@ import { AdMobBanner } from "expo-ads-admob";
 const { width } = Dimensions.get("screen");
 
 export default function Home() {
-  const navigation = useNavigation();
-
   const [username, setUsername] = useState("Guest");
   const [userid, setUserid] = useState("");
   const [games, setGames] = useState([]);
@@ -39,17 +37,10 @@ export default function Home() {
     xhr.send();
   }
   async function fetchData() {
-    const LOGGEDIN = await AsyncStorage.getItem("@Loggedin");
-    const Onboarding = await AsyncStorage.getItem("@Onboarding");
     const key = await AsyncStorage.getItem("@API-Key");
     const GAMES = await AsyncStorage.getItem("@MyGames");
     const username = await AsyncStorage.getItem("@user");
     const userid = await AsyncStorage.getItem("@userid");
-    if (Onboarding != "true") {
-      navigation.navigate("Onboarding", { screen: "Onboarding" });
-    } else if (LOGGEDIN != "true") {
-      navigation.navigate("Login", { screen: "Login" });
-    }
     setGames(JSON.parse(GAMES === null ? "[]" : GAMES));
     setUsername(username === null ? "" : username);
     setUserid(userid === null ? "" : userid);
@@ -69,11 +60,11 @@ export default function Home() {
       <NotificationBar width={width} data={notifications} />
       <Text style={[h1, { marginLeft: 20, fontWeight: "bold" }]}>My Games</Text>
       <MyGames data={games} />
-      <AdMobBanner
+      {/* <AdMobBanner
         bannerSize="fullBanner"
         adUnitID="ca-app-pub-3552758561036628/7487974176"
         servePersonalizedAds
-      />
+      /> */}
     </ScrollView>
   );
 }
