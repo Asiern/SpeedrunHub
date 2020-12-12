@@ -11,10 +11,15 @@ import OnboardingScreen from "../screens/Onboarding";
 //Stacks
 const Root = createStackNavigator();
 
-function Navigation() {
+interface NavigationProps {
+  initialRoute: string;
+}
+
+function Navigation({ initialRoute }: NavigationProps) {
+  const initialRout = "Login";
   return (
     <NavigationContainer>
-      <Root.Navigator>
+      <Root.Navigator initialRouteName={initialRoute}>
         <Root.Screen
           name="Main"
           component={MainNavigator}

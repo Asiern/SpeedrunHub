@@ -7,32 +7,34 @@ import Navigation from "./app/Navigation/Navigation";
 
 export default function App() {
   const [loading, setLoading] = useState(true);
-  const [Loggedin, setLoggedin] = useState(false);
+  const [initialRoute, setInitialRoute] = useState("Onboarding");
   useEffect(() => {
     let mounted = true;
     if (mounted) {
       (async () => {
         const LOGGEDIN = await AsyncStorage.getItem("@Loggedin");
-        if (LOGGEDIN == "true") {
-          setLoggedin(true);
-          setLoading(false);
-        } else if (LOGGEDIN == "false") {
-          setLoggedin(false);
-          setLoading(false);
+        const ONBOARDING = await AsyncStorage.getItem("@Onboarding");
+        var route = "";
+        if (ONBOARDING !== "true") {
+          route = "Onboarding";
+        } else if (LOGGEDIN !== "true") {
+          route = "Login";
         } else {
-          setLoading(false);
+          route = "Main";
         }
+        setInitialRoute(route);
+        setLoading(false);
       })();
     }
 
     return function cleanup() {
       mounted = false;
     };
-  }, [Loggedin]);
+  }, []);
 
   if (loading) {
     return <ActivityIndicator />;
   } else {
-    return <Navigation />;
+    return <Navigation initialRoute={initialRoute} />;
   }
 }
