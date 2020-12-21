@@ -14,7 +14,6 @@ import { StatusBar } from "expo-status-bar";
 import Run from "../components/Run";
 import GameHeader from "../components/GameInfoComponents/GameHeader";
 
-import { FontAwesome } from "@expo/vector-icons";
 import { colors } from "../themes/theme";
 
 export default function GameInfo({ route }) {
