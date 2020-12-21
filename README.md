@@ -103,7 +103,7 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
 
    ```
    # At "...\SpeedrunHub\Source" run
-   $ yarn run expo
+   $ yarn start
    # Expo Metro Bundler should open if all went well
    ```
    
