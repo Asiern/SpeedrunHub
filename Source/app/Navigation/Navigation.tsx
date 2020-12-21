@@ -16,7 +16,6 @@ interface NavigationProps {
 }
 
 function Navigation({ initialRoute }: NavigationProps) {
-  const initialRout = "Login";
   return (
     <NavigationContainer>
       <Root.Navigator initialRouteName={initialRoute}>
