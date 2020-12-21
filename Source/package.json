@@ -1,12 +1,12 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "expo": "expo start",
+    "start": "expo start",
     "clear": "expo start -c",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "web": "expo start --web",
-    "start": "react-native start",
+    "rn-start": "react-native start",
     "test": "jest"
   },
   "dependencies": {
