@@ -6,9 +6,16 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 export interface GameCardProps {
   id: string;
   abbreviation: string;
+  width?: number;
+  height?: number;
 }
 
-export default function GameCard({ id, abbreviation }: GameCardProps) {
+export default function GameCard({
+  id,
+  abbreviation,
+  width,
+  height,
+}: GameCardProps) {
   const navigation = useNavigation();
   return (
     <View style={{ padding: 2 }}>
@@ -19,7 +26,7 @@ export default function GameCard({ id, abbreviation }: GameCardProps) {
             abbreviation,
           })
         }
-        style={styles.container}
+        style={[styles.container, { width, height }]}
       >
         <ImageBackground
           source={{
@@ -36,10 +43,13 @@ export default function GameCard({ id, abbreviation }: GameCardProps) {
   );
 }
 
+GameCard.defaultProps = {
+  width: 113,
+  height: 160,
+};
+
 const styles = StyleSheet.create({
   container: {
-    width: 113,
-    height: 160,
     alignContent: "center",
     justifyContent: "center",
     shadowColor: "black",
@@ -52,6 +62,5 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     resizeMode: "cover",
-    flexDirection: "row",
   },
 });
