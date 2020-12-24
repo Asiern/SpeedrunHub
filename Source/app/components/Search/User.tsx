@@ -10,14 +10,14 @@ export interface UserProps {
   userid: string;
 }
 
-export default function User(props: UserProps) {
+export default function User({ username, userid }: UserProps) {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
       onPress={() =>
         navigation.navigate("Profile", {
-          username: props.username,
-          userid: props.userid,
+          username,
+          userid,
         })
       }
       style={styles.container}
@@ -28,7 +28,7 @@ export default function User(props: UserProps) {
             source={{
               uri:
                 "https://www.speedrun.com/themes/user/" +
-                props.username +
+                username +
                 "/image.png",
             }}
             style={styles.Image}
@@ -36,7 +36,7 @@ export default function User(props: UserProps) {
         </View>
 
         <View style={styles.textcontainer}>
-          <Text style={styles.usename}>{props.username}</Text>
+          <Text style={styles.usename}>{username}</Text>
         </View>
       </View>
     </TouchableOpacity>
