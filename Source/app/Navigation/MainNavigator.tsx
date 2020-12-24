@@ -43,7 +43,7 @@ const createHomeStack = () => (
     <Stack.Screen
       name="RunInfo"
       component={RunInfo}
-      options={{ title: "Run Info" }}
+      options={{ headerShown: false }}
     />
   </Stack.Navigator>
 );
@@ -79,7 +79,7 @@ const createSearchStack = () => (
     <Stack.Screen
       name="RunInfo"
       component={RunInfo}
-      options={{ title: "Run Info" }}
+      options={{ headerShown: false }}
     />
   </Stack.Navigator>
 );
@@ -89,7 +89,10 @@ function MainNavigator() {
       initialRouteName="Home"
       activeColor={colors.primary}
       inactiveColor={colors.darkgrey}
-      barStyle={{ backgroundColor: colors.white }}
+      shifting
+      barStyle={{
+        backgroundColor: colors.white,
+      }}
     >
       <BottomTabs.Screen
         name="Home"
