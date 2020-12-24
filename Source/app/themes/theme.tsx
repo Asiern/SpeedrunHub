@@ -1,5 +1,12 @@
 import { TextStyle } from "react-native";
 
+export const shadow = {
+  shadowOffset: { width: 5, height: 5 },
+  shadowOpacity: 1,
+  elevation: 5,
+  shadowColor: "black",
+};
+
 export const colors = {
   primary: "#FF8A65",
   light: "#ededed",
