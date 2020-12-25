@@ -7,8 +7,12 @@ export const shadow = {
   shadowColor: "black",
 };
 
+const pallete = {
+  orange: "#FF8A65",
+};
+
 export const colors = {
-  primary: "#FF8A65",
+  primary: "#26C6DA",
   light: "#ededed",
   white: "#fff",
   grey: "#f0f0f0",
@@ -41,6 +45,16 @@ export const h3w: TextStyle = {
   fontSize: 20,
   fontWeight: "bold",
 };
+export const h3b: TextStyle = {
+  color: colors.darkgrey,
+  fontSize: 20,
+  fontWeight: "bold",
+};
+export const h3pb: TextStyle = {
+  color: colors.primary,
+  fontSize: 20,
+  fontWeight: "bold",
+};
 export const h4: TextStyle = {
   color: colors.darkgrey,
   fontSize: 17,
@@ -52,4 +66,22 @@ export const h4w: TextStyle = {
 export const h4p: TextStyle = {
   color: colors.primary,
   fontSize: 17,
+};
+export const h4b: TextStyle = {
+  color: colors.darkgrey,
+  fontSize: 17,
+  fontWeight: "bold",
+};
+export const h4pb: TextStyle = {
+  color: colors.primary,
+  fontSize: 17,
+  fontWeight: "bold",
+};
+export const h6: TextStyle = {
+  color: colors.darkgrey,
+  fontSize: 15,
+};
+export const h6p: TextStyle = {
+  color: colors.primary,
+  fontSize: 15,
 };
