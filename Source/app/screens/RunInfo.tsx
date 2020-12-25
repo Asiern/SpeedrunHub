@@ -1,21 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import {
-  View,
-  StyleSheet,
-  Text,
-  ScrollView,
-  ActivityIndicator,
-} from "react-native";
+import { View, StyleSheet, Text, ActivityIndicator } from "react-native";
 
-import { colors, h4, shadow } from "../themes/theme";
+import { colors, h4, shadow, h3pb, h4pb } from "../themes/theme";
 import Splits from "../components/Splits/Splits";
 import VideoCarousel from "../components/RunInfo/VideoCarousel";
 import GameCard from "../components/GameCard";
 import TopBar from "../components/TopBar";
 import Links from "../components/RunInfo/Links";
 import Modal from "../components/RunInfo/Modal";
-import Runners from "../components/RunInfo/Runners";
 
 //Interface
 import { run } from "../interface/runInterface";
@@ -70,6 +63,8 @@ function timeConverter(time: string) {
 export default function RunInfo(props) {
   const { weblink } = props.route.params;
   const [data, setData] = useState<dataProps & run>();
+  const [examiner, setExaminer] = useState<string>("");
+  const [place, setPlace] = useState<string>("");
   //const [splits, setSplits] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -93,10 +88,32 @@ export default function RunInfo(props) {
           "https://www.speedrun.com/api/v1/runs/" +
           getId(weblink) +
           "?embed=players,category,game";
-        //console.log(url);
         const response = await fetch(url);
         const data = await response.json();
         setData(data.data);
+        //Examiner
+        if (data.data.status.status === "verified") {
+          const profileUrl =
+            "https://www.speedrun.com/api/v1/users/" +
+            data.data.status.examiner;
+          const userResponse = await fetch(profileUrl);
+          const user = await userResponse.json();
+          setExaminer(user.data.names.international);
+        }
+        //Personal Bests
+        const userUrl =
+          "https://www.speedrun.com/api/v1/users/" +
+          data.data.players.data[0].id +
+          "/personal-bests";
+        const userResponse = await fetch(userUrl);
+        const pbs = await userResponse.json();
+        for (let pb of pbs.data) {
+          if (pb.run.id === getId(weblink)) {
+            setPlace(pb.place);
+            break;
+          }
+        }
+        //setPlace(pbs.data.names.international);
         //Splits
         // if (data.data.splits != null) {
         //   const splitUrl = data.data.splits.uri;
@@ -135,27 +152,49 @@ export default function RunInfo(props) {
           <Links videolink={data.videos.links[0].uri} weblink={weblink} />
           <View style={styles.gameinfocontainer}>
             <GameCard
-              abbreviation={"na"}
-              id={"76rkwed8"}
+              abbreviation={data.game.data.abbreviation}
+              id={data.game.data.id}
               width={100}
               height={140}
             />
             <View style={styles.gameinfo}>
-              <Text style={styles.gameinfotext}>NieR:Automata</Text>
-              <Text style={styles.gameinfotext}>Platforms: PC PS4 XBOX</Text>
-              <Text style={styles.gameinfotext}>Release Date: 2017-02-23</Text>
+              <Text style={h4}>{data.game.data.names.international}</Text>
+              <Text style={h4}>{data.game.data.platforms[0]}</Text>
+              <Text style={h4}>
+                Release Date: {data.game.data["release-date"]}
+              </Text>
             </View>
           </View>
           <View style={[styles.runtitle, shadow]}>
-            <Runners runners={getPlayers(data)} />
-            <Text style={[h4, styles.padding]}>
-              n place in {timeConverter(data.times.primary)}
-            </Text>
+            {getPlayers(data).map((item) => {
+              return (
+                <Text key={item.userid} style={h3pb}>
+                  {item.username}
+                </Text>
+              );
+            })}
+            <View style={styles.rowtext}>
+              <Text style={[h4pb, styles.padding]}>{place}</Text>
+              <Text style={[h4, styles.padding]}>
+                place in {timeConverter(data.times.primary)}
+              </Text>
+            </View>
+
             <Text style={[h4, styles.padding]}>
               Submitted at{" "}
               {data.submitted.slice(0, data.submitted.indexOf("T"))}
             </Text>
-            <Text style={[h4, styles.padding]}>{data.comment}</Text>
+            {data.status.status === "new" ? (
+              <Text style={[h4, styles.padding]}>Pending verification</Text>
+            ) : (
+              <View style={styles.rowtext}>
+                <Text style={[h4, styles.padding]}>Verified by</Text>
+                <Text style={h3pb}>{examiner}</Text>
+              </View>
+            )}
+            {data.comment === null ? null : (
+              <Text style={[h4, styles.padding]}>{data.comment}</Text>
+            )}
           </View>
           {/* {splits[0] != undefined ? <Splits data={splits} /> : null} */}
         </View>
@@ -179,7 +218,6 @@ const styles = StyleSheet.create({
   gameinfocontainer: {
     padding: 20,
     flexDirection: "row",
-    backgroundColor: colors.light,
   },
   gameinfo: {
     justifyContent: "center",
@@ -187,16 +225,21 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 1,
   },
-  gameinfotext: { fontSize: 17 },
   runtitle: {
-    backgroundColor: "white",
+    backgroundColor: colors.white,
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    margin: 20,
+    borderRadius: 20,
   },
   padding: {
     padding: 10,
+  },
+  rowtext: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
   },
 });
