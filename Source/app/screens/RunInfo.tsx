@@ -1,6 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { View, StyleSheet, Text, ActivityIndicator } from "react-native";
+import Animated, {
+  useAnimatedScrollHandler,
+  useSharedValue,
+} from "react-native-reanimated";
 
 import { colors, h4, shadow, h3pb, h4pb } from "../themes/theme";
 import Splits from "../components/Splits/Splits";
@@ -15,10 +19,9 @@ import { run } from "../interface/runInterface";
 import { game } from "../interface/gameInterface";
 import { category } from "../interface/categoryInterface";
 import { player } from "../interface/playersInterface";
-import Animated, {
-  useAnimatedScrollHandler,
-  useSharedValue,
-} from "react-native-reanimated";
+import { platform } from "../interface/platformInterface";
+import { ScrollView } from "react-native-gesture-handler";
+import { AdMobBanner } from "expo-ads-admob";
 
 interface dataProps {
   game: {
@@ -65,7 +68,8 @@ export default function RunInfo(props) {
   const [data, setData] = useState<dataProps & run>();
   const [examiner, setExaminer] = useState<string>("");
   const [place, setPlace] = useState<string>("");
-  //const [splits, setSplits] = useState([]);
+  const [platforms, setPlatforms] = useState<platform[]>([]);
+  const [splits, setSplits] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(true);
   const scroll = useRef<Animated.ScrollView>(null);
@@ -113,6 +117,20 @@ export default function RunInfo(props) {
             break;
           }
         }
+        //Platforms
+        var platforms = [];
+        for (let platform of data.data.game.data.platforms) {
+          const platformUrl =
+            "https://www.speedrun.com/api/v1/platforms/" + platform;
+          const platformResponse = await fetch(platformUrl);
+          const plat = await platformResponse.json();
+          var pla: platform = {
+            name: plat.data.name,
+            id: plat.data.id,
+          };
+          platforms.push(pla);
+        }
+        setPlatforms(platforms);
         //setPlace(pbs.data.names.international);
         //Splits
         // if (data.data.splits != null) {
@@ -139,7 +157,9 @@ export default function RunInfo(props) {
   } else {
     return (
       <Animated.ScrollView style={{ flex: 1 }} ref={scroll} onScroll={onScroll}>
-        <Modal visible={modalVisible} offset={ScrollY.value} />
+        <Modal visible={modalVisible} offset={ScrollY.value}>
+          <View />
+        </Modal>
         <StatusBar style={"dark"}></StatusBar>
         <View style={styles.container}>
           <TopBar
@@ -158,8 +178,16 @@ export default function RunInfo(props) {
               height={140}
             />
             <View style={styles.gameinfo}>
-              <Text style={h4}>{data.game.data.names.international}</Text>
-              <Text style={h4}>{data.game.data.platforms[0]}</Text>
+              <Text style={h4}>{data.game.data.names.international} </Text>
+              <View style={styles.platforms}>
+                {platforms.map((item) => {
+                  return (
+                    <Text key={item.id} style={h4}>
+                      {item.name}
+                    </Text>
+                  );
+                })}
+              </View>
               <Text style={h4}>
                 Release Date: {data.game.data["release-date"]}
               </Text>
@@ -196,8 +224,12 @@ export default function RunInfo(props) {
               <Text style={[h4, styles.padding]}>{data.comment}</Text>
             )}
           </View>
-          {/* {splits[0] != undefined ? <Splits data={splits} /> : null} */}
         </View>
+        <AdMobBanner
+          bannerSize="fullBanner"
+          adUnitID="ca-app-pub-3552758561036628/7487974176"
+          servePersonalizedAds
+        />
       </Animated.ScrollView>
     );
   }
@@ -241,5 +273,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
+  },
+  platforms: {
+    flexWrap: "wrap",
+    flexDirection: "row",
+    alignContent: "center",
+    justifyContent: "center",
+    padding: 10,
   },
 });
