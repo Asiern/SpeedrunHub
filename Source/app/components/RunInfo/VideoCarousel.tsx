@@ -10,7 +10,6 @@ const aspectRatio = 1080 / 1920;
 const { width } = Dimensions.get("window");
 
 function getWebViewUri(url: string) {
-  console.log(url);
   if (url.includes("youtube") || url.includes("youtu.be")) {
     const start = Math.max(url.lastIndexOf("/"), url.indexOf("=")) + 1;
     const end = url.indexOf("&") > 0 ? url.indexOf("&") : url.length;
