@@ -56,7 +56,9 @@ export default function Login() {
     );
   }
   return (
-    <KeyboardAwareScrollView style={{ flex: 1, backgroundColor: "green" }}>
+    <KeyboardAwareScrollView
+      style={{ flex: 1, backgroundColor: colors.primary }}
+    >
       <StatusBar style={"dark"}></StatusBar>
       <View style={styles.container}>
         <View style={styles.login}>
@@ -134,8 +136,8 @@ export default function Login() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height,
     backgroundColor: colors.primary,
+    height,
   },
   login: {
     flex: 1,
