@@ -4,7 +4,7 @@ import Constants from "expo-constants";
 import { StatusBar } from "expo-status-bar";
 import { colors } from "../../themes/theme";
 
-export default function About() {
+export function About() {
   return (
     <ScrollView style={styles.container}>
       <StatusBar style={"dark"}></StatusBar>

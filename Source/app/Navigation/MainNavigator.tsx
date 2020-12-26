@@ -9,13 +9,16 @@ import { Feather } from "@expo/vector-icons";
 import Home from "../screens/Home";
 import SETTINGS from "../screens/Settings";
 import Profile from "../screens/Profile";
-import About from "../screens/Settings/About";
 import GameInfo from "../screens/GameInfo";
 import Search from "../screens/Search";
 import Notifications from "../screens/Notifications";
-import AccountSettings from "../screens/Settings/AccountSettings";
 import RunInfo from "../screens/RunInfo";
-import DevSettings from "../screens/Settings/DevSettings";
+import {
+  DevSettings,
+  About,
+  AccountSettings,
+  NotificationsSettings,
+} from "../screens/Settings/index";
 
 //Stacks
 const Stack = createStackNavigator();
@@ -57,6 +60,11 @@ const createSettingsStack = () => (
     />
     <Stack.Screen name="About" component={About} />
     <Stack.Screen name="DevSettings" component={DevSettings} />
+    <Stack.Screen
+      name="NotificationsSettings"
+      component={NotificationsSettings}
+      options={{ title: "Notifications" }}
+    />
   </Stack.Navigator>
 );
 const createSearchStack = () => (

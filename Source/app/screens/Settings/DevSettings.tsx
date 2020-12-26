@@ -4,7 +4,7 @@ import { Text, ToastAndroid, View } from "react-native";
 import Button from "../../components/Buttons/Button";
 import { h2 } from "../../themes/theme";
 
-export default function DevSettings() {
+export function DevSettings() {
   const games = [
     { id: "w6jve26j", abbreviation: "darksouls" },
     { id: "m1zjlkm6", abbreviation: "re2remake" },

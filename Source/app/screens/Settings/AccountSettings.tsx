@@ -14,7 +14,7 @@ import { colors } from "../../themes/theme";
 import Button from "../../components/Buttons/Button";
 import { useNavigation } from "@react-navigation/native";
 
-const AccountSettings = () => {
+export const AccountSettings = () => {
   async function save() {
     try {
       await AsyncStorage.removeItem("@Onboarding");
@@ -148,4 +148,3 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
 });
-export default AccountSettings;
