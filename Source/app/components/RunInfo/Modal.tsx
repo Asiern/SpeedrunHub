@@ -1,6 +1,5 @@
 import React from "react";
-import { Text, StyleSheet, Dimensions, View } from "react-native";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { StyleSheet, Dimensions } from "react-native";
 import Animated, {
   useAnimatedStyle,
   useDerivedValue,
@@ -12,6 +11,7 @@ import { colors, shadow } from "../../themes/theme";
 export interface ModalProps {
   visible: boolean;
   offset: number;
+  children: React.ReactNode;
 }
 
 const { width, height } = Dimensions.get("screen");
@@ -19,7 +19,7 @@ const modalWidth = width * 0.9;
 const modalHeight = modalWidth * 1.5;
 const topPosition = height / 2 - modalHeight / 2;
 
-export default function Modal({ visible, offset }: ModalProps) {
+export default function Modal({ visible, offset, children }: ModalProps) {
   const isVisible = useSharedValue(visible ? 1 : 0);
   const transition = useDerivedValue(() => {
     return withTiming(isVisible.value);
@@ -32,7 +32,7 @@ export default function Modal({ visible, offset }: ModalProps) {
   });
   return (
     <Animated.View style={[styles.container, shadow, opacity]}>
-      <Text>Modal</Text>
+      {children}
     </Animated.View>
   );
 }
