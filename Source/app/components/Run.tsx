@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, Text, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-import { colors, h6, h6p } from "../themes/theme";
+import { h6, colors } from "../themes/theme";
+import { context } from "../config/config";
 
 export interface RunProps {
   place: string;
@@ -19,19 +20,22 @@ function formatTime(time: string) {
 
 export default function Run({ place, runner, time, weblink }: RunProps) {
   const navigation = useNavigation();
+  const { theme } = useContext(context);
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate("RunInfo", { weblink })}
-      style={styles.container}
+      style={[styles.container, { backgroundColor: theme.colors.card }]}
     >
       <View style={styles.place}>
-        <Text style={h6p}>{place}</Text>
+        <Text style={[h6, { color: theme.colors.primary }]}>{place}</Text>
       </View>
       <View style={styles.runner}>
-        <Text style={h6}>{runner}</Text>
+        <Text style={[h6, { color: theme.colors.text }]}>{runner}</Text>
       </View>
       <View style={styles.time}>
-        <Text style={h6}>{formatTime(time)}</Text>
+        <Text style={[h6, { color: theme.colors.text }]}>
+          {formatTime(time)}
+        </Text>
       </View>
     </TouchableOpacity>
   );
@@ -45,7 +49,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flex: 1,
     alignItems: "center",
-    backgroundColor: colors.white,
     borderRadius: 10,
     shadowColor: colors.darkgrey,
     shadowOffset: { width: 5, height: 5 },

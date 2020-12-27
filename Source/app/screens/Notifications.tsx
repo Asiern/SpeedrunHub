@@ -1,16 +1,20 @@
 import { useRoute } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useContext } from "react";
 import { View, StyleSheet, FlatList, Dimensions } from "react-native";
 import NotificationCard from "../components/Notifications/NotificationCard";
+import { context } from "../config/config";
 import { colors } from "../themes/theme";
 
 const Notifications = () => {
   const { data } = useRoute().params;
+  const { theme } = useContext(context);
   const { width } = Dimensions.get("window");
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+    >
       <StatusBar style={"auto"}></StatusBar>
       <FlatList
         keyExtractor={(item) => item.id}
@@ -22,8 +26,8 @@ const Notifications = () => {
                 <NotificationCard
                   width={width}
                   text={item.text}
-                  backgroundColor={colors.white}
-                  color={colors.darkgrey}
+                  backgroundColor={theme.colors.card}
+                  color={theme.colors.text}
                 />
               </View>
             ) : (
@@ -31,7 +35,7 @@ const Notifications = () => {
                 <NotificationCard
                   width={width}
                   text={item.text}
-                  backgroundColor={colors.primary}
+                  backgroundColor={theme.colors.primary}
                   color={colors.white}
                 />
               </View>
@@ -45,12 +49,6 @@ const Notifications = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  headertext: {
-    color: colors.darkgrey,
-    fontSize: 30,
-    marginLeft: 20,
-    fontWeight: "bold",
   },
 });
 export default Notifications;

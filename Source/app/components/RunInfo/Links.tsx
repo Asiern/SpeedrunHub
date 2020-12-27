@@ -4,6 +4,7 @@ import { View, StyleSheet, Linking, Share } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { colors } from "../../themes/theme";
 import { GLYPHS } from "@expo/vector-icons/createIconSet";
+import { context } from "../../config/config";
 
 export interface LinksProps {
   videolink: string;
@@ -11,6 +12,7 @@ export interface LinksProps {
 }
 
 export default function Links({ videolink, weblink }: LinksProps) {
+  const { theme } = React.useContext(context);
   const onShare = async () => {
     try {
       const result = await Share.share({
@@ -44,7 +46,7 @@ export default function Links({ videolink, weblink }: LinksProps) {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: theme.colors.primary }]}>
       <TouchableOpacity onPress={() => openOnBrowser(videolink)}>
         <Feather name={browsericon} size={30} color={colors.white} />
       </TouchableOpacity>
@@ -61,6 +63,5 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     padding: 10,
     justifyContent: "space-around",
-    backgroundColor: colors.primary,
   },
 });

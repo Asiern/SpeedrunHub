@@ -1,5 +1,5 @@
 import { Link, useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useContext } from "react";
 import {
   StyleSheet,
   Text,
@@ -7,7 +7,8 @@ import {
   View,
   Linking,
 } from "react-native";
-import { colors } from "../themes/theme";
+import { context } from "../config/config";
+import { colors, h6 } from "../themes/theme";
 
 function timeConverter(time: string) {
   var result = time.toLowerCase();
@@ -23,20 +24,24 @@ export interface PBProps {
 
 const PB = ({ weblink, place, category, time }: PBProps) => {
   const navigation = useNavigation();
-
+  const { theme } = useContext(context);
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate("RunInfo", { weblink })}
-      style={styles.container}
+      style={[styles.container, { backgroundColor: theme.colors.card }]}
     >
       <View style={styles.place}>
-        <Text style={styles.accenttext}>{place}</Text>
+        <Text style={[h6, { color: theme.colors.primary, padding: 10 }]}>
+          {place}
+        </Text>
       </View>
       <View style={styles.category}>
-        <Text style={styles.text}>{category}</Text>
+        <Text style={[h6, { color: theme.colors.text }]}>{category}</Text>
       </View>
       <View style={styles.time}>
-        <Text style={styles.text}>{timeConverter(time)}</Text>
+        <Text style={[h6, { color: theme.colors.text }]}>
+          {timeConverter(time)}
+        </Text>
       </View>
     </TouchableOpacity>
   );
@@ -49,7 +54,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flex: 1,
     alignItems: "center",
-    backgroundColor: colors.white,
     marginTop: 10,
     borderRadius: 10,
     paddingHorizontal: 10,
@@ -73,17 +77,6 @@ const styles = StyleSheet.create({
   time: {
     flex: 8,
     alignItems: "center",
-  },
-  text: {
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-    fontSize: 15,
-  },
-  accenttext: {
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-    fontSize: 15,
-    color: colors.primary,
   },
 });
 

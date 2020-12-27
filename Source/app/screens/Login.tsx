@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -8,7 +8,7 @@ import {
   ToastAndroid,
   Dimensions,
 } from "react-native";
-import { colors } from "../themes/theme";
+import { colors, h2, h6 } from "../themes/theme";
 import AsyncStorage from "@react-native-community/async-storage";
 import { TextInput } from "react-native-gesture-handler";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -17,6 +17,7 @@ import { Feather } from "@expo/vector-icons";
 import Button from "../components/Buttons/Button";
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
+import { context } from "../config/config";
 
 const { height } = Dimensions.get("window");
 
@@ -24,6 +25,7 @@ export default function Login() {
   const [textinput, setTextinput] = useState("");
   const [keyinput, setKeyinput] = useState("");
   const navigation = useNavigation();
+  const { theme } = useContext(context);
   function showToastWithGravity(text: string) {
     ToastAndroid.showWithGravity(text, ToastAndroid.SHORT, ToastAndroid.CENTER);
   }
@@ -57,24 +59,47 @@ export default function Login() {
   }
   return (
     <KeyboardAwareScrollView
-      style={{ flex: 1, backgroundColor: colors.primary }}
+      style={{ flex: 1, backgroundColor: theme.colors.primary }}
     >
       <StatusBar style={"dark"}></StatusBar>
-      <View style={styles.container}>
-        <View style={styles.login}>
+      <View style={[styles.container]}>
+        <View style={[styles.login, { backgroundColor: theme.colors.card }]}>
           <View style={styles.header}>
-            <Text style={styles.h1}>Welcome back</Text>
-            <Text style={styles.h2}>
+            <Text
+              style={[
+                h2,
+                {
+                  color: theme.colors.primary,
+                  textAlign: "center",
+                },
+              ]}
+            >
+              Welcome back
+            </Text>
+            <Text
+              style={[
+                h6,
+                {
+                  color: theme.colors.text,
+                  textAlign: "center",
+                },
+              ]}
+            >
               Use your credentials to login into your account.{"\n\n"} API-Key
               is optional and only used for notifications.
             </Text>
           </View>
           <View style={styles.form}>
             <View style={styles.textinputs}>
-              <View style={styles.textinput}>
-                <Feather name={"user"} size={18} color={colors.primary} />
+              <View
+                style={[
+                  styles.textinput,
+                  { borderColor: theme.colors.primary },
+                ]}
+              >
+                <Feather name={"user"} size={18} color={theme.colors.primary} />
                 <TextInput
-                  style={{ marginLeft: 10, flex: 1 }}
+                  style={{ marginLeft: 10, flex: 1, color: theme.colors.text }}
                   autoCapitalize={"none"}
                   placeholder={"Username"}
                   autoCompleteType={"username"}
@@ -82,10 +107,15 @@ export default function Login() {
                   value={textinput}
                 />
               </View>
-              <View style={styles.textinput}>
-                <Feather name={"key"} size={18} color={colors.primary} />
+              <View
+                style={[
+                  styles.textinput,
+                  { borderColor: theme.colors.primary },
+                ]}
+              >
+                <Feather name={"key"} size={18} color={theme.colors.primary} />
                 <TextInput
-                  style={{ marginLeft: 10, flex: 1 }}
+                  style={{ marginLeft: 10, flex: 1, color: theme.colors.text }}
                   autoCapitalize={"none"}
                   placeholder={"API-Key (Optional)"}
                   autoCompleteType={"username"}
@@ -112,16 +142,22 @@ export default function Login() {
           </View>
           <View style={styles.footerline}>
             <View>
-              <Text>Don't have an API-Key? </Text>
+              <Text style={{ color: theme.colors.text }}>
+                Don't have an API-Key?{" "}
+              </Text>
             </View>
             <TouchableOpacity
               onPress={() => loadInBrowser("https://www.speedrun.com/api/auth")}
             >
-              <Text style={{ color: colors.primary }}>Obtain it here</Text>
+              <Text style={{ color: theme.colors.primary }}>
+                Obtain it here
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
-        <View style={styles.footer}>
+        <View
+          style={[styles.footer, { backgroundColor: theme.colors.primary }]}
+        >
           <Button
             label={"LOG IN AS GUEST"}
             variant={"default"}
@@ -136,12 +172,10 @@ export default function Login() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.primary,
     height,
   },
   login: {
     flex: 1,
-    backgroundColor: colors.white,
     justifyContent: "center",
     alignContent: "center",
     borderBottomEndRadius: 80,
@@ -179,19 +213,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     textAlign: "center",
     flex: 0.15,
-  },
-  h1: {
-    fontWeight: "bold",
-    fontSize: 25,
-    alignSelf: "center",
-    color: colors.primary,
-  },
-  h2: {
-    fontSize: 15,
-    alignSelf: "center",
-    padding: 10,
-    paddingHorizontal: 20,
-    textAlign: "center",
   },
   textinput: {
     height: 50,

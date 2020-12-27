@@ -1,12 +1,17 @@
 import * as React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationContainer } from "@react-navigation/native";
+import {
+  NavigationContainer,
+  DarkTheme,
+  DefaultTheme,
+} from "@react-navigation/native";
 
 import MainNavigator from "./MainNavigator";
 
 //Screens
 import Login from "../screens/Login";
 import OnboardingScreen from "../screens/Onboarding";
+import { context } from "../config/config";
 
 //Stacks
 const Root = createStackNavigator();
@@ -16,8 +21,9 @@ interface NavigationProps {
 }
 
 function Navigation({ initialRoute }: NavigationProps) {
+  const { theme } = React.useContext(context);
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={theme}>
       <Root.Navigator initialRouteName={initialRoute}>
         <Root.Screen
           name="Main"

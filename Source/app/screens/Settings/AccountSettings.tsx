@@ -1,35 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Text,
   View,
   StyleSheet,
   Image,
   TextInput,
-  Clipboard,
   ToastAndroid,
   ScrollView,
+  Clipboard,
 } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import { colors } from "../../themes/theme";
 import Button from "../../components/Buttons/Button";
 import { useNavigation } from "@react-navigation/native";
+import { context } from "../../config/config";
 
 export const AccountSettings = () => {
-  async function save() {
-    try {
-      await AsyncStorage.removeItem("@Onboarding");
-    } catch (error) {}
-  }
   const [user, setUser] = useState("");
   const [userId, setUserId] = useState("");
   const [key, setKey] = useState("");
   const navigation = useNavigation();
-
+  const { theme } = useContext(context);
   const showToastWithGravity = (text: string) => {
     ToastAndroid.showWithGravity(text, ToastAndroid.SHORT, ToastAndroid.CENTER);
   };
-  function copyKey() {
-    Clipboard.setString(key);
+  async function copyKey() {
+    await Clipboard.setString(key);
     showToastWithGravity("API-Key copied to clipboard");
   }
   useEffect(() => {
@@ -54,7 +50,9 @@ export const AccountSettings = () => {
   }
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView
+      style={[styles.container, { backgroundColor: theme.colors.card }]}
+    >
       <View style={styles.user}>
         <View style={styles.imagecontainer}>
           <Image
@@ -68,13 +66,27 @@ export const AccountSettings = () => {
       </View>
       <View style={styles.logout}>
         <View>
-          <Text style={styles.text}>User Name</Text>
-          <TextInput style={styles.textinput} value={user} editable={false} />
-          <Text style={styles.text}>User ID</Text>
-          <TextInput style={styles.textinput} value={userId} editable={false} />
-          <Text style={styles.text}>User API Key</Text>
+          <Text style={[styles.text, { color: theme.colors.text }]}>
+            User Name
+          </Text>
           <TextInput
-            style={styles.textinput}
+            style={[styles.textinput, { color: theme.colors.text }]}
+            value={user}
+            editable={false}
+          />
+          <Text style={[styles.text, { color: theme.colors.text }]}>
+            User ID
+          </Text>
+          <TextInput
+            style={[styles.textinput, { color: theme.colors.text }]}
+            value={userId}
+            editable={false}
+          />
+          <Text style={[styles.text, { color: theme.colors.text }]}>
+            User API Key
+          </Text>
+          <TextInput
+            style={[styles.textinput, { color: theme.colors.text }]}
             value={key}
             editable={false}
             secureTextEntry={true}
@@ -99,7 +111,6 @@ export const AccountSettings = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.white,
     alignContent: "center",
   },
   user: {

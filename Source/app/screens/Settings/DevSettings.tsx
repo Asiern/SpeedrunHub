@@ -36,6 +36,18 @@ export function DevSettings() {
       />
       <Button
         variant={"primary"}
+        label={"Delete Themes"}
+        onPress={async () => {
+          try {
+            await AsyncStorage.removeItem("@Theme");
+            Toast("Async Storage deleted");
+          } catch (error) {
+            Toast("Error");
+          }
+        }}
+      />
+      <Button
+        variant={"primary"}
         label={"Delete MyGames"}
         onPress={async () => {
           try {

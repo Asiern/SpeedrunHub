@@ -18,7 +18,9 @@ import {
   About,
   AccountSettings,
   NotificationsSettings,
+  ThemeSettings,
 } from "../screens/Settings/index";
+import { context } from "../config/config";
 
 //Stacks
 const Stack = createStackNavigator();
@@ -65,6 +67,7 @@ const createSettingsStack = () => (
       component={NotificationsSettings}
       options={{ title: "Notifications" }}
     />
+    <Stack.Screen name="Themes" component={ThemeSettings} />
   </Stack.Navigator>
 );
 const createSearchStack = () => (
@@ -92,14 +95,15 @@ const createSearchStack = () => (
   </Stack.Navigator>
 );
 function MainNavigator() {
+  const { theme } = React.useContext(context);
   return (
     <BottomTabs.Navigator
       initialRouteName="Home"
-      activeColor={colors.primary}
-      inactiveColor={colors.darkgrey}
+      activeColor={theme.colors.primary}
+      inactiveColor={theme.colors.text}
       shifting
       barStyle={{
-        backgroundColor: colors.white,
+        backgroundColor: theme.colors.card,
       }}
     >
       <BottomTabs.Screen
