@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Text, View, StyleSheet, Image } from "react-native";
 
 import { StackActions, useNavigation } from "@react-navigation/native";
@@ -7,6 +7,7 @@ import Constants from "expo-constants";
 import { Feather } from "@expo/vector-icons";
 import { colors, h2w, h4w } from "../../themes/theme";
 import Carousel from "./ProfileCarousel";
+import { context } from "../../config/config";
 
 const goBack = StackActions.pop();
 
@@ -18,8 +19,9 @@ export interface ProfileHeaderProps {
 
 const ProfileHeader = ({ username, country, signup }: ProfileHeaderProps) => {
   const navigation = useNavigation();
+  const { theme } = useContext(context);
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: theme.colors.primary }]}>
       <View style={styles.topbar}>
         <View style={styles.topbarleft}>
           <Feather
@@ -46,7 +48,6 @@ const ProfileHeader = ({ username, country, signup }: ProfileHeaderProps) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.primary,
     borderBottomLeftRadius: 40,
     borderBottomRightRadius: 40,
   },

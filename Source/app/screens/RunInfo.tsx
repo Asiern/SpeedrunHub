@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { View, StyleSheet, Text, ActivityIndicator } from "react-native";
 import Animated, {
@@ -6,7 +6,7 @@ import Animated, {
   useSharedValue,
 } from "react-native-reanimated";
 
-import { colors, h4, shadow, h3pb, h4pb } from "../themes/theme";
+import { colors, h4, shadow, h3pb, h4pb, h3 } from "../themes/theme";
 import Splits from "../components/Splits/Splits";
 import VideoCarousel from "../components/RunInfo/VideoCarousel";
 import GameCard from "../components/GameCard";
@@ -22,6 +22,7 @@ import { player } from "../interface/playersInterface";
 import { platform } from "../interface/platformInterface";
 import { ScrollView } from "react-native-gesture-handler";
 import { AdMobBanner } from "expo-ads-admob";
+import { context } from "../config/config";
 
 interface dataProps {
   game: {
@@ -64,6 +65,7 @@ function timeConverter(time: string) {
 }
 
 export default function RunInfo(props) {
+  const { theme } = useContext(context);
   const { weblink } = props.route.params;
   const [data, setData] = useState<dataProps & run>();
   const [examiner, setExaminer] = useState<string>("");
@@ -161,10 +163,15 @@ export default function RunInfo(props) {
           <View />
         </Modal>
         <StatusBar style={"dark"}></StatusBar>
-        <View style={styles.container}>
+        <View
+          style={[
+            styles.container,
+            { backgroundColor: theme.colors.background },
+          ]}
+        >
           <TopBar
             label={"Run Info"}
-            variant={"light"}
+            variant={theme.dark ? "dark" : "light"}
             onPress={onPress}
             icon={"more-horizontal"}
           />
@@ -178,50 +185,78 @@ export default function RunInfo(props) {
               height={140}
             />
             <View style={styles.gameinfo}>
-              <Text style={h4}>{data.game.data.names.international} </Text>
+              <Text style={[h4, { color: theme.colors.text }]}>
+                {data.game.data.names.international}{" "}
+              </Text>
               <View style={styles.platforms}>
                 {platforms.map((item) => {
                   return (
-                    <Text key={item.id} style={h4}>
+                    <Text
+                      key={item.id}
+                      style={[h4, { color: theme.colors.text }]}
+                    >
                       {item.name}
                     </Text>
                   );
                 })}
               </View>
-              <Text style={h4}>
+              <Text style={[h4, { color: theme.colors.text }]}>
                 Release Date: {data.game.data["release-date"]}
               </Text>
             </View>
           </View>
-          <View style={[styles.runtitle, shadow]}>
+          <View
+            style={[
+              styles.runtitle,
+              shadow,
+              { backgroundColor: theme.colors.card },
+            ]}
+          >
             {getPlayers(data).map((item) => {
               return (
-                <Text key={item.userid} style={h3pb}>
+                <Text
+                  key={item.userid}
+                  style={[h3, { color: theme.colors.primary }]}
+                >
                   {item.username}
                 </Text>
               );
             })}
             <View style={styles.rowtext}>
-              <Text style={[h4pb, styles.padding]}>{place}</Text>
-              <Text style={[h4, styles.padding]}>
+              <Text
+                style={[h3, { color: theme.colors.primary }, styles.padding]}
+              >
+                {place}
+              </Text>
+              <Text style={[h4, { color: theme.colors.text }, styles.padding]}>
                 place in {timeConverter(data.times.primary)}
               </Text>
             </View>
 
-            <Text style={[h4, styles.padding]}>
+            <Text style={[h4, { color: theme.colors.text }, styles.padding]}>
               Submitted at{" "}
               {data.submitted.slice(0, data.submitted.indexOf("T"))}
             </Text>
             {data.status.status === "new" ? (
-              <Text style={[h4, styles.padding]}>Pending verification</Text>
+              <Text style={[h4, { color: theme.colors.text }, styles.padding]}>
+                Pending verification
+              </Text>
             ) : (
               <View style={styles.rowtext}>
-                <Text style={[h4, styles.padding]}>Verified by</Text>
-                <Text style={h3pb}>{examiner}</Text>
+                <Text
+                  style={[h4, { color: theme.colors.text }, styles.padding]}
+                >
+                  Verified by
+                </Text>
+                <Text style={[h3, { color: theme.colors.primary }]}>
+                  {examiner}
+                </Text>
               </View>
             )}
             {data.comment === null ? null : (
-              <Text style={[h4, styles.padding]}>{data.comment}</Text>
+              <Text style={[h4, { color: theme.colors.text }, styles.padding]}>
+                {data.comment}
+              </Text>
             )}
           </View>
         </View>
@@ -238,7 +273,6 @@ export default function RunInfo(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.light,
   },
   title: {
     padding: 20,

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -15,6 +15,7 @@ import Run from "../components/Run";
 import GameHeader from "../components/GameInfoComponents/GameHeader";
 
 import { colors } from "../themes/theme";
+import { context } from "../config/config";
 
 export default function GameInfo({ route }) {
   const { id, abbreviation } = route.params;
@@ -28,6 +29,7 @@ export default function GameInfo({ route }) {
   const [favourite, setFavourite] = useState(false);
   const [players, setPlayers] = useState([]);
   const [checked, setChecked] = useState("");
+  const { theme } = useContext(context);
 
   const _isFavourite = async (id: string) => {
     const MyGames = await AsyncStorage.getItem("@MyGames");
@@ -275,20 +277,32 @@ export default function GameInfo({ route }) {
             <View>
               {checked == item.id ? (
                 <TouchableOpacity
-                  style={styles.selectedcategorybuttoncontainer}
+                  style={[
+                    styles.selectedcategorybuttoncontainer,
+                    { backgroundColor: theme.colors.card },
+                  ]}
                   onPress={() => LoadVariables(item.id)}
                 >
-                  <View style={styles.selectedcategorybuttontext}>
-                    <Text style={styles.selectedtext}>{item.name}</Text>
+                  <View style={styles.categorybuttontext}>
+                    <Text
+                      style={[styles.text, { color: theme.colors.primary }]}
+                    >
+                      {item.name}
+                    </Text>
                   </View>
                 </TouchableOpacity>
               ) : (
                 <TouchableOpacity
-                  style={styles.categorybuttoncontainer}
+                  style={[
+                    styles.categorybuttoncontainer,
+                    { backgroundColor: theme.colors.card },
+                  ]}
                   onPress={() => LoadVariables(item.id)}
                 >
                   <View style={styles.categorybuttontext}>
-                    <Text style={styles.text}>{item.name}</Text>
+                    <Text style={[styles.text, { color: theme.colors.text }]}>
+                      {item.name}
+                    </Text>
                   </View>
                 </TouchableOpacity>
               )}
@@ -311,7 +325,7 @@ export default function GameInfo({ route }) {
                     <View style={styles.button}>
                       <Button
                         title={item.label}
-                        color={colors.primary}
+                        color={theme.colors.primary}
                         onPress={() => modifyUrl(item.categoryid, item.id)}
                       />
                     </View>
@@ -319,7 +333,7 @@ export default function GameInfo({ route }) {
                     <View style={styles.button}>
                       <Button
                         title={item.label}
-                        color={colors.darkgrey}
+                        color={theme.colors.text}
                         onPress={() => modifyUrl(item.categoryid, item.id)}
                       />
                     </View>

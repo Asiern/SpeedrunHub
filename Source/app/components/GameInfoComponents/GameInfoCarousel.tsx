@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, View, Dimensions, Text, Image } from "react-native";
 import { colors, h4w } from "../../themes/theme";
 import Dot from "../Dot";
@@ -7,6 +7,7 @@ import Animated, {
   useAnimatedScrollHandler,
   useDerivedValue,
 } from "react-native-reanimated";
+import { context } from "../../config/config";
 
 export interface CarouselProps {
   abbreviation: string;
@@ -14,11 +15,7 @@ export interface CarouselProps {
   platformIDs: any[];
 }
 
-export default function Carousel({
-  abbreviation,
-  date,
-  platformIDs,
-}: CarouselProps) {
+export default function Carousel({ abbreviation, date }: CarouselProps) {
   const { width } = Dimensions.get("window");
   const x = useSharedValue(0);
   const onScroll = useAnimatedScrollHandler({
@@ -28,24 +25,7 @@ export default function Carousel({
   });
 
   const currentIndex = useDerivedValue(() => x.value / width);
-
-  // function getPlatforms() {
-  //   console.log("GetPlatforms");
-  //   if (platformIDs !== undefined) {
-  //     var out = "";
-  //     for (var i = 0; i < platformIDs.length; i++) {
-  //       for (let platform of platfroms.data) {
-  //         if (platform.id === platformIDs[i]) {
-  //           out += platform.name + " ";
-  //           break;
-  //         }
-  //       }
-  //     }
-  //     return out;
-  //   } else {
-  //     return "Undefined";
-  //   }
-  // }
+  const { theme } = useContext(context);
 
   return (
     <View style={styles.container}>
@@ -82,8 +62,16 @@ export default function Carousel({
           paddingTop: 20,
         }}
       >
-        <Dot index={0} currentIndex={currentIndex} color={colors.primary} />
-        <Dot index={1} currentIndex={currentIndex} color={colors.primary} />
+        <Dot
+          index={0}
+          currentIndex={currentIndex}
+          color={theme.colors.primary}
+        />
+        <Dot
+          index={1}
+          currentIndex={currentIndex}
+          color={theme.colors.primary}
+        />
       </Animated.View>
     </View>
   );

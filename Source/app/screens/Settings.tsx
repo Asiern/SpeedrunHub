@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import SettingsSection from "../components/SettingsSection";
 import { colors } from "../themes/theme";
 import { StatusBar } from "expo-status-bar";
 import { AdMobBanner } from "expo-ads-admob";
 import { View } from "react-native";
+import { context } from "../config/config";
 
 export default function Settings() {
+  const { theme } = useContext(context);
   const Sections = [
     {
       title: "My Account",
@@ -19,6 +21,18 @@ export default function Settings() {
     //   navigateTo: null,
     //   weblink: "https://play.google.com/store",
     // },
+    {
+      title: "Notifications",
+      icon: "bell",
+      navigateTo: "NotificationsSettings",
+      weblink: null,
+    },
+    {
+      title: "Themes",
+      icon: "droplet",
+      navigateTo: "Themes",
+      weblink: null,
+    },
     {
       title: "About",
       icon: "info",
@@ -39,16 +53,22 @@ export default function Settings() {
       weblink:
         "https://github.com/Asiern/SpeedrunHub/blob/master/Readme/Terms%20%26%20Conditions.md",
     },
-    // {
-    //   title: "Dev Settings",
-    //   icon: "alert-triangle",
-    //   navigateTo: "DevSettings",
-    //   weblink: null,
-    // },
+    {
+      title: "Dev Settings",
+      icon: "alert-triangle",
+      navigateTo: "DevSettings",
+      weblink: null,
+    },
   ];
   return (
-    <View style={{ flex: 1, justifyContent: "space-between" }}>
-      <StatusBar style={"dark"}></StatusBar>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "space-between",
+        backgroundColor: theme.colors.background,
+      }}
+    >
+      <StatusBar style={theme.dark ? "light" : "dark"}></StatusBar>
       <View>
         {Sections.map((section, index) => {
           return (
@@ -57,9 +77,9 @@ export default function Settings() {
               navigateTO={section.navigateTo}
               title={section.title}
               icon={section.icon}
-              backgroundColor={colors.white}
-              accentColor={colors.primary}
-              textPrimaryColor={colors.darkgrey}
+              backgroundColor={theme.colors.card}
+              accentColor={theme.colors.primary}
+              textPrimaryColor={theme.colors.text}
               weblink={section.weblink}
             />
           );

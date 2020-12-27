@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   View,
   StyleSheet,
@@ -11,6 +11,7 @@ import NotificationCard from "./NotificationCard";
 
 import { colors, h1, h4p } from "../../themes/theme";
 import { useNavigation } from "@react-navigation/native";
+import { context } from "../../config/config";
 
 export interface NotificationBarProps {
   data: any[];
@@ -19,12 +20,15 @@ export interface NotificationBarProps {
 
 const NotificationBar = ({ data, width }: NotificationBarProps) => {
   const navigation = useNavigation();
+  const { theme } = useContext(context);
 
   return (
     <View style={styles.container}>
       <View style={styles.headerConatiner}>
         <View>
-          <Text style={[h1, { marginLeft: 20 }]}>Notifications</Text>
+          <Text style={[h1, { marginLeft: 20, color: theme.colors.text }]}>
+            Notifications
+          </Text>
         </View>
         <TouchableOpacity
           onPress={() =>
@@ -33,7 +37,9 @@ const NotificationBar = ({ data, width }: NotificationBarProps) => {
             })
           }
         >
-          <Text style={[h4p, { marginRight: 20 }]}>View All</Text>
+          <Text style={[h4p, { marginRight: 20, color: theme.colors.primary }]}>
+            View All
+          </Text>
         </TouchableOpacity>
       </View>
 
@@ -48,7 +54,7 @@ const NotificationBar = ({ data, width }: NotificationBarProps) => {
                 <NotificationCard
                   width={width}
                   text={item.text}
-                  backgroundColor={colors.white}
+                  backgroundColor={theme.colors.card}
                   color={colors.darkgrey}
                 />
               </Animated.View>
@@ -57,7 +63,7 @@ const NotificationBar = ({ data, width }: NotificationBarProps) => {
                 <NotificationCard
                   width={width}
                   text={item.text}
-                  backgroundColor={colors.primary}
+                  backgroundColor={theme.colors.primary}
                   color={colors.white}
                 />
               </Animated.View>

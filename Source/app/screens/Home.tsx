@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { StyleSheet, View, Text, Dimensions } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import { ScrollView } from "react-native-gesture-handler";
@@ -12,6 +12,7 @@ import { colors, h1 } from "../themes/theme";
 import { StatusBar } from "expo-status-bar";
 
 import { AdMobBanner } from "expo-ads-admob";
+import { context } from "../config/config";
 
 const { width } = Dimensions.get("screen");
 
@@ -20,6 +21,7 @@ export default function Home() {
   const [userid, setUserid] = useState("");
   const [games, setGames] = useState([]);
   const [notifications, setNotifications] = useState([]);
+  const { theme } = useContext(context);
 
   function fetchNotifications(key: string) {
     var url = "https://www.speedrun.com/api/v1/notifications";
@@ -52,13 +54,22 @@ export default function Home() {
     }, [])
   );
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView
+      style={[styles.container, { backgroundColor: theme.colors.card }]}
+    >
       <StatusBar style={"dark"}></StatusBar>
       <View style={styles.profile}>
         <UserHeader username={username} userid={userid} />
       </View>
       <NotificationBar width={width} data={notifications} />
-      <Text style={[h1, { marginLeft: 20, fontWeight: "bold" }]}>My Games</Text>
+      <Text
+        style={[
+          h1,
+          { marginLeft: 20, fontWeight: "bold", color: theme.colors.text },
+        ]}
+      >
+        My Games
+      </Text>
       <MyGames data={games} />
       {/* <AdMobBanner
         bannerSize="fullBanner"
@@ -72,7 +83,6 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.light,
   },
   profile: {
     height: 250,
