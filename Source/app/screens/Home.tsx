@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { StyleSheet, View, Text, Dimensions } from "react-native";
-import AsyncStorage from "@react-native-community/async-storage";
 import { ScrollView } from "react-native-gesture-handler";
 
 import { useFocusEffect } from "@react-navigation/native";
@@ -8,7 +7,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import MyGames from "../components/MyGames";
 import UserHeader from "../components/UserHeader";
 import NotificationBar from "../components/Notifications/NotificationBar";
-import { colors, h1 } from "../themes/theme";
+import { h1 } from "../themes/theme";
 import { StatusBar } from "expo-status-bar";
 
 import { AdMobBanner } from "expo-ads-admob";
@@ -17,11 +16,9 @@ import { context } from "../config/config";
 const { width } = Dimensions.get("screen");
 
 export default function Home() {
-  const [username, setUsername] = useState("Guest");
-  const [userid, setUserid] = useState("");
-  const [games, setGames] = useState([]);
   const [notifications, setNotifications] = useState([]);
-  const { theme } = useContext(context);
+  const { theme, Config } = useContext(context);
+  const { key } = Config.user;
 
   function fetchNotifications(key: string) {
     var url = "https://www.speedrun.com/api/v1/notifications";
@@ -38,19 +35,9 @@ export default function Home() {
     };
     xhr.send();
   }
-  async function fetchData() {
-    const key = await AsyncStorage.getItem("@API-Key");
-    const GAMES = await AsyncStorage.getItem("@MyGames");
-    const username = await AsyncStorage.getItem("@user");
-    const userid = await AsyncStorage.getItem("@userid");
-    setGames(JSON.parse(GAMES === null ? "[]" : GAMES));
-    setUsername(username === null ? "" : username);
-    setUserid(userid === null ? "" : userid);
-    fetchNotifications(key === null ? "" : key);
-  }
   useFocusEffect(
     React.useCallback(() => {
-      fetchData();
+      fetchNotifications(key);
     }, [])
   );
   return (
@@ -59,7 +46,7 @@ export default function Home() {
     >
       <StatusBar style={"dark"}></StatusBar>
       <View style={styles.profile}>
-        <UserHeader username={username} userid={userid} />
+        <UserHeader />
       </View>
       <NotificationBar width={width} data={notifications} />
       <Text
@@ -70,7 +57,7 @@ export default function Home() {
       >
         My Games
       </Text>
-      <MyGames data={games} />
+      <MyGames />
       {/* <AdMobBanner
         bannerSize="fullBanner"
         adUnitID="ca-app-pub-3552758561036628/7487974176"

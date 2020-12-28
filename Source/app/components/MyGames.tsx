@@ -1,23 +1,21 @@
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useContext } from "react";
 import { Dimensions, View, StyleSheet } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { context } from "../config/config";
 import { colors } from "../themes/theme";
 import GameCard from "./GameCard";
 import NotificationCard from "./Notifications/NotificationCard";
 
-export interface MyGamesProps {
-  data: any[];
-}
-
-export default function MyGames({ data }: MyGamesProps) {
+export default function MyGames() {
+  const { games } = useContext(context);
   const navigation = useNavigation();
   const { width } = Dimensions.get("window");
   return (
     <>
-      {data[0] !== undefined ? (
+      {games[0] !== undefined ? (
         <View style={styles.conatiner}>
-          {data.map((game) => {
+          {games.map((game) => {
             return (
               <GameCard
                 key={game.id}

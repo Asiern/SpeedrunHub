@@ -25,7 +25,7 @@ export default function Login() {
   const [textinput, setTextinput] = useState("");
   const [keyinput, setKeyinput] = useState("");
   const navigation = useNavigation();
-  const { theme } = useContext(context);
+  const { theme, Config, setConfig } = useContext(context);
   function showToastWithGravity(text: string) {
     ToastAndroid.showWithGravity(text, ToastAndroid.SHORT, ToastAndroid.CENTER);
   }
@@ -38,10 +38,12 @@ export default function Login() {
       if (data.data.id !== null) {
         const id = data.data.id;
         const name = data.data.names.international;
-        await AsyncStorage.setItem("@user", name);
-        await AsyncStorage.setItem("@userid", id);
-        await AsyncStorage.setItem("@API-Key", key);
-        await AsyncStorage.setItem("@Loggedin", "true");
+        Config.user.logged = true;
+        Config.user.username = name;
+        Config.user.userid = id;
+        Config.user.key = key;
+        setConfig(Config);
+        await AsyncStorage.setItem("@Config", JSON.stringify(Config));
 
         showToastWithGravity("Logged in successfully.");
         navigation.navigate("Main", { screen: "Home" });

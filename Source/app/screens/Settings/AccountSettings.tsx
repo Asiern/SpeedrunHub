@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import {
   Text,
   View,
@@ -16,11 +16,9 @@ import { useNavigation } from "@react-navigation/native";
 import { context } from "../../config/config";
 
 export const AccountSettings = () => {
-  const [user, setUser] = useState("");
-  const [userId, setUserId] = useState("");
-  const [key, setKey] = useState("");
   const navigation = useNavigation();
-  const { theme } = useContext(context);
+  const { theme, Config, setConfig } = useContext(context);
+  const { username, userid, key } = Config.user;
   const showToastWithGravity = (text: string) => {
     ToastAndroid.showWithGravity(text, ToastAndroid.SHORT, ToastAndroid.CENTER);
   };
@@ -28,24 +26,17 @@ export const AccountSettings = () => {
     await Clipboard.setString(key);
     showToastWithGravity("API-Key copied to clipboard");
   }
-  useEffect(() => {
-    (async () => {
-      const tempuser = await AsyncStorage.getItem("@user");
-      const tempuserid = await AsyncStorage.getItem("@userid");
-      const tempuserkey = await AsyncStorage.getItem("@API-Key");
-      setUser(tempuser == null ? "" : tempuser);
-      setUserId(tempuserid == null ? "" : tempuserid);
-      setKey(tempuserkey == null ? "" : tempuserkey);
-    })();
-  }, []);
 
   async function signOut() {
     //Remove user
-    await AsyncStorage.setItem("@user", "");
-    await AsyncStorage.setItem("@userid", "");
-    //Set login to 1
-    await AsyncStorage.setItem("@Loggedin", "false");
-    //Restart app
+    Config.user = {
+      logged: false,
+      username: null,
+      userid: null,
+      key: null,
+    };
+    setConfig(Config);
+    await AsyncStorage.setItem("@Config", JSON.stringify(Config));
     navigation.navigate("Login", { screen: "Login" });
   }
 
@@ -58,7 +49,9 @@ export const AccountSettings = () => {
           <Image
             source={{
               uri:
-                "https://www.speedrun.com/themes/user/" + user + "/image.png",
+                "https://www.speedrun.com/themes/user/" +
+                username +
+                "/image.png",
             }}
             style={styles.image}
           ></Image>
@@ -71,7 +64,7 @@ export const AccountSettings = () => {
           </Text>
           <TextInput
             style={[styles.textinput, { color: theme.colors.text }]}
-            value={user}
+            value={username}
             editable={false}
           />
           <Text style={[styles.text, { color: theme.colors.text }]}>
@@ -79,7 +72,7 @@ export const AccountSettings = () => {
           </Text>
           <TextInput
             style={[styles.textinput, { color: theme.colors.text }]}
-            value={userId}
+            value={userid}
             editable={false}
           />
           <Text style={[styles.text, { color: theme.colors.text }]}>

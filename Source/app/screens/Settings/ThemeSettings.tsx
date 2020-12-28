@@ -2,21 +2,34 @@ import { Feather } from "@expo/vector-icons";
 import React, { useContext } from "react";
 import { View, StyleSheet, Dimensions } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import AsyncStorage from "@react-native-community/async-storage";
+
 import { PalleteSquare } from "../../components/PalleteSquare";
 import { context } from "../../config/config";
 import { colors } from "../../themes/theme";
 
-const themeColors = ["#26C6DA", "#FF8A65", "#4CAF50", "#2196F3"];
+const themeColors = [
+  "#26C6DA",
+  "#FF8A65",
+  "#4CAF50",
+  "#2196F3",
+  "#F06292",
+  "#FFF176",
+  "#4A148C",
+  "#c62828",
+];
 
 const { width } = Dimensions.get("window");
-
+async function saveTheme(theme) {
+  await AsyncStorage.setItem("@Theme", JSON.stringify(theme));
+}
 function onPress(dark, color, setTheme) {
   if (dark) {
     var theme = {
       dark: true,
       colors: {
         primary: color,
-        background: "#242c37",
+        background: "#121212",
         card: "#000",
         text: "#fff",
         border: "rgb(199, 199, 204)",
@@ -37,6 +50,7 @@ function onPress(dark, color, setTheme) {
     };
   }
   setTheme(theme);
+  saveTheme(theme);
 }
 export function ThemeSettings() {
   const { theme, setTheme } = useContext(context);
@@ -92,7 +106,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 1,
     width,
-    paddingVertical: 20,
   },
   colors: {
     flex: 3,
@@ -100,13 +113,5 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     padding: 20,
     flexWrap: "wrap",
-  },
-  square: {
-    height: 100,
-    width: 100,
-    borderRadius: 20,
-    marginHorizontal: 20,
-    marginVertical: 10,
-    backgroundColor: "green",
   },
 });
