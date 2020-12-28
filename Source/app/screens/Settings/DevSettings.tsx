@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import * as React from "react";
 import { Text, ToastAndroid, View } from "react-native";
 import Button from "../../components/Buttons/Button";
+import { context } from "../../config/config";
 import { h2 } from "../../themes/theme";
 
 export function DevSettings() {
@@ -19,6 +20,7 @@ export function DevSettings() {
   const Toast = (text: string) => {
     ToastAndroid.showWithGravity(text, ToastAndroid.SHORT, ToastAndroid.CENTER);
   };
+  const { setGames } = React.useContext(context);
   return (
     <View style={{ alignItems: "center", flex: 1, padding: 20 }}>
       <Text style={h2}>Async Storage Settings</Text>
@@ -28,6 +30,9 @@ export function DevSettings() {
         onPress={async () => {
           try {
             await AsyncStorage.removeItem("@Onboarding");
+            await AsyncStorage.removeItem("@user");
+            await AsyncStorage.removeItem("@userid");
+            await AsyncStorage.removeItem("@API-Key");
             Toast("Async Storage deleted");
           } catch (error) {
             Toast("Error");
@@ -40,6 +45,18 @@ export function DevSettings() {
         onPress={async () => {
           try {
             await AsyncStorage.removeItem("@Theme");
+            Toast("Async Storage deleted");
+          } catch (error) {
+            Toast("Error");
+          }
+        }}
+      />
+      <Button
+        variant={"primary"}
+        label={"Delete Config"}
+        onPress={async () => {
+          try {
+            await AsyncStorage.removeItem("@Config");
             Toast("Async Storage deleted");
           } catch (error) {
             Toast("Error");
@@ -64,6 +81,7 @@ export function DevSettings() {
         onPress={async () => {
           try {
             await AsyncStorage.setItem("@MyGames", JSON.stringify(games));
+            setGames(games);
             Toast("Async Storage Loaded");
           } catch (error) {
             Toast("Error");

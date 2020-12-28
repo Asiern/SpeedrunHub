@@ -1,3 +1,30 @@
+# Version 1.0.13 Notes
+
+## What's new?
+
+- RunInfo
+- Expo SDK 40
+- Themes
+- Context
+
+## Fixes
+
+- Fixed: Login layout issues when using the keyboard.
+- Fixed: Leaderboard times format.
+
+## Known issues
+
+- Japanese names not displaying.
+- OS forced darkmode breaks `UserHeader.js` colors.
+- App crashes when selecting a guest user profile/run.
+
+## Performance
+
+- App loading
+- App perfomance
+
+---
+
 # Version 1.0.12 Notes
 
 ## What's new?

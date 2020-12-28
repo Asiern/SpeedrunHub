@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
   StyleSheet,
@@ -17,23 +17,24 @@ import { colors } from "../themes/theme";
 //Components
 import Svgheader from "./svgheader";
 import { Feather } from "@expo/vector-icons";
+import { context } from "../config/config";
 
 const { width, height } = Dimensions.get("screen");
 
-export interface UserHeaderProps {
-  username: string;
-  userid: string;
-}
-
-function UserHeader({ username, userid }: UserHeaderProps) {
+function UserHeader() {
   const navigation = useNavigation();
+  const { Config, setConfig } = useContext(context);
+  const { username, userid } = Config.user;
   async function signOut() {
     //Remove user
-    await AsyncStorage.multiSet([
-      ["@user", ""],
-      ["@userid", ""],
-      ["@Loggedin", "false"],
-    ]);
+    Config.user = {
+      logged: false,
+      username: null,
+      userid: null,
+      key: null,
+    };
+    setConfig(Config);
+    await AsyncStorage.setItem("@Config", JSON.stringify(Config));
     navigation.navigate("Login", { screen: "Login" });
   }
   const createAlert = (msg: string) =>

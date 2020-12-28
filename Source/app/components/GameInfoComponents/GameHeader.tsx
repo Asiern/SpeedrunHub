@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Text, View, ImageBackground, StyleSheet } from "react-native";
 import { StackActions } from "@react-navigation/native";
 import Carousel from "./GameInfoCarousel";
@@ -9,6 +9,7 @@ import Feather from "@expo/vector-icons/Feather";
 import { colors, h2w } from "../../themes/theme";
 import { FontAwesome } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-community/async-storage";
+import { context } from "../../config/config";
 
 export interface GameHeaderProps {
   abbreviation: string;
@@ -28,20 +29,15 @@ const GameHeader = ({
   const [isFav, setFav] = useState(false);
   const navigation = useNavigation();
   const goBack = StackActions.pop();
+  const { games, setGames } = useContext(context);
   const _isFavourite = async (id: string) => {
-    const MyGames = await AsyncStorage.getItem("@MyGames");
-    const gameList = JSON.parse(MyGames === null ? "[]" : MyGames);
-    if (gameList != null) {
-      for (let GAME of gameList) {
-        if (GAME.id == id) {
-          setFav(true);
-        }
+    for (let GAME of games) {
+      if (GAME.id == id) {
+        setFav(true);
       }
     }
   };
   const _toggleFavourites = async () => {
-    const games = await AsyncStorage.getItem("@MyGames");
-    var gameList = JSON.parse(games === null ? "[]" : games);
     //Create game obj
     var game = {
       id: id,
@@ -49,18 +45,20 @@ const GameHeader = ({
     };
     if (!isFav) {
       //add game to list
-      gameList.push(game);
+      games.push(game);
       //Game added to list
-      await AsyncStorage.setItem("@MyGames", JSON.stringify(gameList));
+      await AsyncStorage.setItem("@MyGames", JSON.stringify(games));
+      setGames(games);
       setFav(true);
     } else {
       //Game got removed from list
-      for (let GAME of gameList) {
+      for (let GAME of games) {
         if (game.id == GAME.id) {
-          gameList.splice(gameList.indexOf(GAME), 1);
+          games.splice(games.indexOf(GAME), 1);
         }
       }
-      await AsyncStorage.setItem("@MyGames", JSON.stringify(gameList));
+      await AsyncStorage.setItem("@MyGames", JSON.stringify(games));
+      setGames(games);
       setFav(false);
     }
   };

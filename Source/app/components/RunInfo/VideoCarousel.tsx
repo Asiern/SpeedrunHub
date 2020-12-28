@@ -21,7 +21,6 @@ function getWebViewUri(url: string) {
       "https://player.twitch.tv/?video=v" +
       url.slice(i, url.length) +
       "&parent=streamernews.example.com&autoplay=false";
-    console.log(url);
     return url;
   } else {
     return url;
