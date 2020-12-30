@@ -1,19 +1,32 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import Constants from "expo-constants";
 import { StatusBar } from "expo-status-bar";
 import { colors } from "../../themes/theme";
+import { context } from "../../config/config";
 
 export function About() {
+  const { theme } = useContext(context);
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView
+      style={[styles.container, { backgroundColor: theme.colors.card }]}
+    >
       <StatusBar style={"dark"}></StatusBar>
       <View style={styles.info}>
-        <View style={styles.logocontainer}>
-          <Text style={styles.logo}>Speedrun Hub</Text>
+        <View
+          style={[
+            styles.logocontainer,
+            { backgroundColor: theme.colors.primary },
+          ]}
+        >
+          <Text style={[styles.logo, { color: theme.colors.card }]}>
+            Speedrun Hub
+          </Text>
         </View>
-        <Text style={styles.title}>About This App</Text>
-        <Text style={styles.paragraph}>
+        <Text style={[styles.title, { color: theme.colors.primary }]}>
+          About This App
+        </Text>
+        <Text style={[styles.paragraph, { color: theme.colors.text }]}>
           SpeedrunHub is an open source app for IOS/Android platforms made with
           React Native and Expo.{"\n"}
           {"\n"}
@@ -22,43 +35,62 @@ export function About() {
           {"\n"}
           All the data is provided by the speedrun.com REST API.
         </Text>
-        <Text style={[styles.paragraph, { fontWeight: "bold" }]}>
-          Disclaimer: This is not an official app
-        </Text>
-
-        <Text style={styles.title}>WIP</Text>
-        <Text style={styles.paragraph}>
-          Themes{"\n"}Animations{"\n"}UI Design{"\n"}Run Info{"\n"}Japanese text
-          support
-        </Text>
-        <Text style={styles.title}>Release Notes</Text>
         <Text
           style={[
             styles.paragraph,
-            { fontWeight: "bold", paddingBottom: -5, fontSize: 18 },
+            { fontWeight: "bold", color: theme.colors.text },
+          ]}
+        >
+          Disclaimer: This is not an official app
+        </Text>
+
+        <Text style={[styles.title, { color: theme.colors.primary }]}>WIP</Text>
+        <Text style={[styles.paragraph, { color: theme.colors.text }]}>
+          Themes{"\n"}Animations{"\n"}UI Design{"\n"}Run Info{"\n"}Japanese text
+          support
+        </Text>
+        <Text style={[styles.title, { color: theme.colors.primary }]}>
+          Release Notes
+        </Text>
+        <Text
+          style={[
+            styles.paragraph,
+            {
+              fontWeight: "bold",
+              paddingBottom: -5,
+              fontSize: 18,
+              color: theme.colors.text,
+            },
           ]}
         >
           What's New
         </Text>
-        <Text style={styles.paragraph}>
+        <Text style={[styles.paragraph, { color: theme.colors.text }]}>
           - Onboarding {"\n"}- Increased Game leaderboard `FlatList`
           performance.
         </Text>
         <Text
           style={[
             styles.paragraph,
-            { fontWeight: "bold", paddingBottom: -5, fontSize: 18 },
+            {
+              fontWeight: "bold",
+              paddingBottom: -5,
+              fontSize: 18,
+              color: theme.colors.text,
+            },
           ]}
         >
           Fixes
         </Text>
-        <Text style={styles.paragraph}>
+        <Text style={[styles.paragraph, { color: theme.colors.text }]}>
           - Fixed Login. {"\n"}- Fixed Account Settings user image not loading
           properly.{"\n"}- Fixed Navigation. {"\n"}- Fixed Runs with multiple
           runners not displaying properly.
         </Text>
-        <Text style={styles.title}>Send Feedback</Text>
-        <Text style={styles.paragraph}>
+        <Text style={[styles.title, { color: theme.colors.primary }]}>
+          Send Feedback
+        </Text>
+        <Text style={[styles.paragraph, { color: theme.colors.text }]}>
           Send me an email at asiern.dev@gmail.com
         </Text>
       </View>
@@ -69,7 +101,6 @@ export function About() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.light,
   },
 
   info: {
@@ -78,19 +109,16 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   logocontainer: {
-    backgroundColor: colors.primary,
     paddingVertical: 20,
     borderRadius: 10,
   },
   logo: {
     fontSize: 30,
     fontWeight: "bold",
-    color: colors.white,
     alignSelf: "center",
   },
   title: {
     fontWeight: "bold",
-    color: colors.primary,
     fontSize: 25,
     paddingTop: 20,
   },
@@ -102,7 +130,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignContent: "center",
     justifyContent: "center",
-    backgroundColor: colors.darkgrey,
     padding: 10,
     borderRadius: 10,
   },
@@ -110,7 +137,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignContent: "center",
     justifyContent: "center",
-    backgroundColor: colors.primary,
     padding: 10,
     borderRadius: 10,
   },
@@ -118,6 +144,5 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     paddingHorizontal: 20,
     fontSize: 20,
-    color: colors.white,
   },
 });

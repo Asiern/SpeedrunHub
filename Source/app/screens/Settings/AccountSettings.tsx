@@ -44,7 +44,12 @@ export const AccountSettings = () => {
     <ScrollView
       style={[styles.container, { backgroundColor: theme.colors.card }]}
     >
-      <View style={styles.user}>
+      <View
+        style={[
+          styles.user,
+          { backgroundColor: theme.colors.primary, marginBottom: 20 },
+        ]}
+      >
         <View style={styles.imagecontainer}>
           <Image
             source={{
@@ -63,7 +68,10 @@ export const AccountSettings = () => {
             User Name
           </Text>
           <TextInput
-            style={[styles.textinput, { color: theme.colors.text }]}
+            style={[
+              styles.textinput,
+              { color: theme.colors.text, borderColor: theme.colors.primary },
+            ]}
             value={username}
             editable={false}
           />
@@ -71,7 +79,10 @@ export const AccountSettings = () => {
             User ID
           </Text>
           <TextInput
-            style={[styles.textinput, { color: theme.colors.text }]}
+            style={[
+              styles.textinput,
+              { color: theme.colors.text, borderColor: theme.colors.primary },
+            ]}
             value={userid}
             editable={false}
           />
@@ -79,7 +90,10 @@ export const AccountSettings = () => {
             User API Key
           </Text>
           <TextInput
-            style={[styles.textinput, { color: theme.colors.text }]}
+            style={[
+              styles.textinput,
+              { color: theme.colors.text, borderColor: theme.colors.primary },
+            ]}
             value={key}
             editable={false}
             secureTextEntry={true}
@@ -108,7 +122,6 @@ const styles = StyleSheet.create({
   },
   user: {
     flex: 0.3,
-    backgroundColor: colors.primary,
     borderBottomEndRadius: 40,
     borderBottomStartRadius: 40,
   },
@@ -129,7 +142,6 @@ const styles = StyleSheet.create({
   },
   textinput: {
     height: 50,
-    borderColor: colors.primary,
     borderWidth: 2,
     borderRadius: 10,
     marginVertical: 10,
