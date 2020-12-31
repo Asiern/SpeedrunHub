@@ -1,9 +1,10 @@
-import * as React from "react";
+import React, { useContext } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-import { colors } from "../../themes/theme";
+import { shadow } from "../../themes/theme";
+import { context } from "../../config/config";
 
 export interface UserProps {
   username: string;
@@ -12,6 +13,7 @@ export interface UserProps {
 
 export default function User({ username, userid }: UserProps) {
   const navigation = useNavigation();
+  const { theme } = useContext(context);
   return (
     <TouchableOpacity
       onPress={() =>
@@ -20,7 +22,7 @@ export default function User({ username, userid }: UserProps) {
           userid,
         })
       }
-      style={styles.container}
+      style={[styles.container, shadow, { backgroundColor: theme.colors.card }]}
     >
       <View style={styles.user}>
         <View style={styles.imagecontainer}>
@@ -31,12 +33,20 @@ export default function User({ username, userid }: UserProps) {
                 username +
                 "/image.png",
             }}
-            style={styles.Image}
+            style={[
+              styles.Image,
+              {
+                borderColor: theme.colors.primary,
+                backgroundColor: theme.colors.text,
+              },
+            ]}
           ></Image>
         </View>
 
         <View style={styles.textcontainer}>
-          <Text style={styles.usename}>{username}</Text>
+          <Text style={[styles.usename, { color: theme.colors.text }]}>
+            {username}
+          </Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -49,14 +59,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flex: 1,
     alignItems: "center",
-    backgroundColor: colors.white,
     marginTop: 10,
     borderRadius: 10,
     paddingHorizontal: 10,
-    shadowColor: colors.darkgrey,
-    shadowOffset: { width: 5, height: 5 },
-    shadowOpacity: 0.9,
-    elevation: 5,
   },
   user: {
     flex: 1,
@@ -70,10 +75,8 @@ const styles = StyleSheet.create({
   Image: {
     height: 50,
     width: 50,
-    borderColor: colors.primary,
     borderWidth: 1,
     borderRadius: 30,
-    backgroundColor: colors.light,
   },
   imagecontainer: {
     flex: 1,
@@ -86,7 +89,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
   },
-  usename: { color: colors.darkgrey, fontWeight: "bold", fontSize: 20 },
+  usename: { fontWeight: "bold", fontSize: 20 },
   iconcontainer: {
     flex: 1,
     alignContent: "center",
