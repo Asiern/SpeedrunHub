@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import GameCard from "../GameCard";
-import { colors } from "../../themes/theme";
-import { SearchBar } from "react-native-elements";
+import { SearchBar } from "./SearchBar";
+import { context } from "../../config/config";
 
 export default function Games() {
   const [games, setGames] = useState([]);
   const [search, setSearch] = useState("");
+  const { theme } = useContext(context);
 
   function updateSearch(input) {
     setSearch(input);
@@ -20,12 +21,17 @@ export default function Games() {
     setGames(data.data);
   }
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        { backgroundColor: theme.colors.backgroundColor },
+      ]}
+    >
       <SearchBar
         placeholder="Search for games"
         onChangeText={updateSearch}
         value={search}
-        platform="ios"
+        theme={theme.dark ? "dark" : "light"}
       />
       <FlatList
         style={styles.flatList}
@@ -43,7 +49,6 @@ export default function Games() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.light,
   },
   flatList: {
     flexDirection: "row",
