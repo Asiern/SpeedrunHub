@@ -1,6 +1,7 @@
 export interface player {
   rel: string;
   id: string;
+  name: string;
   names: {
     international: string;
     japanese: string;
