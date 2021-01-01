@@ -16,3 +16,18 @@ export const config = {
   },
   games: [],
 };
+
+export interface config {
+  onboarding: boolean;
+  user: {
+    logged: boolean;
+    username: string | null;
+    userid: string | null;
+    key: string | null;
+  };
+  notifications: {
+    push: boolean;
+    max: number;
+  };
+  games: [];
+}
