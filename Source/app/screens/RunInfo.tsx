@@ -1,6 +1,12 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { View, StyleSheet, Text, ActivityIndicator } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  ActivityIndicator,
+  ToastAndroid,
+} from "react-native";
 import Animated, {
   useAnimatedScrollHandler,
   useSharedValue,
@@ -20,9 +26,10 @@ import { game } from "../interface/gameInterface";
 import { category } from "../interface/categoryInterface";
 import { player } from "../interface/playersInterface";
 import { platform } from "../interface/platformInterface";
-import { ScrollView } from "react-native-gesture-handler";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { AdMobBanner } from "expo-ads-admob";
 import { context } from "../config/config";
+import { useNavigation } from "@react-navigation/native";
 
 interface dataProps {
   game: {
@@ -35,6 +42,9 @@ interface dataProps {
     data: category;
   };
 }
+const showToastWithGravity = (text: string) => {
+  ToastAndroid.showWithGravity(text, ToastAndroid.SHORT, ToastAndroid.CENTER);
+};
 
 function getId(weblink: string) {
   const first = weblink.lastIndexOf("/") + 1;
@@ -45,12 +55,15 @@ function getPlayers(data: run & dataProps) {
   var runners = [];
   for (let player of data.players.data) {
     var runner = {
-      userid: "",
+      userid: null,
       username: "",
     };
     runner.userid = player.id;
-    if (player.names.international != "null") {
+    if (player.name !== undefined) {
+      runner.username = player.name;
+    } else if (player.names.international != "null") {
       runner.username = player.names.international;
+      runner.userid = player.id;
     } else {
       runner.username = player.names.japanese;
     }
@@ -67,11 +80,11 @@ function timeConverter(time: string) {
 export default function RunInfo(props) {
   const { theme } = useContext(context);
   const { weblink } = props.route.params;
+  const navigation = useNavigation();
   const [data, setData] = useState<dataProps & run>();
   const [examiner, setExaminer] = useState<string>("");
   const [place, setPlace] = useState<string>("");
   const [platforms, setPlatforms] = useState<platform[]>([]);
-  const [splits, setSplits] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(true);
   const scroll = useRef<Animated.ScrollView>(null);
@@ -133,14 +146,6 @@ export default function RunInfo(props) {
           platforms.push(pla);
         }
         setPlatforms(platforms);
-        //setPlace(pbs.data.names.international);
-        //Splits
-        // if (data.data.splits != null) {
-        //   const splitUrl = data.data.splits.uri;
-        //   const splitresponse = await fetch(splitUrl);
-        //   const splitdata = await splitresponse.json();
-        //   setSplits(splitdata.run.splits);
-        // }
         setLoading(false);
       })();
     }
@@ -214,12 +219,25 @@ export default function RunInfo(props) {
           >
             {getPlayers(data).map((item) => {
               return (
-                <Text
-                  key={item.userid}
-                  style={[h3, { color: theme.colors.primary }]}
+                <TouchableOpacity
+                // onPress={() =>
+                //   item.userid !== undefined
+                //     ? navigation.navigate("Profile", {
+                //         username: item.username,
+                //         userid: item.userid,
+                //       })
+                //     : showToastWithGravity(
+                //         "Ooops, it look like this user has no account at speedrun.com"
+                //       )
+                // }
                 >
-                  {item.username}
-                </Text>
+                  <Text
+                    key={item.userid}
+                    style={[h3, { color: theme.colors.primary }]}
+                  >
+                    {item.username}
+                  </Text>
+                </TouchableOpacity>
               );
             })}
             <View style={styles.rowtext}>
