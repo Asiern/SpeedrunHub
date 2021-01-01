@@ -10,13 +10,13 @@ import { colors } from "../../themes/theme";
 
 const themeColors = [
   "#26C6DA",
-  "#FF8A65",
+  "#80D8FF",
   "#4CAF50",
-  "#2196F3",
+  "#FF8A65",
   "#F06292",
-  "#FFF176",
-  "#4A148C",
   "#c62828",
+  "#AB47BC",
+  "#448AFF",
 ];
 
 const { width } = Dimensions.get("window");
