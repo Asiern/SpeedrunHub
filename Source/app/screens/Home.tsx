@@ -21,7 +21,9 @@ export default function Home() {
   const { key } = Config.user;
 
   function fetchNotifications(key: string) {
-    var url = "https://www.speedrun.com/api/v1/notifications";
+    var url =
+      "https://www.speedrun.com/api/v1/notifications?max=" +
+      Config.notifications.max;
     var xhr = new XMLHttpRequest();
     xhr.open("GET", url);
     xhr.setRequestHeader("Host", "www.speedrun.com");
