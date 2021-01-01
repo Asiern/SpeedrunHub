@@ -9,15 +9,21 @@ export const shadow = {
 
 const pallete = {
   orange: "#FF8A65",
+  cyan: "#26C6DA",
 };
 
 export const colors = {
-  primary: "#26C6DA",
+  primary: "#FF8A65",
   light: "#ededed",
   white: "#fff",
   grey: "#f0f0f0",
   darkgrey: "#242c37",
   black: "#000",
+};
+
+export const padding = {
+  s: { padding: 10 },
+  m: { padding: 20 },
 };
 
 export const h1: TextStyle = {
@@ -36,7 +42,7 @@ export const h2w: TextStyle = {
   fontWeight: "bold",
 };
 export const h3: TextStyle = {
-  color: colors.white,
+  color: colors.darkgrey,
   fontSize: 20,
   fontWeight: "bold",
 };
