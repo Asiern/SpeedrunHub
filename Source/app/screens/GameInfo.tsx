@@ -222,13 +222,6 @@ export default function GameInfo({ route }) {
       console.log(error);
     }
   }
-  const getPlayerName = (id) => {
-    for (let player of players) {
-      if (player.id === id) {
-        return player.names.international;
-      }
-    }
-  };
   const renderRun = ({ item, index }) => {
     try {
       var names = "";
@@ -352,7 +345,7 @@ export default function GameInfo({ route }) {
       <ActivityIndicator
         style={{ alignSelf: "center", flex: 1 }}
         size="large"
-        color={colors.primary}
+        color={theme.colors.primary}
       />
     );
   } else {
