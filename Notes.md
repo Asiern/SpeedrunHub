@@ -6,22 +6,25 @@
 - Expo SDK 40
 - Themes
 - Context
+- Notifications Settings
 
 ## Fixes
 
 - Fixed: Login layout issues when using the keyboard.
 - Fixed: Leaderboard times format.
-
-## Known issues
-
-- Japanese names not displaying.
-- OS forced darkmode breaks `UserHeader.js` colors.
-- App crashes when selecting a guest user profile/run.
+- Fized: App crashes when selecting a guest user profile/run.
 
 ## Performance
 
 - App loading
 - App perfomance
+
+## Known issues
+
+- Japanese names not displaying.
+- OS forced darkmode breaks `UserHeader.js` colors.
+- Webview interactions
+- Game without categories not loading.
 
 ---
 
