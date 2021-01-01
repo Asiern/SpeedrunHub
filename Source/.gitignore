@@ -64,4 +64,4 @@ buck-out/
 web-build/
 
 #Lock files
-*.lock
+yarn.lock
