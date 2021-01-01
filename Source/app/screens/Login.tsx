@@ -65,7 +65,12 @@ export default function Login() {
     >
       <StatusBar style={"dark"}></StatusBar>
       <View style={[styles.container]}>
-        <View style={[styles.login, { backgroundColor: theme.colors.card }]}>
+        <View
+          style={[
+            styles.login,
+            { backgroundColor: theme.colors.card, overflow: "hidden" },
+          ]}
+        >
           <View style={styles.header}>
             <Text
               style={[
