@@ -62,3 +62,6 @@ buck-out/
 # Expo
 .expo/*
 web-build/
+
+#Lock files
+*.lock
