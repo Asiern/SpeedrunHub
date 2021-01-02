@@ -12,7 +12,7 @@
 
 - Fixed: Login layout issues when using the keyboard.
 - Fixed: Leaderboard times format.
-- Fized: App crashes when selecting a guest user profile/run.
+- Fixed: App crashes when selecting a guest user profile/run.
 
 ## Performance
 
