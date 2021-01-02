@@ -7,10 +7,10 @@ import Constants from "expo-constants";
 import { GLYPHS } from "@expo/vector-icons/createIconSet";
 
 export interface TopBarProps {
-  onPress: () => void;
+  onPress?: () => void;
   label: String;
   variant: "light" | "dark" | "transparent";
-  icon: GLYPHS;
+  icon?: GLYPHS;
 }
 
 export default function TopBar({ label, onPress, variant, icon }: TopBarProps) {

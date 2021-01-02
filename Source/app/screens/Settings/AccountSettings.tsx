@@ -14,6 +14,7 @@ import { colors } from "../../themes/theme";
 import Button from "../../components/Buttons/Button";
 import { useNavigation } from "@react-navigation/native";
 import { context } from "../../config/config";
+import TopBar from "../../components/TopBar";
 
 export const AccountSettings = () => {
   const navigation = useNavigation();
@@ -50,6 +51,7 @@ export const AccountSettings = () => {
           { backgroundColor: theme.colors.primary, marginBottom: 20 },
         ]}
       >
+        <TopBar label={"My Account"} variant={"transparent"} />
         <View style={styles.imagecontainer}>
           <Image
             source={{
@@ -137,7 +139,7 @@ const styles = StyleSheet.create({
     alignContent: "center",
     justifyContent: "center",
     alignSelf: "center",
-    paddingVertical: 20,
+    paddingBottom: 30,
     marginBottom: 10,
   },
   textinput: {

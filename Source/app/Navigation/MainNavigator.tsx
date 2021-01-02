@@ -58,7 +58,7 @@ const createSettingsStack = () => (
     <Stack.Screen
       name="AccountSettings"
       component={AccountSettings}
-      options={{ title: "My Account" }}
+      options={{ headerShown: false }}
     />
     <Stack.Screen name="About" component={About} />
     <Stack.Screen name="DevSettings" component={DevSettings} />
