@@ -27,6 +27,7 @@ import { category } from "../interface/categoryInterface";
 import { player } from "../interface/playersInterface";
 import { platform } from "../interface/platformInterface";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
+import AdMob from "../config/admob.json";
 import { AdMobBanner } from "expo-ads-admob";
 import { context } from "../config/config";
 import { useNavigation } from "@react-navigation/native";
@@ -158,7 +159,7 @@ export default function RunInfo(props) {
       <ActivityIndicator
         style={{ alignSelf: "center", flex: 1 }}
         size="large"
-        color={colors.primary}
+        color={theme.colors.primary}
       />
     );
   } else {
@@ -194,13 +195,13 @@ export default function RunInfo(props) {
                 {data.game.data.names.international}{" "}
               </Text>
               <View style={styles.platforms}>
-                {platforms.map((item) => {
+                {platforms.map((item, index) => {
                   return (
                     <Text
-                      key={item.id}
+                      key={index}
                       style={[h4, { color: theme.colors.text }]}
                     >
-                      {item.name}
+                      {item.name}{" "}
                     </Text>
                   );
                 })}
@@ -280,7 +281,7 @@ export default function RunInfo(props) {
         </View>
         <AdMobBanner
           bannerSize="fullBanner"
-          adUnitID="ca-app-pub-3552758561036628/7487974176"
+          adUnitID={AdMob.runinfo}
           servePersonalizedAds
         />
       </Animated.ScrollView>
@@ -302,6 +303,8 @@ const styles = StyleSheet.create({
   gameinfocontainer: {
     padding: 20,
     flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
   gameinfo: {
     justifyContent: "center",

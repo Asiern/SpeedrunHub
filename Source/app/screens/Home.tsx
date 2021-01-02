@@ -10,6 +10,8 @@ import NotificationBar from "../components/Notifications/NotificationBar";
 import { h1 } from "../themes/theme";
 import { StatusBar } from "expo-status-bar";
 
+//AdMob
+import AdMob from "../config/admob.json";
 import { AdMobBanner } from "expo-ads-admob";
 import { context } from "../config/config";
 
@@ -60,11 +62,11 @@ export default function Home() {
         My Games
       </Text>
       <MyGames />
-      {/* <AdMobBanner
+      <AdMobBanner
         bannerSize="fullBanner"
-        adUnitID="ca-app-pub-3552758561036628/7487974176"
+        adUnitID={AdMob.home}
         servePersonalizedAds
-      /> */}
+      />
     </ScrollView>
   );
 }
