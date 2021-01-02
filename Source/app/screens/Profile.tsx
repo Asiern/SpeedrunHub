@@ -6,6 +6,8 @@ import PB from "../components/PB";
 import SectionHeader from "../components/SectionHeader";
 import { SectionsProps, user } from "../components/Profile/helpers";
 
+//AdMob
+import AdMob from "../config/admob.json";
 import { AdMobBanner } from "expo-ads-admob";
 import { StatusBar } from "expo-status-bar";
 
@@ -95,7 +97,7 @@ export default function Profile(props) {
             <View style={{ paddingTop: 20 }}>
               <AdMobBanner
                 bannerSize="fullBanner"
-                adUnitID="ca-app-pub-3552758561036628/7487974176"
+                adUnitID={AdMob.profile}
                 servePersonalizedAds
               />
             </View>

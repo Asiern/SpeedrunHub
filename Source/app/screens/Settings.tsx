@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
 import SettingsSection from "../components/SettingsSection";
-import { colors } from "../themes/theme";
 import { StatusBar } from "expo-status-bar";
-import { AdMobBanner } from "expo-ads-admob";
 import { View } from "react-native";
 import { context } from "../config/config";
+
+//AdMob
+import AdMob from "../config/admob.json";
+import { AdMobBanner } from "expo-ads-admob";
 
 export default function Settings() {
   const { theme } = useContext(context);
@@ -87,7 +89,7 @@ export default function Settings() {
       </View>
       <AdMobBanner
         bannerSize="fullBanner"
-        adUnitID="ca-app-pub-3552758561036628/7487974176"
+        adUnitID={AdMob.settings}
         servePersonalizedAds
       />
     </View>
