@@ -11,12 +11,8 @@ type onChangeText = (text: string) => void;
 export interface SearchBarProps {
   placeholder?: string;
   value: string;
-  theme?: "dark" | "light";
   onChangeText: onChangeText;
 }
-SearchBar.defaultProps = {
-  theme: "light",
-};
 export function SearchBar({
   placeholder,
   value,
@@ -29,7 +25,7 @@ export function SearchBar({
         styles.textinput,
         {
           borderColor: theme.colors.primary,
-          backgroundColor: theme === "dark" ? "#000" : "#fff",
+          backgroundColor: theme.dark ? "#000" : "#fff",
         },
       ]}
     >
@@ -40,6 +36,7 @@ export function SearchBar({
         placeholder={placeholder}
         onChangeText={(text) => onChangeText(text)}
         value={value}
+        placeholderTextColor={theme.colors.border}
       />
     </View>
   );

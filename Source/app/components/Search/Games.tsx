@@ -31,7 +31,6 @@ export default function Games() {
         placeholder="Search for games"
         onChangeText={updateSearch}
         value={search}
-        theme={theme.dark ? "dark" : "light"}
       />
       <FlatList
         style={styles.flatList}

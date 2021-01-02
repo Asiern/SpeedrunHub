@@ -32,7 +32,6 @@ export default function Users() {
         placeholder="Search for users"
         onChangeText={updateSearch}
         value={search}
-        theme={theme.dark ? "dark" : "light"}
       />
       <FlatList
         keyExtractor={(item) => item.id}
