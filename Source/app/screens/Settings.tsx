@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import SettingsSection from "../components/SettingsSection";
 import { StatusBar } from "expo-status-bar";
-import { View } from "react-native";
+import { ScrollView } from "react-native";
 import { context } from "../config/config";
 
 //AdMob
@@ -17,12 +17,6 @@ export default function Settings() {
       navigateTo: "AccountSettings",
       weblink: null,
     },
-    // {
-    //   title: "Unlock Pro Version",
-    //   icon: "unlock",
-    //   navigateTo: null,
-    //   weblink: "https://play.google.com/store",
-    // },
     {
       title: "Notifications",
       icon: "bell",
@@ -34,6 +28,12 @@ export default function Settings() {
       icon: "droplet",
       navigateTo: "Themes",
       weblink: null,
+    },
+    {
+      title: "Unlock Pro Version",
+      icon: "unlock",
+      navigateTo: null,
+      weblink: "https://play.google.com/store",
     },
     {
       title: "About",
@@ -63,15 +63,14 @@ export default function Settings() {
     },
   ];
   return (
-    <View
+    <ScrollView
       style={{
         flex: 1,
-        justifyContent: "space-between",
         backgroundColor: theme.colors.background,
       }}
     >
       <StatusBar style={theme.dark ? "light" : "dark"}></StatusBar>
-      <View>
+      <>
         {Sections.map((section, index) => {
           return (
             <SettingsSection
@@ -86,12 +85,12 @@ export default function Settings() {
             />
           );
         })}
-      </View>
+      </>
       <AdMobBanner
         bannerSize="fullBanner"
         adUnitID={AdMob.settings}
         servePersonalizedAds
       />
-    </View>
+    </ScrollView>
   );
 }
