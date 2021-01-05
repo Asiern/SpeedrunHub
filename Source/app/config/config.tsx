@@ -11,6 +11,7 @@ export const config = {
     key: null,
   },
   notifications: {
+    unread: false,
     push: false,
     max: 20,
   },
@@ -26,6 +27,7 @@ export interface config {
     key: string | null;
   };
   notifications: {
+    unread: boolean;
     push: boolean;
     max: number;
   };
