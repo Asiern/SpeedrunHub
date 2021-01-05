@@ -1,6 +1,13 @@
 import React, { useContext, useState } from "react";
-import { View, Text, Dimensions, StyleSheet, ToastAndroid } from "react-native";
-import { h3, h4 } from "../../themes/theme";
+import {
+  View,
+  Text,
+  Dimensions,
+  StyleSheet,
+  ToastAndroid,
+  Switch,
+} from "react-native";
+import { h3, h4b, h6 } from "../../themes/theme";
 import { config, context } from "../../config/config";
 import AsyncStorage from "@react-native-community/async-storage";
 import Slider from "@react-native-community/slider";
@@ -9,11 +16,13 @@ const { width } = Dimensions.get("window");
 
 async function apply(
   config: config,
-  value: number,
+  max: number,
+  unread: boolean,
   setConfig: (config: config) => void
 ) {
   try {
-    config.notifications.max = value;
+    config.notifications.max = max;
+    config.notifications.unread = unread;
     setConfig(config);
     await AsyncStorage.setItem("@Config", JSON.stringify(config));
     showToastWithGravity("Settings applied correctly");
@@ -28,14 +37,29 @@ const showToastWithGravity = (text: string) => {
 export function NotificationsSettings() {
   const { Config, setConfig, theme } = useContext(context);
   const [max, setMax] = useState<number>(Config.notifications.max);
+  const [unread, setUnread] = useState<boolean>(Config.notifications.unread);
   return (
-    <View style={[styles.container, { backgroundColor: theme.colors.card }]}>
-      <View style={styles.section}>
-        <Text style={[h4, { color: theme.colors.text }]}>
-          Set the maximum number of {"\n"}notifications to load
-        </Text>
+    <View
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+    >
+      <View style={[styles.section, { backgroundColor: theme.colors.card }]}>
+        <View style={styles.row}>
+          <Text style={[h4b, { color: theme.colors.text }]}>
+            Only show unread notifications
+          </Text>
+          <Switch
+            value={unread}
+            onValueChange={() => setUnread(!unread)}
+            thumbColor={theme.colors.primary}
+            trackColor={theme.colors.text}
+            ios_backgroundColor={theme.colors.text}
+          />
+        </View>
       </View>
-      <View style={styles.section}>
+      <View style={[styles.section, { backgroundColor: theme.colors.card }]}>
+        <Text style={[h4b, { color: theme.colors.text }]}>
+          Set the number of notifications to receive{"\n"}
+        </Text>
         <Text style={[h3, { color: theme.colors.text }]}>{max}</Text>
         <Slider
           style={{ width: width - 40, height: 40 }}
@@ -46,23 +70,44 @@ export function NotificationsSettings() {
           value={max}
           onValueChange={(value) => setMax(Math.round(value))}
         />
+        <Button
+          variant={"primary"}
+          label={"Apply Changes"}
+          onPress={() => apply(Config, max, unread, setConfig)}
+        />
       </View>
-      <Button
-        variant={"primary"}
-        label={"Apply Changes"}
-        onPress={() => apply(Config, max, setConfig)}
-      />
+      {Config.user.key.length > 0 ? null : (
+        <View
+          style={{
+            padding: 20,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Text style={h6}>
+            It seems you did not provide your api key, the key is required to
+            receive notifications.{"\n"}If you want to receive notifications,
+            log in with your key.
+          </Text>
+        </View>
+      )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: "space-around", alignItems: "center" },
+  container: { flex: 1, alignItems: "center" },
   section: {
     width,
-    height: 50,
     justifyContent: "center",
     alignItems: "center",
-    paddingHorizontal: 20,
+    padding: 20,
+    marginBottom: 10,
+  },
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    width,
   },
 });

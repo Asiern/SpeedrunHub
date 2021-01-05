@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import {
   View,
   StyleSheet,
-  Animated,
   FlatList,
   Text,
   TouchableOpacity,
@@ -20,7 +19,7 @@ export interface NotificationBarProps {
 
 const NotificationBar = ({ data, width }: NotificationBarProps) => {
   const navigation = useNavigation();
-  const { theme } = useContext(context);
+  const { theme, Config } = useContext(context);
 
   return (
     <View style={styles.container}>
@@ -50,23 +49,21 @@ const NotificationBar = ({ data, width }: NotificationBarProps) => {
         renderItem={({ item }) => (
           <View>
             {item.status == "read" ? (
-              <Animated.View>
+              Config.notifications.unread ? null : (
                 <NotificationCard
                   width={width}
                   text={item.text}
                   backgroundColor={theme.colors.card}
                   color={colors.darkgrey}
                 />
-              </Animated.View>
+              )
             ) : (
-              <Animated.View>
-                <NotificationCard
-                  width={width}
-                  text={item.text}
-                  backgroundColor={theme.colors.primary}
-                  color={colors.white}
-                />
-              </Animated.View>
+              <NotificationCard
+                width={width}
+                text={item.text}
+                backgroundColor={theme.colors.primary}
+                color={colors.white}
+              />
             )}
           </View>
         )}
