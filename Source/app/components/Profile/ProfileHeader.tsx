@@ -1,40 +1,27 @@
 import React, { useContext } from "react";
-import { Text, View, StyleSheet, Image } from "react-native";
-
-import { StackActions, useNavigation } from "@react-navigation/native";
-
-import Constants from "expo-constants";
-import { Feather } from "@expo/vector-icons";
-import { colors, h2w, h4w } from "../../themes/theme";
+import { Text, View, StyleSheet } from "react-native";
+import { h2w } from "../../themes/theme";
 import Carousel from "./ProfileCarousel";
 import { context } from "../../config/config";
-
-const goBack = StackActions.pop();
+import TopBar from "../TopBar";
 
 export interface ProfileHeaderProps {
   username: string;
   country?: string;
   signup?: string;
+  onPress: () => void;
 }
 
-const ProfileHeader = ({ username, country, signup }: ProfileHeaderProps) => {
-  const navigation = useNavigation();
+const ProfileHeader = ({
+  username,
+  country,
+  signup,
+  onPress,
+}: ProfileHeaderProps) => {
   const { theme } = useContext(context);
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.primary }]}>
-      <View style={styles.topbar}>
-        <View style={styles.topbarleft}>
-          <Feather
-            onPress={() => navigation.dispatch(goBack)}
-            name="arrow-left"
-            color={colors.white}
-            size={35}
-            style={{ paddingLeft: 20 }}
-          />
-        </View>
-        <View style={styles.topbarcenter}></View>
-        <View style={styles.topbarright}></View>
-      </View>
+      <TopBar variant={"transparent"} label={"Profile"} />
       <View style={styles.imagecontainer}>
         <Carousel username={username} signup={signup} country={country} />
       </View>
@@ -50,23 +37,6 @@ const styles = StyleSheet.create({
     flex: 1,
     borderBottomLeftRadius: 40,
     borderBottomRightRadius: 40,
-  },
-  topbar: {
-    flex: 1,
-    flexDirection: "row",
-    marginTop: Constants.statusBarHeight,
-    paddingTop: 10,
-    paddingBottom: 10,
-  },
-  topbarleft: {
-    flex: 1,
-  },
-  topbarcenter: {
-    flex: 1,
-    justifyContent: "center",
-  },
-  topbarright: {
-    flex: 1,
   },
   profile: {
     flex: 1,
