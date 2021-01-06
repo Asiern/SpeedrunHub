@@ -12,13 +12,11 @@ import Animated, {
   useSharedValue,
 } from "react-native-reanimated";
 
-import { colors, h4, shadow, h3pb, h4pb, h3 } from "../themes/theme";
-import Splits from "../components/Splits/Splits";
+import { colors, h4, shadow, h3 } from "../themes/theme";
 import VideoCarousel from "../components/RunInfo/VideoCarousel";
 import GameCard from "../components/GameCard";
 import TopBar from "../components/TopBar";
 import Links from "../components/RunInfo/Links";
-import Modal from "../components/RunInfo/Modal";
 
 //Interface
 import { run } from "../interface/runInterface";
@@ -26,7 +24,7 @@ import { game } from "../interface/gameInterface";
 import { category } from "../interface/categoryInterface";
 import { player } from "../interface/playersInterface";
 import { platform } from "../interface/platformInterface";
-import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import AdMob from "../config/admob.json";
 import { AdMobBanner } from "expo-ads-admob";
 import { context } from "../config/config";
@@ -165,9 +163,9 @@ export default function RunInfo(props) {
   } else {
     return (
       <Animated.ScrollView style={{ flex: 1 }} ref={scroll} onScroll={onScroll}>
-        <Modal visible={modalVisible} offset={ScrollY.value}>
+        {/* <Modal visible={modalVisible} offset={ScrollY.value}>
           <View />
-        </Modal>
+        </Modal> */}
         <StatusBar style={"dark"}></StatusBar>
         <View
           style={[
