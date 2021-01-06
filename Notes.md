@@ -7,12 +7,15 @@
 - Themes
 - Context
 - Notifications Settings
+- Show misc. categories
 
 ## Fixes
 
 - Fixed: Login layout issues when using the keyboard.
 - Fixed: Leaderboard times format.
 - Fixed: App crashes when selecting a guest user profile/run.
+- Fixed: Settings layout.
+- Fixed: Webview interactions.
 
 ## Performance
 
@@ -23,7 +26,6 @@
 
 - Japanese names not displaying.
 - OS forced darkmode breaks `UserHeader.js` colors.
-- Webview interactions
 - Game without categories not loading.
 
 ---
