@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { View, SectionList, ActivityIndicator } from "react-native";
+import React, { useState, useEffect, useContext } from "react";
+import { View, SectionList, ActivityIndicator, Text } from "react-native";
 
 import ProfileHeader from "../components/Profile/ProfileHeader";
 import PB from "../components/PB";
@@ -10,12 +10,23 @@ import { SectionsProps, user } from "../components/Profile/helpers";
 import AdMob from "../config/admob.json";
 import { AdMobBanner } from "expo-ads-admob";
 import { StatusBar } from "expo-status-bar";
+import { Switch } from "react-native-gesture-handler";
+import { h6 } from "../themes/theme";
+import { context } from "../config/config";
+import Modal from "../components/RunInfo/Modal";
 
 export default function Profile(props) {
   const [country, setCountry] = useState("");
   const [sections, setSections] = useState<SectionsProps>();
   const [user, setUser] = useState<user>();
+  const [showMisc, setShowMisc] = useState<boolean>(false);
   const { username, userid } = props.route.params;
+  const { theme } = useContext(context);
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
+  //Toggle modal visible
+  function onPress() {
+    setModalVisible(!modalVisible);
+  }
 
   function filterPBS(data) {
     var sectionList: SectionsProps = {
@@ -47,6 +58,7 @@ export default function Profile(props) {
         time: run.run.times.primary,
         category: run.category.data.name,
         weblink: run.run.weblink,
+        misc: run.category.data.miscellaneous,
       };
       counter++;
       //Push data
@@ -65,6 +77,7 @@ export default function Profile(props) {
           "https://www.speedrun.com/api/v1/users/" +
           userid +
           "/personal-bests?embed=game,category";
+        console.log(runsurl);
         const runsresponse = await fetch(runsurl);
         const runsdata = await runsresponse.json();
         //User
@@ -82,13 +95,16 @@ export default function Profile(props) {
     return function cleanup() {
       mounted = false;
     };
-  }, []);
+  }, [showMisc]);
 
   if (sections == undefined) {
     return <ActivityIndicator />;
   } else {
     return (
       <>
+        {/* <Modal visible={modalVisible} offset={10}>
+          <View />
+        </Modal> */}
         <StatusBar style={"dark"}></StatusBar>
         <SectionList
           sections={sections.data}
@@ -103,20 +119,47 @@ export default function Profile(props) {
             </View>
           }
           ListHeaderComponent={
-            <ProfileHeader
-              username={username}
-              country={country}
-              signup={user.signup}
-            />
+            <>
+              <ProfileHeader
+                username={username}
+                country={country}
+                signup={user.signup}
+                onPress={onPress}
+              />
+              <View
+                style={{
+                  flexDirection: "row",
+                  paddingTop: 20,
+                  paddingHorizontal: 20,
+                  alignItems: "center",
+                }}
+              >
+                <Text
+                  style={[h6, { color: theme.colors.text, marginRight: 10 }]}
+                >
+                  Show misc. categories
+                </Text>
+                <Switch
+                  value={showMisc}
+                  onValueChange={() => setShowMisc(!showMisc)}
+                />
+              </View>
+            </>
           }
-          renderItem={({ item }) => (
-            <PB
-              place={item.place}
-              time={item.time}
-              category={item.category}
-              weblink={item.weblink}
-            />
-          )}
+          renderItem={({ item }) => {
+            if (!showMisc && item.misc) {
+              return null;
+            } else {
+              return (
+                <PB
+                  place={item.place}
+                  time={item.time}
+                  category={item.category}
+                  weblink={item.weblink}
+                />
+              );
+            }
+          }}
           renderSectionHeader={({ section }) => (
             <SectionHeader
               abbreviation={section.abbreviation}
