@@ -28,6 +28,7 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
 - Search for users and watch their PBs
 - Search for game leaderboards
 - Manage your favourite games
+- View game runs
 - <b>Feasible features</b>
   - As a moderator verify/reject runs
   - Submit/remove personal runs
@@ -54,7 +55,7 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
 
    ```
    # Using Ubuntu
-   curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+   $ curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
    $ sudo apt-get install -y nodejs
    ```
    
@@ -63,7 +64,7 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
 3. Install [Git](https://git-scm.com/)
 
    ```
-   #Using Ubuntu
+   # Using Ubuntu
    $ sudo apt install git
    ```
 
@@ -110,12 +111,12 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
    
 ## :warning: Issues
 
-- IOS version not tested
-- MIUI 12 (Android 11) Dark Theme
+- Japanese names not displaying.
+- OS forced darkmode breaks `UserHeader.tsx` colors.
+- Game without categories not loading.
 
 ## :construction: WIP
 
-- Themes
 - UI Design
 - Push Notifications
 - Japanese text support
