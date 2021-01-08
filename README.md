@@ -125,7 +125,7 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
 
 ## :scroll: Release Notes
 
-### Version 1.12 | [View All Versions](Notes.md)
+### Version 1.0.12 | [View All Versions](Notes.md)
 
 #### What's new?
 
