@@ -41,7 +41,6 @@ interface dataProps {
     data: category;
   };
 }
-
 function getId(weblink: string) {
   const first = weblink.lastIndexOf("/") + 1;
   const last = weblink.length;
@@ -211,21 +210,19 @@ export default function RunInfo(props) {
             {getPlayers(data).map((item) => {
               return (
                 <TouchableOpacity
-                // onPress={() =>
-                //   item.userid !== undefined
-                //     ? navigation.navigate("Profile", {
-                //         username: item.username,
-                //         userid: item.userid,
-                //       })
-                //     : showToastWithGravity(
-                //         "Ooops, it look like this user has no account at speedrun.com"
-                //       )
-                // }
+                  // onPress={() =>
+                  //   item.userid !== undefined
+                  //     ? navigation.navigate("Profile", {
+                  //         username: item.username,
+                  //         userid: item.userid,
+                  //       })
+                  //     : showToastWithGravity(
+                  //         "Ooops, it look like this user has no account at speedrun.com"
+                  //       )
+                  // }
+                  key={item.userid}
                 >
-                  <Text
-                    key={item.userid}
-                    style={[h3, { color: theme.colors.primary }]}
-                  >
+                  <Text style={[h3, { color: theme.colors.primary }]}>
                     {item.username}
                   </Text>
                 </TouchableOpacity>
