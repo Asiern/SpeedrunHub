@@ -20,6 +20,7 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
 - [:gear: Project Setup](#gear-project-setup)
 - [:warning: Issues](#warning-issues)
 - [:construction: Work in progress](#construction-wip)
+- [:scroll: Release notes](#scroll-release-notes)
 - [:page_with_curl: Privacy Policy / Terms & Conditions / License](#page_with_curl-privacy-policy--terms--conditions--license)
 
 ## :boom: Features
@@ -58,7 +59,7 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
    $ curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
    $ sudo apt-get install -y nodejs
    ```
-   
+
 2. Install [Yarn](https://classic.yarnpkg.com/en/docs/install)
 
 3. Install [Git](https://git-scm.com/)
@@ -94,21 +95,21 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
    $ git clone https://github.com/Asiern/SpeedrunHub.git
    ```
 
-5. Install missing packages
+6. Install missing packages
 
    ```
    # Navigate to the "...\SpeedrunHub\Source" folder and run the following command
    $ yarn
    ```
 
-6. Run
+7. Run
 
    ```
    # At "...\SpeedrunHub\Source" run
    $ yarn start
    # Expo Metro Bundler should open if all went well
    ```
-   
+
 ## :warning: Issues
 
 - Japanese names not displaying.
@@ -121,6 +122,30 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
 - Push Notifications
 - Japanese text support
 - Add HTTP request Header User-Agent
+
+## :scroll: Release Notes
+
+### Version 1.12
+
+### What's new?
+
+- Onboarding
+- Increased Game leaderboard `FlatList` performance.
+
+### Fixes
+
+- Fixed Login.
+- Fixed Account Settings user image not loading properly.
+- Fixed Navigation.
+- Fixed Runs with multiple runners not displaying properly.
+- Fixed Text inputs.
+
+### Known issues
+
+- Japanese names not displaying.
+- OS forced darkmode breaks `UserHeader.js` colors.
+
+[View All](Notes.md)
 
 ## :page_with_curl: Privacy Policy / Terms & Conditions / License
 
