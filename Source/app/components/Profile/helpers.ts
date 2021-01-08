@@ -15,6 +15,7 @@ interface SectionData {
   runnerid: string;
   time: string;
   weblink: string;
+  misc: boolean;
 }
 
 export interface user {
