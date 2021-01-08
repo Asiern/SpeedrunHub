@@ -70,11 +70,6 @@ export function NotificationsSettings() {
           value={max}
           onValueChange={(value) => setMax(Math.round(value))}
         />
-        <Button
-          variant={"primary"}
-          label={"Apply Changes"}
-          onPress={() => apply(Config, max, unread, setConfig)}
-        />
       </View>
       {Config.user.key.length > 0 ? null : (
         <View
@@ -91,6 +86,11 @@ export function NotificationsSettings() {
           </Text>
         </View>
       )}
+      <Button
+        variant={"primary"}
+        label={"Apply Changes"}
+        onPress={() => apply(Config, max, unread, setConfig)}
+      />
     </View>
   );
 }
