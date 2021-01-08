@@ -5,8 +5,8 @@ import {
   View,
   ActivityIndicator,
   FlatList,
-  Button,
 } from "react-native";
+import VariableButton from "../components/GameInfoComponents/VariableButton";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-community/async-storage";
 import { StatusBar } from "expo-status-bar";
@@ -316,18 +316,18 @@ export default function GameInfo({ route }) {
                 <View>
                   {url.includes(item.id) ? (
                     <View style={styles.button}>
-                      <Button
-                        title={item.label}
-                        color={theme.colors.primary}
+                      <VariableButton
+                        label={item.label}
                         onPress={() => modifyUrl(item.categoryid, item.id)}
+                        variant={"primary"}
                       />
                     </View>
                   ) : (
                     <View style={styles.button}>
-                      <Button
-                        title={item.label}
-                        color={theme.colors.text}
+                      <VariableButton
+                        label={item.label}
                         onPress={() => modifyUrl(item.categoryid, item.id)}
+                        variant={"default"}
                       />
                     </View>
                   )}
