@@ -41,9 +41,6 @@ interface dataProps {
     data: category;
   };
 }
-const showToastWithGravity = (text: string) => {
-  ToastAndroid.showWithGravity(text, ToastAndroid.SHORT, ToastAndroid.CENTER);
-};
 
 function getId(weblink: string) {
   const first = weblink.lastIndexOf("/") + 1;
@@ -173,12 +170,7 @@ export default function RunInfo(props) {
             { backgroundColor: theme.colors.background },
           ]}
         >
-          <TopBar
-            label={"Run Info"}
-            variant={theme.dark ? "dark" : "light"}
-            onPress={onPress}
-            icon={"more-horizontal"}
-          />
+          <TopBar label={"Run Info"} variant={theme.dark ? "dark" : "light"} />
           <VideoCarousel links={data.videos.links} />
           <Links videolink={data.videos.links[0].uri} weblink={weblink} />
           <View style={styles.gameinfocontainer}>
