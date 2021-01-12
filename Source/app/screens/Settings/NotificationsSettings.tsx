@@ -90,6 +90,7 @@ export function NotificationsSettings() {
         variant={"primary"}
         label={"Apply Changes"}
         onPress={() => apply(Config, max, unread, setConfig)}
+        width={(width / 3) * 2}
       />
     </View>
   );

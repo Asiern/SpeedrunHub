@@ -8,6 +8,7 @@ import {
   ToastAndroid,
   ScrollView,
   Clipboard,
+  Dimensions,
 } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import { colors } from "../../themes/theme";
@@ -16,6 +17,7 @@ import { useNavigation } from "@react-navigation/native";
 import { context } from "../../config/config";
 import TopBar from "../../components/TopBar";
 
+const { width } = Dimensions.get("window");
 export const AccountSettings = () => {
   const navigation = useNavigation();
   const { theme, Config, setConfig } = useContext(context);
@@ -106,11 +108,13 @@ export const AccountSettings = () => {
             label={"LOG OUT"}
             variant={"primary"}
             onPress={() => signOut()}
+            width={(width / 3) * 2}
           />
           <Button
             label={"COPY API-KEY"}
             variant={"default"}
             onPress={() => copyKey()}
+            width={(width / 3) * 2}
           />
         </View>
       </View>
@@ -120,7 +124,6 @@ export const AccountSettings = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignContent: "center",
   },
   user: {
     flex: 0.3,
