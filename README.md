@@ -125,14 +125,14 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
 
 ## :scroll: Release Notes
 
-### Version 1.12
+### Version 1.0.12 | [View All Versions](Notes.md)
 
-### What's new?
+#### What's new?
 
 - Onboarding
 - Increased Game leaderboard `FlatList` performance.
 
-### Fixes
+#### Fixes
 
 - Fixed Login.
 - Fixed Account Settings user image not loading properly.
@@ -140,12 +140,10 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
 - Fixed Runs with multiple runners not displaying properly.
 - Fixed Text inputs.
 
-### Known issues
+#### Known issues
 
 - Japanese names not displaying.
 - OS forced darkmode breaks `UserHeader.js` colors.
-
-[View All](Notes.md)
 
 ## :page_with_curl: Privacy Policy / Terms & Conditions / License
 
