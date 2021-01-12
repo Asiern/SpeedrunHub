@@ -8,16 +8,18 @@ export interface ButtonProps {
   label: string;
   variant: "default" | "primary";
   onPress: () => void;
+  width: number;
 }
 
-const Button = ({ label, variant, onPress }: ButtonProps) => {
+const Button = ({ label, variant, onPress, width }: ButtonProps) => {
   const { theme } = React.useContext(context);
+  const height = width * 0.2;
   const backgroundColor =
     variant === "primary" ? theme.colors.primary : colors.light;
   const color = variant === "primary" ? colors.white : colors.darkgrey;
   return (
     <RectButton
-      style={[styles.container, { backgroundColor }]}
+      style={[styles.container, { backgroundColor, width, height }]}
       {...{ onPress }}
     >
       <Text style={[styles.label, { color }]}>{label}</Text>

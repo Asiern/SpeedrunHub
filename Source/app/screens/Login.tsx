@@ -19,7 +19,7 @@ import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { context } from "../config/config";
 
-const { height } = Dimensions.get("window");
+const { height, width } = Dimensions.get("window");
 
 export default function Login() {
   const [textinput, setTextinput] = useState("");
@@ -111,6 +111,7 @@ export default function Login() {
                   placeholder={"Username"}
                   autoCompleteType={"username"}
                   onChangeText={(text) => setTextinput(text)}
+                  placeholderTextColor={theme.colors.border}
                   value={textinput}
                 />
               </View>
@@ -127,6 +128,7 @@ export default function Login() {
                   placeholder={"API-Key (Optional)"}
                   autoCompleteType={"username"}
                   onChangeText={(text) => setKeyinput(text)}
+                  placeholderTextColor={theme.colors.border}
                   value={keyinput}
                   secureTextEntry={true}
                 />
@@ -138,6 +140,7 @@ export default function Login() {
               label={"LOG IN"}
               variant={"primary"}
               onPress={() => _storeData(textinput, keyinput)}
+              width={(width / 3) * 2}
             />
             <Button
               label={"SIGN UP"}
@@ -145,6 +148,7 @@ export default function Login() {
               onPress={() => {
                 loadInBrowser("https://speedrun.com");
               }}
+              width={(width / 3) * 2}
             />
           </View>
           <View style={styles.footerline}>
@@ -169,6 +173,7 @@ export default function Login() {
             label={"LOG IN AS GUEST"}
             variant={"default"}
             onPress={() => _storeData("Guest", "")}
+            width={(width / 3) * 2}
           ></Button>
         </View>
       </View>
