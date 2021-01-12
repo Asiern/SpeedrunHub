@@ -1,6 +1,6 @@
 import { Feather } from "@expo/vector-icons";
 import React, { useContext } from "react";
-import { View, StyleSheet, Dimensions } from "react-native";
+import { View, StyleSheet, Dimensions, ScrollView } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-community/async-storage";
 
@@ -17,6 +17,8 @@ const themeColors = [
   "#c62828",
   "#AB47BC",
   "#448AFF",
+  "#0097A7",
+  "#F9A825",
 ];
 
 const { width } = Dimensions.get("window");
@@ -57,7 +59,7 @@ export function ThemeSettings() {
   var backgroundColor = theme.dark ? "#000" : colors.light;
   var color = theme.dark ? "#fff" : "#000";
   return (
-    <View style={[styles.container, { backgroundColor }]}>
+    <ScrollView style={[styles.container, { backgroundColor }]}>
       <View style={styles.dark}>
         <TouchableOpacity
           onPress={() => onPress(false, theme.colors.primary, setTheme)}
@@ -89,16 +91,15 @@ export function ThemeSettings() {
           );
         })}
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
     backgroundColor: "white",
+    paddingVertical: 30,
   },
   dark: {
     flexDirection: "row",
@@ -106,6 +107,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 1,
     width,
+    paddingVertical: 20,
   },
   colors: {
     flex: 3,
@@ -113,5 +115,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     padding: 20,
     flexWrap: "wrap",
+    marginBottom: 30,
   },
 });
