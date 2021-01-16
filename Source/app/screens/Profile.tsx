@@ -50,6 +50,13 @@ export default function Profile(props) {
         sectionList.data.push(section);
         sectionList.pagination.push(run.game.data.id);
       }
+      //Get variables
+      // var variables = "";
+      // for (let value in run.run.values) {
+      //   const url = "https://www.speedrun.com/api/v1/variables/" + value;
+      //   const response = await fetch(url);
+      //   const data = await response.json();
+      // }
       //Create run object
       var r = {
         key: counter.toString(),

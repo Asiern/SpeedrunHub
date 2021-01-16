@@ -29,12 +29,12 @@ export default function Settings() {
       navigateTo: "Themes",
       weblink: null,
     },
-    {
-      title: "Unlock Pro Version",
-      icon: "unlock",
-      navigateTo: null,
-      weblink: "https://play.google.com/store",
-    },
+    // {
+    //   title: "Unlock Pro Version",
+    //   icon: "unlock",
+    //   navigateTo: null,
+    //   weblink: "https://play.google.com/store",
+    // },
     {
       title: "About",
       icon: "info",
@@ -55,12 +55,12 @@ export default function Settings() {
       weblink:
         "https://github.com/Asiern/SpeedrunHub/blob/master/Readme/Terms%20%26%20Conditions.md",
     },
-    {
-      title: "Dev Settings",
-      icon: "alert-triangle",
-      navigateTo: "DevSettings",
-      weblink: null,
-    },
+    // {
+    //   title: "Dev Settings",
+    //   icon: "alert-triangle",
+    //   navigateTo: "DevSettings",
+    //   weblink: null,
+    // },
   ];
   return (
     <ScrollView
