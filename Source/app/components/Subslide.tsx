@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 import { h2, h4 } from "../themes/theme";
 import Button from "./Buttons/Button";
 export interface SubslideProps {
@@ -8,6 +8,7 @@ export interface SubslideProps {
   last?: boolean;
   onPress: () => void;
 }
+const { width } = Dimensions.get("window");
 
 export default function Subslide({
   title,
@@ -25,6 +26,7 @@ export default function Subslide({
         label={last ? "Let's get Started" : "Next"}
         variant={last ? "primary" : "default"}
         {...{ onPress }}
+        width={(width / 3) * 2}
       />
     </View>
   );
