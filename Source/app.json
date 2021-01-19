@@ -25,7 +25,7 @@
     "githubUrl": "https://github.com/Asiern/SpeedrunHub",
     "android": {
       "package": "com.asiern.speedrun",
-      "versionCode": 13,
+      "versionCode": 15,
       "permissions": [],
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-3552758561036628~8801055846"
