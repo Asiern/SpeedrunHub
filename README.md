@@ -42,7 +42,7 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
 
 ## :arrow_down: Download
 
-[![Get](Readme/assets/google-play-badge.png)](https://play.google.com/store/apps/details?id=com.asiern.speedrun)
+[![Get](Readme/assets/google-play-badge.png)](https://play.google.com/store/apps/details?id=com.asiern.speedrun2)
 
 ## :email: Send Feedback
 
