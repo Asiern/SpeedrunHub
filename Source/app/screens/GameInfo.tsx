@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import VariableButton from "../components/GameInfoComponents/VariableButton";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StatusBar } from "expo-status-bar";
 
 import Run from "../components/Run";
