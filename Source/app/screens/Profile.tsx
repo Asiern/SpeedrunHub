@@ -117,11 +117,11 @@ export default function Profile(props) {
           keyExtractor={(item, index) => item.key + index}
           ListFooterComponent={
             <View style={{ paddingTop: 20 }}>
-              <AdMobBanner
+              {/* <AdMobBanner
                 bannerSize="fullBanner"
                 adUnitID={AdMob.profile}
                 servePersonalizedAds
-              />
+              /> */}
             </View>
           }
           ListHeaderComponent={
