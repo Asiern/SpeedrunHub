@@ -266,11 +266,11 @@ export default function RunInfo(props) {
             )}
           </View>
         </View>
-        <AdMobBanner
+        {/* <AdMobBanner
           bannerSize="fullBanner"
           adUnitID={AdMob.runinfo}
           servePersonalizedAds
-        />
+        /> */}
       </Animated.ScrollView>
     );
   }

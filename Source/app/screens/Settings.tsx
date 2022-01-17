@@ -86,11 +86,11 @@ export default function Settings() {
           );
         })}
       </>
-      <AdMobBanner
+      {/* <AdMobBanner
         bannerSize="fullBanner"
         adUnitID={AdMob.settings}
         servePersonalizedAds
-      />
+      /> */}
     </ScrollView>
   );
 }
