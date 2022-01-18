@@ -14,6 +14,7 @@ import { context } from "../../config/config";
 export interface GameHeaderProps {
   abbreviation: string;
   name: string;
+  uri: string;
   date: string;
   platforms: any[];
   id: string;
@@ -22,6 +23,7 @@ export interface GameHeaderProps {
 const GameHeader = ({
   abbreviation,
   name,
+  uri,
   date,
   platforms,
   id,
@@ -30,6 +32,7 @@ const GameHeader = ({
   const navigation = useNavigation();
   const goBack = StackActions.pop();
   const { games, setGames } = useContext(context);
+
   const _isFavourite = async (id: string) => {
     for (let GAME of games) {
       if (GAME.id == id) {
@@ -38,9 +41,11 @@ const GameHeader = ({
     }
   };
   const _toggleFavourites = async () => {
+    console.log("URI " + uri);
     //Create game obj
     var game = {
       id: id,
+      uri: uri,
       abbreviation: abbreviation,
     };
     if (!isFav) {
@@ -83,8 +88,7 @@ const GameHeader = ({
       }}
       style={styles.profileBG}
       source={{
-        uri:
-          "https://www.speedrun.com/themes/" + abbreviation + "/cover-256.png",
+        uri: uri,
       }}
     >
       <View style={styles.topbar}>
@@ -121,6 +125,7 @@ const GameHeader = ({
       <View style={styles.profile}>
         <Carousel
           abbreviation={abbreviation}
+          uri={uri}
           date={date}
           platformIDs={platforms}
         />

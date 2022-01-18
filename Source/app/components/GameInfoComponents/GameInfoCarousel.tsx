@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { StyleSheet, View, Dimensions, Text, Image } from "react-native";
-import { colors, h4w } from "../../themes/theme";
+import { h4w } from "../../themes/theme";
 import Dot from "../Dot";
 import Animated, {
   useSharedValue,
@@ -11,11 +11,12 @@ import { context } from "../../config/config";
 
 export interface CarouselProps {
   abbreviation: string;
+  uri: string;
   date: string;
   platformIDs: any[];
 }
 
-export default function Carousel({ abbreviation, date }: CarouselProps) {
+export default function Carousel({ abbreviation, uri, date }: CarouselProps) {
   const { width } = Dimensions.get("window");
   const x = useSharedValue(0);
   const onScroll = useAnimatedScrollHandler({
@@ -42,10 +43,7 @@ export default function Carousel({ abbreviation, date }: CarouselProps) {
         <View style={[styles.imagecontainer, { width }]}>
           <Image
             source={{
-              uri:
-                "https://www.speedrun.com/themes/" +
-                abbreviation +
-                "/cover-256.png",
+              uri: uri,
             }}
             style={styles.Image}
           ></Image>
