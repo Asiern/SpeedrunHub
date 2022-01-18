@@ -176,6 +176,7 @@ export default function RunInfo(props) {
             <GameCard
               abbreviation={data.game.data.abbreviation}
               id={data.game.data.id}
+              image={data.game.data.assets["cover-medium"].uri}
               width={100}
               height={140}
             />
