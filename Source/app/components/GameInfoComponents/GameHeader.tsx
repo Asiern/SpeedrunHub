@@ -41,7 +41,6 @@ const GameHeader = ({
     }
   };
   const _toggleFavourites = async () => {
-    console.log("URI " + uri);
     //Create game obj
     var game = {
       id: id,
