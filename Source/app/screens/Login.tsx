@@ -42,6 +42,7 @@ export default function Login() {
         Config.user.username = name;
         Config.user.userid = id;
         Config.user.key = key;
+        Config.user.image = data.data.assets.image.uri;
         setConfig(Config);
         await AsyncStorage.setItem("@Config", JSON.stringify(Config));
 
