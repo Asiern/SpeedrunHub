@@ -9,6 +9,7 @@ export const config = {
     username: null,
     userid: null,
     key: null,
+    image: null,
   },
   notifications: {
     unread: false,
@@ -25,6 +26,7 @@ export interface config {
     username: string | null;
     userid: string | null;
     key: string | null;
+    image: string | null;
   };
   notifications: {
     unread: boolean;

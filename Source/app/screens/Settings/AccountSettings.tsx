@@ -37,6 +37,7 @@ export const AccountSettings = () => {
       username: null,
       userid: null,
       key: null,
+      image: null,
     };
     setConfig(Config);
     await AsyncStorage.setItem("@Config", JSON.stringify(Config));
@@ -57,10 +58,7 @@ export const AccountSettings = () => {
         <View style={styles.imagecontainer}>
           <Image
             source={{
-              uri:
-                "https://www.speedrun.com/themes/user/" +
-                username +
-                "/image.png",
+              uri: Config.user.image,
             }}
             style={styles.image}
           ></Image>
