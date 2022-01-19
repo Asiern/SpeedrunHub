@@ -44,7 +44,7 @@ export function About() {
           Disclaimer: This is not an official app
         </Text>
         <Text style={[styles.title, { color: theme.colors.primary }]}>
-          Release Notes
+          Release Notes v1.1.0
         </Text>
         <Text
           style={[
@@ -60,8 +60,7 @@ export function About() {
           What's New
         </Text>
         <Text style={[styles.paragraph, { color: theme.colors.text }]}>
-          - RunInfo {"\n"}- Expo SDK 40 {"\n"}- Themes {"\n"}- Notifications
-          Settings {"\n"}- Show misc. categories
+          - Ads Removed
         </Text>
         <Text
           style={[
@@ -77,26 +76,8 @@ export function About() {
           Fixes
         </Text>
         <Text style={[styles.paragraph, { color: theme.colors.text }]}>
-          - Fixed: Login layout issues when using the keyboard. {"\n"}- Fixed:
-          Leaderboard times format. {"\n"}- Fixed: App crashes when selecting a
-          guest user profile/run. {"\n"}- Fixed: Settings layout. {"\n"}- Fixed:
-          Webview interactions.
-        </Text>
-        <Text
-          style={[
-            styles.paragraph,
-            {
-              fontWeight: "bold",
-              paddingBottom: -5,
-              fontSize: 18,
-              color: theme.colors.text,
-            },
-          ]}
-        >
-          Performance
-        </Text>
-        <Text style={[styles.paragraph, { color: theme.colors.text }]}>
-          - App loading {"\n"}- App perfomance
+          - Fixed: Asset images not displaying {"\n"}- Fixed: Category variable
+          button not displaying label
         </Text>
         <Text
           style={[
@@ -114,6 +95,7 @@ export function About() {
         <Text style={[styles.paragraph, { color: theme.colors.text }]}>
           - Japanese names not displaying. {"\n"}- OS forced darkmode breaks
           `UserHeader.js` colors. {"\n"}- Game without categories not loading.
+          {"\n"}- App crashing
         </Text>
         <Text style={[styles.title, { color: theme.colors.primary }]}>
           Send Feedback
