@@ -7,6 +7,7 @@ interface Section {
   data: SectionData[];
   id: string;
   name: string;
+  uri: string | null;
 }
 interface SectionData {
   key: string;
