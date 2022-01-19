@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import VariableButton from "../components/GameInfoComponents/VariableButton";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import AsyncStorage from "@react-native-community/async-storage";
 import { StatusBar } from "expo-status-bar";
 
 import Run from "../components/Run";
@@ -26,54 +25,15 @@ export default function GameInfo({ route }) {
   const [runs, setRuns] = useState([]);
   const [variables, setVariables] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [favourite, setFavourite] = useState(false);
   const [players, setPlayers] = useState([]);
   const [checked, setChecked] = useState("");
   const { theme } = useContext(context);
 
-  const _isFavourite = async (id: string) => {
-    const MyGames = await AsyncStorage.getItem("@MyGames");
-    const gameList = JSON.parse(MyGames === null ? "[]" : MyGames);
-    if (gameList != null) {
-      for (let GAME of gameList) {
-        if (GAME.id == id) {
-          setFavourite(true);
-        }
-      }
-    }
-  };
-  const _toggleFavourites = async () => {
-    const games = await AsyncStorage.getItem("@MyGames");
-    var gameList = JSON.parse(games === null ? "[]" : games);
-    //Create game obj
-    var game = {
-      id: id,
-      abbreviation: abbreviation,
-    };
-    if (!favourite) {
-      //add game to list
-      gameList.push(game);
-      //Game added to list
-      await AsyncStorage.setItem("@MyGames", JSON.stringify(gameList));
-      setFavourite(true);
-    } else {
-      //Game got removed from list
-      for (let GAME of gameList) {
-        if (game.id == GAME.id) {
-          gameList.splice(gameList.indexOf(GAME), 1);
-        }
-      }
-      await AsyncStorage.setItem("@MyGames", JSON.stringify(gameList));
-      setFavourite(false);
-    }
-  };
   useEffect(() => {
     let mounted = true;
     if (mounted) {
       (async () => {
         //Load gameId & abbreviation from react navigation
-        //Fav?
-        _isFavourite(id);
         //Get Game Data
         //Fetch Categories from Speedrun.com
         const url =
@@ -256,6 +216,7 @@ export default function GameInfo({ route }) {
         <GameHeader
           abbreviation={abbreviation}
           name={name}
+          uri={game.assets["cover-medium"].uri}
           date={game["release-date"]}
           id={id}
           platforms={[]}
@@ -414,7 +375,6 @@ const styles = StyleSheet.create({
   },
   button: {
     alignSelf: "center",
-    height: 46,
     alignContent: "center",
     marginHorizontal: 10,
     marginVertical: 10,

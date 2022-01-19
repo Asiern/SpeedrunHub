@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Text, StyleSheet } from "react-native";
+import { Text, StyleSheet, TouchableOpacity } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 import { context } from "../../config/config";
 import { colors } from "../../themes/theme";
@@ -16,12 +16,12 @@ const Button = ({ label, variant, onPress }: ButtonProps) => {
   var backgroundColor =
     variant === "primary" ? theme.colors.primary : theme.colors.card;
   return (
-    <RectButton
+    <TouchableOpacity
       style={[styles.container, { backgroundColor }]}
       {...{ onPress }}
     >
       <Text style={[styles.label, { color }]}>{label}</Text>
-    </RectButton>
+    </TouchableOpacity>
   );
 };
 
@@ -39,11 +39,11 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 5, height: 5 },
     shadowOpacity: 1,
     elevation: 1,
-    padding: 15,
   },
   label: {
     fontSize: 15,
     fontWeight: "bold",
+    padding: 10,
   },
 });
 export default Button;
