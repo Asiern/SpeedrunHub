@@ -375,7 +375,6 @@ const styles = StyleSheet.create({
   },
   button: {
     alignSelf: "center",
-    height: 46,
     alignContent: "center",
     marginHorizontal: 10,
     marginVertical: 10,
