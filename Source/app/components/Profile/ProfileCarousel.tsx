@@ -11,10 +11,16 @@ import Animated, {
 export interface CarouselProps {
   username: string;
   signup: string;
+  image: string;
   country?: string;
 }
 
-export default function Carousel({ username, signup, country }: CarouselProps) {
+export default function Carousel({
+  username,
+  signup,
+  image,
+  country,
+}: CarouselProps) {
   const { width } = Dimensions.get("window");
   const x = useSharedValue(0);
   const onScroll = useAnimatedScrollHandler({
@@ -40,10 +46,7 @@ export default function Carousel({ username, signup, country }: CarouselProps) {
         <View style={[styles.imagecontainer, { width }]}>
           <Image
             source={{
-              uri:
-                "https://www.speedrun.com/themes/user/" +
-                username +
-                "/image.png",
+              uri: image,
             }}
             style={styles.Image}
           ></Image>

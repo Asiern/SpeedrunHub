@@ -62,11 +62,11 @@ export default function Home() {
         My Games
       </Text>
       <MyGames />
-      <AdMobBanner
+      {/* <AdMobBanner
         bannerSize="fullBanner"
         adUnitID={AdMob.home}
         servePersonalizedAds
-      />
+      /> */}
     </ScrollView>
   );
 }

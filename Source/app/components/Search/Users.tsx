@@ -36,6 +36,9 @@ export default function Users() {
       <FlatList
         keyExtractor={(item) => item.id}
         data={users}
+        ListFooterComponent={() => {
+          return <View style={{ padding: 20 }}></View>;
+        }}
         renderItem={({ item }) => (
           <User username={item.names.international} userid={item.id} />
         )}

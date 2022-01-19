@@ -10,7 +10,7 @@ import {
   Clipboard,
   Dimensions,
 } from "react-native";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { colors } from "../../themes/theme";
 import Button from "../../components/Buttons/Button";
 import { useNavigation } from "@react-navigation/native";
@@ -37,6 +37,7 @@ export const AccountSettings = () => {
       username: null,
       userid: null,
       key: null,
+      image: null,
     };
     setConfig(Config);
     await AsyncStorage.setItem("@Config", JSON.stringify(Config));
@@ -57,10 +58,7 @@ export const AccountSettings = () => {
         <View style={styles.imagecontainer}>
           <Image
             source={{
-              uri:
-                "https://www.speedrun.com/themes/user/" +
-                username +
-                "/image.png",
+              uri: Config.user.image,
             }}
             style={styles.image}
           ></Image>

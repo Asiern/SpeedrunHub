@@ -38,7 +38,11 @@ export default function Games() {
         keyExtractor={(item) => item.id}
         data={games}
         renderItem={({ item }) => (
-          <GameCard id={item.id} abbreviation={item.abbreviation} />
+          <GameCard
+            id={item.id}
+            abbreviation={item.abbreviation}
+            image={item.assets["cover-medium"].uri}
+          />
         )}
       ></FlatList>
     </View>

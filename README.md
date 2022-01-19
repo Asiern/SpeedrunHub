@@ -125,35 +125,23 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
 
 ## :scroll: Release Notes
 
-### Version 1.0.13 | [View All Versions](Notes.md)
+### Version 1.1.0 | [View All Versions](Notes.md)
 
 #### What's new?
 
-- RunInfo
-- Expo SDK 40
-- Themes
-- Context
-- Notifications Settings
-- Show misc. categories
+- Ads Removed
 
 #### Fixes
 
-- Fixed: Login layout issues when using the keyboard.
-- Fixed: Leaderboard times format.
-- Fixed: App crashes when selecting a guest user profile/run.
-- Fixed: Settings layout.
-- Fixed: Webview interactions.
-
-#### Performance
-
-- App loading
-- App perfomance
+- Fixed: Asset images not displaying
+- Fixed: Category variable button not displaying label
 
 #### Known issues
 
 - Japanese names not displaying.
 - OS forced darkmode breaks `UserHeader.js` colors.
 - Game without categories not loading.
+- App crashing
 
 ## :page_with_curl: Privacy Policy / Terms & Conditions / License
 

@@ -7,6 +7,7 @@ interface Section {
   data: SectionData[];
   id: string;
   name: string;
+  uri: string | null;
 }
 interface SectionData {
   key: string;
@@ -34,6 +35,14 @@ export interface user {
         international: string;
         japanese: string;
       };
+    };
+  };
+  assets: {
+    icon: {
+      uri: string | null;
+    };
+    image: {
+      uri: string | null;
     };
   };
   twitch: link | null;

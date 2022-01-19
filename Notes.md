@@ -1,3 +1,23 @@
+# Version 1.1.0 Notes
+
+## What's new?
+
+- Ads Removed
+
+## Fixes
+
+- Fixed: Asset images not displaying
+- Fixed: Category variable button not displaying label
+
+## Known issues
+
+- Japanese names not displaying.
+- OS forced darkmode breaks `UserHeader.js` colors.
+- Game without categories not loading.
+- App crashing
+
+---
+
 # Version 1.0.13 Notes
 
 ## What's new?

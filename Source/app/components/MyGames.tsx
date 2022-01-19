@@ -20,6 +20,7 @@ export default function MyGames() {
               <GameCard
                 key={game.id}
                 id={game.id}
+                image={game.uri}
                 abbreviation={game.abbreviation}
               />
             );

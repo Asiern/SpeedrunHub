@@ -6,6 +6,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 export interface GameCardProps {
   id: string;
   abbreviation: string;
+  image: string;
   width?: number;
   height?: number;
 }
@@ -13,6 +14,7 @@ export interface GameCardProps {
 export default function GameCard({
   id,
   abbreviation,
+  image,
   width,
   height,
 }: GameCardProps) {
@@ -30,10 +32,7 @@ export default function GameCard({
       >
         <ImageBackground
           source={{
-            uri:
-              "https://www.speedrun.com/themes/" +
-              abbreviation +
-              "/cover-256.png",
+            uri: image,
           }}
           style={styles.image}
           imageStyle={{ borderRadius: 10 }}

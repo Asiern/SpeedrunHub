@@ -353,5 +353,3 @@ MigrationBackup/
 .ionide/
 
 Builds/
-*.lock
-Source/yarn.lock
