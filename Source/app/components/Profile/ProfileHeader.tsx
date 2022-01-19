@@ -9,6 +9,7 @@ export interface ProfileHeaderProps {
   username: string;
   country?: string;
   signup?: string;
+  image: string;
   onPress: () => void;
 }
 
@@ -16,6 +17,7 @@ const ProfileHeader = ({
   username,
   country,
   signup,
+  image,
   onPress,
 }: ProfileHeaderProps) => {
   const { theme } = useContext(context);
@@ -23,7 +25,12 @@ const ProfileHeader = ({
     <View style={[styles.container, { backgroundColor: theme.colors.primary }]}>
       <TopBar variant={"transparent"} label={"Profile"} />
       <View style={styles.imagecontainer}>
-        <Carousel username={username} signup={signup} country={country} />
+        <Carousel
+          username={username}
+          signup={signup}
+          country={country}
+          image={image}
+        />
       </View>
       <View style={styles.userinfo}>
         <Text style={[h2w, { fontWeight: "bold" }]}>{username}</Text>

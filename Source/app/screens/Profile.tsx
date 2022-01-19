@@ -129,6 +129,7 @@ export default function Profile(props) {
               <ProfileHeader
                 username={username}
                 country={country}
+                image={user.assets.image.uri}
                 signup={user.signup}
                 onPress={onPress}
               />

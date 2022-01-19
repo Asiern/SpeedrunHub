@@ -36,6 +36,14 @@ export interface user {
       };
     };
   };
+  assets: {
+    icon: {
+      uri: string | null;
+    };
+    image: {
+      uri: string | null;
+    };
+  };
   twitch: link | null;
   twitter: link | null;
   hitbox: link | null;
