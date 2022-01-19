@@ -47,7 +47,7 @@ export default function Profile(props) {
         section.abbreviation = run.game.data.abbreviation;
         section.id = run.game.data.id;
         section.name = run.game.data.names.international;
-        section.uri = run.game.data.assets["cover-medium"].uri;
+        section.uri = run.game.data.assets["cover-large"].uri;
 
         sectionList.data.push(section);
         sectionList.pagination.push(run.game.data.id);
