@@ -25,7 +25,7 @@ export default function User({ username, userid }: UserProps) {
       style={[styles.container, shadow, { backgroundColor: theme.colors.card }]}
     >
       <View style={styles.user}>
-        <View style={styles.imagecontainer}>
+        {/* <View style={styles.imagecontainer}>
           <Image
             source={{
               uri:
@@ -43,11 +43,11 @@ export default function User({ username, userid }: UserProps) {
           ></Image>
         </View>
 
-        <View style={styles.textcontainer}>
-          <Text style={[styles.usename, { color: theme.colors.text }]}>
-            {username}
-          </Text>
-        </View>
+        <View style={styles.textcontainer}> */}
+        <Text style={[styles.usename, { color: theme.colors.text }]}>
+          {username}
+        </Text>
+        {/* </View> */}
       </View>
     </TouchableOpacity>
   );
@@ -72,28 +72,22 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 10,
   },
-  Image: {
-    height: 50,
-    width: 50,
-    borderWidth: 1,
-    borderRadius: 30,
-  },
-  imagecontainer: {
-    flex: 1,
-    alignItems: "center",
-    alignContent: "center",
-    justifyContent: "center",
-  },
-  textcontainer: {
-    flex: 2,
-    flexDirection: "column",
-    alignItems: "center",
-  },
+  // Image: {
+  //   height: 50,
+  //   width: 50,
+  //   borderWidth: 1,
+  //   borderRadius: 30,
+  // },
+  // imagecontainer: {
+  //   flex: 1,
+  //   alignItems: "center",
+  //   alignContent: "center",
+  //   justifyContent: "center",
+  // },
+  // textcontainer: {
+  //   flex: 2,
+  //   flexDirection: "column",
+  //   alignItems: "center",
+  // },
   usename: { fontWeight: "bold", fontSize: 20 },
-  iconcontainer: {
-    flex: 1,
-    alignContent: "center",
-    justifyContent: "center",
-    alignItems: "center",
-  },
 });
