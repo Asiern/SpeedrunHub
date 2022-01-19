@@ -19,7 +19,7 @@ export default function Profile(props) {
   const [country, setCountry] = useState("");
   const [sections, setSections] = useState<SectionsProps>();
   const [user, setUser] = useState<user>();
-  const [showMisc, setShowMisc] = useState<boolean>(false);
+  const [showMisc, setShowMisc] = useState<boolean>(true);
   const { username, userid } = props.route.params;
   const { theme } = useContext(context);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
@@ -41,11 +41,13 @@ export default function Profile(props) {
         name: "",
         id: "",
         data: [],
+        uri: null,
       };
       if (!sectionList.pagination.includes(run.game.data.id)) {
         section.abbreviation = run.game.data.abbreviation;
         section.id = run.game.data.id;
         section.name = run.game.data.names.international;
+        section.uri = run.game.data.assets["cover-medium"].uri;
 
         sectionList.data.push(section);
         sectionList.pagination.push(run.game.data.id);
@@ -86,6 +88,7 @@ export default function Profile(props) {
           "/personal-bests?embed=game,category";
         const runsresponse = await fetch(runsurl);
         const runsdata = await runsresponse.json();
+
         //User
         const userurl = "https://www.speedrun.com/api/v1/users/" + userid;
         const userresponse = await fetch(userurl);
@@ -172,6 +175,7 @@ export default function Profile(props) {
               abbreviation={section.abbreviation}
               id={section.id}
               name={section.name}
+              uri={section.uri}
             />
           )}
         />

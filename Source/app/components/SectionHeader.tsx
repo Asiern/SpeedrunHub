@@ -14,9 +14,10 @@ export interface SectionHeaderProps {
   id: string;
   abbreviation: string;
   name: string;
+  uri: string;
 }
 const { width } = Dimensions.get("screen");
-const SectionHeader = ({ id, abbreviation, name }: SectionHeaderProps) => {
+const SectionHeader = ({ id, abbreviation, name, uri }: SectionHeaderProps) => {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
@@ -30,10 +31,7 @@ const SectionHeader = ({ id, abbreviation, name }: SectionHeaderProps) => {
     >
       <ImageBackground
         source={{
-          uri:
-            "https://www.speedrun.com/themes/" +
-            abbreviation +
-            "/cover-256.png",
+          uri,
         }}
         style={styles.image}
         imageStyle={{ borderRadius: 10 }}
