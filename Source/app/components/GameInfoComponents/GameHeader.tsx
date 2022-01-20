@@ -67,7 +67,6 @@ const GameHeader = ({
     }
   };
   useEffect(() => {
-    console.log("render GH");
     let mounted = true;
     if (mounted) {
       (async () => {
