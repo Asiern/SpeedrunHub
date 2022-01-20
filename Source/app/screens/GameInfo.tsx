@@ -204,7 +204,7 @@ export default function GameInfo({ route }) {
         />
       );
     } catch (error) {
-      // console.log(error);
+      console.log(error);
     }
   };
   const ListFooter = () => {
@@ -314,16 +314,18 @@ export default function GameInfo({ route }) {
       <View style={{ flex: 1 }}>
         <StatusBar style={"light"}></StatusBar>
         <FlatList
-          // getItemLayout={(data, index) => ({
-          //   length: 50,
-          //   offset: 10 * index,
-          //   index,
-          // })}
           keyExtractor={(item) => item.run.id}
           data={runs}
           renderItem={renderRun}
           ListHeaderComponent={ListHeader}
           ListFooterComponent={ListFooter}
+          ListEmptyComponent={
+            <ActivityIndicator
+              style={{ alignSelf: "center", flex: 1 }}
+              size="large"
+              color={theme.colors.primary}
+            />
+          }
         ></FlatList>
       </View>
     );
