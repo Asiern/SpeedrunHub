@@ -6,14 +6,10 @@ import PB from "../components/PB";
 import SectionHeader from "../components/SectionHeader";
 import { SectionsProps, user } from "../components/Profile/helpers";
 
-//AdMob
-import AdMob from "../config/admob.json";
-import { AdMobBanner } from "expo-ads-admob";
 import { StatusBar } from "expo-status-bar";
 import { Switch } from "react-native-gesture-handler";
 import { h6 } from "../themes/theme";
 import { context } from "../config/config";
-import Modal from "../components/RunInfo/Modal";
 
 export default function Profile(props) {
   const [country, setCountry] = useState("");
@@ -22,11 +18,6 @@ export default function Profile(props) {
   const [showMisc, setShowMisc] = useState<boolean>(true);
   const { username, userid } = props.route.params;
   const { theme } = useContext(context);
-  const [modalVisible, setModalVisible] = useState<boolean>(false);
-  //Toggle modal visible
-  function onPress() {
-    setModalVisible(!modalVisible);
-  }
 
   function filterPBS(data) {
     var sectionList: SectionsProps = {
@@ -52,13 +43,6 @@ export default function Profile(props) {
         sectionList.data.push(section);
         sectionList.pagination.push(run.game.data.id);
       }
-      //Get variables
-      // var variables = "";
-      // for (let value in run.run.values) {
-      //   const url = "https://www.speedrun.com/api/v1/variables/" + value;
-      //   const response = await fetch(url);
-      //   const data = await response.json();
-      // }
       //Create run object
       var r = {
         key: counter.toString(),
@@ -111,22 +95,11 @@ export default function Profile(props) {
   } else {
     return (
       <>
-        {/* <Modal visible={modalVisible} offset={10}>
-          <View />
-        </Modal> */}
         <StatusBar style={"dark"}></StatusBar>
         <SectionList
           sections={sections.data}
           keyExtractor={(item, index) => item.key + index}
-          ListFooterComponent={
-            <View style={{ paddingTop: 20 }}>
-              {/* <AdMobBanner
-                bannerSize="fullBanner"
-                adUnitID={AdMob.profile}
-                servePersonalizedAds
-              /> */}
-            </View>
-          }
+          ListFooterComponent={<View style={{ paddingTop: 20 }} />}
           ListHeaderComponent={
             <>
               <ProfileHeader
@@ -134,7 +107,6 @@ export default function Profile(props) {
                 country={country}
                 image={user.assets.image.uri}
                 signup={user.signup}
-                onPress={onPress}
               />
               <View
                 style={{
