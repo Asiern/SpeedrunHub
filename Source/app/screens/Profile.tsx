@@ -12,7 +12,8 @@ import { h6 } from "../themes/theme";
 import { context } from "../config/config";
 
 export default function Profile(props) {
-  const [country, setCountry] = useState("");
+  const [loading, setLoading] = useState<boolean>(true);
+  const [country, setCountry] = useState<string>("");
   const [sections, setSections] = useState<SectionsProps>();
   const [user, setUser] = useState<user>();
   const [showMisc, setShowMisc] = useState<boolean>(true);
@@ -64,6 +65,7 @@ export default function Profile(props) {
   useEffect(() => {
     let mounted = true;
     if (mounted) {
+      setLoading(true);
       (async () => {
         //PBs
         const runsurl =
@@ -82,6 +84,7 @@ export default function Profile(props) {
           setCountry(userdata.data.location.country.names.international);
         }
         filterPBS(runsdata.data);
+        setLoading(false);
       })();
     }
 
@@ -90,8 +93,14 @@ export default function Profile(props) {
     };
   }, [showMisc]);
 
-  if (sections == undefined) {
-    return <ActivityIndicator />;
+  if (loading) {
+    return (
+      <ActivityIndicator
+        style={{ alignSelf: "center", flex: 1 }}
+        size="large"
+        color={theme.colors.primary}
+      />
+    );
   } else {
     return (
       <>
