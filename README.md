@@ -1,6 +1,6 @@
 # :trophy:SpeedrunHub
 
-[![GitHub release](https://img.shields.io/badge/Latest-1.0.13-blue?style=flat-square)](https://github.com/Asiern/SpeedrunHub/releases/latest)
+[![GitHub release](https://img.shields.io/badge/Latest-1.1.0-blue?style=flat-square)](https://github.com/Asiern/SpeedrunHub/releases/latest)
 [![GitHub license](https://img.shields.io/badge/License-GPL--3.0-red?style=flat-square)](https://raw.githubusercontent.com/Asiern/SpeedrunHub/master/LICENSE)
 [![runs with expo](https://img.shields.io/badge/Runs%20with%20Expo-000.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000)](https://expo.io/)
 [![PayPal](https://img.shields.io/badge/Support-000.svg?style=flat-square&logo=PayPal&labelColor=f3f3f3&logoColor=000)](https://www.paypal.me/asiernl)
