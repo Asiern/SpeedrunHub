@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import Constants from "expo-constants";
 import { StatusBar } from "expo-status-bar";
-import { colors } from "../../themes/theme";
 import { context } from "../../config/config";
 
 export function About() {
@@ -44,7 +43,7 @@ export function About() {
           Disclaimer: This is not an official app
         </Text>
         <Text style={[styles.title, { color: theme.colors.primary }]}>
-          Release Notes v1.1.0
+          Release Notes v1.1.1
         </Text>
         <Text
           style={[
@@ -60,42 +59,7 @@ export function About() {
           What's New
         </Text>
         <Text style={[styles.paragraph, { color: theme.colors.text }]}>
-          - Ads Removed
-        </Text>
-        <Text
-          style={[
-            styles.paragraph,
-            {
-              fontWeight: "bold",
-              paddingBottom: -5,
-              fontSize: 18,
-              color: theme.colors.text,
-            },
-          ]}
-        >
-          Fixes
-        </Text>
-        <Text style={[styles.paragraph, { color: theme.colors.text }]}>
-          - Fixed: Asset images not displaying {"\n"}- Fixed: Category variable
-          button not displaying label
-        </Text>
-        <Text
-          style={[
-            styles.paragraph,
-            {
-              fontWeight: "bold",
-              paddingBottom: -5,
-              fontSize: 18,
-              color: theme.colors.text,
-            },
-          ]}
-        >
-          Known Issues
-        </Text>
-        <Text style={[styles.paragraph, { color: theme.colors.text }]}>
-          - Japanese names not displaying. {"\n"}- OS forced darkmode breaks
-          `UserHeader.js` colors. {"\n"}- Game without categories not loading.
-          {"\n"}- App crashing
+          - Fix: Games with no categories not loading
         </Text>
         <Text style={[styles.title, { color: theme.colors.primary }]}>
           Send Feedback
