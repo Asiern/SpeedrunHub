@@ -1,3 +1,11 @@
+# Version 1.1.1 Notes
+
+## What's new?
+
+- Fix: Games with no categories not loading
+
+---
+
 # Version 1.1.0 Notes
 
 ## What's new?
