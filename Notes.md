@@ -3,6 +3,7 @@
 ## What's new?
 
 - Fix: Games with no categories not loading
+- Updated Expo to v45
 
 ---
 
