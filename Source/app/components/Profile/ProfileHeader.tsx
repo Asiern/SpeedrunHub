@@ -10,7 +10,6 @@ export interface ProfileHeaderProps {
   country?: string;
   signup?: string;
   image: string;
-  onPress: () => void;
 }
 
 const ProfileHeader = ({
@@ -18,7 +17,6 @@ const ProfileHeader = ({
   country,
   signup,
   image,
-  onPress,
 }: ProfileHeaderProps) => {
   const { theme } = useContext(context);
   return (

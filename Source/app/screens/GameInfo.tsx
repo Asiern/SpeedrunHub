@@ -7,6 +7,7 @@ import {
   FlatList,
 } from "react-native";
 import VariableButton from "../components/GameInfoComponents/VariableButton";
+import NotificationCard from "../components/Notifications/NotificationCard";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
 
@@ -40,6 +41,7 @@ export default function GameInfo({ route }) {
           "https://www.speedrun.com/api/v1/games/" + id + "?embed=categories";
         const response = await fetch(url);
         const data = await response.json();
+        setGame(data.data);
         //Categories output
         var outCategories = [];
         //Filter Categories (type == Per-Game)
@@ -49,14 +51,17 @@ export default function GameInfo({ route }) {
           }
         }
         //Select Default Category
-        const selectedCategory = outCategories[0].id;
+        if (outCategories.length == 0) {
+          setLoading(false);
+        } else {
+          const selectedCategory = outCategories[0].id;
+          LoadVariables(selectedCategory);
+          setChecked(selectedCategory);
+        }
         //Fetch Variables
-        LoadVariables(selectedCategory);
         //Set State
-        setGame(data.data);
         setName(data.data.names.international);
         setCategories(outCategories);
-        setChecked(selectedCategory);
       })();
     }
     return function cleanup() {
@@ -204,7 +209,7 @@ export default function GameInfo({ route }) {
         />
       );
     } catch (error) {
-      // console.log(error);
+      console.log(error);
     }
   };
   const ListFooter = () => {
@@ -314,16 +319,26 @@ export default function GameInfo({ route }) {
       <View style={{ flex: 1 }}>
         <StatusBar style={"light"}></StatusBar>
         <FlatList
-          // getItemLayout={(data, index) => ({
-          //   length: 50,
-          //   offset: 10 * index,
-          //   index,
-          // })}
           keyExtractor={(item) => item.run.id}
           data={runs}
           renderItem={renderRun}
           ListHeaderComponent={ListHeader}
           ListFooterComponent={ListFooter}
+          ListEmptyComponent={
+            loading ? (
+              <ActivityIndicator
+                style={{ alignSelf: "center", flex: 1 }}
+                size="large"
+                color={theme.colors.primary}
+              />
+            ) : (
+              <NotificationCard
+                text="No categories found"
+                color={theme.colors.card}
+                backgroundColor={theme.colors.primary}
+              />
+            )
+          }
         ></FlatList>
       </View>
     );
