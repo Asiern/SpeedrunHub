@@ -4,10 +4,6 @@ import { StatusBar } from "expo-status-bar";
 import { ScrollView } from "react-native";
 import { context } from "../config/config";
 
-//AdMob
-import AdMob from "../config/admob.json";
-import { AdMobBanner } from "expo-ads-admob";
-
 export default function Settings() {
   const { theme } = useContext(context);
   const Sections = [
@@ -29,12 +25,6 @@ export default function Settings() {
       navigateTo: "Themes",
       weblink: null,
     },
-    // {
-    //   title: "Unlock Pro Version",
-    //   icon: "unlock",
-    //   navigateTo: null,
-    //   weblink: "https://play.google.com/store",
-    // },
     {
       title: "About",
       icon: "info",
@@ -55,12 +45,6 @@ export default function Settings() {
       weblink:
         "https://github.com/Asiern/SpeedrunHub/blob/master/Readme/Terms%20%26%20Conditions.md",
     },
-    // {
-    //   title: "Dev Settings",
-    //   icon: "alert-triangle",
-    //   navigateTo: "DevSettings",
-    //   weblink: null,
-    // },
   ];
   return (
     <ScrollView
@@ -86,11 +70,6 @@ export default function Settings() {
           );
         })}
       </>
-      {/* <AdMobBanner
-        bannerSize="fullBanner"
-        adUnitID={AdMob.settings}
-        servePersonalizedAds
-      /> */}
     </ScrollView>
   );
 }
