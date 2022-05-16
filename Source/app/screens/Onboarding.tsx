@@ -18,19 +18,19 @@ const { width } = Dimensions.get("window");
 const slides = [
   {
     title: "Speedrun Hub",
-    description: "Your speedrun.com client.",
+    description: "Your speedrun.com client",
     color: "#ffc1c1",
     image: require("../assets/Onboarding/race.png"),
   },
   {
     title: "Notifications",
-    description: "Receive notifications directly to your phone.",
+    description: "Receive notifications directly to your phone",
     color: "#fffbd8",
     image: require("../assets/Onboarding/Notifications.png"),
   },
   {
     title: "My Games",
-    description: "Manage your favourite games.",
+    description: "Manage your favourite games",
     color: "#d5ffd1",
     image: require("../assets/Onboarding/MyGames.png"),
   },
@@ -134,9 +134,10 @@ export default function OnboardingScreen() {
                     save();
                     navigation.navigate("Login");
                   } else {
-                    scroll.current
-                      ?.getNode()
-                      .scrollTo({ x: width * (index + 1), animated: true });
+                    scroll.current.scrollTo({
+                      x: width * (index + 1),
+                      animated: true,
+                    });
                   }
                 }}
                 last={index === slides.length - 1}
