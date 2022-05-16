@@ -130,13 +130,12 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
 #### What's new?
 
 - Fix: Games with no categories not loading
+- Updated Expo to v45
 
 #### Known issues
 
 - Japanese names not displaying.
-- OS forced darkmode breaks `UserHeader.js` colors.
-- Game without categories not loading.
-- App crashing
+- OS forced darkmode breaks `UserHeader.tsx` colors.
 
 ## :page_with_curl: Privacy Policy / Terms & Conditions / License
 
