@@ -6,27 +6,19 @@ import PB from "../components/PB";
 import SectionHeader from "../components/SectionHeader";
 import { SectionsProps, user } from "../components/Profile/helpers";
 
-//AdMob
-import AdMob from "../config/admob.json";
-import { AdMobBanner } from "expo-ads-admob";
 import { StatusBar } from "expo-status-bar";
 import { Switch } from "react-native-gesture-handler";
 import { h6 } from "../themes/theme";
 import { context } from "../config/config";
-import Modal from "../components/RunInfo/Modal";
 
 export default function Profile(props) {
-  const [country, setCountry] = useState("");
+  const [loading, setLoading] = useState<boolean>(true);
+  const [country, setCountry] = useState<string>("");
   const [sections, setSections] = useState<SectionsProps>();
   const [user, setUser] = useState<user>();
   const [showMisc, setShowMisc] = useState<boolean>(true);
   const { username, userid } = props.route.params;
   const { theme } = useContext(context);
-  const [modalVisible, setModalVisible] = useState<boolean>(false);
-  //Toggle modal visible
-  function onPress() {
-    setModalVisible(!modalVisible);
-  }
 
   function filterPBS(data) {
     var sectionList: SectionsProps = {
@@ -52,13 +44,6 @@ export default function Profile(props) {
         sectionList.data.push(section);
         sectionList.pagination.push(run.game.data.id);
       }
-      //Get variables
-      // var variables = "";
-      // for (let value in run.run.values) {
-      //   const url = "https://www.speedrun.com/api/v1/variables/" + value;
-      //   const response = await fetch(url);
-      //   const data = await response.json();
-      // }
       //Create run object
       var r = {
         key: counter.toString(),
@@ -80,6 +65,7 @@ export default function Profile(props) {
   useEffect(() => {
     let mounted = true;
     if (mounted) {
+      setLoading(true);
       (async () => {
         //PBs
         const runsurl =
@@ -98,6 +84,7 @@ export default function Profile(props) {
           setCountry(userdata.data.location.country.names.international);
         }
         filterPBS(runsdata.data);
+        setLoading(false);
       })();
     }
 
@@ -106,27 +93,22 @@ export default function Profile(props) {
     };
   }, [showMisc]);
 
-  if (sections == undefined) {
-    return <ActivityIndicator />;
+  if (loading) {
+    return (
+      <ActivityIndicator
+        style={{ alignSelf: "center", flex: 1 }}
+        size="large"
+        color={theme.colors.primary}
+      />
+    );
   } else {
     return (
       <>
-        {/* <Modal visible={modalVisible} offset={10}>
-          <View />
-        </Modal> */}
         <StatusBar style={"dark"}></StatusBar>
         <SectionList
           sections={sections.data}
           keyExtractor={(item, index) => item.key + index}
-          ListFooterComponent={
-            <View style={{ paddingTop: 20 }}>
-              {/* <AdMobBanner
-                bannerSize="fullBanner"
-                adUnitID={AdMob.profile}
-                servePersonalizedAds
-              /> */}
-            </View>
-          }
+          ListFooterComponent={<View style={{ paddingTop: 20 }} />}
           ListHeaderComponent={
             <>
               <ProfileHeader
@@ -134,7 +116,6 @@ export default function Profile(props) {
                 country={country}
                 image={user.assets.image.uri}
                 signup={user.signup}
-                onPress={onPress}
               />
               <View
                 style={{
