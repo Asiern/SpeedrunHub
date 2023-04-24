@@ -24,7 +24,7 @@ export function UserCard(): JSX.Element {
         shadow,
       ]}
       onPress={() => {
-        navigation.navigate("SelfProfile");
+        navigation.navigate("Profile", { user: config.user });
       }}
     >
       <View

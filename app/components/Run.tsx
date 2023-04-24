@@ -5,37 +5,37 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 import { h6, colors } from "../themes/theme";
 import { context } from "../config/config";
+import { run } from "../hooks/types";
 
-export interface RunProps {
-  place: string;
-  runner: string;
-  time: string;
-  categoryid: string;
-  weblink: string;
+export interface IRun {
+  run: run;
 }
 
 function formatTime(time: string) {
   return time.slice(2, time.length).toLowerCase();
 }
 
-export default function Run({ place, runner, time, weblink }: RunProps) {
+export default function Run({ run }: IRun) {
   const navigation = useNavigation();
   const { config } = useContext(context)!;
   const { theme } = config;
+  const { weblink, players, times, values } = run;
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate("RunInfo", { weblink })}
-      style={[styles.container, { backgroundColor: theme.colors.card }]}
+      style={[styles.container, { backgroundColor: theme.colors.foreground }]}
     >
       <View style={styles.place}>
-        <Text style={[h6, { color: theme.colors.primary }]}>{place}</Text>
+        <Text style={[h6, { color: theme.colors.primary }]}>{0}</Text>
       </View>
       <View style={styles.runner}>
-        <Text style={[h6, { color: theme.colors.text }]}>{runner}</Text>
+        <Text style={[h6, { color: theme.colors.text }]}>
+          {players[0].name}
+        </Text>
       </View>
       <View style={styles.time}>
         <Text style={[h6, { color: theme.colors.text }]}>
-          {formatTime(time)}
+          {formatTime(times.primary)}
         </Text>
       </View>
     </TouchableOpacity>
@@ -44,9 +44,8 @@ export default function Run({ place, runner, time, weblink }: RunProps) {
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 10,
     marginTop: 10,
-    paddingVertical: 25,
+    height: 60,
     flexDirection: "row",
     flex: 1,
     alignItems: "center",

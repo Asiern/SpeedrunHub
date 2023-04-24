@@ -4,7 +4,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 //Screens
 import Home from "../screens/home/Home";
 import { Settings } from "../screens/settings";
-import Profile from "../screens/Profile";
 import GameInfo from "../screens/GameInfo";
 import Search from "../screens/search/Search";
 import Notifications from "../screens/Notifications";
@@ -16,7 +15,7 @@ import {
   NotificationsSettings,
   ThemeSettings,
 } from "../screens/settings";
-import { SelfProfile } from "../screens/profile/SelfProfile";
+import { Profile } from "../screens/profile/Profile";
 
 const Stack = createStackNavigator();
 
@@ -40,11 +39,6 @@ const HomeStack = () => (
     <Stack.Screen
       name="Profile"
       component={Profile}
-      options={{ headerShown: false }}
-    />
-    <Stack.Screen
-      name="SelfProfile"
-      component={SelfProfile}
       options={{ headerShown: false }}
     />
     <Stack.Screen
