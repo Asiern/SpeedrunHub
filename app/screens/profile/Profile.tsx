@@ -6,24 +6,29 @@ import { UserCard } from "./UserCard";
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { Social } from "./Social";
-import { user } from "../../types";
-import { getUser, getRuns } from "../../hooks";
-import { run } from "../../hooks/types";
+import { getUser, getRuns, getPersonalBests } from "../../hooks";
+import { PersonalBest, game, run } from "../../hooks/types";
+import Run from "../../components/Run";
 
-export function SelfProfile(): JSX.Element {
-  const [userData, setUserData] = useState<user | null>(null);
+export function Profile(props): JSX.Element {
+  const [pbs, setPBs] = useState<PersonalBest[] | null>(null);
+  const [games, setGames] = useState<game[]>([]);
   const [runs, setRuns] = useState<run[]>([]);
   const { config, setConfig } = useContext(context)!;
   const { theme } = config;
   const navigation = useNavigation();
+  const { user } = props.route.params;
 
   async function prepare() {
     try {
-      if (config.user.username !== null) {
-        // const data = await getUser(config.user.username);
+      if (user.username !== null) {
+        // const data = await getUser(user.username);
         // setUserData(data);
-        const runs = await getRuns(config.user.userid);
-        setRuns(runs);
+        const _pbs: PersonalBest[] = await getPersonalBests(user.userid);
+        const _games: game[] = [];
+        // _pbs.forEach((pb)=>{if(games.)})
+        setPBs(_pbs);
+        // setRuns(runs);
       }
     } catch (e) {
       console.warn(e);
@@ -90,24 +95,9 @@ export function SelfProfile(): JSX.Element {
           </TouchableOpacity>
         </View>
         <View style={{ marginTop: 15 }}>
-          {runs.map((run) => {
-            return (
-              <View
-                key={run.id}
-                style={[
-                  {
-                    backgroundColor: theme.colors.foreground,
-                    borderRadius: 10,
-                    padding: 10,
-                    marginVertical: 5,
-                    height: 60,
-                  },
-                  shadow,
-                ]}
-              >
-                <Text>{run.id}</Text>
-              </View>
-            );
+          {runs.map((run, i) => {
+            if (i === 0) console.log(run);
+            return <Run run={run} key={run.id} />;
           })}
         </View>
       </View>
