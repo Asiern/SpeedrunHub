@@ -1,4 +1,4 @@
-export interface game {
+export type game = {
   id: string;
   names: {
     international: string;
@@ -17,4 +17,4 @@ export interface game {
     "default-time": string;
     "emulators-allowed": boolean;
   };
-}
+};

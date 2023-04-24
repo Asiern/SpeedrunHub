@@ -4,20 +4,25 @@
   "expo": {
     "name": "SpeedrunHub",
     "slug": "speedruncomapp",
-    "platforms": ["ios", "android"],
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "version": "1.1.1",
     "orientation": "portrait",
     "icon": "./app/assets/trophy.png",
-
     "splash": {
       "image": "./app/assets/trophy.png",
       "resizeMode": "contain",
       "backgroundColor": "#fff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/041f1baf-8635-40e4-89ab-2ad730a1eb50"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "bundleIdentifier": "SpeedrunHub"
     },
@@ -26,10 +31,15 @@
     "android": {
       "package": "com.asiern.speedrun2",
       "versionCode": 3,
-      "permissions": [],
-      "config": {
-        "googleMobileAdsAppId": "ca-app-pub-3552758561036628~8801055846"
+      "permissions": []
+    },
+    "extra": {
+      "eas": {
+        "projectId": "041f1baf-8635-40e4-89ab-2ad730a1eb50"
       }
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
     }
   }
 }

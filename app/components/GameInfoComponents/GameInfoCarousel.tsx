@@ -26,7 +26,8 @@ export default function Carousel({ abbreviation, uri, date }: CarouselProps) {
   });
 
   const currentIndex = useDerivedValue(() => x.value / width);
-  const { theme } = useContext(context);
+  const { config } = useContext(context)!;
+  const { theme } = config;
 
   return (
     <View style={styles.container}>

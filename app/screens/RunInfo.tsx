@@ -73,7 +73,8 @@ function timeConverter(time: string) {
 }
 
 export default function RunInfo(props) {
-  const { theme } = useContext(context);
+  const { config } = useContext(context)!;
+  const { theme } = config;
   const { weblink } = props.route.params;
   const navigation = useNavigation();
   const [data, setData] = useState<dataProps & run>();

@@ -8,7 +8,8 @@ import { colors } from "../themes/theme";
 
 const Notifications = () => {
   const { data } = useRoute().params;
-  const { theme, Config } = useContext(context);
+  const { config } = useContext(context)!;
+  const { theme } = config;
   const { width } = Dimensions.get("window");
 
   return (
@@ -22,7 +23,7 @@ const Notifications = () => {
         renderItem={({ item }) => (
           <View>
             {item.status == "read" ? (
-              Config.notifications.unread ? null : (
+              config.notifications.unread ? null : (
                 <View>
                   <NotificationCard
                     width={width}

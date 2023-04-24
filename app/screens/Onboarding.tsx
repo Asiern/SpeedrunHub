@@ -46,7 +46,7 @@ export default function OnboardingScreen() {
   const navigation = useNavigation();
   const scroll = useRef<Animated.ScrollView>(null);
   const x = useSharedValue(0);
-  const { Config, setConfig } = useContext(context);
+  const { config, setConfig } = useContext(context)!;
   const onScroll = useAnimatedScrollHandler({
     onScroll: ({ contentOffset }) => {
       x.value = contentOffset.x;
@@ -70,13 +70,6 @@ export default function OnboardingScreen() {
     transform: [{ translateX: -x.value }],
   }));
 
-  async function save() {
-    try {
-      Config.onboarding = true;
-      await AsyncStorage.setItem("@Config", JSON.stringify(Config));
-      setConfig(Config);
-    } catch (error) {}
-  }
   return (
     <View style={styles.container}>
       <Animated.View style={[styles.slider, slider]}>
@@ -131,7 +124,7 @@ export default function OnboardingScreen() {
                 key={index}
                 onPress={() => {
                   if (index === slides.length - 1) {
-                    save();
+                    setConfig({ ...config, onboarding: true });
                     navigation.navigate("Login");
                   } else {
                     scroll.current.scrollTo({
