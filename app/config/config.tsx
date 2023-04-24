@@ -1,15 +1,18 @@
 import { createContext } from "react";
+import { Theme } from "../themes/DefaultTheme";
+import { config } from "../types";
 
-export const context = createContext(null);
-
-export const config = {
+// Default config
+export const defaultConfig: config = {
   onboarding: false,
+  logged: false,
   user: {
-    logged: false,
     username: null,
     userid: null,
     key: null,
     image: null,
+    location: null,
+    social: [],
   },
   notifications: {
     unread: false,
@@ -17,21 +20,10 @@ export const config = {
     max: 20,
   },
   games: [],
+  theme: Theme,
 };
 
-export interface config {
-  onboarding: boolean;
-  user: {
-    logged: boolean;
-    username: string | null;
-    userid: string | null;
-    key: string | null;
-    image: string | null;
-  };
-  notifications: {
-    unread: boolean;
-    push: boolean;
-    max: number;
-  };
-  games: [];
-}
+// Define context
+export const context = createContext<
+  { config: config; setConfig: (config: config) => Promise<void> } | undefined
+>(undefined);

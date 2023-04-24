@@ -1,11 +1,13 @@
-export const Theme = {
+import { theme } from "../types";
+
+export const Theme: theme = {
   dark: false,
   colors: {
-    primary: "#00BCD4",
-    background: "#ededed",
-    card: "#fff",
-    text: "#242c37",
-    border: "rgb(199, 199, 204)",
-    notification: "rgb(255, 69, 58)",
+    primary: "#738FFA",
+    background: "#fafafe",
+    foreground: "#fff",
+    headerText: "#6D6B6B",
+    text: "#969292",
+    error: "#ff0000",
   },
 };

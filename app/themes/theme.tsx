@@ -1,9 +1,9 @@
 import { TextStyle } from "react-native";
 
 export const shadow = {
-  shadowOffset: { width: 5, height: 5 },
-  shadowOpacity: 1,
-  elevation: 5,
+  shadowOffset: { width: 10, height: 10 },
+  shadowOpacity: 0.5,
+  elevation: 2,
   shadowColor: "black",
 };
 
@@ -13,7 +13,7 @@ const pallete = {
 };
 
 export const colors = {
-  primary: "#FF8A65",
+  primary: "#738ffa",
   light: "#ededed",
   white: "#fff",
   grey: "#f0f0f0",
