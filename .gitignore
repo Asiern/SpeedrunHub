@@ -62,6 +62,4 @@ buck-out/
 # Expo
 .expo/*
 web-build/
-
-#Lock files
-yarn.lock
+dist
