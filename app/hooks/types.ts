@@ -143,3 +143,24 @@ export type run = {
   } | null;
   splits: { rel: string; uri: string } | null;
 };
+
+export type category = {
+  id: string;
+  name: string;
+  weblink: string;
+  type: "peer-level" | "peer-game";
+  rules: string;
+  players: {
+    type: "exactly" | "up-to";
+    value: number;
+  };
+  miscellaneous: boolean;
+  links: link[];
+};
+
+export type PersonalBest = {
+  category: category;
+  game: game;
+  place: string;
+  run: run;
+};
