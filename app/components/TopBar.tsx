@@ -49,7 +49,7 @@ export default function TopBar({ label, onPress, variant, icon }: TopBarProps) {
         </View>
         <View style={styles.topbarright}>
           <Feather
-            onPress={() => onPress()}
+            onPress={onPress}
             name={icon}
             color={variant == "dark" ? colors.white : colors.darkgrey}
             size={35}

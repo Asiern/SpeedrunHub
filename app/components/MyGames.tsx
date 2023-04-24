@@ -8,7 +8,8 @@ import GameCard from "./GameCard";
 import NotificationCard from "./Notifications/NotificationCard";
 
 export default function MyGames() {
-  const { games } = useContext(context);
+  const { config } = useContext(context)!;
+  const { games } = config;
   const navigation = useNavigation();
   const { width } = Dimensions.get("window");
   return (

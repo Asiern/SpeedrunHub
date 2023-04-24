@@ -18,7 +18,8 @@ export function SearchBar({
   value,
   onChangeText,
 }: SearchBarProps) {
-  const { theme } = useContext(context);
+  const { config } = useContext(context)!;
+  const { theme } = config;
   return (
     <View
       style={[

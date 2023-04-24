@@ -3,12 +3,13 @@ import { View, StyleSheet } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import GameCard from "../GameCard";
 import { SearchBar } from "./SearchBar";
-import { context } from "../../config/config";
+import { config, context } from "../../config/config";
 
 export default function Games() {
   const [games, setGames] = useState([]);
   const [search, setSearch] = useState("");
-  const { theme } = useContext(context);
+  const { config } = useContext(context)!;
+  const { theme } = config;
 
   function updateSearch(input) {
     setSearch(input);

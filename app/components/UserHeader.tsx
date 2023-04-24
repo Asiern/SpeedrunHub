@@ -23,19 +23,18 @@ const { width, height } = Dimensions.get("screen");
 
 function UserHeader() {
   const navigation = useNavigation();
-  const { Config, setConfig } = useContext(context);
-  const { username, userid } = Config.user;
+  const { config, setConfig } = useContext(context)!;
+  const { username, userid } = config.user;
   async function signOut() {
     //Remove user
-    Config.user = {
+    config.user = {
       logged: false,
       username: null,
       userid: null,
       key: null,
       image: null,
     };
-    setConfig(Config);
-    await AsyncStorage.setItem("@Config", JSON.stringify(Config));
+    setConfig(config);
     navigation.navigate("Login", { screen: "Login" });
   }
   const createAlert = (msg: string) =>
@@ -66,7 +65,7 @@ function UserHeader() {
           <View style={styles.imagecontainer}>
             <Image
               source={{
-                uri: Config.user.image,
+                uri: config.user.image,
               }}
               style={styles.Image}
             ></Image>

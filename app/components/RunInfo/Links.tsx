@@ -12,7 +12,8 @@ export interface LinksProps {
 }
 
 export default function Links({ videolink, weblink }: LinksProps) {
-  const { theme } = React.useContext(context);
+  const { config } = React.useContext(context)!;
+  const { theme } = config;
   const onShare = async () => {
     try {
       const result = await Share.share({

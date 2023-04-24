@@ -18,7 +18,8 @@ export default function Profile(props) {
   const [user, setUser] = useState<user>();
   const [showMisc, setShowMisc] = useState<boolean>(true);
   const { username, userid } = props.route.params;
-  const { theme } = useContext(context);
+  const { config } = useContext(context)!;
+  const { theme } = config;
 
   function filterPBS(data) {
     var sectionList: SectionsProps = {

@@ -20,7 +20,8 @@ function formatTime(time: string) {
 
 export default function Run({ place, runner, time, weblink }: RunProps) {
   const navigation = useNavigation();
-  const { theme } = useContext(context);
+  const { config } = useContext(context)!;
+  const { theme } = config;
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate("RunInfo", { weblink })}

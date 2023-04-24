@@ -8,7 +8,8 @@ import { context } from "../../config/config";
 export default function Users() {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
-  const { theme } = useContext(context);
+  const { config } = useContext(context)!;
+  const { theme } = config;
 
   function updateSearch(input) {
     setSearch(input);

@@ -31,7 +31,8 @@ const GameHeader = ({
   const [isFav, setFav] = useState(false);
   const navigation = useNavigation();
   const goBack = StackActions.pop();
-  const { games, setGames } = useContext(context);
+  const { config, setConfig } = useContext(context)!;
+  const { games } = config;
 
   const _isFavourite = async (id: string) => {
     for (let GAME of games) {
@@ -52,7 +53,7 @@ const GameHeader = ({
       games.push(game);
       //Game added to list
       await AsyncStorage.setItem("@MyGames", JSON.stringify(games));
-      setGames(games);
+      setConfig({ ...config, games });
       setFav(true);
     } else {
       //Game got removed from list
@@ -62,7 +63,7 @@ const GameHeader = ({
         }
       }
       await AsyncStorage.setItem("@MyGames", JSON.stringify(games));
-      setGames(games);
+      setConfig({ ...config, games });
       setFav(false);
     }
   };

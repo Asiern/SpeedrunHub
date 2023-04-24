@@ -8,7 +8,8 @@ export interface svgheaderProps {
   width: number;
 }
 export default function svgheader({ height, width }) {
-  const { theme } = useContext(context);
+  const { config } = useContext(context)!;
+  const { theme } = config;
   return (
     <View>
       <View

@@ -24,7 +24,8 @@ export interface PBProps {
 
 const PB = ({ weblink, place, category, time }: PBProps) => {
   const navigation = useNavigation();
-  const { theme } = useContext(context);
+  const { config } = useContext(context)!;
+  const { theme } = config;
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate("RunInfo", { weblink })}

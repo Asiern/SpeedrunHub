@@ -19,7 +19,8 @@ export interface NotificationBarProps {
 
 const NotificationBar = ({ data, width }: NotificationBarProps) => {
   const navigation = useNavigation();
-  const { theme, Config } = useContext(context);
+  const { config } = useContext(context)!;
+  const { theme } = config;
 
   return (
     <View style={styles.container}>
@@ -49,7 +50,7 @@ const NotificationBar = ({ data, width }: NotificationBarProps) => {
         renderItem={({ item }) => (
           <View>
             {item.status == "read" ? (
-              Config.notifications.unread ? null : (
+              config.notifications.unread ? null : (
                 <NotificationCard
                   width={width}
                   text={item.text}

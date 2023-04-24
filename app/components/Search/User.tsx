@@ -13,7 +13,8 @@ export interface UserProps {
 
 export default function User({ username, userid }: UserProps) {
   const navigation = useNavigation();
-  const { theme } = useContext(context);
+  const { config } = useContext(context)!;
+  const { theme } = config;
   return (
     <TouchableOpacity
       onPress={() =>

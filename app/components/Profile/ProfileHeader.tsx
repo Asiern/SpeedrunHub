@@ -18,7 +18,8 @@ const ProfileHeader = ({
   signup,
   image,
 }: ProfileHeaderProps) => {
-  const { theme } = useContext(context);
+  const { config } = useContext(context)!;
+  const { theme } = config;
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.primary }]}>
       <TopBar variant={"transparent"} label={"Profile"} />
