@@ -5,7 +5,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { shadow } from "../../themes/theme";
 import { useNavigation } from "@react-navigation/native";
 import { context } from "../../config/config";
-import { UserCard } from "./UserCard";
+import { UserCard } from "../../components/UserCard";
 import { LoginButton } from "./LoginButton";
 
 interface IHeaderButton {
@@ -53,7 +53,11 @@ export default function HomeHeader(): JSX.Element {
       }}
     >
       <HeaderButton onPress={() => navigation.navigate("Settings")} />
-      {config.logged === true ? <UserCard /> : <LoginButton />}
+      {config.logged === true && config.user !== null ? (
+        <UserCard user={config.user} />
+      ) : (
+        <LoginButton />
+      )}
     </View>
   );
 }
