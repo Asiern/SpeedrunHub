@@ -1,21 +1,4 @@
-type social = { name: string; icon: string; uri: string };
-export type user = {
-  username: string | null;
-  userid: string | null; // User identifier
-  key: string | null; // speedrun.com API-Key
-  image: string | null; // Url to user image at speedrun.com
-  location: {
-    country: {
-      code: string;
-      names: { international: string | null; japanese: string | null };
-      flag: {
-        uri: string | null;
-      };
-    };
-  } | null;
-  social: social[];
-};
-
+import { user } from "../hooks/types";
 export type game = {
   id: string;
   abbreviation: string;
@@ -25,8 +8,9 @@ export type game = {
 export type config = {
   onboarding: boolean; // True if user completed onboarding
   // Logged user data
-  user: user;
+  user: user | null;
   logged: boolean; // True id logged in
+  key: string | null; // API key
   // Notification fetching options
   notifications: {
     unread: boolean;
