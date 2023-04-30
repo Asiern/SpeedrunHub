@@ -14,7 +14,8 @@ export type notificationResponse = {
 
 type names = {
   international: string;
-  japanese: string;
+  japanese?: string;
+  twitch?: string;
 };
 
 export type game = {
@@ -33,6 +34,36 @@ export type game = {
     "default-time": string;
     "emulators-allowed": boolean;
   };
+  boostReceived: number;
+  boostDistinctDonors: number;
+  discord?: string;
+  romhack: boolean;
+  gametypes: [];
+  regions: string[];
+  genres: string[];
+  engines: string[];
+  developers: string[];
+  publishers: string[];
+  moderators: object;
+  created: string;
+  assets: {
+    logo: { uri: string | null };
+    "cover-tiny": { uri: string | null };
+    "cover-small": { uri: string | null };
+    "cover-medium": { uri: string | null };
+    "cover-large": { uri: string | null };
+    icon: { uri: string | null };
+    "trophy-1st": { uri: string | null };
+    "trophy-2nd": { uri: string | null };
+    "trophy-3rd": { uri: string | null };
+    "trophy-4th": { uri: string | null };
+    background: { uri: string | null };
+    foreground: { uri: string | null };
+  };
+  links: link[];
+};
+export type gameResponse = {
+  data: game;
 };
 
 type link = { rel: string; uri: string };
@@ -109,6 +140,7 @@ type player = {
 export type run = {
   id: string;
   weblink: string;
+  comment: string | null;
   game: string;
   level: null;
   category: string;
@@ -148,7 +180,7 @@ export type category = {
   id: string;
   name: string;
   weblink: string;
-  type: "peer-level" | "peer-game";
+  type: "peer-level" | "per-game";
   rules: string;
   players: {
     type: "exactly" | "up-to";
@@ -158,9 +190,15 @@ export type category = {
   links: link[];
 };
 
-export type PersonalBest = {
-  category: category;
-  game: game;
-  place: string;
+export type categoryResponse = { data: category };
+
+export type personalBest = {
+  category: categoryResponse;
+  game: gameResponse;
+  place: number;
   run: run;
+};
+
+export type personalBestsResponse = {
+  data: personalBest[];
 };
