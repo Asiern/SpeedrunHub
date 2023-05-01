@@ -22,7 +22,7 @@ export default function Home() {
     <View style={styles.container}>
       <View style={{ flex: 1 }}>
         <HomeHeader />
-        <View style={{ paddingHorizontal: 30 }}>
+        <View style={{ paddingHorizontal: 30, marginTop: 10 }}>
           <SearchBar
             onSearch={() => onSearch(searchValue)}
             onChangeText={setSearchValue}
