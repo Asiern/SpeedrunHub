@@ -1,4 +1,4 @@
-import React, { memo, useContext } from "react";
+import React, { memo, useContext, useState } from "react";
 import { View } from "react-native";
 import { TextInput } from "react-native";
 import { shadow } from "../themes/theme";
@@ -13,9 +13,11 @@ export interface ISearchBar {
 
 function SearchBar({
   onSearch,
-  initialValue = "",
+  initialValue = undefined,
   onChangeText = () => {},
 }: ISearchBar): JSX.Element {
+  const [value, setValue] = useState<string>(initialValue ?? "");
+
   // Retrieve the theme from the app context
   const { config } = useContext(context)!;
   const { theme } = config;
@@ -31,8 +33,11 @@ function SearchBar({
     >
       <TextInput
         placeholder={"Search for games/users..."}
-        onChangeText={onChangeText}
-        value={initialValue ?? undefined}
+        onChangeText={(v) => {
+          onChangeText(v);
+          setValue(v);
+        }}
+        value={value}
         style={[
           {
             height: 50,
