@@ -81,6 +81,9 @@ export default function Search(props) {
       <FlatList
         style={{ marginVertical: 10 }}
         data={users?.data}
+        ListFooterComponent={() => {
+          return <View style={{ height: 30 }} />;
+        }}
         ItemSeparatorComponent={() => {
           return <View style={{ height: 5 }} />;
         }}
