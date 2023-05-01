@@ -8,7 +8,7 @@ import { SquareButton } from "./SquareButton";
 export interface ISearchBar {
   onSearch: () => void;
   initialValue?: string;
-  onChangeText?: (value) => void;
+  onChangeText?: (value: string) => void;
 }
 
 function SearchBar({
@@ -27,7 +27,6 @@ function SearchBar({
     <View
       style={{
         flexDirection: "row",
-        marginVertical: 10,
         flex: 1,
       }}
     >
