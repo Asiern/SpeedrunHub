@@ -65,6 +65,10 @@ export type game = {
 export type gameResponse = {
   data: game;
 };
+export type gamesResponse = {
+  data: game[];
+  pagination: pagination;
+};
 
 type link = { rel: string; uri: string };
 export type socialMedia = { uri: string };
