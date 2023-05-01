@@ -17,7 +17,7 @@ export default async function getNotifications(
   const { data } = await axios({
     url: endpoint,
     method: "GET",
-    headers: { Accept: "application/json", "X-API-Key": config.user.key },
+    headers: { Accept: "application/json", "X-API-Key": config.key },
   });
   return data;
 }
