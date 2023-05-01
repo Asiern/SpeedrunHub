@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -11,9 +11,12 @@ export default function Home() {
   const navigator = useNavigation();
   const [searchValue, setSearchValue] = useState<string | undefined>(undefined);
 
-  function onSearch(query: string | undefined) {
-    navigator.navigate("Search", { query: query });
-  }
+  const onSearch = useCallback(
+    (query: string | undefined) => {
+      navigator.navigate("Search", { query: query });
+    },
+    [navigator]
+  );
 
   return (
     <View style={styles.container}>

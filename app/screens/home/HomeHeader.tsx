@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { memo, useContext } from "react";
 import { Feather } from "@expo/vector-icons";
 import { Image, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -40,7 +40,7 @@ function HeaderButton({ onPress }: IHeaderButton): JSX.Element {
   );
 }
 
-export default function HomeHeader(): JSX.Element {
+function HomeHeader(): JSX.Element {
   const navigation = useNavigation();
   const { config } = useContext(context)!;
   return (
@@ -61,3 +61,5 @@ export default function HomeHeader(): JSX.Element {
     </View>
   );
 }
+
+export default memo(HomeHeader);
