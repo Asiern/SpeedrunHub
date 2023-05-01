@@ -6,8 +6,8 @@
   @returns A JSX element containing the filter button.
 */
 
-import React, { useContext } from "react";
-import { Text } from "react-native";
+import React, { memo, useContext } from "react";
+import { Text, StyleSheet } from "react-native";
 import { context } from "../../config/config";
 import { shadow } from "../../themes/theme";
 import { Feather } from "@expo/vector-icons";
@@ -22,28 +22,23 @@ interface IFilter {
 /**
   Set the default variant of the Filter component to "add".
 */
-Filter.defaultProps = {
+FilterComponent.defaultProps = {
   variant: "add",
 };
 
-export function Filter({ label, onPress, variant }: IFilter): JSX.Element {
+export const Filter = memo(FilterComponent);
+
+function FilterComponent({ label, onPress, variant }: IFilter): JSX.Element {
   const { config } = useContext(context)!;
   const { theme } = config;
   return (
     <TouchableOpacity
       style={[
         {
-          height: 35,
-          paddingHorizontal: 6,
-          borderRadius: 10,
           backgroundColor:
             variant === "add" ? theme.colors.foreground : theme.colors.primary,
-          flexDirection: "row",
-          alignItems: "center",
-          marginVertical: 5,
-          marginRight: 5,
         },
-        shadow,
+        styles.container,
       ]}
       onPress={onPress}
     >
@@ -55,15 +50,35 @@ export function Filter({ label, onPress, variant }: IFilter): JSX.Element {
         size={15}
       />
       <Text
-        style={{
-          fontFamily: "Poppins",
-          marginHorizontal: 5,
-          color:
-            variant === "add" ? theme.colors.primary : theme.colors.foreground,
-        }}
+        style={[
+          {
+            color:
+              variant === "add"
+                ? theme.colors.primary
+                : theme.colors.foreground,
+          },
+          styles.text,
+        ]}
       >
         {label}
       </Text>
     </TouchableOpacity>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    ...shadow,
+    height: 35,
+    paddingHorizontal: 6,
+    borderRadius: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    marginVertical: 5,
+    marginRight: 5,
+  },
+  text: {
+    fontFamily: "Poppins",
+    marginHorizontal: 5,
+  },
+});

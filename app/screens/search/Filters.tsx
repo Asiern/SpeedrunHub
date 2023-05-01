@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { Filter } from "./Filter";
@@ -6,7 +6,7 @@ import { Filter } from "./Filter";
 interface IFilters {
   filters: string[]; // An array of all possible filters
   initial: string[]; // An array of initially enabled filters
-  onChange: () => void; // A function to be called when filters are changed
+  onChange: (filters: string[]) => void; // A function to be called when filters are changed
 }
 
 export function Filters({ filters, initial, onChange }: IFilters): JSX.Element {
@@ -15,21 +15,26 @@ export function Filters({ filters, initial, onChange }: IFilters): JSX.Element {
     filters.filter((f) => !initial.includes(f))
   );
 
-  // Define a function to remove a filter from the enabled list
-  function onRemove(filter: string) {
-    const newFilters: string[] = enabled.filter((f) => f !== filter);
-    setEnabled([...newFilters]);
-    setDisabled([...disabled, filter]);
-    onChange(); // Call the onChange function to notify of the filter change
-  }
+  const onRemove = useCallback(
+    (filter: string) => {
+      const newFilters: string[] = enabled.filter((f) => f !== filter);
+      setEnabled([...newFilters]);
+      setDisabled([...disabled, filter]);
+      onChange(newFilters); // Call the onChange function to notify of the filter change
+    },
+    [enabled, disabled]
+  );
 
-  // Define a function to add a filter to the enabled list
-  function onAdd(filter: string) {
-    setEnabled([...enabled, filter]);
-    const newDisabled: string[] = disabled.filter((f) => f !== filter);
-    setDisabled([...newDisabled]);
-    onChange(); // Call the onChange function to notify of the filter change
-  }
+  const onAdd = useCallback(
+    (filter: string) => {
+      const newEnabled: string[] = [...enabled, filter];
+      setEnabled(newEnabled);
+      const newDisabled: string[] = disabled.filter((f) => f !== filter);
+      setDisabled([...newDisabled]);
+      onChange(newEnabled); // Call the onChange function to notify of the filter change
+    },
+    [enabled, disabled]
+  );
 
   return (
     <View
