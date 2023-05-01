@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { context } from "../../config/config";
 import { getGames, getUsers } from "../../hooks";
 import SearchBar from "../../components/SearchBar";
 import { Filters } from "./Filters";
@@ -37,10 +36,11 @@ export default function Search(props) {
   const params = props.route.params;
   const [users, setUsers] = useState<usersResponse | null>(null);
   const [games, setGames] = useState<gameResponse | null>(null);
+  const [searchQuery, setSearchQuery] = useState<string | undefined>(
+    params.query
+  );
   const [filters, setFilters] = useState<string[]>(INITIAL_FILTERS);
   const navigation = useNavigation();
-  const { config } = useContext(context)!;
-  const { theme } = config;
 
   useEffect(() => {
     if (params !== undefined) search(setUsers, setGames, params.query, filters);
@@ -48,7 +48,6 @@ export default function Search(props) {
 
   return (
     <View style={[styles.container]}>
-      {/* // TODO  Set onSearch action*/}
       <View
         style={{
           flexDirection: "row",
@@ -64,17 +63,20 @@ export default function Search(props) {
           variant="default"
         />
         <SearchBar
-          onSearch={(query) => search(setUsers, setGames, query, filters)}
+          onSearch={() =>
+            search(setUsers, setGames, searchQuery ?? "", filters)
+          }
           initialValue={params.query}
+          onChangeText={setSearchQuery}
         />
       </View>
       <Filters
         filters={["users", "games"]}
         initial={INITIAL_FILTERS}
-        // TODO add search action
-        onChange={(filters: string[]) =>
-          search(setUsers, setGames, "query", filters)
-        }
+        onChange={(filters: string[]) => {
+          setFilters(filters);
+          search(setUsers, setGames, searchQuery ?? "", filters);
+        }}
       />
       <FlatList
         style={{ marginVertical: 10 }}

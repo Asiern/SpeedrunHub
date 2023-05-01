@@ -1,28 +1,26 @@
-import { Feather } from "@expo/vector-icons";
-import React, { useContext, useState } from "react";
+import React, { memo, useContext } from "react";
 import { View } from "react-native";
-import { TextInput, TouchableOpacity } from "react-native";
+import { TextInput } from "react-native";
 import { shadow } from "../themes/theme";
 import { context } from "../config/config";
 import { SquareButton } from "./SquareButton";
 
 export interface ISearchBar {
-  onSearch: (query: string) => void;
+  onSearch: () => void;
   initialValue?: string;
+  onChangeText?: (value) => void;
 }
 
-SearchBar.DefaultProps = {
-  initialValue: "",
-};
-
-export default function SearchBar({
-  initialValue,
+function SearchBar({
   onSearch,
+  initialValue = "",
+  onChangeText = () => {},
 }: ISearchBar): JSX.Element {
+  // Retrieve the theme from the app context
   const { config } = useContext(context)!;
   const { theme } = config;
-  const [query, setQuery] = useState<string>(initialValue ?? "");
 
+  // Render a view containing a text input and a search button
   return (
     <View
       style={{
@@ -32,9 +30,9 @@ export default function SearchBar({
       }}
     >
       <TextInput
-        placeholder="Search for games/users..."
-        value={query}
-        onChangeText={setQuery}
+        placeholder={"Search for games/users..."}
+        onChangeText={onChangeText}
+        value={initialValue ?? undefined}
         style={[
           {
             height: 50,
@@ -49,11 +47,10 @@ export default function SearchBar({
           shadow,
         ]}
       />
-      <SquareButton
-        icon="search"
-        onPress={() => onSearch(query)}
-        variant="primary"
-      />
+      <SquareButton icon="search" onPress={onSearch} variant="primary" />
     </View>
   );
 }
+
+// Memoize the component to optimize performance
+export default memo(SearchBar);
