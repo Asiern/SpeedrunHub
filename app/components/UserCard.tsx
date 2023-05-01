@@ -36,6 +36,7 @@ export function UserCard({ user }: IUserCard): JSX.Element {
           flex: 1,
           flexDirection: "row",
           alignItems: "center",
+          justifyContent: "space-between",
         }}
       >
         <View>
@@ -76,7 +77,7 @@ export function UserCard({ user }: IUserCard): JSX.Element {
                 color: theme.colors.text,
               }}
             >
-              {config.user?.location?.country.names.international}
+              {user.location?.country.names.international}
             </Text>
           </View>
         </View>
@@ -103,7 +104,7 @@ export function UserCard({ user }: IUserCard): JSX.Element {
               marginLeft: 10,
             }}
             source={{
-              uri: user.assets.image.uri ?? "",
+              uri: user.assets.image?.uri ?? undefined,
             }}
           />
         )}
