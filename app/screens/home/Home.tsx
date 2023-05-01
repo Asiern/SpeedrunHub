@@ -22,7 +22,9 @@ export default function Home() {
     <View style={styles.container}>
       <View style={{ flex: 1 }}>
         <HomeHeader />
-        <SearchBar {...{ onSearch }} />
+        <View style={{ paddingHorizontal: 30 }}>
+          <SearchBar {...{ onSearch }} />
+        </View>
         {/* <Notifications /> */}
       </View>
       <View style={{ flex: 1 }}>{/* <GameList /> */}</View>
