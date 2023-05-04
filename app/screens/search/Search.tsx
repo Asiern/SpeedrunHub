@@ -10,6 +10,7 @@ import { SquareButton } from "../../components/SquareButton";
 import { useNavigation } from "@react-navigation/native";
 import Game from "./Game";
 import { context } from "../../config/config";
+import Constants from "expo-constants";
 
 const INITIAL_FILTERS: string[] = ["games"];
 const FILTERS: string[] = ["users", "games"];
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fafafe",
-    paddingTop: 40,
+    paddingTop: Constants.statusBarHeight + 20,
   },
   searchBar: {
     flexDirection: "row",

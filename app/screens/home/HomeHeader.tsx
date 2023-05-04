@@ -49,7 +49,7 @@ function HomeHeader(): JSX.Element {
         flexDirection: "row",
         justifyContent: "space-between",
         paddingHorizontal: 30,
-        marginTop: 20,
+        marginTop: 10,
       }}
     >
       <HeaderButton onPress={() => navigation.navigate("Settings")} />
