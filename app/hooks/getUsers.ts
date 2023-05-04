@@ -11,10 +11,10 @@ export default async function getUsers(
   query: string,
   pagination?: number
 ): Promise<usersResponse> {
-  let endpoint: string = "https://www.speedrun.com/api/v1/users?name=" + query;
+  let url: string = `https://www.speedrun.com/api/v1/users?name=${query}&max=${pagination}`;
 
   // Add pagination parameter
-  if (pagination) endpoint += `?max=${pagination}`;
-
-  return (await axios({ url: endpoint, method: "GET" })).data as usersResponse;
+  // if (pagination) endpoint += `?max=${pagination}`;
+  const users = (await axios({ method: "GET", url })).data as usersResponse;
+  return users;
 }

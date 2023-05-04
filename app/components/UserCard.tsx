@@ -1,18 +1,22 @@
 import React, { useContext } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
-import { context } from "../../config/config";
-import { shadow } from "../../themes/theme";
+import { context } from "../config/config";
+import { shadow } from "../themes/theme";
 import { useNavigation } from "@react-navigation/native";
 import { Feather } from "@expo/vector-icons";
+import { user } from "../hooks/types";
 
 // TODO Center username when location === null
 // TODO Disable self profile link when user is "Guest"
 // TODO Set onPress action (when user is "Guest") to log out
 
-export function UserCard(): JSX.Element {
+interface IUserCard {
+  user: user;
+}
+export function UserCard({ user }: IUserCard): JSX.Element {
   const navigation = useNavigation();
   const { config } = useContext(context)!;
-  const { theme, user } = config;
+  const { theme } = config;
   return (
     <TouchableOpacity
       style={[
@@ -32,6 +36,7 @@ export function UserCard(): JSX.Element {
           flex: 1,
           flexDirection: "row",
           alignItems: "center",
+          justifyContent: "space-between",
         }}
       >
         <View>
@@ -44,7 +49,7 @@ export function UserCard(): JSX.Element {
               textAlignVertical: "bottom",
             }}
           >
-            {user.username}
+            {user.names.international}
           </Text>
           <View
             style={{
@@ -72,11 +77,11 @@ export function UserCard(): JSX.Element {
                 color: theme.colors.text,
               }}
             >
-              {config.user.location?.country.names.international}
+              {user.location?.country.names.international}
             </Text>
           </View>
         </View>
-        {user.image === null ? (
+        {user.assets.image === null ? (
           <View
             style={{ width: 60, height: 60, borderRadius: 10, marginLeft: 10 }}
           >
@@ -99,7 +104,7 @@ export function UserCard(): JSX.Element {
               marginLeft: 10,
             }}
             source={{
-              uri: user.image,
+              uri: user.assets.image?.uri ?? undefined,
             }}
           />
         )}

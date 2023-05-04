@@ -1,39 +1,42 @@
-import { Feather } from "@expo/vector-icons";
-import React, { useContext, useState } from "react";
+import React, { memo, useContext, useState } from "react";
 import { View } from "react-native";
-import { TextInput, TouchableOpacity } from "react-native";
+import { TextInput } from "react-native";
 import { shadow } from "../themes/theme";
 import { context } from "../config/config";
+import { SquareButton } from "./SquareButton";
 
 export interface ISearchBar {
-  onSearch: (query: string) => void;
+  onSearch: () => void;
   initialValue?: string;
+  onChangeText?: (value: string) => void;
 }
 
-SearchBar.DefaultProps = {
-  initialValue: "",
-};
-
-export default function SearchBar({
-  initialValue,
+function SearchBar({
   onSearch,
+  initialValue = undefined,
+  onChangeText = () => {},
 }: ISearchBar): JSX.Element {
+  const [value, setValue] = useState<string>(initialValue ?? "");
+
+  // Retrieve the theme from the app context
   const { config } = useContext(context)!;
   const { theme } = config;
-  const [query, setQuery] = useState<string>(initialValue);
 
+  // Render a view containing a text input and a search button
   return (
     <View
       style={{
         flexDirection: "row",
-        paddingHorizontal: 30,
-        marginVertical: 10,
+        flex: 1,
       }}
     >
       <TextInput
-        placeholder="Search for games/users..."
-        value={query}
-        onChangeText={setQuery}
+        placeholder={"Search for games/users..."}
+        onChangeText={(v) => {
+          onChangeText(v);
+          setValue(v);
+        }}
+        value={value}
         style={[
           {
             height: 50,
@@ -43,27 +46,15 @@ export default function SearchBar({
             padding: 10,
             fontFamily: "Poppins",
             textAlignVertical: "center",
+            marginRight: 5,
           },
           shadow,
         ]}
       />
-      <TouchableOpacity
-        style={[
-          {
-            backgroundColor: theme.colors.primary,
-            justifyContent: "center",
-            height: 50,
-            width: 50,
-            alignItems: "center",
-            borderRadius: 12,
-            marginLeft: 10,
-          },
-          shadow,
-        ]}
-        onPress={() => onSearch(query)}
-      >
-        <Feather name="search" size={25} color={theme.colors.foreground} />
-      </TouchableOpacity>
+      <SquareButton icon="search" onPress={onSearch} variant="primary" />
     </View>
   );
 }
+
+// Memoize the component to optimize performance
+export default memo(SearchBar);

@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
+import React, { memo, useContext } from "react";
 import { Feather } from "@expo/vector-icons";
 import { Image, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { shadow } from "../../themes/theme";
 import { useNavigation } from "@react-navigation/native";
 import { context } from "../../config/config";
-import { UserCard } from "./UserCard";
+import { UserCard } from "../../components/UserCard";
 import { LoginButton } from "./LoginButton";
 
 interface IHeaderButton {
@@ -40,7 +40,7 @@ function HeaderButton({ onPress }: IHeaderButton): JSX.Element {
   );
 }
 
-export default function HomeHeader(): JSX.Element {
+function HomeHeader(): JSX.Element {
   const navigation = useNavigation();
   const { config } = useContext(context)!;
   return (
@@ -53,7 +53,13 @@ export default function HomeHeader(): JSX.Element {
       }}
     >
       <HeaderButton onPress={() => navigation.navigate("Settings")} />
-      {config.logged === true ? <UserCard /> : <LoginButton />}
+      {config.logged === true && config.user !== null ? (
+        <UserCard user={config.user} />
+      ) : (
+        <LoginButton />
+      )}
     </View>
   );
 }
+
+export default memo(HomeHeader);

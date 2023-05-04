@@ -1,28 +1,33 @@
-import React, { useContext } from "react";
+import React, { useCallback, useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
 import Constants from "expo-constants";
 
 import HomeHeader from "./HomeHeader";
 import SearchBar from "../../components/SearchBar";
-import Notifications from "./Notifications";
-import { GameList } from "./GameList";
-import { context } from "../../config/config";
 
 export default function Home() {
   const navigator = useNavigation();
+  const [searchValue, setSearchValue] = useState<string | undefined>(undefined);
 
-  function onSearch(query: string) {
-    navigator.navigate("Search", { query: query });
-  }
+  const onSearch = useCallback(
+    (query: string | undefined) => {
+      navigator.navigate("Search", { query: query });
+    },
+    [navigator]
+  );
 
   return (
     <View style={styles.container}>
       <View style={{ flex: 1 }}>
         <HomeHeader />
-        <SearchBar {...{ onSearch }} />
+        <View style={{ paddingHorizontal: 30, marginTop: 10 }}>
+          <SearchBar
+            onSearch={() => onSearch(searchValue)}
+            onChangeText={setSearchValue}
+          />
+        </View>
         {/* <Notifications /> */}
       </View>
       <View style={{ flex: 1 }}>{/* <GameList /> */}</View>

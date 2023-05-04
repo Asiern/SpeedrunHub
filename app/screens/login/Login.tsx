@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
-import { StyleSheet, Text, View, Linking, ToastAndroid } from "react-native";
-import { colors, h2, h6, shadow } from "../../themes/theme";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { StyleSheet, Text, View } from "react-native";
+import { shadow } from "../../themes/theme";
 import { TextInput } from "react-native-gesture-handler";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
@@ -9,8 +8,8 @@ import Button from "../../components/Buttons/Button";
 import { useNavigation } from "@react-navigation/native";
 import { context } from "../../config/config";
 import { getUser } from "../../hooks";
-import { user } from "../../types";
 import { loadInBrowser } from "../../utils";
+import { user } from "../../hooks/types";
 
 export function Login() {
   const [username, setUsername] = useState<string>("");
@@ -27,7 +26,7 @@ export function Login() {
         return;
       }
       const user: user = await getUser(username);
-      setConfig({ ...config, user: { ...user, key }, logged: true });
+      setConfig({ ...config, user, logged: true, key });
       navigation.navigate("Main", { screen: "Home" });
       console.log(user);
     } catch (e) {
