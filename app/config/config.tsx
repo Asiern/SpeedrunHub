@@ -6,14 +6,8 @@ import { config } from "../types";
 export const defaultConfig: config = {
   onboarding: false,
   logged: false,
-  user: {
-    username: null,
-    userid: null,
-    key: null,
-    image: null,
-    location: null,
-    social: [],
-  },
+  user: null,
+  key: null,
   notifications: {
     unread: false,
     push: false,
