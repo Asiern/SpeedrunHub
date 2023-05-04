@@ -3,22 +3,28 @@ import { StyleSheet, Text, View, ScrollView } from "react-native";
 import Constants from "expo-constants";
 import { StatusBar } from "expo-status-bar";
 import { context } from "../../config/config";
+import { SquareButton } from "../../components/SquareButton";
+import { useNavigation } from "@react-navigation/native";
 
 export function About() {
-  const { theme } = useContext(context);
+  // Retrieve the theme from the app context
+  const { config } = useContext(context)!;
+  const { theme } = config;
+  const navigation = useNavigation();
   return (
     <ScrollView
-      style={[styles.container, { backgroundColor: theme.colors.card }]}
+      style={[styles.container, { backgroundColor: theme.colors.foreground }]}
     >
       <StatusBar style={"dark"}></StatusBar>
       <View style={styles.info}>
+        <SquareButton icon="arrow-left" onPress={() => navigation.goBack()} />
         <View
           style={[
             styles.logocontainer,
             { backgroundColor: theme.colors.primary },
           ]}
         >
-          <Text style={[styles.logo, { color: theme.colors.card }]}>
+          <Text style={[styles.logo, { color: theme.colors.foreground }]}>
             Speedrun Hub
           </Text>
         </View>
@@ -37,19 +43,20 @@ export function About() {
         <Text
           style={[
             styles.paragraph,
-            { fontWeight: "bold", color: theme.colors.text },
+            { fontFamily: "Poppins-Medium", color: theme.colors.text },
           ]}
         >
           Disclaimer: This is not an official app
         </Text>
+        {/* TODO add release notes for v2.0.0 */}
         <Text style={[styles.title, { color: theme.colors.primary }]}>
-          Release Notes v1.1.1
+          Release Notes v2.0.0
         </Text>
         <Text
           style={[
             styles.paragraph,
             {
-              fontWeight: "bold",
+              fontFamily: "Poppins-Medium",
               paddingBottom: -5,
               fontSize: 18,
               color: theme.colors.text,
@@ -76,27 +83,29 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-
   info: {
     marginTop: Constants.statusBarHeight,
     flex: 1,
-    padding: 20,
+    paddingHorizontal: 30,
+    paddingTop: 10,
   },
   logocontainer: {
     paddingVertical: 20,
     borderRadius: 10,
+    marginTop: 10,
   },
   logo: {
     fontSize: 30,
-    fontWeight: "bold",
+    fontFamily: "Poppins-Medium",
     alignSelf: "center",
   },
   title: {
-    fontWeight: "bold",
+    fontFamily: "Poppins-Medium",
     fontSize: 25,
     paddingTop: 20,
   },
   paragraph: {
+    fontFamily: "Poppins",
     paddingVertical: 10,
     fontSize: 15,
   },
@@ -115,6 +124,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   githubtext: {
+    fontFamily: "Poppins",
     alignSelf: "center",
     paddingHorizontal: 20,
     fontSize: 20,
