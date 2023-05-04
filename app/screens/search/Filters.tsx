@@ -44,7 +44,13 @@ export function Filters({ filters, initial, onChange }: IFilters): JSX.Element {
       bounces={false}
       scrollEventThrottle={16}
     >
-      <View style={{ marginHorizontal: 30, flexDirection: "row" }}>
+      <View
+        style={{
+          marginHorizontal: 30,
+          flexDirection: "row",
+          marginVertical: 5,
+        }}
+      >
         {/* Render the enabled filters */}
         {enabled.map((filter: string, index: number) => {
           return (
