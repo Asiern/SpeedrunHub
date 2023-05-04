@@ -41,6 +41,7 @@ export default function App() {
       await SplashScreen.preventAutoHideAsync();
       await loadAsync({
         Poppins: require("./app/assets/fonts/Poppins-Regular.ttf"),
+        "Poppins-Medium": require("./app/assets/fonts/Poppins-Medium.ttf"),
       });
 
       // Read config from AsyncStorage
