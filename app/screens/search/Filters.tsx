@@ -37,19 +37,14 @@ export function Filters({ filters, initial, onChange }: IFilters): JSX.Element {
   );
 
   return (
-    <View
-      style={{
-        flexDirection: "row",
-      }}
+    <ScrollView
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      decelerationRate={"fast"}
+      bounces={false}
+      scrollEventThrottle={16}
     >
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        decelerationRate={"fast"}
-        bounces={false}
-        scrollEventThrottle={16}
-        style={{ marginHorizontal: 30 }}
-      >
+      <View style={{ marginHorizontal: 30, flexDirection: "row" }}>
         {/* Render the enabled filters */}
         {enabled.map((filter: string, index: number) => {
           return (
@@ -72,7 +67,7 @@ export function Filters({ filters, initial, onChange }: IFilters): JSX.Element {
             />
           );
         })}
-      </ScrollView>
-    </View>
+      </View>
+    </ScrollView>
   );
 }
