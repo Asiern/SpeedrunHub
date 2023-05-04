@@ -46,7 +46,7 @@ const HomeStack = () => (
       component={Settings}
       options={{ headerShown: false }}
     />
-    {/* <Stack.Screen
+    <Stack.Screen
       name="About"
       component={About}
       options={{ headerShown: false }}
@@ -65,7 +65,7 @@ const HomeStack = () => (
       name="ThemeSettings"
       component={ThemeSettings}
       options={{ headerShown: false }}
-    /> */}
+    />
     <Stack.Screen
       name="RunInfo"
       component={RunInfo}
