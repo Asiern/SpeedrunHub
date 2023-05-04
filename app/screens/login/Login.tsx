@@ -129,7 +129,7 @@ export function Login() {
           onPress={() => login(username, key)}
           variant="primary"
           shadow
-          icon={"user-check"}
+          icon={"log-in"}
         />
         <Button
           label="Login as guest"
