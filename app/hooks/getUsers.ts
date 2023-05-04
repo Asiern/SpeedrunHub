@@ -11,7 +11,7 @@ export default async function getUsers(
   query: string,
   pagination?: number
 ): Promise<usersResponse> {
-  let url: string = `https://www.speedrun.com/api/v1/users?name=${query}&pagination=${pagination}`;
+  let url: string = `https://www.speedrun.com/api/v1/users?name=${query}&max=${pagination}`;
 
   // Add pagination parameter
   // if (pagination) endpoint += `?max=${pagination}`;
