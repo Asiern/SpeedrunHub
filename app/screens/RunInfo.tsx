@@ -15,7 +15,6 @@ import Animated, {
 import { colors, h4, shadow, h3 } from "../themes/theme";
 import VideoCarousel from "../components/RunInfo/VideoCarousel";
 import GameCard from "../components/GameCard";
-import TopBar from "../components/TopBar";
 import Links from "../components/RunInfo/Links";
 
 //Interface
@@ -170,7 +169,6 @@ export default function RunInfo(props) {
             { backgroundColor: theme.colors.background },
           ]}
         >
-          <TopBar label={"Run Info"} variant={theme.dark ? "dark" : "light"} />
           <VideoCarousel links={data.videos.links} />
           <Links videolink={data.videos.links[0].uri} weblink={weblink} />
           <View style={styles.gameinfocontainer}>

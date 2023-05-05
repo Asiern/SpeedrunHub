@@ -28,7 +28,7 @@ export function UserCard(): JSX.Element {
           borderBottomLeftRadius: 10,
         }}
         source={{
-          uri: user.image,
+          uri: user?.assets.image.uri,
         }}
       />
       <View style={{ marginLeft: 10 }}>
@@ -41,7 +41,7 @@ export function UserCard(): JSX.Element {
             textAlignVertical: "bottom",
           }}
         >
-          {user.username}
+          {user?.names.international}
         </Text>
         <View
           style={{
@@ -51,7 +51,7 @@ export function UserCard(): JSX.Element {
         >
           <Image
             source={{
-              uri: `https://www.speedrun.com/images/flags/${user.location?.country.code}.png`,
+              uri: `https://www.speedrun.com/images/flags/${user?.location?.country.code}.png`,
             }}
             style={{
               alignSelf: "center",
@@ -69,7 +69,7 @@ export function UserCard(): JSX.Element {
               color: theme.colors.text,
             }}
           >
-            {config.user.location?.country.names.international}
+            {config.user?.location?.country.names.international}
           </Text>
         </View>
       </View>
