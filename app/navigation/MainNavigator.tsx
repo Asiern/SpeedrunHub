@@ -9,9 +9,7 @@ import Search from "../screens/search/Search";
 import Notifications from "../screens/Notifications";
 import RunInfo from "../screens/RunInfo";
 import {
-  DevSettings,
   About,
-  AccountSettings,
   NotificationsSettings,
   ThemeSettings,
 } from "../screens/settings";
@@ -46,14 +44,9 @@ const HomeStack = () => (
       component={Settings}
       options={{ headerShown: false }}
     />
-    {/* <Stack.Screen
+    <Stack.Screen
       name="About"
       component={About}
-      options={{ headerShown: false }}
-    />
-    <Stack.Screen
-      name="AccountSettings"
-      component={AccountSettings}
       options={{ headerShown: false }}
     />
     <Stack.Screen
@@ -65,7 +58,7 @@ const HomeStack = () => (
       name="ThemeSettings"
       component={ThemeSettings}
       options={{ headerShown: false }}
-    /> */}
+    />
     <Stack.Screen
       name="RunInfo"
       component={RunInfo}
