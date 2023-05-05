@@ -7,11 +7,11 @@ import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { Social } from "./Social";
 import { getUser, getRuns, getPersonalBests } from "../../hooks";
-import { PersonalBest, game, run } from "../../hooks/types";
+import { personalBest, game, run } from "../../hooks/types";
 import Run from "../../components/Run";
 
 export function Profile(props): JSX.Element {
-  const [pbs, setPBs] = useState<PersonalBest[] | null>(null);
+  const [pbs, setPBs] = useState<personalBest[] | null>(null);
   const [games, setGames] = useState<game[]>([]);
   const [runs, setRuns] = useState<run[]>([]);
   const { config, setConfig } = useContext(context)!;
@@ -24,7 +24,7 @@ export function Profile(props): JSX.Element {
       if (user.username !== null) {
         // const data = await getUser(user.username);
         // setUserData(data);
-        const _pbs: PersonalBest[] = await getPersonalBests(user.userid);
+        const _pbs: personalBest[] = await getPersonalBests(user.userid);
         const _games: game[] = [];
         // _pbs.forEach((pb)=>{if(games.)})
         setPBs(_pbs);
