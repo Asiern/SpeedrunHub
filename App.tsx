@@ -27,7 +27,6 @@ export default function App() {
    * @param config config object
    */
   async function updateConfig(config: config) {
-    console.log("Updating config");
     await AsyncStorage.setItem("@Config", JSON.stringify(config));
     setConfig({ ...config });
   }
