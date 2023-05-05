@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { StatusBar } from "expo-status-bar";
-import { Linking, ScrollView, View } from "react-native";
+import { Linking, ScrollView, View, StyleSheet } from "react-native";
 import { context } from "../../config/config";
 import { useNavigation } from "@react-navigation/native";
 import Button from "../../components/Buttons/Button";
+import { SquareButton } from "../../components/SquareButton";
+import Constants from "expo-constants";
 
 type section = {
   title: string;
@@ -14,13 +16,6 @@ type section = {
 };
 
 const Sections: section[] = [
-  {
-    title: "My Account",
-    icon: "user",
-    navigateTo: "AccountSettings",
-    weblink: null,
-    onPress: null,
-  },
   {
     title: "Notifications",
     icon: "bell",
@@ -67,20 +62,29 @@ export function Settings() {
   return (
     <ScrollView
       style={{
-        flex: 1,
         backgroundColor: theme.colors.background,
+        marginTop: Constants.statusBarHeight,
       }}
     >
-      <StatusBar style={theme.dark ? "light" : "dark"}></StatusBar>
-      <View style={{ padding: 30 }}>
+      <View
+        style={{
+          paddingHorizontal: 30,
+          marginTop: 10,
+        }}
+      >
+        <SquareButton
+          icon="arrow-left"
+          onPress={() => navigation.goBack()}
+          variant="default"
+        />
         {Sections.map(({ icon, navigateTo, title, weblink }, index: number) => {
           return (
             <Button
               icon={icon}
               label={title}
               onPress={() => {
-                if (weblink === null) navigation.navigate(navigateTo);
-                else Linking.openURL(weblink);
+                if (navigateTo) navigation.navigate(navigateTo);
+                else if (weblink) Linking.openURL(weblink);
               }}
               shadow
               key={index}
@@ -88,7 +92,7 @@ export function Settings() {
           );
         })}
         <Button
-          icon={"user-x"}
+          icon={"log-out"}
           label={"Log out"}
           onPress={() => {
             setConfig({ ...config, logged: false });

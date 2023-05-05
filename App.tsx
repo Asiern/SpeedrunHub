@@ -27,7 +27,6 @@ export default function App() {
    * @param config config object
    */
   async function updateConfig(config: config) {
-    console.log("Updating config");
     await AsyncStorage.setItem("@Config", JSON.stringify(config));
     setConfig({ ...config });
   }
@@ -41,6 +40,7 @@ export default function App() {
       await SplashScreen.preventAutoHideAsync();
       await loadAsync({
         Poppins: require("./app/assets/fonts/Poppins-Regular.ttf"),
+        "Poppins-Medium": require("./app/assets/fonts/Poppins-Medium.ttf"),
       });
 
       // Read config from AsyncStorage
