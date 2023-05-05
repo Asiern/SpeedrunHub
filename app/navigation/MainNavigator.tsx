@@ -8,11 +8,7 @@ import GameInfo from "../screens/GameInfo";
 import Search from "../screens/search/Search";
 import Notifications from "../screens/Notifications";
 import RunInfo from "../screens/RunInfo";
-import {
-  About,
-  NotificationsSettings,
-  ThemeSettings,
-} from "../screens/settings";
+import { About, NotificationsSettings } from "../screens/settings";
 import { Profile } from "../screens/profile/Profile";
 
 const Stack = createStackNavigator();
@@ -52,11 +48,6 @@ const HomeStack = () => (
     <Stack.Screen
       name="NotificationsSettings"
       component={NotificationsSettings}
-      options={{ headerShown: false }}
-    />
-    <Stack.Screen
-      name="ThemeSettings"
-      component={ThemeSettings}
       options={{ headerShown: false }}
     />
     <Stack.Screen
