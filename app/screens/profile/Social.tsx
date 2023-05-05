@@ -29,7 +29,7 @@ export function SocialButton({ icon, uri }: ISocialButton): JSX.Element {
 }
 
 export function Social(): JSX.Element {
-  const { config, setConfig } = useContext(context)!;
+  const { config } = useContext(context)!;
   const { theme } = config;
   return (
     <View
@@ -44,10 +44,6 @@ export function Social(): JSX.Element {
         },
         shadow,
       ]}
-    >
-      {config.user.social?.map(({ icon, uri }, i: number) => {
-        return <SocialButton icon={icon} uri={uri} key={i} />;
-      })}
-    </View>
+    ></View>
   );
 }

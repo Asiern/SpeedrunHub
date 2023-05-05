@@ -28,7 +28,6 @@ export function Login() {
       const user: user = await getUser(username);
       setConfig({ ...config, user, logged: true, key });
       navigation.navigate("Main", { screen: "Home" });
-      console.log(user);
     } catch (e) {
       setUsernameError(true);
       console.warn(e);

@@ -1,15 +1,14 @@
 import axios from "axios";
-import { PersonalBest } from "./types";
+import { personalBest } from "./types";
 
 export default async function getPersonalBests(
   userid: string
-): Promise<PersonalBest[]> {
+): Promise<personalBest[]> {
   return new Promise((resolve, reject) => {
     try {
       const url: string = `https://www.speedrun.com/api/v1/users/${userid}/personal-bests?embed=game,category`;
       axios({ method: "GET", url }).then((response) => {
-        console.log(response.data.data[0]);
-        resolve(response.data.data as PersonalBest[]);
+        resolve(response.data.data as personalBest[]);
       });
     } catch (e) {
       reject();
