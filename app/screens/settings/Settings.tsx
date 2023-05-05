@@ -17,13 +17,6 @@ type section = {
 
 const Sections: section[] = [
   {
-    title: "My Account",
-    icon: "user",
-    navigateTo: "AccountSettings",
-    weblink: null,
-    onPress: null,
-  },
-  {
     title: "Notifications",
     icon: "bell",
     navigateTo: "NotificationsSettings",
