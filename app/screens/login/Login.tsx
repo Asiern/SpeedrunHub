@@ -99,19 +99,23 @@ export function Login() {
         >
           Get your API key.
         </Text>
-        <Button
-          label="Login"
-          onPress={() => login(username, key)}
-          variant="primary"
-          shadow
-          icon={"log-in"}
-        />
-        <Button
-          label="Login as guest"
-          onPress={() => login("Guest", "")}
-          variant="default"
-          icon={"user-x"}
-        />
+        <View style={{ marginTop: 10 }}>
+          <Button
+            label="Login"
+            onPress={() => login(username, key)}
+            variant="primary"
+            shadow
+            icon={"log-in"}
+          />
+        </View>
+        <View style={{ marginTop: 10 }}>
+          <Button
+            label="Login as guest"
+            onPress={() => login("Guest", "")}
+            variant="default"
+            icon={"user-x"}
+          />
+        </View>
       </View>
     </KeyboardAwareScrollView>
   );
