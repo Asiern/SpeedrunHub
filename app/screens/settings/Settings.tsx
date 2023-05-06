@@ -79,27 +79,30 @@ export function Settings() {
         />
         {Sections.map(({ icon, navigateTo, title, weblink }, index: number) => {
           return (
-            <Button
-              icon={icon}
-              label={title}
-              onPress={() => {
-                if (navigateTo) navigation.navigate(navigateTo);
-                else if (weblink) Linking.openURL(weblink);
-              }}
-              shadow
-              key={index}
-            />
+            <View key={index} style={{ marginTop: 10 }}>
+              <Button
+                icon={icon}
+                label={title}
+                onPress={() => {
+                  if (navigateTo) navigation.navigate(navigateTo);
+                  else if (weblink) Linking.openURL(weblink);
+                }}
+                shadow
+              />
+            </View>
           );
         })}
-        <Button
-          icon={"log-out"}
-          label={"Log out"}
-          onPress={() => {
-            setConfig({ ...config, logged: false });
-            navigation.navigate("Login");
-          }}
-          shadow
-        />
+        <View style={{ marginVertical: 10 }}>
+          <Button
+            icon={"log-out"}
+            label={"Log out"}
+            onPress={() => {
+              setConfig({ ...config, logged: false });
+              navigation.navigate("Login");
+            }}
+            shadow
+          />
+        </View>
       </View>
     </ScrollView>
   );
