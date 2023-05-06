@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { shadow } from "../../themes/theme";
-import { TextInput } from "react-native-gesture-handler";
+import { TextInput } from "../../components";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import Button from "../../components/Buttons/Button";
@@ -62,22 +62,10 @@ export function Login() {
           Please login to continue.
         </Text>
         <TextInput
-          placeholder="username"
+          onChange={setUsername}
           value={username}
-          onChangeText={setUsername}
-          verticalAlign="middle"
-          style={[
-            {
-              height: 50,
-              backgroundColor: theme.colors.foreground,
-              borderRadius: 15,
-              padding: 10,
-              fontFamily: "Poppins",
-              textAlignVertical: "center",
-              marginVertical: 10,
-            },
-            shadow,
-          ]}
+          placehorder="username"
+          icon="user"
         />
         {usernameError ? (
           <Text
@@ -93,22 +81,10 @@ export function Login() {
           </Text>
         ) : null}
         <TextInput
-          placeholder="API-key"
+          onChange={setKey}
           value={key}
-          verticalAlign="middle"
-          onChangeText={setKey}
-          style={[
-            {
-              height: 50,
-              backgroundColor: theme.colors.foreground,
-              borderRadius: 15,
-              padding: 10,
-              fontFamily: "Poppins",
-              marginVertical: 10,
-              textAlignVertical: "center",
-            },
-            shadow,
-          ]}
+          placehorder="API-key"
+          icon="key"
           secureTextEntry
         />
         <Text
