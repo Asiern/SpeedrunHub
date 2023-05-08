@@ -35,8 +35,10 @@ function Game({ game }: IGame): JSX.Element {
         style={styles.image}
         source={{ uri: game.assets["cover-large"].uri }}
       />
-      <View>
-        <Text style={styles.title}>{game.names.international}</Text>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title} ellipsizeMode="tail" numberOfLines={1}>
+          {game.names.international}
+        </Text>
       </View>
     </TouchableOpacity>
   );
@@ -49,12 +51,16 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginTop: 5,
     alignItems: "center",
+    paddingHorizontal: 10,
   },
   image: {
     borderRadius: 5,
     height: GAME_HEIGHT,
     width: GAME_HEIGHT * (3 / 4), // 3:4 aspect ratio
-    margin: 10,
+  },
+  titleContainer: {
+    flex: 1,
+    marginLeft: 10,
   },
   title: {
     fontFamily: "Poppins",
