@@ -37,43 +37,45 @@ export function Filters({ filters, initial, onChange }: IFilters): JSX.Element {
   );
 
   return (
-    <ScrollView
-      horizontal
-      showsHorizontalScrollIndicator={false}
-      decelerationRate={"fast"}
-      bounces={false}
-      scrollEventThrottle={16}
-    >
-      <View
-        style={{
-          marginHorizontal: 30,
-          flexDirection: "row",
-          marginVertical: 5,
-        }}
+    <View>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        decelerationRate={"fast"}
+        bounces={false}
+        scrollEventThrottle={16}
       >
-        {/* Render the enabled filters */}
-        {enabled.map((filter: string, index: number) => {
-          return (
-            <Filter
-              label={filter}
-              key={index + filter} // Use a unique key for each filter
-              onPress={() => onRemove(filter)} // Call onRemove when the filter is pressed
-              variant="remove" // Use the remove variant of the Filter component
-            />
-          );
-        })}
-        {/* Render the disabled filters */}
-        {disabled.map((filter: string, index: number) => {
-          return (
-            <Filter
-              label={filter}
-              onPress={() => onAdd(filter)} // Call onAdd when the filter is pressed
-              key={index + filter} // Use a unique key for each filter
-              variant="add" // Use the add variant of the Filter component
-            />
-          );
-        })}
-      </View>
-    </ScrollView>
+        <View
+          style={{
+            marginHorizontal: 30,
+            flexDirection: "row",
+            marginVertical: 5,
+          }}
+        >
+          {/* Render the enabled filters */}
+          {enabled.map((filter: string, index: number) => {
+            return (
+              <Filter
+                label={filter}
+                key={index + filter} // Use a unique key for each filter
+                onPress={() => onRemove(filter)} // Call onRemove when the filter is pressed
+                variant="remove" // Use the remove variant of the Filter component
+              />
+            );
+          })}
+          {/* Render the disabled filters */}
+          {disabled.map((filter: string, index: number) => {
+            return (
+              <Filter
+                label={filter}
+                onPress={() => onAdd(filter)} // Call onAdd when the filter is pressed
+                key={index + filter} // Use a unique key for each filter
+                variant="add" // Use the add variant of the Filter component
+              />
+            );
+          })}
+        </View>
+      </ScrollView>
+    </View>
   );
 }

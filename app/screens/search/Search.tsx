@@ -87,7 +87,7 @@ export default function Search(props) {
           search(setUsers, setGames, searchQuery ?? "", filters);
         }}
       />
-      <ScrollView style={{ marginTop: 10 }}>
+      <ScrollView>
         <View style={{ paddingHorizontal: 30 }}>
           {loading && (
             <ActivityIndicator color={theme.colors.primary} size={30} />
