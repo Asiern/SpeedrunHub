@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import { TouchableOpacity, View } from "react-native";
-import { context } from "../../config/config";
 import { shadow } from "../../themes/theme";
 import { Feather } from "@expo/vector-icons";
 import { loadInBrowser } from "../../utils";
+import { useConfig } from "../../hooks";
 
 interface ISocialButton {
   uri: string;
@@ -11,7 +11,7 @@ interface ISocialButton {
 }
 
 export function SocialButton({ icon, uri }: ISocialButton): JSX.Element {
-  const { config } = useContext(context)!;
+  const { config } = useConfig();
   const { theme } = config;
   return (
     <TouchableOpacity
@@ -29,7 +29,7 @@ export function SocialButton({ icon, uri }: ISocialButton): JSX.Element {
 }
 
 export function Social(): JSX.Element {
-  const { config } = useContext(context)!;
+  const { config } = useConfig();
   const { theme } = config;
   return (
     <View

@@ -17,7 +17,7 @@ export default function GameCard({
   image,
   width,
   height,
-}: GameCardProps) {
+}: GameCardProps): JSX.Element {
   const navigation = useNavigation();
   return (
     <View style={{ padding: 2 }}>

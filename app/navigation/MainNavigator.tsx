@@ -10,8 +10,26 @@ import Notifications from "../screens/Notifications";
 import RunInfo from "../screens/RunInfo";
 import { About, NotificationsSettings } from "../screens/settings";
 import { Profile } from "../screens/profile/Profile";
+import { user } from "../hooks/types";
 
 const Stack = createStackNavigator();
+
+type GameInfoParams = {
+  id: string;
+  abbreviation: string;
+};
+type ProfileParams = {
+  user: user;
+};
+type RunInfoParams = {
+  weblink: string;
+};
+
+export type MainNavigatorParamList = {
+  GameInfo: GameInfoParams;
+  Profile: ProfileParams;
+  RunInfo: RunInfoParams;
+};
 
 const HomeStack = () => (
   <Stack.Navigator>
@@ -21,7 +39,7 @@ const HomeStack = () => (
       options={{ headerShown: false }}
     />
     <Stack.Screen
-      name="Game Info"
+      name="GameInfo"
       component={GameInfo}
       options={{ headerShown: false }}
     />

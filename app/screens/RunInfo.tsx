@@ -1,12 +1,6 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import {
-  View,
-  StyleSheet,
-  Text,
-  ActivityIndicator,
-  ToastAndroid,
-} from "react-native";
+import { View, StyleSheet, Text, ActivityIndicator } from "react-native";
 import Animated, {
   useAnimatedScrollHandler,
   useSharedValue,
@@ -24,10 +18,13 @@ import { category } from "../interface/categoryInterface";
 import { player } from "../interface/playersInterface";
 import { platform } from "../interface/platformInterface";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import AdMob from "../config/admob.json";
-import { AdMobBanner } from "expo-ads-admob";
-import { context } from "../config/config";
-import { useNavigation } from "@react-navigation/native";
+import {
+  NavigationProp,
+  RouteProp,
+  useNavigation,
+} from "@react-navigation/native";
+import { useConfig } from "../hooks";
+import { MainNavigatorParamList } from "../navigation/MainNavigator";
 
 interface dataProps {
   game: {
@@ -46,9 +43,9 @@ function getId(weblink: string) {
   return weblink.slice(first, last);
 }
 function getPlayers(data: run & dataProps) {
-  var runners = [];
-  for (let player of data.players.data) {
-    var runner = {
+  const runners = [];
+  for (const player of data.players.data) {
+    const runner = {
       userid: null,
       username: "",
     };
@@ -67,12 +64,17 @@ function getPlayers(data: run & dataProps) {
 }
 
 function timeConverter(time: string) {
-  var result = time.toLowerCase();
+  const result = time.toLowerCase();
   return result.substr(2, result.length);
 }
 
-export default function RunInfo(props) {
-  const { config } = useContext(context)!;
+type RunInfoProps = {
+  route: RouteProp<MainNavigatorParamList, "RunInfo">;
+  navigation: NavigationProp<MainNavigatorParamList, "RunInfo">;
+};
+
+export default function RunInfo(props: RunInfoProps) {
+  const { config } = useConfig();
   const { theme } = config;
   const { weblink } = props.route.params;
   const navigation = useNavigation();
@@ -121,20 +123,20 @@ export default function RunInfo(props) {
           "/personal-bests";
         const userResponse = await fetch(userUrl);
         const pbs = await userResponse.json();
-        for (let pb of pbs.data) {
+        for (const pb of pbs.data) {
           if (pb.run.id === getId(weblink)) {
             setPlace(pb.place);
             break;
           }
         }
         //Platforms
-        var platforms = [];
-        for (let platform of data.data.game.data.platforms) {
+        const platforms = [];
+        for (const platform of data.data.game.data.platforms) {
           const platformUrl =
             "https://www.speedrun.com/api/v1/platforms/" + platform;
           const platformResponse = await fetch(platformUrl);
           const plat = await platformResponse.json();
-          var pla: platform = {
+          const pla: platform = {
             name: plat.data.name,
             id: plat.data.id,
           };

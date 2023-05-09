@@ -1,9 +1,9 @@
-import React, { memo, useContext } from "react";
+import React, { memo } from "react";
 import { TextInput as Input } from "react-native-gesture-handler";
 import { shadow } from "../themes/theme";
-import { context } from "../config/config";
 import { View, StyleSheet } from "react-native";
 import { Feather } from "@expo/vector-icons";
+import { useConfig } from "../hooks";
 
 interface ITextInput {
   icon?: string;
@@ -20,7 +20,7 @@ function TextInput({
   placehorder = undefined,
   secureTextEntry = false,
 }: ITextInput): JSX.Element {
-  const { config } = useContext(context)!;
+  const { config } = useConfig();
   const { theme } = config;
 
   return (

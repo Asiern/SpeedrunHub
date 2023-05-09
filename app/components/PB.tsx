@@ -11,7 +11,7 @@ import { context } from "../config/config";
 import { colors, h6 } from "../themes/theme";
 
 function timeConverter(time: string) {
-  var result = time.toLowerCase();
+  const result = time.toLowerCase();
   return result.substr(2, result.length);
 }
 

@@ -12,7 +12,11 @@ export interface DotProps {
   color: ColorValue;
 }
 
-export default function Dot({ index, currentIndex, color }: DotProps) {
+export default function Dot({
+  index,
+  currentIndex,
+  color,
+}: DotProps): JSX.Element {
   const style = useAnimatedStyle(() => {
     const opacity = interpolate(
       currentIndex.value,

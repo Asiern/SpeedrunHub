@@ -4,7 +4,7 @@ import { h3 } from "../../themes/theme";
 import { Feather } from "@expo/vector-icons";
 
 export interface SquareButtonProps {
-  title: String;
+  title: string;
   color: ColorValue;
   backgroundColor: ColorValue;
   onPress?: () => void;

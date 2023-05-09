@@ -1,43 +1,47 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
-import { context } from "../../config/config";
+import React, { useState } from "react";
+import { ScrollView, TouchableOpacity, View } from "react-native";
 import { shadow } from "../../themes/theme";
 import { UserCard } from "./UserCard";
 import { Feather } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
 import { Social } from "./Social";
-import { getUser, getRuns, getPersonalBests } from "../../hooks";
+import { useConfig } from "../../hooks";
 import { personalBest, game, run } from "../../hooks/types";
 import Run from "../../components/Run";
+import { NavigationProp, RouteProp } from "@react-navigation/native";
+import { MainNavigatorParamList } from "../../navigation/MainNavigator";
 
-export function Profile(props): JSX.Element {
+type ProfileProps = {
+  route: RouteProp<MainNavigatorParamList, "Profile">;
+  navigation: NavigationProp<MainNavigatorParamList, "Profile">;
+};
+
+export function Profile(props: ProfileProps): JSX.Element {
   const [pbs, setPBs] = useState<personalBest[] | null>(null);
   const [games, setGames] = useState<game[]>([]);
   const [runs, setRuns] = useState<run[]>([]);
-  const { config, setConfig } = useContext(context)!;
+  const { config } = useConfig();
   const { theme } = config;
-  const navigation = useNavigation();
   const { user } = props.route.params;
 
-  async function prepare() {
-    try {
-      if (user.username !== null) {
-        // const data = await getUser(user.username);
-        // setUserData(data);
-        const _pbs: personalBest[] = await getPersonalBests(user.userid);
-        const _games: game[] = [];
-        // _pbs.forEach((pb)=>{if(games.)})
-        setPBs(_pbs);
-        // setRuns(runs);
-      }
-    } catch (e) {
-      console.warn(e);
-    }
-  }
+  // async function prepare() {
+  //   try {
+  //     if (user.names.international !== null) {
+  //       // const data = await getUser(user.username);
+  //       // setUserData(data);
+  //       const _pbs: personalBest[] = await getPersonalBests(user.userid);
+  //       const _games: game[] = [];
+  //       // _pbs.forEach((pb)=>{if(games.)})
+  //       setPBs(_pbs);
+  //       // setRuns(runs);
+  //     }
+  //   } catch (e) {
+  //     console.warn(e);
+  //   }
+  // }
 
-  useEffect(() => {
-    prepare();
-  }, []);
+  // useEffect(() => {
+  //   prepare();
+  // }, []);
 
   return (
     <ScrollView

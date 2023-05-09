@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
-import { context } from "../config/config";
 import { shadow } from "../themes/theme";
 import { useNavigation } from "@react-navigation/native";
 import { Feather } from "@expo/vector-icons";
 import { user } from "../hooks/types";
+import { useConfig } from "../hooks";
 
 // TODO Center username when location === null
 // TODO Disable self profile link when user is "Guest"
@@ -15,7 +15,7 @@ interface IUserCard {
 }
 export function UserCard({ user }: IUserCard): JSX.Element {
   const navigation = useNavigation();
-  const { config } = useContext(context)!;
+  const { config } = useConfig();
   const { theme } = config;
   return (
     <TouchableOpacity
