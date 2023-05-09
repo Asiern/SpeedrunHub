@@ -99,7 +99,7 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
 6. Install missing packages
 
    ```
-   # Navigate to the "...\SpeedrunHub\Source" folder and run the following command
+   # Navigate to the "SpeedrunHub\" folder and run the following command
    $ yarn
    ```
 
