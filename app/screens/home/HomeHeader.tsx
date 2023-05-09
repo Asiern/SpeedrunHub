@@ -1,21 +1,21 @@
-import React, { memo, useContext } from "react";
+import React, { memo } from "react";
 import { Feather } from "@expo/vector-icons";
-import { Image, Text, View } from "react-native";
+import { View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { shadow } from "../../themes/theme";
 import { useNavigation } from "@react-navigation/native";
-import { context } from "../../config/config";
 import { UserCard } from "../../components/UserCard";
 import { LoginButton } from "./LoginButton";
+import { useConfig } from "../../hooks";
 
 interface IHeaderButton {
   onPress: () => void;
 }
 
-const HEIGHT: number = 60;
+const HEIGHT = 60;
 
 function HeaderButton({ onPress }: IHeaderButton): JSX.Element {
-  const { config } = useContext(context)!;
+  const { config } = useConfig();
   const { theme } = config;
   return (
     <TouchableOpacity
@@ -42,7 +42,7 @@ function HeaderButton({ onPress }: IHeaderButton): JSX.Element {
 
 function HomeHeader(): JSX.Element {
   const navigation = useNavigation();
-  const { config } = useContext(context)!;
+  const { config } = useConfig();
   return (
     <View
       style={{

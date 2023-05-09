@@ -1,14 +1,14 @@
-import React, { useContext } from "react";
+import React from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import Constants from "expo-constants";
 import { StatusBar } from "expo-status-bar";
-import { context } from "../../config/config";
 import { SquareButton } from "../../components/SquareButton";
 import { useNavigation } from "@react-navigation/native";
+import { useConfig } from "../../hooks";
 
-export function About() {
+export function About(): JSX.Element {
   // Retrieve the theme from the app context
-  const { config } = useContext(context)!;
+  const { config } = useConfig();
   const { theme } = config;
   const navigation = useNavigation();
   return (
@@ -63,7 +63,7 @@ export function About() {
             },
           ]}
         >
-          What's New
+          What&apos;s New
         </Text>
         <Text style={[styles.paragraph, { color: theme.colors.text }]}>
           - Fix: Games with no categories not loading

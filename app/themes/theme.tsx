@@ -7,11 +7,6 @@ export const shadow = {
   shadowColor: "black",
 };
 
-const pallete = {
-  orange: "#FF8A65",
-  cyan: "#26C6DA",
-};
-
 export const colors = {
   primary: "#738ffa",
   light: "#ededed",

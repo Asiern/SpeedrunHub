@@ -1,22 +1,20 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { shadow } from "../../themes/theme";
 import { TextInput } from "../../components";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import Button from "../../components/Buttons/Button";
 import { useNavigation } from "@react-navigation/native";
-import { context } from "../../config/config";
-import { getUser } from "../../hooks";
+import { getUser, useConfig } from "../../hooks";
 import { loadInBrowser } from "../../utils";
 import { user } from "../../hooks/types";
 
-export function Login() {
+export function Login(): JSX.Element {
   const [username, setUsername] = useState<string>("");
   const [usernameError, setUsernameError] = useState<boolean>(false);
   const [key, setKey] = useState<string>("");
   const navigation = useNavigation();
-  const { config, setConfig } = useContext(context)!;
+  const { config, setConfig } = useConfig();
   const { theme } = config;
 
   async function login(username: string, key: string) {

@@ -1,6 +1,6 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
-import { getGames, getUsers } from "../../hooks";
+import { getGames, getUsers, useConfig } from "../../hooks";
 import SearchBar from "../../components/SearchBar";
 import { Filters } from "./Filters";
 import { game, gamesResponse, user, usersResponse } from "../../hooks/types";
@@ -9,14 +9,22 @@ import { UserCard } from "../../components";
 import { SquareButton } from "../../components/SquareButton";
 import { useNavigation } from "@react-navigation/native";
 import Game from "./Game";
-import { context } from "../../config/config";
 import Constants from "expo-constants";
+import PropTypes from "prop-types";
 
 const INITIAL_FILTERS: string[] = ["games"];
 const FILTERS: string[] = ["users", "games"];
 
-export default function Search(props) {
-  const params = props.route.params;
+Search.propTypes = {
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      query: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+};
+
+export default function Search(props): JSX.Element {
+  const params = props?.route?.params;
   const [users, setUsers] = useState<usersResponse | null>(null);
   const [games, setGames] = useState<gamesResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -25,7 +33,7 @@ export default function Search(props) {
   );
   const [filters, setFilters] = useState<string[]>(INITIAL_FILTERS);
   const navigation = useNavigation();
-  const { config } = useContext(context)!;
+  const { config } = useConfig();
   const { theme } = config;
 
   useEffect(() => {

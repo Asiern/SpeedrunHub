@@ -6,12 +6,12 @@
   @returns A JSX element containing the filter button.
 */
 
-import React, { memo, useContext } from "react";
+import React, { memo } from "react";
 import { Text, StyleSheet } from "react-native";
-import { context } from "../../config/config";
 import { shadow } from "../../themes/theme";
 import { Feather } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { useConfig } from "../../hooks";
 
 interface IFilter {
   label: string;
@@ -29,7 +29,7 @@ FilterComponent.defaultProps = {
 export const Filter = memo(FilterComponent);
 
 function FilterComponent({ label, onPress, variant }: IFilter): JSX.Element {
-  const { config } = useContext(context)!;
+  const { config } = useConfig();
   const { theme } = config;
   return (
     <TouchableOpacity

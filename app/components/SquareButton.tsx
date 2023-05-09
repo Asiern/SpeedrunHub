@@ -1,8 +1,8 @@
 import { Feather } from "@expo/vector-icons";
-import React, { useContext } from "react";
+import React from "react";
 import { TouchableOpacity, ViewStyle } from "react-native";
 import { shadow } from "../themes/theme";
-import { context } from "../config/config";
+import { useConfig } from "../hooks";
 
 interface ISquareButton {
   icon: string;
@@ -11,17 +11,13 @@ interface ISquareButton {
   variant?: "primary" | "default";
 }
 
-SquareButton.defaultProps = {
-  variant: "default",
-};
-
 export function SquareButton({
   icon,
   onPress,
   style,
-  variant,
+  variant = "default",
 }: ISquareButton): JSX.Element {
-  const { config } = useContext(context)!;
+  const { config } = useConfig();
   const { theme } = config;
   return (
     <TouchableOpacity

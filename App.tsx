@@ -5,7 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import AppLoading from "expo-app-loading";
 
 // Fonts
-import { loadAsync, useFonts } from "expo-font";
+import { loadAsync } from "expo-font";
 
 // Splash screen
 import * as SplashScreen from "expo-splash-screen";
@@ -17,7 +17,7 @@ import { context, defaultConfig } from "./app/config/config";
 import { StatusBar } from "expo-status-bar";
 import { config } from "./app/types";
 
-export default function App() {
+export default function App(): JSX.Element {
   const [appIsReady, setAppIsReady] = useState<boolean>(false);
   const [initialRoute, setInitialRoute] = useState("Onboarding");
   const [config, setConfig] = useState<config>(defaultConfig);
@@ -52,7 +52,7 @@ export default function App() {
 
       // Read config from storage
       CONFIG = await AsyncStorage.getItem("@Config");
-      const confObj: config = JSON.parse(CONFIG!);
+      const confObj: config = CONFIG ? JSON.parse(CONFIG) : config;
       setConfig(confObj);
 
       // Set initial route

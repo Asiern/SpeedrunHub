@@ -13,8 +13,8 @@ export interface ButtonProps {
 const Button = ({ label, variant, onPress }: ButtonProps) => {
   const { config } = React.useContext(context)!;
   const { theme } = config;
-  var color = variant === "primary" ? theme.colors.card : theme.colors.text;
-  var backgroundColor =
+  const color = variant === "primary" ? theme.colors.card : theme.colors.text;
+  const backgroundColor =
     variant === "primary" ? theme.colors.primary : theme.colors.card;
   return (
     <TouchableOpacity

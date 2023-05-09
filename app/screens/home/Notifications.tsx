@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { Text } from "react-native";
 import React, { useContext, useEffect } from "react";
 import { getNotifications } from "../../hooks";
 import { context } from "../../config/config";
