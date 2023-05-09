@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Image, Text, View } from "react-native";
-import { context } from "../../config/config";
 import { shadow } from "../../themes/theme";
+import { useConfig } from "../../hooks";
 
 export function UserCard(): JSX.Element {
-  const { config } = useContext(context)!;
+  const { config } = useConfig();
   const { theme, user } = config;
   return (
     <View

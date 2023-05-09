@@ -2,9 +2,9 @@ import * as React from "react";
 import { View, StyleSheet, Text } from "react-native";
 
 interface SplitProps {
-  name: String;
-  duration: String;
-  finished: String;
+  name: string;
+  duration: string;
+  finished: string;
 }
 
 export default function Split({ name, duration, finished }: SplitProps) {

@@ -1,14 +1,14 @@
 import { useRoute } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-import React, { useContext } from "react";
+import React from "react";
 import { View, StyleSheet, FlatList, Dimensions } from "react-native";
 import NotificationCard from "../components/Notifications/NotificationCard";
-import { context } from "../config/config";
 import { colors } from "../themes/theme";
+import { useConfig } from "../hooks";
 
 const Notifications = () => {
   const { data } = useRoute().params;
-  const { config } = useContext(context)!;
+  const { config } = useConfig();
   const { theme } = config;
   const { width } = Dimensions.get("window");
 

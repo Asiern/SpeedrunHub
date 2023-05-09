@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import {
   FlatList,
   Image,
@@ -7,8 +7,8 @@ import {
   Text,
   Dimensions,
 } from "react-native";
-import { context } from "../../config/config";
 import { game } from "../../types";
+import { useConfig } from "../../hooks";
 
 const data: game[] = [
   {
@@ -36,10 +36,10 @@ const data: game[] = [
 const { height, width } = Dimensions.get("screen");
 const PADDING = 30;
 const CARD_HEIGHT: number = (height / 2 - 2 * PADDING) / 2 - PADDING / 2;
-const CARD_WIDTH: number = 60;
+const CARD_WIDTH = 60;
 
 function GameCard({ abbreviation, id, uri }: game): JSX.Element {
-  const { config } = useContext(context)!;
+  const { config } = useConfig();
   const { theme } = config;
 
   return (
@@ -58,7 +58,7 @@ function GameCard({ abbreviation, id, uri }: game): JSX.Element {
 }
 
 export function GameList(): JSX.Element {
-  const { config, setConfig } = useContext(context)!;
+  const { config, setConfig } = useConfig();
   const { games, theme } = config;
 
   function setGames(games: game[]): void {

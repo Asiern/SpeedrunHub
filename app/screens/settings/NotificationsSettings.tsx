@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -7,12 +7,12 @@ import {
   ToastAndroid,
   Switch,
 } from "react-native";
-import { context } from "../../config/config";
 import Slider from "@react-native-community/slider";
 import { config } from "../../types";
 import Constants from "expo-constants";
 import { SquareButton } from "../../components/SquareButton";
 import { useNavigation } from "@react-navigation/native";
+import { useConfig } from "../../hooks";
 const { width } = Dimensions.get("window");
 
 async function apply(
@@ -36,7 +36,7 @@ const showToastWithGravity = (text: string) => {
 
 export function NotificationsSettings(): JSX.Element {
   // Retrieve the theme from the app context
-  const { config, setConfig } = useContext(context)!;
+  const { config, setConfig } = useConfig();
   const { theme } = config;
   const navigation = useNavigation();
   const [max, setMax] = useState<number>(config.notifications.max);

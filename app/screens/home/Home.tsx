@@ -7,7 +7,7 @@ import Constants from "expo-constants";
 import HomeHeader from "./HomeHeader";
 import SearchBar from "../../components/SearchBar";
 
-export default function Home() {
+export default function Home(): JSX.Element {
   const navigator = useNavigation();
   const [searchValue, setSearchValue] = useState<string | undefined>(undefined);
 

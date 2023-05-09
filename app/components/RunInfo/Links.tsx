@@ -39,7 +39,7 @@ export default function Links({ videolink, weblink }: LinksProps) {
   }
 
   //Set icon depending on the video platform
-  var browsericon: GLYPHS = "globe";
+  let browsericon: GLYPHS = "globe";
   if (videolink.includes("yout")) {
     browsericon = "youtube";
   } else if (videolink.includes("twit")) {

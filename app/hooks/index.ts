@@ -4,6 +4,7 @@ import getUser from "./getUser";
 import getUsers from "./getUsers";
 import getPersonalBests from "./getPersonalBests";
 import getGames from "./getGames";
+import useConfig from "./useConfig";
 
 export {
   getNotifications,
@@ -12,4 +13,5 @@ export {
   getUsers,
   getPersonalBests,
   getGames,
+  useConfig,
 };

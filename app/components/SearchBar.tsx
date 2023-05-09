@@ -8,13 +8,13 @@ import { SquareButton } from "./SquareButton";
 export interface ISearchBar {
   onSearch: () => void;
   initialValue?: string;
-  onChangeText?: (value: string) => void;
+  onChangeText: (value: string) => void;
 }
 
 function SearchBar({
   onSearch,
   initialValue = undefined,
-  onChangeText = () => {},
+  onChangeText,
 }: ISearchBar): JSX.Element {
   const [value, setValue] = useState<string>(initialValue ?? "");
 
