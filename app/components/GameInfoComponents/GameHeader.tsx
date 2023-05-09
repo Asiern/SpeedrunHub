@@ -35,7 +35,7 @@ const GameHeader = ({
   const { games } = config;
 
   const _isFavourite = async (id: string) => {
-    for (let GAME of games) {
+    for (const GAME of games) {
       if (GAME.id == id) {
         setFav(true);
       }
@@ -43,7 +43,7 @@ const GameHeader = ({
   };
   const _toggleFavourites = async () => {
     //Create game obj
-    var game = {
+    const game = {
       id: id,
       uri: uri,
       abbreviation: abbreviation,
@@ -57,7 +57,7 @@ const GameHeader = ({
       setFav(true);
     } else {
       //Game got removed from list
-      for (let GAME of games) {
+      for (const GAME of games) {
         if (game.id == GAME.id) {
           games.splice(games.indexOf(GAME), 1);
         }

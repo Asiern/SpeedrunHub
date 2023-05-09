@@ -1,19 +1,19 @@
-import React, { memo, useContext } from "react";
+import React, { memo } from "react";
 import { Text, View } from "react-native";
 import { Image, TouchableOpacity, StyleSheet } from "react-native";
 import { game } from "../../hooks/types";
 import { shadow } from "../../themes/theme";
-import { context } from "../../config/config";
 import { useNavigation } from "@react-navigation/native";
+import { useConfig } from "../../hooks";
 
 interface IGame {
   game: game;
 }
 
-const GAME_HEIGHT: number = 60;
+const GAME_HEIGHT = 60;
 
 function Game({ game }: IGame): JSX.Element {
-  const { config } = useContext(context)!;
+  const { config } = useConfig();
   const { theme } = config;
   const navigation = useNavigation();
   return (

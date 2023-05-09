@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -15,10 +15,17 @@ import Run from "../components/Run";
 import GameHeader from "../components/GameInfoComponents/GameHeader";
 
 import { colors } from "../themes/theme";
-import { context } from "../config/config";
+import { useConfig } from "../hooks";
+import { NavigationProp, RouteProp } from "@react-navigation/native";
+import { MainNavigatorParamList } from "../navigation/MainNavigator";
 
-export default function GameInfo({ route }) {
-  const { id, abbreviation } = route.params;
+type GameInfoProps = {
+  route: RouteProp<MainNavigatorParamList, "GameInfo">;
+  navigation: NavigationProp<MainNavigatorParamList, "GameInfo">;
+};
+
+export default function GameInfo(props: GameInfoProps) {
+  const { abbreviation, id } = props.route.params;
   const [loading, setLoading] = useState(true);
   const [name, setName] = useState("");
   const [game, setGame] = useState([]);
@@ -28,7 +35,8 @@ export default function GameInfo({ route }) {
   const [categories, setCategories] = useState([]);
   const [players, setPlayers] = useState([]);
   const [checked, setChecked] = useState("");
-  const { theme } = useContext(context);
+  const { config } = useConfig();
+  const { theme } = config;
 
   useEffect(() => {
     let mounted = true;
@@ -43,9 +51,9 @@ export default function GameInfo({ route }) {
         const data = await response.json();
         setGame(data.data);
         //Categories output
-        var outCategories = [];
+        const outCategories = [];
         //Filter Categories (type == Per-Game)
-        for (var category of data.data.categories.data) {
+        for (const category of data.data.categories.data) {
           if (category.type == "per-game") {
             outCategories.push(category);
           }
@@ -80,18 +88,18 @@ export default function GameInfo({ route }) {
       const varResponse = await fetch(variablesUrl);
       const varData = await varResponse.json();
       //Get subcategories (is-subcategory===true)
-      var outSubcategoies = [];
+      const outSubcategoies = [];
       //UrlBuild index
-      var index = 1;
+      let index = 1;
       //Url extension
-      var urlExt =
+      let urlExt =
         "https://www.speedrun.com/api/v1/leaderboards/" +
         id +
         "/category/" +
         categoryid;
-      for (let subcategory of varData.data) {
+      for (const subcategory of varData.data) {
         //Output Subcategory
-        var outSubcategory = {
+        const outSubcategory = {
           id: "",
           name: "",
           values: [],
@@ -103,9 +111,9 @@ export default function GameInfo({ route }) {
           outSubcategory.id = subcategory.id;
           outSubcategory.name = subcategory.name;
           //Get subcategory variables
-          for (let variable in subcategory.values.values) {
+          for (const variable in subcategory.values.values) {
             //Create output value
-            var outValue = {
+            const outValue = {
               label: "",
               id: "",
               rules: "",
@@ -158,14 +166,14 @@ export default function GameInfo({ route }) {
   };
   const modifyUrl = (id: string, value: string) => {
     setRuns([]);
-    var outUrl;
+    let outUrl;
     //Url contains id
     //Id lenght
-    var lenght = id.length;
-    var i = url.search(id) + lenght + 1;
+    const lenght = id.length;
+    const i = url.search(id) + lenght + 1;
     //i = value first char position
-    var start = url.substr(0, i);
-    var end = url.substr(i, url.length);
+    const start = url.substr(0, i);
+    let end = url.substr(i, url.length);
     if (end.includes("&")) {
       end = end.substr(end.indexOf("&"), url.length);
       outUrl = start + value + end;
@@ -189,9 +197,9 @@ export default function GameInfo({ route }) {
   }
   const renderRun = ({ item, index }) => {
     try {
-      var names = "";
-      var i = index;
-      for (let player of item.run.players) {
+      let names = "";
+      let i = index;
+      for (const player of item.run.players) {
         if (player.name === undefined) {
           names += players[i].names.international + " ";
         } else {

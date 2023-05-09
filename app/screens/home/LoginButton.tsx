@@ -1,12 +1,12 @@
 import { TouchableOpacity, View } from "react-native";
-import React, { useContext } from "react";
+import React from "react";
 import { useNavigation } from "@react-navigation/native";
-import { context } from "../../config/config";
 import { Feather } from "@expo/vector-icons";
+import { useConfig } from "../../hooks";
 
 export function LoginButton(): JSX.Element {
   const navigation = useNavigation();
-  const { config } = useContext(context)!;
+  const { config } = useConfig();
   const { theme } = config;
   return (
     <TouchableOpacity

@@ -44,7 +44,7 @@ export type game = {
   engines: string[];
   developers: string[];
   publishers: string[];
-  moderators: object;
+  moderators: unknown;
   created: string;
   assets: {
     logo: { uri: string | null };
@@ -172,7 +172,7 @@ export type run = {
     emulated: boolean;
     region: string | null;
   };
-  values: Object;
+  values: unknown;
   videos: {
     text?: string;
     links: { uri: string }[];

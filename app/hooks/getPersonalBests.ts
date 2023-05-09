@@ -6,7 +6,7 @@ export default async function getPersonalBests(
 ): Promise<personalBest[]> {
   return new Promise((resolve, reject) => {
     try {
-      const url: string = `https://www.speedrun.com/api/v1/users/${userid}/personal-bests?embed=game,category`;
+      const url = `https://www.speedrun.com/api/v1/users/${userid}/personal-bests?embed=game,category`;
       axios({ method: "GET", url }).then((response) => {
         resolve(response.data.data as personalBest[]);
       });

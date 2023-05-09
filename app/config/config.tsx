@@ -17,7 +17,10 @@ export const defaultConfig: config = {
   theme: Theme,
 };
 
+export type configCtx = {
+  config: config;
+  setConfig: (config: config) => Promise<void>;
+};
+
 // Define context
-export const context = createContext<
-  { config: config; setConfig: (config: config) => Promise<void> } | undefined
->(undefined);
+export const context = createContext<configCtx | undefined>(undefined);
