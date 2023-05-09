@@ -4,6 +4,7 @@
 [![GitHub license](https://img.shields.io/badge/License-GPL--3.0-red?style=flat-square)](https://raw.githubusercontent.com/Asiern/SpeedrunHub/master/LICENSE)
 [![runs with expo](https://img.shields.io/badge/Runs%20with%20Expo-000.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000)](https://expo.io/)
 [![PayPal](https://img.shields.io/badge/Support-000.svg?style=flat-square&logo=PayPal&labelColor=f3f3f3&logoColor=000)](https://www.paypal.me/asiernl)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
 
 <img src="https://github.com/Asiern/SpeedrunHub/blob/master/Readme/assets/Home.jpg" />
 
@@ -102,7 +103,13 @@ It allows you to consult the speedrun.com page natively on your Android/iOS devi
    $ yarn
    ```
 
-7. Run
+7. Set up git hooks
+
+   ```
+   $ yarn prepare
+   ```
+
+8. Run
 
    ```
    # At "...\SpeedrunHub\Source" run
