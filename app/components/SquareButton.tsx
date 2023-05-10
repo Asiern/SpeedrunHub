@@ -21,6 +21,7 @@ export function SquareButton({
   const { theme } = config;
   return (
     <TouchableOpacity
+      testID="touchable"
       style={[
         {
           backgroundColor:
