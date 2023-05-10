@@ -15,7 +15,7 @@ interface NavigationProps {
   initialRoute: string;
 }
 
-function Navigation({ initialRoute }: NavigationProps) {
+function Navigation({ initialRoute }: NavigationProps): JSX.Element {
   return (
     <NavigationContainer>
       <Root.Navigator initialRouteName={initialRoute}>
