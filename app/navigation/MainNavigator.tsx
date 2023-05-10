@@ -24,11 +24,15 @@ type ProfileParams = {
 type RunInfoParams = {
   weblink: string;
 };
+type SearchParams = {
+  query: string;
+};
 
 export type MainNavigatorParamList = {
   GameInfo: GameInfoParams;
   Profile: ProfileParams;
   RunInfo: RunInfoParams;
+  Search: SearchParams;
 };
 
 const HomeStack = () => (
