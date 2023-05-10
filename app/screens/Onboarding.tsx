@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useRef } from "react";
 import { View, StyleSheet, Dimensions } from "react-native";
 import Slide from "../components/Slide";
 import Animated, {
@@ -11,9 +11,8 @@ import Subslide from "../components/Subslide";
 import { colors } from "../themes/theme";
 import Dot from "../components/Dot";
 import { useNavigation } from "@react-navigation/native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { interpolateColor } from "react-native-redash";
-import { context } from "../config/config";
+import { useConfig } from "../hooks";
 const { width } = Dimensions.get("window");
 const slides = [
   {
@@ -46,7 +45,7 @@ export default function OnboardingScreen() {
   const navigation = useNavigation();
   const scroll = useRef<Animated.ScrollView>(null);
   const x = useSharedValue(0);
-  const { config, setConfig } = useContext(context)!;
+  const { config, setConfig } = useConfig();
   const onScroll = useAnimatedScrollHandler({
     onScroll: ({ contentOffset }) => {
       x.value = contentOffset.x;

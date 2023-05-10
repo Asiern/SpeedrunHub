@@ -1,8 +1,7 @@
 import * as React from "react";
 import { Text, StyleSheet, TouchableOpacity } from "react-native";
-import { RectButton } from "react-native-gesture-handler";
-import { context } from "../../config/config";
 import { colors } from "../../themes/theme";
+import { useConfig } from "../../hooks";
 
 export interface ButtonProps {
   label: string;
@@ -11,7 +10,7 @@ export interface ButtonProps {
 }
 
 const Button = ({ label, variant, onPress }: ButtonProps) => {
-  const { config } = React.useContext(context)!;
+  const { config } = useConfig();
   const { theme } = config;
   const color = variant === "primary" ? theme.colors.card : theme.colors.text;
   const backgroundColor =

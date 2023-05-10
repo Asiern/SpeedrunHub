@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { StyleSheet, View, Dimensions, Text, Image } from "react-native";
 import { h4w } from "../../themes/theme";
 import Dot from "../Dot";
@@ -7,7 +7,7 @@ import Animated, {
   useAnimatedScrollHandler,
   useDerivedValue,
 } from "react-native-reanimated";
-import { context } from "../../config/config";
+import { useConfig } from "../../hooks";
 
 export interface CarouselProps {
   abbreviation: string;
@@ -26,7 +26,7 @@ export default function Carousel({ abbreviation, uri, date }: CarouselProps) {
   });
 
   const currentIndex = useDerivedValue(() => x.value / width);
-  const { config } = useContext(context)!;
+  const { config } = useConfig();
   const { theme } = config;
 
   return (

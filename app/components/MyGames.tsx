@@ -1,14 +1,14 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useContext } from "react";
+import React from "react";
 import { Dimensions, View, StyleSheet } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
-import { context } from "../config/config";
 import { colors } from "../themes/theme";
 import GameCard from "./GameCard";
 import NotificationCard from "./Notifications/NotificationCard";
+import { useConfig } from "../hooks";
 
 export default function MyGames() {
-  const { config } = useContext(context)!;
+  const { config } = useConfig();
   const { games } = config;
   const navigation = useNavigation();
   const { width } = Dimensions.get("window");

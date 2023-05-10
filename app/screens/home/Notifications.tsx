@@ -1,7 +1,6 @@
 import { Text } from "react-native";
-import React, { useContext, useEffect } from "react";
-import { getNotifications } from "../../hooks";
-import { context } from "../../config/config";
+import React, { useEffect } from "react";
+import { getNotifications, useConfig } from "../../hooks";
 import Animated, {
   useAnimatedRef,
   useAnimatedScrollHandler,
@@ -37,7 +36,7 @@ function Notification(): JSX.Element {
 }
 
 export default function Notifications(): JSX.Element {
-  const { config } = useContext(context)!;
+  const { config } = useConfig();
   useEffect(() => {
     // const notifications = getNotifications(config);
   });

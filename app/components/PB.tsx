@@ -1,14 +1,8 @@
-import { Link, useNavigation } from "@react-navigation/native";
-import React, { useContext } from "react";
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Linking,
-} from "react-native";
-import { context } from "../config/config";
-import { colors, h6 } from "../themes/theme";
+import { useNavigation } from "@react-navigation/native";
+import React from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { h6 } from "../themes/theme";
+import { useConfig } from "../hooks";
 
 function timeConverter(time: string) {
   const result = time.toLowerCase();
@@ -24,7 +18,7 @@ export interface PBProps {
 
 const PB = ({ weblink, place, category, time }: PBProps) => {
   const navigation = useNavigation();
-  const { config } = useContext(context)!;
+  const { config } = useConfig();
   const { theme } = config;
   return (
     <TouchableOpacity

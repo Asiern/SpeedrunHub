@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Text, View, ImageBackground, StyleSheet } from "react-native";
 import { StackActions } from "@react-navigation/native";
 import Carousel from "./GameInfoCarousel";
@@ -9,7 +9,7 @@ import Feather from "@expo/vector-icons/Feather";
 import { colors, h2w } from "../../themes/theme";
 import { FontAwesome } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { context } from "../../config/config";
+import { useConfig } from "../../hooks";
 
 export interface GameHeaderProps {
   abbreviation: string;
@@ -31,7 +31,7 @@ const GameHeader = ({
   const [isFav, setFav] = useState(false);
   const navigation = useNavigation();
   const goBack = StackActions.pop();
-  const { config, setConfig } = useContext(context)!;
+  const { config, setConfig } = useConfig();
   const { games } = config;
 
   const _isFavourite = async (id: string) => {

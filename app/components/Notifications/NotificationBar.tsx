@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import {
   View,
   StyleSheet,
@@ -10,7 +10,7 @@ import NotificationCard from "./NotificationCard";
 
 import { colors, h1, h4p } from "../../themes/theme";
 import { useNavigation } from "@react-navigation/native";
-import { context } from "../../config/config";
+import { useConfig } from "../../hooks";
 
 export interface NotificationBarProps {
   data: any[];
@@ -19,7 +19,7 @@ export interface NotificationBarProps {
 
 const NotificationBar = ({ data, width }: NotificationBarProps) => {
   const navigation = useNavigation();
-  const { config } = useContext(context)!;
+  const { config } = useConfig();
   const { theme } = config;
 
   return (

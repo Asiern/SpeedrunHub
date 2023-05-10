@@ -1,9 +1,9 @@
-import * as React from "react";
+import React from "react";
 import { Text, StyleSheet } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
-import { context } from "../../config/config";
 import { shadow as shadowStyle } from "../../themes/theme";
 import { Feather } from "@expo/vector-icons";
+import { useConfig } from "../../hooks";
 
 export interface ButtonProps {
   label: string;
@@ -22,7 +22,7 @@ const Button = ({
   icon,
   centerContent,
 }: ButtonProps) => {
-  const { config } = React.useContext(context)!;
+  const { config } = useConfig();
   const { theme } = config;
   const backgroundColor =
     variant === "primary" ? theme.colors.primary : theme.colors.foreground;
