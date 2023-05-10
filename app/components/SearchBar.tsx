@@ -31,6 +31,7 @@ function SearchBar({
       }}
     >
       <TextInput
+        testID="input"
         placeholder={"Search for games/users..."}
         onChangeText={(v) => {
           onChangeText(v);
