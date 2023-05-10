@@ -1,9 +1,9 @@
-import React, { memo, useContext, useState } from "react";
+import React, { memo, useState } from "react";
 import { View } from "react-native";
 import { TextInput } from "react-native";
 import { shadow } from "../themes/theme";
-import { context } from "../config/config";
 import { SquareButton } from "./SquareButton";
+import { useConfig } from "../hooks";
 
 export interface ISearchBar {
   onSearch: () => void;
@@ -19,7 +19,7 @@ function SearchBar({
   const [value, setValue] = useState<string>(initialValue ?? "");
 
   // Retrieve the theme from the app context
-  const { config } = useContext(context)!;
+  const { config } = useConfig();
   const { theme } = config;
 
   // Render a view containing a text input and a search button

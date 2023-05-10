@@ -4,7 +4,7 @@ import { View, StyleSheet, Linking, Share } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { colors } from "../../themes/theme";
 import { GLYPHS } from "@expo/vector-icons/createIconSet";
-import { context } from "../../config/config";
+import { useConfig } from "../../hooks";
 
 export interface LinksProps {
   videolink: string;
@@ -12,7 +12,7 @@ export interface LinksProps {
 }
 
 export default function Links({ videolink, weblink }: LinksProps) {
-  const { config } = React.useContext(context)!;
+  const { config } = useConfig();
   const { theme } = config;
   const onShare = async () => {
     try {

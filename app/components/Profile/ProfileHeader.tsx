@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { h2w } from "../../themes/theme";
 import Carousel from "./ProfileCarousel";
-import { context } from "../../config/config";
 import TopBar from "../TopBar";
+import { useConfig } from "../../hooks";
 
 export interface ProfileHeaderProps {
   username: string;
@@ -18,7 +18,7 @@ const ProfileHeader = ({
   signup,
   image,
 }: ProfileHeaderProps) => {
-  const { config } = useContext(context)!;
+  const { config } = useConfig();
   const { theme } = config;
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.primary }]}>

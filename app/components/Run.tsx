@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, Text, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 import { h6, colors } from "../themes/theme";
-import { context } from "../config/config";
 import { run } from "../hooks/types";
+import { useConfig } from "../hooks";
 
 export interface IRun {
   run: run;
@@ -17,7 +17,7 @@ function formatTime(time: string) {
 
 export default function Run({ run }: IRun) {
   const navigation = useNavigation();
-  const { config } = useContext(context)!;
+  const { config } = useConfig();
   const { theme } = config;
   const { weblink, players, times, values } = run;
   return (
