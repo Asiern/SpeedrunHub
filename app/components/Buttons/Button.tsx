@@ -14,14 +14,14 @@ export interface ButtonProps {
   centerContent?: boolean;
 }
 
-const Button = ({
+function Button({
   label,
   variant,
   onPress,
   shadow,
   icon,
   centerContent,
-}: ButtonProps) => {
+}: ButtonProps): JSX.Element {
   const { config } = useConfig();
   const { theme } = config;
   const backgroundColor =
@@ -50,7 +50,7 @@ const Button = ({
       <Text style={[styles.label, { color }]}>{label}</Text>
     </RectButton>
   );
-};
+}
 
 Button.defaultProps = {
   variant: "default",

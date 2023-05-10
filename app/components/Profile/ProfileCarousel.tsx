@@ -20,7 +20,7 @@ export default function Carousel({
   signup,
   image,
   country,
-}: CarouselProps) {
+}: CarouselProps): JSX.Element {
   const { width } = Dimensions.get("window");
   const x = useSharedValue(0);
   const onScroll = useAnimatedScrollHandler({

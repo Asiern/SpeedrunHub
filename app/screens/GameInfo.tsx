@@ -24,7 +24,7 @@ type GameInfoProps = {
   navigation: NavigationProp<MainNavigatorParamList, "GameInfo">;
 };
 
-export default function GameInfo(props: GameInfoProps) {
+export default function GameInfo(props: GameInfoProps): JSX.Element {
   const { abbreviation, id } = props.route.params;
   const [loading, setLoading] = useState(true);
   const [name, setName] = useState("");

@@ -16,7 +16,7 @@ export interface PBProps {
   time: string;
 }
 
-const PB = ({ weblink, place, category, time }: PBProps) => {
+function PB({ weblink, place, category, time }: PBProps): JSX.Element {
   const navigation = useNavigation();
   const { config } = useConfig();
   const { theme } = config;
@@ -40,7 +40,7 @@ const PB = ({ weblink, place, category, time }: PBProps) => {
       </View>
     </TouchableOpacity>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {

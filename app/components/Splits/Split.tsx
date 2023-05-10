@@ -7,7 +7,11 @@ interface SplitProps {
   finished: string;
 }
 
-export default function Split({ name, duration, finished }: SplitProps) {
+export default function Split({
+  name,
+  duration,
+  finished,
+}: SplitProps): JSX.Element {
   return (
     <View style={styles.container}>
       <View style={styles.nameContainer}>

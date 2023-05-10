@@ -16,7 +16,11 @@ export interface CarouselProps {
   platformIDs: any[];
 }
 
-export default function Carousel({ abbreviation, uri, date }: CarouselProps) {
+export default function Carousel({
+  abbreviation,
+  uri,
+  date,
+}: CarouselProps): JSX.Element {
   const { width } = Dimensions.get("window");
   const x = useSharedValue(0);
   const onScroll = useAnimatedScrollHandler({

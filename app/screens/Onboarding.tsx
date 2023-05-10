@@ -41,7 +41,7 @@ const slides = [
   },
 ];
 
-export default function OnboardingScreen() {
+export default function OnboardingScreen(): JSX.Element {
   const navigation = useNavigation();
   const scroll = useRef<Animated.ScrollView>(null);
   const x = useSharedValue(0);

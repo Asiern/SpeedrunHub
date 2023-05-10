@@ -20,14 +20,14 @@ export interface GameHeaderProps {
   id: string;
 }
 
-const GameHeader = ({
+function GameHeader({
   abbreviation,
   name,
   uri,
   date,
   platforms,
   id,
-}: GameHeaderProps) => {
+}: GameHeaderProps): JSX.Element {
   const [isFav, setFav] = useState(false);
   const navigation = useNavigation();
   const goBack = StackActions.pop();
@@ -134,7 +134,7 @@ const GameHeader = ({
       </View>
     </ImageBackground>
   );
-};
+}
 
 const styles = StyleSheet.create({
   profileBG: {

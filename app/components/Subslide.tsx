@@ -15,7 +15,7 @@ export default function Subslide({
   description,
   last,
   onPress,
-}: SubslideProps) {
+}: SubslideProps): JSX.Element {
   return (
     <View style={styles.container}>
       <View style={styles.textcontainer}>

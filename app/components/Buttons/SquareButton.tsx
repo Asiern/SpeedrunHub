@@ -17,7 +17,7 @@ export default function SquareButtonComponent({
   backgroundColor,
   onPress,
   icon,
-}: SquareButtonProps) {
+}: SquareButtonProps): JSX.Element {
   return (
     <TouchableOpacity
       style={[styles.container, { backgroundColor }]}

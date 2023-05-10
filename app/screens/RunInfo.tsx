@@ -73,7 +73,7 @@ type RunInfoProps = {
   navigation: NavigationProp<MainNavigatorParamList, "RunInfo">;
 };
 
-export default function RunInfo(props: RunInfoProps) {
+export default function RunInfo(props: RunInfoProps): JSX.Element {
   const { config } = useConfig();
   const { theme } = config;
   const { weblink } = props.route.params;

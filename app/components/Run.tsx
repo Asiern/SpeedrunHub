@@ -15,7 +15,7 @@ function formatTime(time: string) {
   return time.slice(2, time.length).toLowerCase();
 }
 
-export default function Run({ run }: IRun) {
+export default function Run({ run }: IRun): JSX.Element {
   const navigation = useNavigation();
   const { config } = useConfig();
   const { theme } = config;

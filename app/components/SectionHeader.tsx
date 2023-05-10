@@ -17,7 +17,12 @@ export interface SectionHeaderProps {
   uri: string;
 }
 const { width } = Dimensions.get("screen");
-const SectionHeader = ({ id, abbreviation, name, uri }: SectionHeaderProps) => {
+function SectionHeader({
+  id,
+  abbreviation,
+  name,
+  uri,
+}: SectionHeaderProps): JSX.Element {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
@@ -40,7 +45,7 @@ const SectionHeader = ({ id, abbreviation, name, uri }: SectionHeaderProps) => {
       </ImageBackground>
     </TouchableOpacity>
   );
-};
+}
 const styles = StyleSheet.create({
   container: {
     width: width - 20,
