@@ -7,23 +7,24 @@ import { game, gamesResponse, user, usersResponse } from "../../hooks/types";
 import { ScrollView } from "react-native-gesture-handler";
 import { UserCard } from "../../components";
 import { SquareButton } from "../../components/SquareButton";
-import { useNavigation } from "@react-navigation/native";
+import {
+  NavigationProp,
+  RouteProp,
+  useNavigation,
+} from "@react-navigation/native";
 import Game from "./Game";
 import Constants from "expo-constants";
-import PropTypes from "prop-types";
+import { MainNavigatorParamList } from "../../navigation/MainNavigator";
 
 const INITIAL_FILTERS: string[] = ["games"];
 const FILTERS: string[] = ["users", "games"];
 
-Search.propTypes = {
-  route: PropTypes.shape({
-    params: PropTypes.shape({
-      query: PropTypes.string.isRequired,
-    }).isRequired,
-  }).isRequired,
+type SearchProps = {
+  route: RouteProp<MainNavigatorParamList, "Search">;
+  navigation: NavigationProp<MainNavigatorParamList, "Search">;
 };
 
-export default function Search(props): JSX.Element {
+export default function Search(props: SearchProps): JSX.Element {
   const params = props?.route?.params;
   const [users, setUsers] = useState<usersResponse | null>(null);
   const [games, setGames] = useState<gamesResponse | null>(null);
