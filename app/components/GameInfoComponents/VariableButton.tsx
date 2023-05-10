@@ -9,7 +9,7 @@ export interface ButtonProps {
   onPress: () => void;
 }
 
-const Button = ({ label, variant, onPress }: ButtonProps) => {
+function Button({ label, variant, onPress }: ButtonProps): JSX.Element {
   const { config } = useConfig();
   const { theme } = config;
   const color = variant === "primary" ? theme.colors.card : theme.colors.text;
@@ -23,7 +23,7 @@ const Button = ({ label, variant, onPress }: ButtonProps) => {
       <Text style={[styles.label, { color }]}>{label}</Text>
     </TouchableOpacity>
   );
-};
+}
 
 Button.defaultProps = {
   varian: "default",

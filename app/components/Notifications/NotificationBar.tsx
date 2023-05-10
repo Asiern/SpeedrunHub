@@ -17,7 +17,7 @@ export interface NotificationBarProps {
   width: number;
 }
 
-const NotificationBar = ({ data, width }: NotificationBarProps) => {
+function NotificationBar({ data, width }: NotificationBarProps): JSX.Element {
   const navigation = useNavigation();
   const { config } = useConfig();
   const { theme } = config;
@@ -73,7 +73,7 @@ const NotificationBar = ({ data, width }: NotificationBarProps) => {
       ></FlatList>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {

@@ -7,12 +7,12 @@ export interface NotificationCardProps {
   backgroundColor: ColorValue;
   text: string;
 }
-const NotificationCard = ({
+function NotificationCard({
   width,
   color,
   backgroundColor,
   text,
-}: NotificationCardProps) => {
+}: NotificationCardProps): JSX.Element {
   function stripHtml(html: string) {
     const regex = /(<([^>]+)>)/gi;
     const result = html.replace(regex, "");
@@ -25,7 +25,7 @@ const NotificationCard = ({
       </View>
     </View>
   );
-};
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,

@@ -10,7 +10,7 @@ export interface Slide {
   image: number;
 }
 
-export default function Slide({ width, image }: Slide) {
+export default function Slide({ width, image }: Slide): JSX.Element {
   return (
     <View style={[styles.container, { width }]}>
       <Image style={styles.image} source={image} />

@@ -12,12 +12,12 @@ export interface ProfileHeaderProps {
   image: string;
 }
 
-const ProfileHeader = ({
+function ProfileHeader({
   username,
   country,
   signup,
   image,
-}: ProfileHeaderProps) => {
+}: ProfileHeaderProps): JSX.Element {
   const { config } = useConfig();
   const { theme } = config;
   return (
@@ -36,7 +36,7 @@ const ProfileHeader = ({
       </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {

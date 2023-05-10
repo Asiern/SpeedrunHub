@@ -7,7 +7,7 @@ import GameCard from "./GameCard";
 import NotificationCard from "./Notifications/NotificationCard";
 import { useConfig } from "../hooks";
 
-export default function MyGames() {
+export default function MyGames(): JSX.Element {
   const { config } = useConfig();
   const { games } = config;
   const navigation = useNavigation();

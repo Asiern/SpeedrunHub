@@ -7,7 +7,7 @@ export interface SplitsProps {
   data: any[];
 }
 
-export default function Splits({ data }: SplitsProps) {
+export default function Splits({ data }: SplitsProps): JSX.Element {
   return (
     <View>
       <Text style={[h2, { alignSelf: "center", paddingTop: 20 }]}>Splits</Text>

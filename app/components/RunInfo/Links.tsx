@@ -11,7 +11,7 @@ export interface LinksProps {
   weblink: string;
 }
 
-export default function Links({ videolink, weblink }: LinksProps) {
+export default function Links({ videolink, weblink }: LinksProps): JSX.Element {
   const { config } = useConfig();
   const { theme } = config;
   const onShare = async () => {

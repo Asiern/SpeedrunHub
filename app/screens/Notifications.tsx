@@ -6,7 +6,7 @@ import NotificationCard from "../components/Notifications/NotificationCard";
 import { colors } from "../themes/theme";
 import { useConfig } from "../hooks";
 
-const Notifications = () => {
+function Notifications(): JSX.Element {
   const { data } = useRoute().params;
   const { config } = useConfig();
   const { theme } = config;
@@ -48,7 +48,7 @@ const Notifications = () => {
       ></FlatList>
     </View>
   );
-};
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
