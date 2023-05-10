@@ -35,54 +35,56 @@ export type MainNavigatorParamList = {
   Search: SearchParams;
 };
 
-const HomeStack = () => (
-  <Stack.Navigator>
-    <Stack.Screen
-      name="Home"
-      component={Home}
-      options={{ headerShown: false }}
-    />
-    <Stack.Screen
-      name="GameInfo"
-      component={GameInfo}
-      options={{ headerShown: false }}
-    />
-    <Stack.Screen
-      name="Notifications"
-      component={Notifications}
-      options={{ headerShown: false }}
-    />
-    <Stack.Screen
-      name="Profile"
-      component={Profile}
-      options={{ headerShown: false }}
-    />
-    <Stack.Screen
-      name="Settings"
-      component={Settings}
-      options={{ headerShown: false }}
-    />
-    <Stack.Screen
-      name="About"
-      component={About}
-      options={{ headerShown: false }}
-    />
-    <Stack.Screen
-      name="NotificationsSettings"
-      component={NotificationsSettings}
-      options={{ headerShown: false }}
-    />
-    <Stack.Screen
-      name="RunInfo"
-      component={RunInfo}
-      options={{ headerShown: false }}
-    />
-    <Stack.Screen
-      name="Search"
-      component={Search}
-      options={{ headerShown: false }}
-    />
-  </Stack.Navigator>
-);
+function HomeStack(): JSX.Element {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="GameInfo"
+        component={GameInfo}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Notifications"
+        component={Notifications}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Settings"
+        component={Settings}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="About"
+        component={About}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="NotificationsSettings"
+        component={NotificationsSettings}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="RunInfo"
+        component={RunInfo}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Search"
+        component={Search}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+  );
+}
 
 export default HomeStack;
