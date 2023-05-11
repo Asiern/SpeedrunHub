@@ -13,6 +13,7 @@ import { useConfig } from "../hooks";
 interface IUserCard {
   user: user;
 }
+
 export function UserCard({ user }: IUserCard): JSX.Element {
   const navigation = useNavigation();
   const { config } = useConfig();
@@ -28,7 +29,7 @@ export function UserCard({ user }: IUserCard): JSX.Element {
         shadow,
       ]}
       onPress={() => {
-        navigation.navigate("Profile", { user: config.user });
+        navigation.navigate("Profile", { user: user });
       }}
     >
       <View

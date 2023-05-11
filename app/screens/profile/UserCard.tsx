@@ -2,10 +2,15 @@ import React from "react";
 import { Image, Text, View } from "react-native";
 import { shadow } from "../../themes/theme";
 import { useConfig } from "../../hooks";
+import { user } from "../../hooks/types";
 
-export function UserCard(): JSX.Element {
+interface IUserCard {
+  user: user;
+}
+
+export function UserCard({ user }: IUserCard): JSX.Element {
   const { config } = useConfig();
-  const { theme, user } = config;
+  const { theme } = config;
   return (
     <View
       style={[
