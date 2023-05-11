@@ -63,3 +63,7 @@ buck-out/
 .expo/*
 web-build/
 dist
+
+# Jest
+*.snap
+coverage
