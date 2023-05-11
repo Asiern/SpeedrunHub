@@ -44,6 +44,7 @@ function TextInput({
         />
       )}
       <Input
+        testID="input"
         placeholder={placehorder}
         value={value}
         verticalAlign="middle"
