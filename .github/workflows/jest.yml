@@ -1,0 +1,18 @@
+name: Jest test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: run jest tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+      - name: Yarn setup
+        run: npm install -g yarn
+      - name: yarn install and test
+        run: |
+          yarn
+          yarn test
