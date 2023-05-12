@@ -15,6 +15,7 @@ function SocialButton({ icon, uri }: ISocialButton): JSX.Element {
   const { theme } = config;
   return (
     <TouchableOpacity
+      testID="social-button"
       onPress={() => loadInBrowser(uri)}
       style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
     >
