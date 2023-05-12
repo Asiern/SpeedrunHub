@@ -34,14 +34,18 @@ function TextInput({
       ]}
     >
       {icon && (
-        <Feather
-          name={icon}
-          style={styles.icon}
-          color={
-            value || value !== "" ? theme.colors.headerText : theme.colors.text
-          }
-          size={15}
-        />
+        <View testID="text-input-icon">
+          <Feather
+            name={icon}
+            style={styles.icon}
+            color={
+              value || value !== ""
+                ? theme.colors.headerText
+                : theme.colors.text
+            }
+            size={15}
+          />
+        </View>
       )}
       <Input
         testID="input"

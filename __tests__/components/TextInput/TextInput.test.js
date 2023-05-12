@@ -25,4 +25,9 @@ describe("TextInput component", () => {
     fireEvent.changeText(input, "test search text");
     expect(onChangeMock).toHaveBeenCalledWith("test search text");
   });
+  it("render icon", () => {
+    const { getByTestId } = render(<TextInput icon="user" />);
+    const icon = getByTestId("text-input-icon");
+    expect(icon).toBeDefined();
+  });
 });
