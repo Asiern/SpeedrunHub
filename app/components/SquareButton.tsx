@@ -8,7 +8,7 @@ interface ISquareButton {
   icon: string;
   onPress: () => void;
   style?: ViewStyle;
-  variant?: "primary" | "default";
+  variant?: "primary" | "default" | "gray";
 }
 
 export function SquareButton({
@@ -43,7 +43,11 @@ export function SquareButton({
         name={icon}
         size={25}
         color={
-          variant === "primary" ? theme.colors.foreground : theme.colors.primary
+          variant === "primary"
+            ? theme.colors.foreground
+            : variant === "default"
+            ? theme.colors.primary
+            : theme.colors.text
         }
       />
     </TouchableOpacity>
