@@ -74,7 +74,7 @@ export function UserCard({ user }: IUserCard): JSX.Element {
               color: theme.colors.text,
             }}
           >
-            {config.user?.location?.country.names.international}
+            {user?.location?.country.names.international}
           </Text>
         </View>
       </View>
