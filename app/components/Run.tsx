@@ -1,36 +1,64 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, Text, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 import { h6, colors } from "../themes/theme";
 import { run } from "../hooks/types";
-import { useConfig } from "../hooks";
+import { getUser, useConfig } from "../hooks";
 
 export interface IRun {
   run: run;
+  place: number;
 }
 
 function formatTime(time: string) {
   return time.slice(2, time.length).toLowerCase();
 }
 
-export default function Run({ run }: IRun): JSX.Element {
+export default function Run({ run, place }: IRun): JSX.Element {
   const navigation = useNavigation();
   const { config } = useConfig();
   const { theme } = config;
-  const { weblink, players, times, values } = run;
+  const { weblink, times } = run;
+  const [playerList, setPlayersList] = useState<string[]>([]);
+
+  const getPlayers = useCallback(async () => {
+    const _players: string[] = [];
+    for (const player of run.players) {
+      if (player.rel === "user") {
+        if (player.id === undefined) continue;
+        const user = await getUser(player.id);
+        _players.push(user.names.international ?? user.names.japanese ?? "");
+      } else {
+        //Player is guest
+        if (player.name === undefined) continue;
+        _players.push(player.name);
+      }
+    }
+
+    setPlayersList(_players);
+    console.log(_players);
+  }, []);
+
+  useEffect(() => {
+    getPlayers();
+  }, [run]);
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate("RunInfo", { weblink })}
       style={[styles.container, { backgroundColor: theme.colors.foreground }]}
     >
       <View style={styles.place}>
-        <Text style={[h6, { color: theme.colors.primary }]}>{0}</Text>
+        <Text style={[h6, { color: theme.colors.primary }]}>{place}</Text>
       </View>
       <View style={styles.runner}>
-        <Text style={[h6, { color: theme.colors.text }]}>
-          {players[0].name}
+        <Text
+          style={[h6, { color: theme.colors.text }]}
+          ellipsizeMode="tail"
+          numberOfLines={2}
+        >
+          {playerList.join(", ")}
         </Text>
       </View>
       <View style={styles.time}>
