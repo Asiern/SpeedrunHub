@@ -1,47 +1,28 @@
-import React, { useState } from "react";
-import { ScrollView, TouchableOpacity, View } from "react-native";
-import { shadow } from "../../themes/theme";
+import React from "react";
+import { ScrollView, View, StyleSheet, Dimensions } from "react-native";
 import { UserCard } from "./UserCard";
-import { Feather } from "@expo/vector-icons";
 import { Social } from "./Social";
 import { useConfig } from "../../hooks";
-import { personalBest, game, run } from "../../hooks/types";
-import Run from "../../components/Run";
-import { NavigationProp, RouteProp } from "@react-navigation/native";
-import { MainNavigatorParamList } from "../../navigation/MainNavigator";
+import { game, personalBest, user } from "../../hooks/types";
+import { SquareButton } from "../../components";
+import { useNavigation } from "@react-navigation/native";
+import PersonalBests from "./PersonalBests";
+import Constants from "expo-constants";
+import { CARD_HEIGHT, CARD_WIDTH } from "./GameCard";
 
-type ProfileProps = {
-  route: RouteProp<MainNavigatorParamList, "Profile">;
-  navigation: NavigationProp<MainNavigatorParamList, "Profile">;
-};
+const { width } = Dimensions.get("screen");
 
-export function Profile(props: ProfileProps): JSX.Element {
-  const [pbs, setPBs] = useState<personalBest[] | null>(null);
-  const [games, setGames] = useState<game[]>([]);
-  const [runs, setRuns] = useState<run[]>([]);
+interface IProfile {
+  user: user;
+  pbs: personalBest[];
+  games: game[];
+}
+
+export function Profile({ user, pbs, games }: IProfile): JSX.Element {
   const { config } = useConfig();
   const { theme } = config;
-  const { user } = props.route.params;
 
-  // async function prepare() {
-  //   try {
-  //     if (user.names.international !== null) {
-  //       // const data = await getUser(user.username);
-  //       // setUserData(data);
-  //       const _pbs: personalBest[] = await getPersonalBests(user.userid);
-  //       const _games: game[] = [];
-  //       // _pbs.forEach((pb)=>{if(games.)})
-  //       setPBs(_pbs);
-  //       // setRuns(runs);
-  //     }
-  //   } catch (e) {
-  //     console.warn(e);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   prepare();
-  // }, []);
+  const navigation = useNavigation();
 
   return (
     <ScrollView
@@ -51,60 +32,62 @@ export function Profile(props: ProfileProps): JSX.Element {
         marginTop: 10,
       }}
     >
-      <View style={{ margin: 30 }}>
-        <View style={{ flexDirection: "row" }}>
-          <UserCard />
-          {/* <TouchableOpacity
-          style={[
-            {
-              width: 60,
-              height: 60,
-              backgroundColor: theme.colors.primary,
-              borderRadius: 10,
-              justifyContent: "center",
-            },
-            shadow,
-          ]}
-          onPress={logout}
-          >
-          <Feather
-          name="user-x"
-          size={25}
-          style={{ color: theme.colors.foreground, alignSelf: "center" }}
-          />
-        </TouchableOpacity> */}
-        </View>
-        <View style={{ flexDirection: "row", marginVertical: 10 }}>
-          <View style={{ marginRight: 10, flex: 1 }}>
-            <Social />
-          </View>
-          <TouchableOpacity
-            style={[
-              {
-                backgroundColor: theme.colors.primary,
-                height: 50,
-                width: 50,
-                borderRadius: 10,
-                justifyContent: "center",
-                alignItems: "center",
-              },
-              shadow,
-            ]}
-          >
-            <Feather
-              name="more-horizontal"
-              size={20}
-              color={theme.colors.foreground}
-            />
-          </TouchableOpacity>
-        </View>
-        <View style={{ marginTop: 15 }}>
-          {runs.map((run, i) => {
-            if (i === 0) console.log(run);
-            return <Run run={run} key={run.id} />;
-          })}
-        </View>
+      <View style={styles.header}>
+        <SquareButton
+          icon="arrow-left"
+          onPress={() => navigation.goBack()}
+          style={{ width: 60, height: 60, marginRight: 10 }}
+          variant="gray"
+        />
+        <UserCard user={user} />
       </View>
+      <View style={styles.social}>
+        <View style={{ marginRight: 10, flex: 1 }}>
+          <Social user={user} />
+        </View>
+        <SquareButton
+          icon="more-horizontal"
+          onPress={() => null}
+          style={styles.moreButton}
+          variant="primary"
+        />
+      </View>
+      <PersonalBests games={games} pbs={pbs} />
     </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  header: {
+    flexDirection: "row",
+    marginHorizontal: 30,
+    marginTop: Constants.statusBarHeight,
+  },
+  social: {
+    flexDirection: "row",
+    marginVertical: 10,
+    marginHorizontal: 30,
+  },
+  moreButton: {
+    height: 50,
+    width: 50,
+    borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  gameScrollviewContainer: {
+    borderRadius: 10,
+    overflow: "hidden",
+    height: CARD_HEIGHT,
+    width: CARD_WIDTH,
+    marginBottom: 10,
+  },
+  runScrollView: {
+    width,
+  },
+  runContainer: {
+    width,
+    paddingHorizontal: 30,
+    paddingBottom: 10,
+  },
+});
