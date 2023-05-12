@@ -20,6 +20,7 @@ export function UserCard({ user }: IUserCard): JSX.Element {
   const { theme } = config;
   return (
     <TouchableOpacity
+      testID="usercard-touchable"
       style={[
         {
           backgroundColor: theme.colors.foreground,
