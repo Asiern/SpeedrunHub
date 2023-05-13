@@ -19,7 +19,7 @@ function Game({ game }: IGame): JSX.Element {
   return (
     <TouchableOpacity
       onPress={() =>
-        navigation.navigate("Game Info", {
+        navigation.navigate("GameInfo", {
           id: game.id,
           abbreviation: game.abbreviation,
         })
