@@ -10,7 +10,7 @@ import Notifications from "../screens/Notifications";
 import RunInfo from "../screens/RunInfo";
 import { About, NotificationsSettings } from "../screens/settings";
 import { user } from "../hooks/types";
-import { ProfileContainer } from "../screens/profile";
+import { Profile } from "../screens/profile";
 
 const Stack = createStackNavigator();
 
@@ -55,7 +55,7 @@ function HomeStack(): JSX.Element {
       />
       <Stack.Screen
         name="Profile"
-        component={ProfileContainer}
+        component={Profile}
         options={{ headerShown: false }}
       />
       <Stack.Screen

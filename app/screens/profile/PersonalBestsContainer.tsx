@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { MainNavigatorParamList } from "../../navigation/MainNavigator";
-import { NavigationProp, RouteProp } from "@react-navigation/native";
-import { Profile } from "./Profile";
-import { game, personalBest } from "../../hooks/types";
+import { game, personalBest, user } from "../../hooks/types";
 import { getPersonalBests } from "../../hooks";
 import { ActivityIndicator, View } from "react-native";
+import PersonalBests from "./PersonalBests";
 
-type ProfileProps = {
-  route: RouteProp<MainNavigatorParamList, "Profile">;
-  navigation: NavigationProp<MainNavigatorParamList, "Profile">;
-};
+interface IPersonalBestsContainer {
+  user: user;
+}
 
-export function ProfileContainer(props: ProfileProps): JSX.Element {
-  const { user } = props.route.params;
+export function PersonalBestsContainer({
+  user,
+}: IPersonalBestsContainer): JSX.Element {
   const [pbs, setPbs] = useState<personalBest[]>([]);
   const [games, setGames] = useState<game[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -45,5 +43,5 @@ export function ProfileContainer(props: ProfileProps): JSX.Element {
       </View>
     );
 
-  return <Profile user={user} pbs={pbs} games={games} />;
+  return <PersonalBests games={games} pbs={pbs} />;
 }
