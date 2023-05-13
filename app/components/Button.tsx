@@ -30,6 +30,7 @@ function Button({
     variant === "primary" ? theme.colors.foreground : theme.colors.headerText;
   return (
     <RectButton
+      testID="button-touchable"
       style={[
         styles.container,
         { backgroundColor },
@@ -41,6 +42,7 @@ function Button({
       {icon !== null ? (
         // TODO fix icon prop type
         <Feather
+          testID="button-icon"
           name={icon}
           size={15}
           style={{ marginRight: 10 }}
