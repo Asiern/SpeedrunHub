@@ -3,24 +3,28 @@ import { ScrollView, View, StyleSheet, Dimensions } from "react-native";
 import { UserCard } from "./UserCard";
 import { Social } from "./Social";
 import { useConfig } from "../../hooks";
-import { game, personalBest, user } from "../../hooks/types";
 import { SquareButton } from "../../components";
-import { useNavigation } from "@react-navigation/native";
-import PersonalBests from "./PersonalBests";
+import {
+  NavigationProp,
+  RouteProp,
+  useNavigation,
+} from "@react-navigation/native";
 import Constants from "expo-constants";
 import { CARD_HEIGHT, CARD_WIDTH } from "./GameCard";
+import { PersonalBestsContainer } from "./PersonalBestsContainer";
+import { MainNavigatorParamList } from "../../navigation/MainNavigator";
 
 const { width } = Dimensions.get("screen");
 
-interface IProfile {
-  user: user;
-  pbs: personalBest[];
-  games: game[];
-}
+type ProfileProps = {
+  route: RouteProp<MainNavigatorParamList, "Profile">;
+  navigation: NavigationProp<MainNavigatorParamList, "Profile">;
+};
 
-export function Profile({ user, pbs, games }: IProfile): JSX.Element {
+export function Profile(props: ProfileProps): JSX.Element {
   const { config } = useConfig();
   const { theme } = config;
+  const { user } = props.route.params;
 
   const navigation = useNavigation();
 
@@ -52,7 +56,7 @@ export function Profile({ user, pbs, games }: IProfile): JSX.Element {
           variant="primary"
         />
       </View>
-      <PersonalBests games={games} pbs={pbs} />
+      <PersonalBestsContainer user={user} />
     </ScrollView>
   );
 }
