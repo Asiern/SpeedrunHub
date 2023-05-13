@@ -1,9 +1,9 @@
-import React from "react";
+import React, { memo } from "react";
 import { Text, StyleSheet } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
-import { shadow as shadowStyle } from "../../themes/theme";
+import { shadow as shadowStyle } from "../themes/theme";
 import { Feather } from "@expo/vector-icons";
-import { useConfig } from "../../hooks";
+import { useConfig } from "../hooks";
 
 export interface ButtonProps {
   label: string;
@@ -73,4 +73,4 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins",
   },
 });
-export default Button;
+export default memo(Button);
