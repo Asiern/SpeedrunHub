@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { game, personalBest, user } from "../../hooks/types";
 import { getPersonalBests } from "../../hooks";
-import { View } from "react-native";
 import PersonalBests from "./PersonalBests";
 import { ActivityIndicator } from "../../components";
 
