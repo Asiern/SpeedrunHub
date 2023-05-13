@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { getGames, getUsers, useConfig } from "../../hooks";
+import { getGames, getUsers } from "../../hooks";
 import SearchBar from "../../components/SearchBar";
 import { Filters } from "./Filters";
 import { game, gamesResponse, user, usersResponse } from "../../hooks/types";
@@ -34,8 +34,6 @@ export default function Search(props: SearchProps): JSX.Element {
   );
   const [filters, setFilters] = useState<string[]>(INITIAL_FILTERS);
   const navigation = useNavigation();
-  const { config } = useConfig();
-  const { theme } = config;
 
   useEffect(() => {
     if (params !== undefined) search(setUsers, setGames, params.query, filters);
