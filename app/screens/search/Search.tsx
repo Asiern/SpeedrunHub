@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { getGames, getUsers, useConfig } from "../../hooks";
 import SearchBar from "../../components/SearchBar";
 import { Filters } from "./Filters";
 import { game, gamesResponse, user, usersResponse } from "../../hooks/types";
 import { ScrollView } from "react-native-gesture-handler";
-import { UserCard } from "../../components";
+import { ActivityIndicator, UserCard } from "../../components";
 import { SquareButton } from "../../components/SquareButton";
 import {
   NavigationProp,
@@ -98,9 +98,7 @@ export default function Search(props: SearchProps): JSX.Element {
       />
       <ScrollView>
         <View style={{ paddingHorizontal: 30 }}>
-          {loading && (
-            <ActivityIndicator color={theme.colors.primary} size={30} />
-          )}
+          {loading && <ActivityIndicator />}
           {!loading &&
             users?.data.map((user: user, index: number) => {
               return (

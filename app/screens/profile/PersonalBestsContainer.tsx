@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { game, personalBest, user } from "../../hooks/types";
 import { getPersonalBests } from "../../hooks";
-import { ActivityIndicator, View } from "react-native";
+import { View } from "react-native";
 import PersonalBests from "./PersonalBests";
+import { ActivityIndicator } from "../../components";
 
 interface IPersonalBestsContainer {
   user: user;
@@ -34,14 +35,7 @@ export function PersonalBestsContainer({
     prepare();
   }, []);
 
-  if (loading)
-    return (
-      <View
-        style={{ flex: 1, justifyContent: "center", alignContent: "center" }}
-      >
-        <ActivityIndicator />
-      </View>
-    );
+  if (loading) return <ActivityIndicator />;
 
   return <PersonalBests games={games} pbs={pbs} />;
 }
