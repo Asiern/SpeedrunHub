@@ -1,18 +1,21 @@
-name: Jest test
+name: Jest Tests on Pull Request
 
 on:
-  workflow_dispatch:
+  pull_request:
 
 jobs:
   test:
-    name: run jest tests
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-      - name: Yarn setup
-        run: npm install -g yarn
-      - name: yarn install and test
-        run: |
-          yarn
-          yarn test
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Node setup
+        uses: actions/setup-node@v1
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Run Jest tests
+        run: yarn test
