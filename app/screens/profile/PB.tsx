@@ -23,6 +23,7 @@ function PB({ pb }: IPB): JSX.Element {
 
   return (
     <TouchableOpacity
+      testID="touchable-pb"
       onPress={() => navigation.navigate("RunInfo", { weblink: run.weblink })}
       style={[
         styles.container,
@@ -31,7 +32,10 @@ function PB({ pb }: IPB): JSX.Element {
       ]}
     >
       <View style={styles.place}>
-        <Text style={[{ color: theme.colors.primary, fontFamily: "Poppins" }]}>
+        <Text
+          style={[{ color: theme.colors.primary, fontFamily: "Poppins" }]}
+          testID="pb-place"
+        >
           {place}
         </Text>
       </View>
