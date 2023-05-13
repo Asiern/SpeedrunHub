@@ -38,7 +38,6 @@ export default function Run({ run, place }: IRun): JSX.Element {
     }
 
     setPlayersList(_players);
-    console.log(_players);
   }, []);
 
   useEffect(() => {
@@ -48,12 +47,14 @@ export default function Run({ run, place }: IRun): JSX.Element {
     <TouchableOpacity
       onPress={() => navigation.navigate("RunInfo", { weblink })}
       style={[styles.container, { backgroundColor: theme.colors.foreground }]}
+      testID="run-touchable"
     >
-      <View style={styles.place}>
+      <View style={styles.place} testID="run-place">
         <Text style={[h6, { color: theme.colors.primary }]}>{place}</Text>
       </View>
       <View style={styles.runner}>
         <Text
+          testID="run-players"
           style={[h6, { color: theme.colors.text }]}
           ellipsizeMode="tail"
           numberOfLines={2}
@@ -61,7 +62,7 @@ export default function Run({ run, place }: IRun): JSX.Element {
           {playerList.join(", ")}
         </Text>
       </View>
-      <View style={styles.time}>
+      <View style={styles.time} testID="run-time">
         <Text style={[h6, { color: theme.colors.text }]}>
           {formatTime(times.primary)}
         </Text>
