@@ -10,6 +10,7 @@ export function LoginButton(): JSX.Element {
   const { theme } = config;
   return (
     <TouchableOpacity
+      testID="login-button-touchable"
       onPress={() => {
         navigation.navigate("Login");
       }}
