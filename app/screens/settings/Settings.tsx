@@ -1,8 +1,7 @@
 import React from "react";
 import { Linking, ScrollView, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import Button from "../../components/Buttons/Button";
-import { SquareButton } from "../../components/SquareButton";
+import { SquareButton, Button } from "../../components";
 import Constants from "expo-constants";
 import { useConfig } from "../../hooks";
 

@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { TextInput } from "../../components";
+import { TextInput, Button } from "../../components";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-
-import Button from "../../components/Buttons/Button";
 import { useNavigation } from "@react-navigation/native";
 import { getUser, useConfig } from "../../hooks";
 import { loadInBrowser } from "../../utils";
