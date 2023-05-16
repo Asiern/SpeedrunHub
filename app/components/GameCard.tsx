@@ -1,7 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { StyleSheet, ImageBackground, View } from "react-native";
+import { StyleSheet, ImageBackground, ViewStyle } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { shadow } from "../themes/theme";
 
 export interface GameCardProps {
   id: string;
@@ -9,57 +10,50 @@ export interface GameCardProps {
   image: string;
   width?: number;
   height?: number;
+  style?: ViewStyle;
 }
 
-export default function GameCard({
+export function GameCard({
   id,
   abbreviation,
   image,
-  width,
-  height,
+  width = 113,
+  height = 160,
+  style,
 }: GameCardProps): JSX.Element {
   const navigation = useNavigation();
   return (
-    <View style={{ padding: 2 }}>
-      <TouchableOpacity
-        onPress={() =>
-          navigation.navigate("Game Info", {
-            id,
-            abbreviation,
-          })
-        }
-        style={[styles.container, { width, height }]}
-      >
-        <ImageBackground
-          source={{
-            uri: image,
-          }}
-          style={styles.image}
-          imageStyle={{ borderRadius: 10 }}
-        ></ImageBackground>
-      </TouchableOpacity>
-    </View>
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate("GameInfo", {
+          id,
+          abbreviation,
+        })
+      }
+      style={[styles.container, { width, height }, shadow, style]}
+    >
+      <ImageBackground
+        source={{
+          uri: image,
+        }}
+        style={styles.image}
+        imageStyle={{ borderRadius: 10 }}
+      ></ImageBackground>
+    </TouchableOpacity>
   );
 }
-
-GameCard.defaultProps = {
-  width: 113,
-  height: 160,
-};
 
 const styles = StyleSheet.create({
   container: {
     alignContent: "center",
     justifyContent: "center",
-    shadowColor: "black",
     backgroundColor: "white",
     borderRadius: 10,
-    shadowOffset: { width: 5, height: 5 },
-    shadowOpacity: 1,
-    elevation: 5,
   },
   image: {
     flex: 1,
     resizeMode: "cover",
   },
 });
+
+export default memo(GameCard);
