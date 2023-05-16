@@ -24,6 +24,7 @@ export function GameCard({
   const navigation = useNavigation();
   return (
     <TouchableOpacity
+      testID="game-card-touchable-opacity"
       onPress={() =>
         navigation.navigate("GameInfo", {
           id,
@@ -33,6 +34,7 @@ export function GameCard({
       style={[styles.container, { width, height }, shadow, style]}
     >
       <ImageBackground
+        testID="game-card-image-background"
         source={{
           uri: image,
         }}
