@@ -100,6 +100,7 @@ function GameList(): JSX.Element {
         ) : null}
       </Animated.ScrollView>
       <ScrollIndicator
+        gap={CARD_GAP / 2}
         index={currentIndex}
         slides={N_SLIDES}
         width={SLIDE_WIDTH}
