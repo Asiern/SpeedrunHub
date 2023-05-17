@@ -8,12 +8,11 @@ import {
 } from "react-native";
 import { game } from "../../types";
 import { useConfig } from "../../hooks";
-import { GameCard } from "../../components";
+import { GameCard, ScrollIndicator } from "../../components";
 import { shadow } from "../../themes/theme";
 import { Feather } from "@expo/vector-icons";
 import Animated, {
   useAnimatedScrollHandler,
-  useAnimatedStyle,
   useDerivedValue,
   useSharedValue,
 } from "react-native-reanimated";
@@ -100,40 +99,11 @@ function GameList(): JSX.Element {
           </TouchableOpacity>
         ) : null}
       </Animated.ScrollView>
-      <View
-        style={{
-          width: width - 2 * 30,
-          height: 5,
-          marginVertical: 5,
-          flexDirection: "row",
-          gap: 1,
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        {Array.from({ length: N_SLIDES }).map((_, index: number) => {
-          const style = useAnimatedStyle(() => ({
-            backgroundColor:
-              currentIndex.value === index
-                ? theme.colors.primary
-                : theme.colors.foreground,
-          }));
-          return (
-            <Animated.View
-              key={index}
-              style={[
-                {
-                  borderRadius: 2,
-                  height: 5,
-                  width: SLIDE_WIDTH / N_CARDS_SLIDE - 2 * (N_SLIDES - 1),
-                },
-                shadow,
-                style,
-              ]}
-            />
-          );
-        })}
-      </View>
+      <ScrollIndicator
+        index={currentIndex}
+        slides={N_SLIDES}
+        width={SLIDE_WIDTH}
+      />
     </View>
   );
 }

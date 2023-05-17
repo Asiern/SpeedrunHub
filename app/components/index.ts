@@ -5,6 +5,7 @@ import { SquareButton } from "./SquareButton";
 import ActivityIndicator from "./ActivityIndicator";
 import Button from "./Button";
 import GameCard from "./GameCard";
+import ScrollIndicator from "./ScrollIndicator";
 
 export {
   UserCard,
@@ -14,4 +15,5 @@ export {
   ActivityIndicator,
   Button,
   GameCard,
+  ScrollIndicator,
 };
