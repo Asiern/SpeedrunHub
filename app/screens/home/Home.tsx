@@ -8,6 +8,7 @@ import HomeHeader from "./HomeHeader";
 import SearchBar from "../../components/SearchBar";
 import { ScrollView } from "react-native-gesture-handler";
 import GameList from "./GameList";
+import Following from "./Following/Following";
 
 export default function Home(): JSX.Element {
   const navigator = useNavigation();
@@ -30,6 +31,7 @@ export default function Home(): JSX.Element {
         />
       </View>
       <GameList />
+      <Following />
     </ScrollView>
   );
 }
