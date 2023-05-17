@@ -14,6 +14,7 @@ export const defaultConfig: config = {
     max: 20,
   },
   games: [],
+  following: [],
   theme: Theme,
 };
 
