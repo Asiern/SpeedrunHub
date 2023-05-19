@@ -21,6 +21,8 @@ function ScrollIndicator({
 }: IScrollIndicator): JSX.Element {
   const { config } = useConfig();
   const { theme } = config;
+
+  if (!(slides > 1)) return <></>;
   return (
     <View
       style={{
