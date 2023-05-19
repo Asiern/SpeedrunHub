@@ -16,7 +16,7 @@ import Animated, {
   useDerivedValue,
   useSharedValue,
 } from "react-native-reanimated";
-// import { useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
 const { width } = Dimensions.get("screen");
 
@@ -30,9 +30,10 @@ const SLIDE_WIDTH: number = width - 2 * 30;
 function GameList(): JSX.Element {
   const { config } = useConfig();
   const { games, theme } = config;
-  // const navigation = useNavigation();
+  const navigation = useNavigation();
   const gamesToRender: number = Math.min(games.length, PREVIEW_CARD_COUNT);
-  const N_SLIDES: number = Math.round(gamesToRender / N_CARDS_SLIDE);
+  const N_SLIDES: number = Math.ceil(gamesToRender / N_CARDS_SLIDE);
+  const nFillerCards: number = N_SLIDES * N_CARDS_SLIDE - gamesToRender;
 
   const scrollX = useSharedValue<number>(0);
 
@@ -67,6 +68,7 @@ function GameList(): JSX.Element {
               <GameCard
                 style={{
                   marginRight: i === gamesToRender - 1 ? 0 : CARD_GAP,
+                  marginBottom: 3,
                 }}
                 {...{
                   abbreviation,
@@ -84,12 +86,11 @@ function GameList(): JSX.Element {
             style={[
               styles.moreCard,
               shadow,
-              { backgroundColor: theme.colors.primary },
+              {
+                backgroundColor: theme.colors.primary,
+              },
             ]}
-            onPress={
-              () => null
-              // TODO navigation.navigate("GameList")
-            }
+            onPress={() => navigation.navigate("GameList")}
             testID="more-card-touchable"
           >
             <Feather name="list" color={theme.colors.foreground} size={25} />
@@ -97,6 +98,15 @@ function GameList(): JSX.Element {
               Show All
             </Text>
           </TouchableOpacity>
+        ) : nFillerCards > 0 ? (
+          <View
+            style={{
+              width:
+                nFillerCards === 1
+                  ? CARD_WIDTH + CARD_GAP
+                  : 2 * CARD_WIDTH + 2 * CARD_GAP,
+            }}
+          />
         ) : null}
       </Animated.ScrollView>
       <ScrollIndicator
