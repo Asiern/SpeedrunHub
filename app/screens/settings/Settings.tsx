@@ -95,7 +95,7 @@ export function Settings(): JSX.Element {
             icon={"log-out"}
             label={"Log out"}
             onPress={() => {
-              setConfig({ ...config, logged: false });
+              setConfig({ ...config, logged: false, key: null, user: null });
               navigation.navigate("Login");
             }}
             shadow
