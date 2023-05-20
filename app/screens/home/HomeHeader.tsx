@@ -22,13 +22,20 @@ function HomeHeader(): JSX.Element {
       <SquareButton
         onPress={() => navigation.navigate("Settings")}
         icon="sliders"
-        style={{ width: HEIGHT, height: HEIGHT }}
+        style={{ width: HEIGHT, height: HEIGHT, marginRight: 5 }}
       />
       {config.logged === true && config.user !== null ? (
         <UserCard user={config.user} />
       ) : (
         <LoginButton />
       )}
+      {config.key !== null ? (
+        <SquareButton
+          icon="bell"
+          style={{ width: HEIGHT, height: HEIGHT, marginLeft: 5 }}
+          onPress={() => null}
+        />
+      ) : null}
     </View>
   );
 }
