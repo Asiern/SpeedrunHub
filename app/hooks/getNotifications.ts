@@ -9,15 +9,23 @@ import { notificationResponse } from "./types";
  */
 export default async function getNotifications(
   config: config
-): Promise<notificationResponse> {
-  const endpoint =
-    "https://www.speedrun.com/api/v1/notifications?max=" +
-    config.notifications.max;
+): Promise<notificationResponse | null> {
+  return new Promise((resolve, reject) => {
+    const endpoint =
+      "https://www.speedrun.com/api/v1/notifications?max=" +
+      config.notifications.max;
 
-  const { data } = await axios({
-    url: endpoint,
-    method: "GET",
-    headers: { Accept: "application/json", "X-API-Key": config.key },
+    axios({
+      url: endpoint,
+      method: "GET",
+      headers: { Accept: "application/json", "X-API-Key": config.key },
+    })
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((err) => {
+        console.error(err);
+        reject(null);
+      });
   });
-  return data;
 }
