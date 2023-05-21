@@ -31,9 +31,10 @@ function HomeHeader(): JSX.Element {
       )}
       {config.key !== null ? (
         <SquareButton
+          testID="notifications-square-button"
           icon="bell"
           style={{ width: HEIGHT, height: HEIGHT, marginLeft: 5 }}
-          onPress={() => null}
+          onPress={() => navigation.navigate("Notifications")}
         />
       ) : null}
     </View>
