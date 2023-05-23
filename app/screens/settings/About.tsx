@@ -5,6 +5,7 @@ import { StatusBar } from "expo-status-bar";
 import { SquareButton } from "../../components/SquareButton";
 import { useNavigation } from "@react-navigation/native";
 import { useConfig } from "../../hooks";
+import * as Application from "expo-application";
 
 export function About(): JSX.Element {
   // Retrieve the theme from the app context
@@ -25,7 +26,7 @@ export function About(): JSX.Element {
           ]}
         >
           <Text style={[styles.logo, { color: theme.colors.foreground }]}>
-            Speedrun Hub
+            Speedrun Hub v{Application.nativeApplicationVersion}
           </Text>
         </View>
         <Text style={[styles.title, { color: theme.colors.primary }]}>
@@ -95,7 +96,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   logo: {
-    fontSize: 30,
+    fontSize: 26,
     fontFamily: "Poppins-Medium",
     alignSelf: "center",
   },

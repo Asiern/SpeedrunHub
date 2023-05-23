@@ -1,5 +1,6 @@
 {
   "main": "node_modules/expo/AppEntry.js",
+  "version": "2.0.0",
   "scripts": {
     "start": "expo start",
     "clear": "expo start -c",
@@ -26,6 +27,7 @@
     "expo": "^48.0.0",
     "expo-ads-admob": "~13.0.0",
     "expo-app-loading": "^2.1.1",
+    "expo-application": "~5.1.1",
     "expo-constants": "~14.2.1",
     "expo-font": "~11.1.1",
     "expo-splash-screen": "~0.18.1",
