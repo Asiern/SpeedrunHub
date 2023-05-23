@@ -6,16 +6,16 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { useConfig } from "../../../hooks";
-import UserContainer from "./UserContainer";
+import { useConfig } from "../../hooks";
+import { UserContainer } from "../../components";
 import Animated, {
   useAnimatedScrollHandler,
   useDerivedValue,
   useSharedValue,
 } from "react-native-reanimated";
-import { ScrollIndicator } from "../../../components";
+import { ScrollIndicator } from "../../components";
 import { Feather } from "@expo/vector-icons";
-import { shadow } from "../../../themes/theme";
+import { shadow } from "../../themes/theme";
 import { useNavigation } from "@react-navigation/native";
 
 const { width } = Dimensions.get("screen");
@@ -25,7 +25,6 @@ const GAP = 6;
 const N_CARDS_SLIDE = 3;
 const USER_WIDTH: number = (width - 2 * 30 - 2 * GAP) / N_CARDS_SLIDE;
 const SLIDE_WIDTH: number = width - 2 * 30;
-const MAX_N_SLIDES = 3;
 const PREVIEW_USER_COUNT = 8;
 
 function Following(): JSX.Element {

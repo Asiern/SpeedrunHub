@@ -1,8 +1,8 @@
 import React, { memo, useEffect, useState } from "react";
 import User from "./User";
-import { ActivityIndicator } from "../../../components";
-import { user } from "../../../hooks/types";
-import { getUser } from "../../../hooks";
+import { ActivityIndicator } from "../";
+import { user } from "../../hooks/types";
+import { getUser } from "../../hooks";
 
 interface IUserContainer {
   id: string;
