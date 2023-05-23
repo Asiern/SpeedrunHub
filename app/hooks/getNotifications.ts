@@ -1,6 +1,7 @@
 import axios from "axios";
 import { config } from "../types";
 import { notificationResponse } from "./types";
+import { USER_AGENT } from "../constants/requests";
 
 /**
  * Get notifications from api (API key needed)
@@ -18,7 +19,11 @@ export default async function getNotifications(
     axios({
       url: endpoint,
       method: "GET",
-      headers: { Accept: "application/json", "X-API-Key": config.key },
+      headers: {
+        Accept: "application/json",
+        "X-API-Key": config.key,
+        "User-Agent": USER_AGENT,
+      },
     })
       .then((response) => {
         resolve(response.data);

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { run } from "./types";
+import { USER_AGENT } from "../constants/requests";
 
 export default async function getRuns(
   userid: string | null
@@ -10,6 +11,7 @@ export default async function getRuns(
   const { data } = await axios({
     url: endpoint,
     method: "GET",
+    headers: { "User-Agent": USER_AGENT },
   });
 
   return data.data as run[];

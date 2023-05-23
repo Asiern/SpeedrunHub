@@ -1,5 +1,6 @@
 import axios from "axios";
 import { usersResponse } from "./types";
+import { USER_AGENT } from "../constants/requests";
 
 /**
  * Get users matching the query
@@ -15,6 +16,8 @@ export default async function getUsers(
 
   // Add pagination parameter
   // if (pagination) endpoint += `?max=${pagination}`;
-  const users = (await axios({ method: "GET", url })).data as usersResponse;
+  const users = (
+    await axios({ method: "GET", url, headers: { "User-Agent": USER_AGENT } })
+  ).data as usersResponse;
   return users;
 }
