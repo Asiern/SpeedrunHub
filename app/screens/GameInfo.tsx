@@ -7,7 +7,6 @@ import {
   FlatList,
 } from "react-native";
 import VariableButton from "../components/GameInfoComponents/VariableButton";
-import NotificationCard from "../components/Notifications/NotificationCard";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
 
@@ -339,13 +338,12 @@ export default function GameInfo(props: GameInfoProps): JSX.Element {
                 size="large"
                 color={theme.colors.primary}
               />
-            ) : (
-              <NotificationCard
-                text="No categories found"
-                color={theme.colors.card}
-                backgroundColor={theme.colors.primary}
-              />
-            )
+            ) : null
+            // <NotificationCard
+            //   text="No categories found"
+            //   color={theme.colors.card}
+            //   backgroundColor={theme.colors.primary}
+            // />
           }
         ></FlatList>
       </View>

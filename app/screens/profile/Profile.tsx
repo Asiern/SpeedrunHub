@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { ScrollView, View, StyleSheet, Dimensions } from "react-native";
 import { UserCard } from "./UserCard";
 import { Social } from "./Social";
@@ -22,11 +22,27 @@ type ProfileProps = {
 };
 
 export function Profile(props: ProfileProps): JSX.Element {
-  const { config } = useConfig();
+  const { config, setConfig } = useConfig();
   const { theme } = config;
   const { user } = props.route.params;
-
+  const [following, setFollowing] = useState<boolean>(
+    config.following.includes(user.id)
+  );
   const navigation = useNavigation();
+
+  const follow = useCallback(() => {
+    setConfig({ ...config, following: [...config.following, user.id] });
+    setFollowing(true);
+  }, []);
+
+  const unFollow = useCallback(() => {
+    const index = config.following.indexOf(user.id);
+    const newArray: string[] = [
+      ...config.following.slice(0, index),
+      ...config.following.slice(index + 1, config.following.length),
+    ];
+    setConfig({ ...config, following: [...newArray] });
+  }, []);
 
   return (
     <ScrollView
@@ -40,10 +56,18 @@ export function Profile(props: ProfileProps): JSX.Element {
         <SquareButton
           icon="arrow-left"
           onPress={() => navigation.goBack()}
-          style={{ width: 60, height: 60, marginRight: 10 }}
+          style={{ width: 60, height: 60, marginRight: 5 }}
           variant="gray"
         />
         <UserCard user={user} />
+        {config.user !== null && config.user.id !== user.id ? (
+          <SquareButton
+            testID="follow-square-button"
+            icon="heart"
+            onPress={following ? unFollow : follow}
+            style={{ marginLeft: 5, height: 60, width: 60 }}
+          />
+        ) : null}
       </View>
       <View style={styles.social}>
         <View style={{ marginRight: 10, flex: 1 }}>

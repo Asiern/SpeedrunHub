@@ -18,6 +18,7 @@ export type config = {
     max: number;
   };
   games: game[]; // Game list
+  following: string[]; // User id's
   theme: theme;
 };
 
