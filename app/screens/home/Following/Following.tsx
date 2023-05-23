@@ -16,6 +16,7 @@ import Animated, {
 import { ScrollIndicator } from "../../../components";
 import { Feather } from "@expo/vector-icons";
 import { shadow } from "../../../themes/theme";
+import { useNavigation } from "@react-navigation/native";
 
 const { width } = Dimensions.get("screen");
 
@@ -25,14 +26,16 @@ const N_CARDS_SLIDE = 3;
 const USER_WIDTH: number = (width - 2 * 30 - 2 * GAP) / N_CARDS_SLIDE;
 const SLIDE_WIDTH: number = width - 2 * 30;
 const MAX_N_SLIDES = 3;
+const PREVIEW_USER_COUNT = 8;
 
 function Following(): JSX.Element {
   const { config } = useConfig();
   const { theme, following } = config;
-  const USER_TO_RENDER = Math.min(
-    MAX_N_SLIDES * N_CARDS_SLIDE,
-    following?.length
-  );
+  const USERS_TO_RENDER = Math.min(PREVIEW_USER_COUNT, following?.length);
+  const N_SLIDES: number = Math.ceil(USERS_TO_RENDER / N_CARDS_SLIDE);
+  const nFillerCards: number = N_SLIDES * N_CARDS_SLIDE - USERS_TO_RENDER;
+
+  const navigation = useNavigation();
 
   const scrollX = useSharedValue<number>(0);
 
@@ -59,7 +62,7 @@ function Following(): JSX.Element {
         snapToInterval={SLIDE_WIDTH + GAP}
       >
         {following
-          ?.slice(0, USER_TO_RENDER)
+          ?.slice(0, USERS_TO_RENDER)
           .map((userid: string, i: number) => {
             return (
               <View
@@ -70,24 +73,35 @@ function Following(): JSX.Element {
               </View>
             );
           })}
-        <TouchableOpacity
-          style={[
-            styles.moreCard,
-            { backgroundColor: theme.colors.primary },
-            shadow,
-          ]}
-          testID="more-users-touchable"
-          onPress={() => null}
-        >
-          <Feather name="user" size={25} color={theme.colors.foreground} />
-          <Text style={[styles.text, { color: theme.colors.foreground }]}>
-            Show All
-          </Text>
-        </TouchableOpacity>
+        {USERS_TO_RENDER < following.length ? (
+          <TouchableOpacity
+            style={[
+              styles.moreCard,
+              { backgroundColor: theme.colors.primary },
+              shadow,
+            ]}
+            testID="more-users-touchable"
+            onPress={() => navigation.navigate("Following")}
+          >
+            <Feather name="user" size={25} color={theme.colors.foreground} />
+            <Text style={[styles.text, { color: theme.colors.foreground }]}>
+              Show All
+            </Text>
+          </TouchableOpacity>
+        ) : nFillerCards > 0 ? (
+          <View
+            style={{
+              width:
+                nFillerCards === 1
+                  ? USER_WIDTH + GAP
+                  : 2 * USER_WIDTH + 2 * GAP,
+            }}
+          />
+        ) : null}
       </Animated.ScrollView>
       <ScrollIndicator
         width={SLIDE_WIDTH}
-        slides={2}
+        slides={N_SLIDES}
         index={currentIndex}
         gap={GAP}
       />
@@ -104,7 +118,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
-    marginLeft: GAP,
+    marginBottom: 5,
   },
   text: {
     fontFamily: "Poppins",
