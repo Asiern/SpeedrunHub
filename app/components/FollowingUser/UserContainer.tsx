@@ -3,6 +3,7 @@ import User from "./User";
 import { ActivityIndicator } from "../";
 import { user } from "../../hooks/types";
 import { getUser } from "../../hooks";
+import { View } from "react-native";
 
 interface IUserContainer {
   id: string;
@@ -20,8 +21,12 @@ function UserContainer({ id, width }: IUserContainer): JSX.Element {
     }
     fetchUser();
   }, []);
-  if (loading || user === undefined) return <ActivityIndicator />;
-
+  if (loading || user === undefined)
+    return (
+      <View style={{ width }}>
+        <ActivityIndicator />
+      </View>
+    );
   return <User {...{ width, user }} />;
 }
 
