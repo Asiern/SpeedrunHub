@@ -1,8 +1,10 @@
-import React, { memo } from "react";
+import React from "react";
 import { View } from "react-native";
 import Animated, {
+  Easing,
   SharedValue,
   useAnimatedStyle,
+  withTiming,
 } from "react-native-reanimated";
 import { useConfig } from "../hooks";
 
@@ -21,8 +23,24 @@ function ScrollIndicator({
 }: IScrollIndicator): JSX.Element {
   const { config } = useConfig();
   const { theme } = config;
+  const indicatorWidth: number = width / slides;
 
   if (!(slides > 1)) return <></>;
+
+  const indicatorStyle = useAnimatedStyle(() => {
+    const position = index.value * indicatorWidth;
+    return {
+      transform: [
+        {
+          translateX: withTiming(position, {
+            duration: 200,
+            easing: Easing.bezier(0.25, 0.1, 0.25, 1),
+          }),
+        },
+      ],
+    };
+  });
+
   return (
     <View
       style={{
@@ -35,27 +53,19 @@ function ScrollIndicator({
         alignItems: "center",
       }}
     >
-      {Array.from({ length: slides }).map((_, i: number) => {
-        const style = useAnimatedStyle(() => ({
-          backgroundColor:
-            index.value === i ? theme.colors.primary : theme.colors.foreground,
-        }));
-        return (
-          <Animated.View
-            key={i}
-            style={[
-              {
-                borderRadius: 2,
-                height: 5,
-                width: width / slides - gap * (slides - 1),
-              },
-              style,
-            ]}
-          />
-        );
-      })}
+      <Animated.View
+        style={[
+          {
+            borderRadius: 2,
+            height: 5,
+            width: indicatorWidth,
+            backgroundColor: theme.colors.primary,
+          },
+          indicatorStyle,
+        ]}
+      />
     </View>
   );
 }
 
-export default memo(ScrollIndicator);
+export default ScrollIndicator;
