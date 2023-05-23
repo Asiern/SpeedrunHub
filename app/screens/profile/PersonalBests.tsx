@@ -10,8 +10,8 @@ import { useConfig } from "../../hooks";
 import GameCard, { CARD_HEIGHT, CARD_WIDTH } from "./GameCard";
 import { shadow } from "../../themes/theme";
 import Animated from "react-native-reanimated";
-import Dot from "../../components/Dot";
 import PB from "./PB";
+import { ScrollIndicator } from "../../components";
 
 const { width } = Dimensions.get("screen");
 
@@ -68,17 +68,20 @@ function PersonalBests({ games, pbs }: IPersonalBests): JSX.Element {
           })}
         </Animated.ScrollView>
       </View>
-      <View style={{ flexDirection: "row", justifyContent: "center" }}>
-        {games.map((_: game, i: number) => {
-          return (
-            <Dot
-              key={i}
-              index={i}
-              currentIndex={currentIndex}
-              color={theme.colors.primary}
-            />
-          );
-        })}
+      <View
+        style={[
+          styles.scrollIndicatorContainer,
+          shadow,
+          {
+            backgroundColor: theme.colors.foreground,
+          },
+        ]}
+      >
+        <ScrollIndicator
+          index={currentIndex}
+          slides={games.length}
+          width={width - 60 - 10}
+        />
       </View>
       <View style={styles.pbContainer}>
         {selectedPBs.map((pb) => {
@@ -99,7 +102,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     height: CARD_HEIGHT,
     width: CARD_WIDTH,
-    marginBottom: 10,
+    marginBottom: 5,
     marginHorizontal: 30,
   },
   runScrollView: {
@@ -109,6 +112,12 @@ const styles = StyleSheet.create({
     width,
     paddingHorizontal: 30,
     paddingBottom: 10,
+  },
+  scrollIndicatorContainer: {
+    marginHorizontal: 30,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 5,
   },
 });
 

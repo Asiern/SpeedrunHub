@@ -6,11 +6,13 @@ import Home from "../screens/home/Home";
 import { Settings } from "../screens/settings";
 import GameInfo from "../screens/GameInfo";
 import Search from "../screens/search/Search";
-import Notifications from "../screens/Notifications";
+import { NotificationsContainer } from "../screens/notifications";
 import RunInfo from "../screens/RunInfo";
 import { About, NotificationsSettings } from "../screens/settings";
 import { user } from "../hooks/types";
 import { Profile } from "../screens/profile";
+import GameList from "../screens/GameList";
+import Following from "../screens/Following";
 
 const Stack = createStackNavigator();
 
@@ -44,13 +46,23 @@ function HomeStack(): JSX.Element {
         options={{ headerShown: false }}
       />
       <Stack.Screen
+        name="GameList"
+        component={GameList}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Following"
+        component={Following}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
         name="GameInfo"
         component={GameInfo}
         options={{ headerShown: false }}
       />
       <Stack.Screen
         name="Notifications"
-        component={Notifications}
+        component={NotificationsContainer}
         options={{ headerShown: false }}
       />
       <Stack.Screen

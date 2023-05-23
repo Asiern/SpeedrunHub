@@ -22,7 +22,12 @@ export function Login(): JSX.Element {
         return;
       }
       const user: user = await getUser(username);
-      setConfig({ ...config, user, logged: true, key });
+      setConfig({
+        ...config,
+        user,
+        logged: true,
+        key: key === "" ? null : key,
+      });
       navigation.navigate("Main", { screen: "Home" });
     } catch (e) {
       setUsernameError(true);

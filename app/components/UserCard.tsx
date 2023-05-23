@@ -26,6 +26,7 @@ export function UserCard({ user }: IUserCard): JSX.Element {
           backgroundColor: theme.colors.foreground,
           paddingLeft: 20,
           borderRadius: 10,
+          flex: 1,
         },
         shadow,
       ]}

@@ -47,4 +47,43 @@ describe("HomeHeader component", () => {
     const { getByTestId } = render(<HomeHeader />);
     expect(getByTestId("login-button-touchable")).toBeDefined();
   });
+  it("renders notifications button when key is provided", () => {
+    useConfig.mockReturnValue({
+      config: {
+        ...defaultConfig,
+        user: null,
+        logged: false,
+        key: "someexamplekey",
+      },
+      setConfig: jest.fn(),
+    });
+    const { getByTestId } = render(<HomeHeader />);
+    expect(getByTestId("notifications-square-button")).toBeDefined();
+  });
+  it("does not render notifications button when key not provided", () => {
+    useConfig.mockReturnValue({
+      config: { ...defaultConfig, user: null, logged: false, key: null },
+      setConfig: jest.fn(),
+    });
+    const { queryByTestId } = render(<HomeHeader />);
+    const notificationsButton = queryByTestId("notifications-square-button");
+    expect(notificationsButton).toBeNull();
+  });
+  it("redirects to notifications when pressing button", () => {
+    useConfig.mockReturnValue({
+      config: {
+        ...defaultConfig,
+        user: null,
+        logged: false,
+        key: "someexamplekey",
+      },
+      setConfig: jest.fn(),
+    });
+    const { getByTestId } = render(<HomeHeader />);
+    const button = getByTestId("notifications-square-button");
+    fireEvent.press(button);
+
+    const navigation = useNavigation();
+    expect(navigation.navigate).toBeCalledWith("Notifications");
+  });
 });

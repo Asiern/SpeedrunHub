@@ -6,6 +6,9 @@ import Constants from "expo-constants";
 
 import HomeHeader from "./HomeHeader";
 import SearchBar from "../../components/SearchBar";
+import { ScrollView } from "react-native-gesture-handler";
+import GameList from "./GameList";
+import Following from "./Following";
 
 export default function Home(): JSX.Element {
   const navigator = useNavigation();
@@ -19,25 +22,22 @@ export default function Home(): JSX.Element {
   );
 
   return (
-    <View style={styles.container}>
-      <View style={{ flex: 1 }}>
-        <HomeHeader />
-        <View style={{ paddingHorizontal: 30, marginTop: 10 }}>
-          <SearchBar
-            onSearch={() => onSearch(searchValue)}
-            onChangeText={setSearchValue}
-          />
-        </View>
-        {/* <Notifications /> */}
+    <ScrollView style={styles.container}>
+      <HomeHeader />
+      <View style={{ paddingHorizontal: 30, marginTop: 10 }}>
+        <SearchBar
+          onSearch={() => onSearch(searchValue)}
+          onChangeText={setSearchValue}
+        />
       </View>
-      <View style={{ flex: 1 }}>{/* <GameList /> */}</View>
-    </View>
+      <GameList />
+      <Following />
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     marginTop: Constants.statusBarHeight,
     backgroundColor: "#fafafe",
   },

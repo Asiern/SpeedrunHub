@@ -9,6 +9,7 @@ interface ISquareButton {
   onPress: () => void;
   style?: ViewStyle;
   variant?: "primary" | "default" | "gray";
+  testID?: string;
 }
 
 export function SquareButton({
@@ -16,12 +17,13 @@ export function SquareButton({
   onPress,
   style,
   variant = "default",
+  testID = undefined,
 }: ISquareButton): JSX.Element {
   const { config } = useConfig();
   const { theme } = config;
   return (
     <TouchableOpacity
-      testID="touchable"
+      testID={testID ?? "touchable"}
       style={[
         {
           backgroundColor:
