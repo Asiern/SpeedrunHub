@@ -19,7 +19,6 @@ function ScrollIndicator({
   width,
   slides,
   index,
-  gap = 1,
 }: IScrollIndicator): JSX.Element {
   const { config } = useConfig();
   const { theme } = config;
