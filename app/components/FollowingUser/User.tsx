@@ -1,12 +1,12 @@
 import React, { memo } from "react";
 import { Image, StyleSheet, Text } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { user } from "../../../hooks/types";
+import { user } from "../../hooks/types";
 import { Feather } from "@expo/vector-icons";
-import { useConfig } from "../../../hooks";
+import { useConfig } from "../../hooks";
 import { useNavigation } from "@react-navigation/native";
 import { View } from "react-native";
-import { shadow } from "../../../themes/theme";
+import { shadow } from "../../themes/theme";
 
 interface IUser {
   user: user;
