@@ -12,6 +12,7 @@ import { About, NotificationsSettings } from "../screens/settings";
 import { user } from "../hooks/types";
 import { Profile } from "../screens/profile";
 import GameList from "../screens/GameList";
+import Following from "../screens/Following";
 
 const Stack = createStackNavigator();
 
@@ -47,6 +48,11 @@ function HomeStack(): JSX.Element {
       <Stack.Screen
         name="GameList"
         component={GameList}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Following"
+        component={Following}
         options={{ headerShown: false }}
       />
       <Stack.Screen
