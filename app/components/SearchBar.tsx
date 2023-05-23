@@ -37,6 +37,7 @@ function SearchBar({
           onChangeText(v);
           setValue(v);
         }}
+        onSubmitEditing={onSearch}
         value={value}
         style={[
           {
