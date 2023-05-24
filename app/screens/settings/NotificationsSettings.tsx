@@ -13,6 +13,7 @@ import Constants from "expo-constants";
 import { SquareButton } from "../../components/SquareButton";
 import { useNavigation } from "@react-navigation/native";
 import { useConfig } from "../../hooks";
+import { Header } from "../../components";
 const { width } = Dimensions.get("window");
 
 async function apply(
@@ -45,6 +46,7 @@ export function NotificationsSettings(): JSX.Element {
     <View
       style={[styles.container, { backgroundColor: theme.colors.background }]}
     >
+      <Header title="Notifications" />
       <View
         style={[styles.section, { backgroundColor: theme.colors.foreground }]}
       >
@@ -87,6 +89,7 @@ export function NotificationsSettings(): JSX.Element {
         <SquareButton
           icon="save"
           onPress={() => apply(config, max, unread, setConfig)}
+          style={{ alignSelf: "center" }}
         />
       ) : (
         <View
@@ -122,7 +125,6 @@ export function NotificationsSettings(): JSX.Element {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
     marginTop: Constants.statusBarHeight,
   },
   section: {
