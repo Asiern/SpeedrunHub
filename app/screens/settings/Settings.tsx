@@ -1,7 +1,7 @@
 import React from "react";
 import { Linking, ScrollView, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { SquareButton, Button } from "../../components";
+import { Button, Header } from "../../components";
 import Constants from "expo-constants";
 import { useConfig } from "../../hooks";
 
@@ -64,17 +64,12 @@ export function Settings(): JSX.Element {
         marginTop: Constants.statusBarHeight,
       }}
     >
+      <Header title="Settings" />
       <View
         style={{
           paddingHorizontal: 30,
-          marginTop: 10,
         }}
       >
-        <SquareButton
-          icon="arrow-left"
-          onPress={() => navigation.goBack()}
-          variant="default"
-        />
         {Sections.map(({ icon, navigateTo, title, weblink }, index: number) => {
           return (
             <View key={index} style={{ marginTop: 10 }}>
