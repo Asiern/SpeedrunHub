@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useState } from "react";
 import User from "./User";
-import { ActivityIndicator } from "../";
+import ActivityIndicator from "../ActivityIndicator";
 import { user } from "../../hooks/types";
 import { getUser } from "../../hooks";
 import { View } from "react-native";
