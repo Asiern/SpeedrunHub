@@ -7,6 +7,7 @@ import Button from "./Button";
 import GameCard from "./GameCard";
 import ScrollIndicator from "./ScrollIndicator";
 import { UserContainer } from "./FollowingUser";
+import Header from "./Header";
 
 export {
   UserCard,
@@ -18,4 +19,5 @@ export {
   GameCard,
   ScrollIndicator,
   UserContainer,
+  Header,
 };
