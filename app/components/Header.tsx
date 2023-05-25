@@ -11,7 +11,11 @@ function Header({ title }: IHeader): JSX.Element {
   const navigation = useNavigation();
   return (
     <View style={styles.header}>
-      <SquareButton icon="arrow-left" onPress={() => navigation.goBack()} />
+      <SquareButton
+        icon="arrow-left"
+        onPress={() => navigation.goBack()}
+        testID="back-button"
+      />
       <Text style={styles.headerText}>{title}</Text>
     </View>
   );

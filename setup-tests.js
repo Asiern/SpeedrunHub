@@ -24,6 +24,7 @@ jest.mock("react-native/Libraries/Animated/NativeAnimatedHelper");
 
 // useNavigation mock
 const mockedNavigate = jest.fn();
+const mockedGoBack = jest.fn();
 
 jest.mock("@react-navigation/native", () => {
   const actualNav = jest.requireActual("@react-navigation/native");
@@ -31,6 +32,7 @@ jest.mock("@react-navigation/native", () => {
     ...actualNav,
     useNavigation: () => ({
       navigate: mockedNavigate,
+      goBack: mockedGoBack,
     }),
   };
 });
