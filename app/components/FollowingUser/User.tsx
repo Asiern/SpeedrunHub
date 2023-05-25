@@ -33,9 +33,13 @@ function User({ user, width }: IUser): JSX.Element {
         <Image
           style={[styles.image, { width, height: width }]}
           source={{ uri: user.assets.image.uri }}
+          testID="user-image"
         />
       ) : (
-        <View style={[styles.iconContainer, { width, height: width }]}>
+        <View
+          style={[styles.iconContainer, { width, height: width }]}
+          testID="user-icon-container"
+        >
           <Feather name="user" size={25} color={theme.colors.text} />
         </View>
       )}
