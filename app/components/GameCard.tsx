@@ -11,6 +11,7 @@ export interface GameCardProps {
   width?: number;
   height?: number;
   style?: ViewStyle;
+  disabled?: boolean;
 }
 
 export function GameCard({
@@ -20,6 +21,7 @@ export function GameCard({
   width = 113,
   height = 160,
   style,
+  disabled = false,
 }: GameCardProps): JSX.Element {
   const navigation = useNavigation();
   return (
@@ -32,6 +34,7 @@ export function GameCard({
         })
       }
       style={[styles.container, { width, height }, shadow, style]}
+      disabled={disabled}
     >
       <ImageBackground
         testID="game-card-image-background"
