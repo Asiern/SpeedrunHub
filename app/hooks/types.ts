@@ -206,3 +206,12 @@ export type personalBest = {
 export type personalBestsResponse = {
   data: personalBest[];
 };
+
+export type platform = {
+  id: string;
+  name: string;
+  released: number;
+  links: link[];
+};
+
+export type platformsResponse = { data: platform };
