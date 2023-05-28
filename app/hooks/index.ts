@@ -7,6 +7,8 @@ import getGames from "./getGames";
 import useConfig from "./useConfig";
 import getGame from "./getGame";
 import getPlatform from "./getPlatform";
+import getCategory from "./getCategory";
+import getCategories from "./getCategories";
 
 export {
   getNotifications,
@@ -18,4 +20,6 @@ export {
   useConfig,
   getGame,
   getPlatform,
+  getCategory,
+  getCategories,
 };
