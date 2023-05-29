@@ -49,7 +49,10 @@ function GameList(): JSX.Element {
 
   return (
     <View style={styles.container}>
-      <Text style={[styles.headerText, { color: theme.colors.primary }]}>
+      <Text
+        style={[styles.headerText, { color: theme.colors.primary }]}
+        onPress={() => navigation.navigate("GameList")}
+      >
         My Games
       </Text>
       <Animated.ScrollView

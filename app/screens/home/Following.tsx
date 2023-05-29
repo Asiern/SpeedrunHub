@@ -50,7 +50,10 @@ function Following(): JSX.Element {
 
   return (
     <View style={styles.container}>
-      <Text style={[styles.header, { color: theme.colors.primary }]}>
+      <Text
+        style={[styles.header, { color: theme.colors.primary }]}
+        onPress={() => navigation.navigate("Following")}
+      >
         Following
       </Text>
       <Animated.ScrollView
