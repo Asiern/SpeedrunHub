@@ -14,14 +14,16 @@ function Header({ title }: IHeader): JSX.Element {
   const { theme } = config;
   return (
     <View style={styles.header}>
-      <SquareButton icon="arrow-left" onPress={() => navigation.goBack()} />
+      <SquareButton
+        icon="arrow-left"
+        onPress={() => navigation.goBack()}
+        testID="back-button"
+      />
       <Text
         style={[styles.headerText, { color: theme.colors.headerText }]}
         ellipsizeMode="tail"
         numberOfLines={1}
       >
-        {title}
-      </Text>
     </View>
   );
 }
