@@ -4,7 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 //Screens
 import Home from "../screens/home/Home";
 import { Settings } from "../screens/settings";
-import GameInfo from "../screens/GameInfo";
+import { GameInfoContainer } from "../screens/game";
 import Search from "../screens/search/Search";
 import { NotificationsContainer } from "../screens/notifications";
 import RunInfo from "../screens/RunInfo";
@@ -57,7 +57,7 @@ function HomeStack(): JSX.Element {
       />
       <Stack.Screen
         name="GameInfo"
-        component={GameInfo}
+        component={GameInfoContainer}
         options={{ headerShown: false }}
       />
       <Stack.Screen
