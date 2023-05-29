@@ -23,7 +23,7 @@ function Header({ title }: IHeader): JSX.Element {
         style={[styles.headerText, { color: theme.colors.headerText }]}
         ellipsizeMode="tail"
         numberOfLines={1}
-      >
+      />
     </View>
   );
 }
