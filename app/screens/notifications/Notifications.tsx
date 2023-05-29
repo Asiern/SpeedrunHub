@@ -1,8 +1,7 @@
 import React, { memo } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import { notificationResponse } from "../../hooks/types";
-import { SquareButton } from "../../components";
-import { useNavigation } from "@react-navigation/native";
+import { Header } from "../../components";
 import { StyleSheet, Text, View } from "react-native";
 import { useConfig } from "../../hooks";
 import Constants from "expo-constants";
@@ -13,23 +12,13 @@ interface INotification {
 }
 
 function Notifications({ notifications }: INotification): JSX.Element {
-  const navigation = useNavigation();
   const { config } = useConfig();
   const { theme } = config;
   return (
     <ScrollView
       style={[styles.container, { backgroundColor: theme.colors.background }]}
     >
-      <View style={styles.header}>
-        <SquareButton
-          icon="arrow-left"
-          onPress={() => navigation.goBack()}
-          style={{ marginLeft: 30, marginVertical: 10 }}
-        />
-        <Text style={[styles.headerText, { color: theme.colors.primary }]}>
-          Notifications
-        </Text>
-      </View>
+      <Header title="Notifications" />
       {notifications?.data.map((notification) => {
         return (
           <View
