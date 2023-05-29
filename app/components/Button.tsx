@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import { Text, StyleSheet } from "react-native";
+import { Text, StyleSheet, ViewStyle } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 import { shadow as shadowStyle } from "../themes/theme";
 import { Feather } from "@expo/vector-icons";
@@ -12,6 +12,7 @@ export interface ButtonProps {
   shadow?: boolean;
   icon?: string | null;
   centerContent?: boolean;
+  style?: ViewStyle;
 }
 
 function Button({
@@ -21,6 +22,7 @@ function Button({
   shadow,
   icon,
   centerContent,
+  style,
 }: ButtonProps): JSX.Element {
   const { config } = useConfig();
   const { theme } = config;
@@ -36,6 +38,7 @@ function Button({
         { backgroundColor },
         variant === "primary" ? shadowStyle : shadow ? shadowStyle : null,
         centerContent ? { justifyContent: "center" } : null,
+        style,
       ]}
       {...{ onPress }}
     >

@@ -5,6 +5,13 @@ import getUsers from "./getUsers";
 import getPersonalBests from "./getPersonalBests";
 import getGames from "./getGames";
 import useConfig from "./useConfig";
+import getGame from "./getGame";
+import getPlatform from "./getPlatform";
+import getCategory from "./getCategory";
+import getCategories from "./getCategories";
+import getVariables from "./getVariables";
+import getVariable from "./getVariable";
+import getLeaderboard from "./getLeaderboard";
 
 export {
   getNotifications,
@@ -14,4 +21,11 @@ export {
   getPersonalBests,
   getGames,
   useConfig,
+  getGame,
+  getPlatform,
+  getCategory,
+  getCategories,
+  getVariables,
+  getVariable,
+  getLeaderboard,
 };
