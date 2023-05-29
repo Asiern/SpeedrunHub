@@ -9,6 +9,9 @@ import getGame from "./getGame";
 import getPlatform from "./getPlatform";
 import getCategory from "./getCategory";
 import getCategories from "./getCategories";
+import getVariables from "./getVariables";
+import getVariable from "./getVariable";
+import getLeaderboard from "./getLeaderboard";
 
 export {
   getNotifications,
@@ -22,4 +25,7 @@ export {
   getPlatform,
   getCategory,
   getCategories,
+  getVariables,
+  getVariable,
+  getLeaderboard,
 };

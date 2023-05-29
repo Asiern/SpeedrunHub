@@ -215,3 +215,54 @@ export type platform = {
 };
 
 export type platformsResponse = { data: platform };
+
+export type value = {
+  label: string;
+  rules: string;
+  flags: {
+    miscellaneous: boolean;
+  };
+};
+
+export type variable = {
+  id: string;
+  name: string;
+  category: string | null;
+  scope: {
+    type: "global" | "full-game" | "all-levels" | "single-level";
+  };
+  mandatory: boolean;
+  "user-defined": boolean;
+  obsoletes: boolean;
+  values: {
+    _note: string | null;
+    choices: {
+      [key: string]: string;
+    };
+    values: {
+      [key: string]: value;
+    };
+    default: string;
+  };
+  "is-subcategory": boolean;
+  links: link[];
+};
+
+export type variablesResponse = { data: variable[] };
+
+export type leaderboard = {
+  weblink: string;
+  game: string;
+  category: string;
+  level: string | null;
+  platform: string | null;
+  region: string | null;
+  emulators: null | boolean;
+  "video-only": boolean;
+  timing: "realtime" | "realtime_noloads" | "ingame";
+  values: unknown;
+  runs: { place: number; run: run }[];
+  links: link[];
+};
+
+export type leaderboardResponse = { data: leaderboard };
