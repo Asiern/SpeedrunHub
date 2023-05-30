@@ -28,6 +28,7 @@ type RunInfoParams = {
 };
 type SearchParams = {
   query: string;
+  filters?: string[];
 };
 
 export type MainNavigatorParamList = {
