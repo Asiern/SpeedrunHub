@@ -56,51 +56,80 @@ function Following(): JSX.Element {
       >
         Following
       </Text>
-      <Animated.ScrollView
-        onScroll={onScroll}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        decelerationRate={"fast"}
-        snapToInterval={SLIDE_WIDTH + GAP}
-      >
-        {following
-          ?.slice(0, USERS_TO_RENDER)
-          .map((userid: string, i: number) => {
-            return (
-              <View
-                key={userid}
-                style={i !== following.length - 1 ? { marginRight: GAP } : null}
-              >
-                <UserContainer id={userid} width={USER_WIDTH} />
-              </View>
-            );
-          })}
-        {USERS_TO_RENDER < following.length ? (
-          <TouchableOpacity
-            style={[
-              styles.moreCard,
-              { backgroundColor: theme.colors.primary },
-              shadow,
-            ]}
-            testID="more-users-touchable"
-            onPress={() => navigation.navigate("Following")}
-          >
-            <Feather name="user" size={25} color={theme.colors.foreground} />
-            <Text style={[styles.text, { color: theme.colors.foreground }]}>
-              Show All
-            </Text>
-          </TouchableOpacity>
-        ) : nFillerCards > 0 ? (
-          <View
+      {following.length === 0 || following === undefined ? (
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate("Search", { query: "", filters: ["users"] })
+          }
+          testID="list-empty-touchable"
+          style={[
+            styles.listEmptyCard,
+            {
+              backgroundColor: theme.colors.primary,
+            },
+            shadow,
+          ]}
+        >
+          <Text
             style={{
-              width:
-                nFillerCards === 1
-                  ? USER_WIDTH + GAP
-                  : 2 * USER_WIDTH + 2 * GAP,
+              fontFamily: "Poppins",
+              color: theme.colors.foreground,
+              textAlign: "center",
             }}
-          />
-        ) : null}
-      </Animated.ScrollView>
+          >
+            Your following list is empty. Start following your favorite users
+            now!
+          </Text>
+        </TouchableOpacity>
+      ) : (
+        <Animated.ScrollView
+          onScroll={onScroll}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          decelerationRate={"fast"}
+          snapToInterval={SLIDE_WIDTH + GAP}
+        >
+          {following
+            ?.slice(0, USERS_TO_RENDER)
+            .map((userid: string, i: number) => {
+              return (
+                <View
+                  key={userid}
+                  style={
+                    i !== following.length - 1 ? { marginRight: GAP } : null
+                  }
+                >
+                  <UserContainer id={userid} width={USER_WIDTH} />
+                </View>
+              );
+            })}
+          {USERS_TO_RENDER < following.length ? (
+            <TouchableOpacity
+              style={[
+                styles.moreCard,
+                { backgroundColor: theme.colors.primary },
+                shadow,
+              ]}
+              testID="more-users-touchable"
+              onPress={() => navigation.navigate("Following")}
+            >
+              <Feather name="user" size={25} color={theme.colors.foreground} />
+              <Text style={[styles.text, { color: theme.colors.foreground }]}>
+                Show All
+              </Text>
+            </TouchableOpacity>
+          ) : nFillerCards > 0 ? (
+            <View
+              style={{
+                width:
+                  nFillerCards === 1
+                    ? USER_WIDTH + GAP
+                    : 2 * USER_WIDTH + 2 * GAP,
+              }}
+            />
+          ) : null}
+        </Animated.ScrollView>
+      )}
       <ScrollIndicator
         width={SLIDE_WIDTH}
         slides={N_SLIDES}
@@ -124,6 +153,11 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: "Poppins",
+  },
+  listEmptyCard: {
+    width: SLIDE_WIDTH,
+    borderRadius: 10,
+    padding: 10,
   },
 });
 
