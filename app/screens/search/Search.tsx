@@ -32,11 +32,14 @@ export default function Search(props: SearchProps): JSX.Element {
   const [searchQuery, setSearchQuery] = useState<string | undefined>(
     params.query
   );
-  const [filters, setFilters] = useState<string[]>(INITIAL_FILTERS);
+  const [filters, setFilters] = useState<string[]>(
+    params.filters ?? INITIAL_FILTERS
+  );
   const navigation = useNavigation();
 
   useEffect(() => {
-    if (params !== undefined) search(setUsers, setGames, params.query, filters);
+    if (params !== undefined && params.query !== "")
+      search(setUsers, setGames, params.query, filters);
   }, [params.query, filters]);
 
   const search = useCallback(async function search(
@@ -88,7 +91,7 @@ export default function Search(props: SearchProps): JSX.Element {
       </View>
       <Filters
         filters={FILTERS}
-        initial={INITIAL_FILTERS}
+        initial={params.filters ?? INITIAL_FILTERS}
         onChange={(filters: string[]) => {
           setFilters(filters);
           search(setUsers, setGames, searchQuery ?? "", filters);
