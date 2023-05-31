@@ -15,6 +15,11 @@ export function Login(): JSX.Element {
   const { config, setConfig } = useConfig();
   const { theme } = config;
 
+  async function guestLogin() {
+    setConfig({ ...config, user: null, logged: true, key: null });
+    navigation.navigate("Main", { screen: "Home" });
+  }
+
   async function login(username: string, key: string) {
     try {
       if (username === "") {
@@ -112,7 +117,7 @@ export function Login(): JSX.Element {
         <View style={{ marginTop: 10 }}>
           <Button
             label="Login as guest"
-            onPress={() => login("Guest", "")}
+            onPress={guestLogin}
             variant="default"
             icon={"user-x"}
           />

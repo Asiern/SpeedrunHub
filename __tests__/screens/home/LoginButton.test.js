@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { LoginButton } from "../../../app/screens/home/LoginButton";
+import LoginButton from "../../../app/screens/home/LoginButton";
 import { fireEvent, render } from "react-native-testing-library";
 import { useNavigation } from "@react-navigation/native";
 import { useConfig } from "../../../app/hooks";
