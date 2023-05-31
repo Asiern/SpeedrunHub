@@ -42,7 +42,7 @@ Download the app for your device:
 
 If you're interested in contributing to this project, you can get started by reading the development [section](CONTRIBUTING.md) in the README. The development section provides information about the project's dependencies, configuration steps, and how to set up the development environment. It will guide you through the necessary steps to contribute effectively. Feel free to explore the codebase and submit your contributions following the project's guidelines. We appreciate your interest and look forward to your contributions!
 
-## ## Creating Issues
+## Creating Issues
 
 To report a problem, suggest an improvement, or request a new feature, you can create an issue in the project's repository. Follow these steps to create a new issue:
 
