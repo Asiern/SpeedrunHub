@@ -2,7 +2,7 @@ import React, { memo } from "react";
 import { View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { UserCard, SquareButton } from "../../components";
-import { LoginButton } from "./LoginButton";
+import LoginButton from "./LoginButton";
 import { useConfig } from "../../hooks";
 
 const HEIGHT = 60;
