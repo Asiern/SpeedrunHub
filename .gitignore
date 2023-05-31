@@ -68,3 +68,6 @@ android
 # Jest
 *.snap
 coverage
+
+# Obsidian
+.obsidian
