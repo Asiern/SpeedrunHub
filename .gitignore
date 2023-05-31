@@ -63,6 +63,7 @@ buck-out/
 .expo/*
 web-build/
 dist
+android
 
 # Jest
 *.snap

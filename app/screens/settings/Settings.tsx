@@ -4,6 +4,12 @@ import { useNavigation } from "@react-navigation/native";
 import { Button, Header } from "../../components";
 import Constants from "expo-constants";
 import { useConfig } from "../../hooks";
+import {
+  BannerAd,
+  BannerAdSize,
+  TestIds,
+} from "react-native-google-mobile-ads";
+import { ADS_IDS } from "../../constants/ads";
 
 type section = {
   title: string;
@@ -96,6 +102,12 @@ export function Settings(): JSX.Element {
             shadow
           />
         </View>
+      </View>
+      <View style={{ justifyContent: "center", alignItems: "center" }}>
+        <BannerAd
+          size={BannerAdSize.LARGE_BANNER}
+          unitId={__DEV__ ? TestIds.BANNER : ADS_IDS.Settings}
+        />
       </View>
     </ScrollView>
   );
