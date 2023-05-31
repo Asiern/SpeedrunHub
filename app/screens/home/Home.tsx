@@ -6,7 +6,6 @@ import {
   BannerAd,
   BannerAdSize,
   TestIds,
-  GAMBannerAd,
 } from "react-native-google-mobile-ads";
 
 import HomeHeader from "./HomeHeader";
@@ -14,7 +13,6 @@ import SearchBar from "../../components/SearchBar";
 import { ScrollView } from "react-native-gesture-handler";
 import GameList from "./GameList";
 import Following from "./Following";
-import { shadow } from "../../themes/theme";
 import { ADS_IDS } from "../../constants/ads";
 
 export default function Home(): JSX.Element {
