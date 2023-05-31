@@ -15,6 +15,12 @@ import {
 import Game from "./Game";
 import Constants from "expo-constants";
 import { MainNavigatorParamList } from "../../navigation/MainNavigator";
+import {
+  BannerAd,
+  BannerAdSize,
+  TestIds,
+} from "react-native-google-mobile-ads";
+import { ADS_IDS } from "../../constants/ads";
 
 const INITIAL_FILTERS: string[] = ["games"];
 const FILTERS: string[] = ["users", "games"];
@@ -97,6 +103,18 @@ export default function Search(props: SearchProps): JSX.Element {
           search(setUsers, setGames, searchQuery ?? "", filters);
         }}
       />
+      <View
+        style={{
+          marginVertical: 10,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <BannerAd
+          size={BannerAdSize.BANNER}
+          unitId={__DEV__ ? TestIds.BANNER : ADS_IDS.Search}
+        />
+      </View>
       <ScrollView>
         <View style={{ paddingHorizontal: 30 }}>
           {loading && <ActivityIndicator />}
