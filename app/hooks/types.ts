@@ -263,6 +263,7 @@ export type leaderboard = {
   values: unknown;
   runs: { place: number; run: run }[];
   links: link[];
+  players?: { data: user[] };
 };
 
 export type leaderboardResponse = { data: leaderboard };

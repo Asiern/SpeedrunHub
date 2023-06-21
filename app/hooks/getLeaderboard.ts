@@ -12,9 +12,9 @@ export default async function getLeaderboard(
   return new Promise((resolve, reject) => {
     if (category === "" || game === "") return;
 
-    let url = `https://www.speedrun.com/api/v1/leaderboards/${game}/category/${category}`;
+    let url = `https://www.speedrun.com/api/v1/leaderboards/${game}/category/${category}?embed=players`;
     if (variables !== undefined) {
-      url += "?";
+      url += "&";
       const numVars = Object.keys(variables).length;
       Object.keys(variables).map((variable, i) => {
         url += `var-${variable}=${variables[variable]}`;
