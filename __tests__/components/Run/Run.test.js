@@ -6,6 +6,7 @@ import { useConfig } from "../../../app/hooks";
 import { defaultConfig } from "../../../app/config/config";
 import { useNavigation } from "@react-navigation/native";
 import { fireEvent } from "react-native-testing-library";
+import { userData } from "../../../__mocks__/MockUserData";
 
 jest.mock("../../../app/hooks/useConfig");
 
@@ -15,12 +16,16 @@ beforeAll(() => {
 
 describe("Run component", () => {
   it("displays place correctly", async () => {
-    const { getByText } = render(<Run place={20} run={runData} />);
+    const { getByText } = render(
+      <Run place={20} run={runData} players={[userData]} />
+    );
     const place = getByText("20");
     expect(place).toBeDefined();
   });
   it("navigates to RunInfo screen when pressed", () => {
-    const { getByTestId } = render(<Run run={runData} place={0} />);
+    const { getByTestId } = render(
+      <Run run={runData} place={0} players={[userData]} />
+    );
     const touchable = getByTestId("run-touchable");
     fireEvent.press(touchable);
     const navigation = useNavigation();
