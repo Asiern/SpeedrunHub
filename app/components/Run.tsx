@@ -1,48 +1,29 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { memo } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, Text, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 import { h6, colors } from "../themes/theme";
-import { run } from "../hooks/types";
-import { getUser, useConfig } from "../hooks";
+import { run, user } from "../hooks/types";
+import { useConfig } from "../hooks";
 
 export interface IRun {
   run: run;
   place: number;
+  players: user[];
 }
 
 function formatTime(time: string) {
   return time.slice(2, time.length).toLowerCase();
 }
 
-export default function Run({ run, place }: IRun): JSX.Element {
+function Run({ run, place, players }: IRun): JSX.Element {
   const navigation = useNavigation();
   const { config } = useConfig();
   const { theme } = config;
   const { weblink, times } = run;
-  const [playerList, setPlayersList] = useState<string[]>([]);
+  const playersLabel = players.map((p) => p.names.international);
 
-  const getPlayers = useCallback(async () => {
-    const _players: string[] = [];
-    for (const player of run.players) {
-      if (player.rel === "user") {
-        if (player.id === undefined) continue;
-        const user = await getUser(player.id);
-        _players.push(user.names.international ?? user.names.japanese ?? "");
-      } else {
-        //Player is guest
-        if (player.name === undefined) continue;
-        _players.push(player.name);
-      }
-    }
-
-    setPlayersList(_players);
-  }, []);
-
-  useEffect(() => {
-    getPlayers();
-  }, [run]);
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate("RunInfo", { weblink })}
@@ -59,7 +40,7 @@ export default function Run({ run, place }: IRun): JSX.Element {
           ellipsizeMode="tail"
           numberOfLines={2}
         >
-          {playerList.join(", ")}
+          {playersLabel.join(", ")}
         </Text>
       </View>
       <View style={styles.time} testID="run-time">
@@ -70,6 +51,8 @@ export default function Run({ run, place }: IRun): JSX.Element {
     </TouchableOpacity>
   );
 }
+
+export default memo(Run);
 
 const styles = StyleSheet.create({
   container: {
