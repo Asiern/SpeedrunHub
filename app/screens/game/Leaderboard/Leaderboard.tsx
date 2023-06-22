@@ -12,18 +12,20 @@ function Leaderboard({ leaderboard }: ILeaderboard): JSX.Element {
   return (
     <View style={styles.container}>
       {runs.map(({ run, place }) => {
-        let players: user[] | undefined = undefined;
+        const players: (user | string)[] = [];
         run.players.forEach((player) => {
-          const playerData = leaderboard.players?.data.find(
-            (p) => p.id === player.id
-          );
-          if (playerData) {
-            if (!players) players = [playerData];
-            else players.push(playerData);
+          if (player.rel === "guest" && player.name) {
+            players?.push(player.name);
+          } else if (player.rel === "user") {
+            const playerData = leaderboard.players?.data.find(
+              (p) => p.id === player.id
+            );
+            if (playerData) players.push(playerData);
           }
         });
-        leaderboard.players?.data.find((p) => p.id === run.players[0].id);
-        if (!players) return null;
+
+        if (players.length === 0) return null;
+
         return (
           <Run
             key={run.id}

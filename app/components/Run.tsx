@@ -10,7 +10,7 @@ import { useConfig } from "../hooks";
 export interface IRun {
   run: run;
   place: number;
-  players: user[];
+  players: (user | string)[];
 }
 
 function formatTime(time: string) {
@@ -22,7 +22,13 @@ function Run({ run, place, players }: IRun): JSX.Element {
   const { config } = useConfig();
   const { theme } = config;
   const { weblink, times } = run;
-  const playersLabel = players.map((p) => p.names.international);
+  const playersLabel = players.map((p) => {
+    if (typeof p === "string") {
+      return p;
+    } else {
+      return p.names.international ?? p.names.japanese ?? "";
+    }
+  });
 
   return (
     <TouchableOpacity
