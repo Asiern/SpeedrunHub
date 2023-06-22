@@ -6,9 +6,10 @@ import { useConfig } from "../hooks";
 
 interface IHeader {
   title?: string;
+  button?: JSX.Element;
 }
 
-function Header({ title }: IHeader): JSX.Element {
+function Header({ title, button }: IHeader): JSX.Element {
   const navigation = useNavigation();
   const { config } = useConfig();
   const { theme } = config;
@@ -20,12 +21,16 @@ function Header({ title }: IHeader): JSX.Element {
         testID="back-button"
       />
       <Text
-        style={[styles.headerText, { color: theme.colors.headerText }]}
+        style={[
+          styles.headerText,
+          { color: theme.colors.headerText, marginRight: button ? 10 : 0 },
+        ]}
         ellipsizeMode="tail"
         numberOfLines={1}
       >
         {title}
       </Text>
+      {button}
     </View>
   );
 }
@@ -36,10 +41,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginHorizontal: 30,
+    flex: 1,
   },
   headerText: {
     fontFamily: "Poppins",
     fontSize: 18,
+    flex: 1,
     marginLeft: 10,
   },
 });
