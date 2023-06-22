@@ -1,9 +1,8 @@
-import React, { memo, useState } from "react";
+import React, { memo } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { GameCard } from "../../../components/GameCard";
 import { game, platform } from "../../../hooks/types";
 import { useConfig } from "../../../hooks";
-import { Button } from "../../../components";
 
 interface IInfo {
   platforms: platform[];
@@ -11,38 +10,9 @@ interface IInfo {
 }
 
 function Info({ platforms, game }: IInfo): JSX.Element {
-  const { config, setConfig } = useConfig();
+  const { config } = useConfig();
   const { theme } = config;
   const { id, abbreviation } = game;
-  const [liked, setLiked] = useState<boolean>(
-    config.games.find(({ id }) => game.id === id) !== undefined
-  );
-
-  function likeGame() {
-    setConfig({
-      ...config,
-      games: [
-        ...config.games,
-        {
-          abbreviation: game.abbreviation,
-          id: game.id,
-          uri: game.assets["cover-large"].uri ?? "",
-        },
-      ],
-    });
-    setLiked(true);
-  }
-  function dislikeGame() {
-    setConfig({
-      ...config,
-      games: [
-        ...config.games.filter(({ id }) => {
-          id !== game.id;
-        }),
-      ],
-    });
-    setLiked(false);
-  }
 
   return (
     <View style={styles.container}>
@@ -51,13 +21,6 @@ function Info({ platforms, game }: IInfo): JSX.Element {
         {...{ id, abbreviation, image: game.assets["cover-large"].uri ?? "" }}
       />
       <View style={styles.info}>
-        <Button
-          label={liked ? "Remove" : "Add to my games"}
-          icon={liked ? "minus" : "plus"}
-          onPress={liked ? dislikeGame : likeGame}
-          style={{ flex: 0 }}
-          shadow
-        />
         <Text
           style={[styles.text, { color: theme.colors.text }]}
           ellipsizeMode="tail"
