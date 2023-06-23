@@ -1,7 +1,7 @@
 import { Feather } from "@expo/vector-icons";
 import React from "react";
 import { TouchableOpacity, ViewStyle } from "react-native";
-import { shadow } from "../themes/theme";
+import { shadow as shadowStyle } from "../themes/theme";
 import { useConfig } from "../hooks";
 
 interface ISquareButton {
@@ -10,6 +10,7 @@ interface ISquareButton {
   style?: ViewStyle;
   variant?: "primary" | "default" | "gray";
   testID?: string;
+  shadow?: boolean;
 }
 
 export function SquareButton({
@@ -18,6 +19,7 @@ export function SquareButton({
   style,
   variant = "default",
   testID = undefined,
+  shadow = true,
 }: ISquareButton): JSX.Element {
   const { config } = useConfig();
   const { theme } = config;
@@ -36,7 +38,7 @@ export function SquareButton({
           alignItems: "center",
           borderRadius: 12,
         },
-        shadow,
+        shadow ? shadowStyle : null,
         style,
       ]}
       onPress={onPress}
