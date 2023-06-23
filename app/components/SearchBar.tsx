@@ -25,10 +25,16 @@ function SearchBar({
   // Render a view containing a text input and a search button
   return (
     <View
-      style={{
-        flexDirection: "row",
-        flex: 1,
-      }}
+      style={[
+        {
+          flexDirection: "row",
+          height: 50,
+          flex: 1,
+          backgroundColor: theme.colors.foreground,
+          borderRadius: 12,
+        },
+        shadow,
+      ]}
     >
       <TextInput
         testID="input"
@@ -41,19 +47,19 @@ function SearchBar({
         value={value}
         style={[
           {
-            height: 50,
-            flex: 1,
-            backgroundColor: theme.colors.foreground,
-            borderRadius: 12,
-            padding: 10,
             fontFamily: "Poppins",
             textAlignVertical: "center",
-            marginRight: 5,
+            flex: 1,
+            marginLeft: 10,
           },
-          shadow,
         ]}
       />
-      <SquareButton icon="search" onPress={onSearch} variant="primary" />
+      <SquareButton
+        icon="search"
+        onPress={onSearch}
+        variant="default"
+        shadow={false}
+      />
     </View>
   );
 }
