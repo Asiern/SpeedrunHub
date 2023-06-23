@@ -29,7 +29,7 @@ export default function Home(): JSX.Element {
   return (
     <ScrollView style={styles.container}>
       <HomeHeader />
-      <View style={{ paddingHorizontal: 30, marginTop: 10 }}>
+      <View style={{ paddingHorizontal: 30, marginTop: 5 }}>
         <SearchBar
           onSearch={() => onSearch(searchValue)}
           onChangeText={setSearchValue}
