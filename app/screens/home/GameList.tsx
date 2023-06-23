@@ -63,15 +63,14 @@ function GameList(): JSX.Element {
           style={[
             styles.listEmptyCard,
             {
-              backgroundColor: theme.colors.primary,
+              backgroundColor: theme.colors.foreground,
             },
-            shadow,
           ]}
         >
           <Text
             style={{
               fontFamily: "Poppins",
-              color: theme.colors.foreground,
+              color: theme.colors.text,
               textAlign: "center",
             }}
           >
