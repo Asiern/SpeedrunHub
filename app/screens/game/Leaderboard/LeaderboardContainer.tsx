@@ -24,6 +24,7 @@ function LeaderboardContainer({
       setLeaderboard(leaderborad.data);
     }
     setLoading(true);
+    setLeaderboard(undefined);
     prepare();
     setLoading(false);
   }, [category, variables]);
