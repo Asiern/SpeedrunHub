@@ -36,3 +36,5 @@ jest.mock("@react-navigation/native", () => {
     }),
   };
 });
+
+require("@shopify/flash-list/jestSetup");
