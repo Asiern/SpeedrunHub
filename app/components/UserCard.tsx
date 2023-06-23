@@ -14,6 +14,7 @@ interface IUserCard {
   user: user;
 }
 
+const HEIGHT = 60;
 export function UserCard({ user }: IUserCard): JSX.Element {
   const navigation = useNavigation();
   const { config } = useConfig();
@@ -86,7 +87,12 @@ export function UserCard({ user }: IUserCard): JSX.Element {
         </View>
         {user.assets.image === null ? (
           <View
-            style={{ width: 60, height: 60, borderRadius: 10, marginLeft: 10 }}
+            style={{
+              width: HEIGHT,
+              height: HEIGHT,
+              borderRadius: 10,
+              marginLeft: 10,
+            }}
           >
             <View style={{ flex: 1, justifyContent: "center" }}>
               <Feather
@@ -100,8 +106,8 @@ export function UserCard({ user }: IUserCard): JSX.Element {
         ) : (
           <Image
             style={{
-              width: 60,
-              height: 60,
+              width: HEIGHT,
+              height: HEIGHT,
               borderTopRightRadius: 10,
               borderBottomRightRadius: 10,
               marginLeft: 10,
