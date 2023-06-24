@@ -50,6 +50,27 @@ yarn start
 ```
 
 
+## Flipper
+
+Flipper is a powerful debugging and testing tool for React Native applications. It provides a platform for inspecting, debugging, and analyzing the behavior of your app in real-time. Here's a step-by-step guide on how to use Flipper:
+
+1. Install [Flipper](https://fbflipper.com/)
+
+2. Run your React Native app:
+
+```
+yarn start
+```
+
+3. Open Flipper:
+	- Once your app is running on a simulator or device, open Flipper on your computer.
+	- Flipper should automatically detect your running app and display it in the device list.
+
+4. Inspect and debug your app:
+	- With Flipper open, you can use various plugins to inspect and debug your React Native app.
+	- Flipper provides plugins for network inspection, state management, layout inspection, and more.
+	- Install additional plugins from the Flipper marketplace to extend its functionality.
+
 ## Design pattern
 
 This pattern is based on the concept of organizing code by feature, rather than by file type. It is often referred to as **"feature-based"** or **"feature-first"** architecture.
