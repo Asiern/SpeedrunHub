@@ -82,10 +82,6 @@ function GameInfo({ game }: IGameInfo): JSX.Element {
         }
       />
       <InfoContainer {...{ game }} />
-      <CategoriesContainer {...{ game, category, setCategory }} />
-      <VariablesContainer
-        {...{ category, selectedVariables, setSelectedVariables }}
-      />
       <View
         style={{
           marginVertical: 10,
@@ -99,6 +95,10 @@ function GameInfo({ game }: IGameInfo): JSX.Element {
           unitId={__DEV__ ? TestIds.BANNER : ADS_IDS.GameInfo}
         />
       </View>
+      <CategoriesContainer {...{ game, category, setCategory }} />
+      <VariablesContainer
+        {...{ category, selectedVariables, setSelectedVariables }}
+      />
       <LeaderboardContainer
         {...{ game, category, variables: selectedVariables }}
       />
