@@ -54,6 +54,7 @@ function Leaderboard({ leaderboard }: ILeaderboard): JSX.Element {
 
   return (
     <FlashList
+      keyExtractor={(item) => item.run.id}
       data={leaderboard.runs}
       renderItem={renderItem}
       estimatedItemSize={100}
