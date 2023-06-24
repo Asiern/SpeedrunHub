@@ -134,7 +134,7 @@ export type runsResponse = {
   data: run[];
 };
 
-type player = {
+export type player = {
   rel: "user" | "guest";
   name?: string;
   id?: string;

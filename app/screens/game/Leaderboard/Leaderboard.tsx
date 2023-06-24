@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { StyleSheet, View } from "react-native";
-import { leaderboard, user } from "../../../hooks/types";
+import { leaderboard, player } from "../../../hooks/types";
 import { ActivityIndicator, Run } from "../../../components";
 import { FlashList } from "@shopify/flash-list";
 
@@ -8,21 +8,48 @@ interface ILeaderboard {
   leaderboard: leaderboard;
 }
 
+function formatTime(time: string) {
+  return time.slice(2, time.length).toLowerCase();
+}
+
 function Leaderboard({ leaderboard }: ILeaderboard): JSX.Element {
-  const renderItem = useCallback(({ item, index }) => {
-    const players: (user | string)[] = [];
-    item.run.players.forEach((player) => {
-      if (index === 9) console.log(item.run.players);
+  const renderItem = useCallback(({ item }) => {
+    let players = "";
+
+    // Find player data inside embeded players
+    item.run.players.forEach((player: player) => {
+      // If player is guest, use name
       if (player.rel === "guest" && player.name) {
-        players?.push(player.name);
-      } else if (player.rel === "user") {
+        players += player.name + ", ";
+      }
+      // If player is user, use name
+      else if (player.rel === "user") {
+        // Find user data inside embeded users
         const playerData = leaderboard.players?.data.find(
           (p) => p.id === player.id
         );
-        if (playerData) players.push(playerData);
+        //  If user has data, use name
+        if (playerData) {
+          //  If user has international name, use it
+          if (playerData.names.international)
+            players += playerData.names.international + ", ";
+          //  If user has japanese name, use it
+          else if (playerData.names.japanese)
+            players += playerData.names.japanese + ", ";
+        }
       }
+
+      // Remove last comma
+      players = players.trimEnd().slice(0, -1);
     });
-    return <Run place={item.place} run={item.run} players={players} />;
+    return (
+      <Run
+        place={item.place}
+        players={players}
+        time={formatTime(item.run.times.primary)}
+        weblink={item.run.weblink}
+      />
+    );
   }, []);
 
   return (

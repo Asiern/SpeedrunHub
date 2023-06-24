@@ -2,56 +2,49 @@ import React, { memo } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, Text, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-
-import { h6, colors } from "../themes/theme";
-import { run, user } from "../hooks/types";
 import { useConfig } from "../hooks";
+import { shadow } from "../themes/theme";
 
 export interface IRun {
-  run: run;
   place: number;
-  players: (user | string)[];
+  players: string;
+  weblink: string;
+  time: string;
 }
 
-function formatTime(time: string) {
-  return time.slice(2, time.length).toLowerCase();
-}
-
-function Run({ run, place, players }: IRun): JSX.Element {
+function Run({ place, players, time, weblink }: IRun): JSX.Element {
   const navigation = useNavigation();
   const { config } = useConfig();
   const { theme } = config;
-  const { weblink, times } = run;
-  const playersLabel = players.map((p) => {
-    if (typeof p === "string") {
-      return p;
-    } else {
-      return p.names.international ?? p.names.japanese ?? "";
-    }
-  });
 
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate("RunInfo", { weblink })}
-      style={[styles.container, { backgroundColor: theme.colors.foreground }]}
+      style={[
+        styles.container,
+        { backgroundColor: theme.colors.foreground },
+        shadow,
+      ]}
       testID="run-touchable"
     >
       <View style={styles.place} testID="run-place">
-        <Text style={[h6, { color: theme.colors.primary }]}>{place}</Text>
+        <Text style={[{ color: theme.colors.primary }, styles.text]}>
+          {place}
+        </Text>
       </View>
       <View style={styles.runner}>
         <Text
           testID="run-players"
-          style={[h6, { color: theme.colors.text }]}
+          style={[{ color: theme.colors.headerText }, styles.text]}
           ellipsizeMode="tail"
           numberOfLines={2}
         >
-          {playersLabel.join(", ")}
+          {players}
         </Text>
       </View>
       <View style={styles.time} testID="run-time">
-        <Text style={[h6, { color: theme.colors.text }]}>
-          {formatTime(times.primary)}
+        <Text style={[{ color: theme.colors.headerText }, styles.text]}>
+          {time}
         </Text>
       </View>
     </TouchableOpacity>
@@ -68,10 +61,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     borderRadius: 10,
-    shadowColor: colors.darkgrey,
-    shadowOffset: { width: 5, height: 5 },
-    shadowOpacity: 0.9,
-    elevation: 2,
   },
   place: {
     flex: 3,
@@ -84,5 +73,8 @@ const styles = StyleSheet.create({
   time: {
     flex: 8,
     alignItems: "center",
+  },
+  text: {
+    fontFamily: "Poppins",
   },
 });
