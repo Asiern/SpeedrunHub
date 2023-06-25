@@ -10,6 +10,7 @@ import {
   TestIds,
 } from "react-native-google-mobile-ads";
 import { ADS_IDS } from "../../constants/ads";
+import crashlytics from "@react-native-firebase/crashlytics";
 
 type section = {
   title: string;
@@ -41,6 +42,13 @@ const Sections: section[] = [
     weblink: null,
   },
   {
+    title: "Privacy & Safety",
+    icon: "shield",
+    navigateTo: "Safety",
+    onPress: null,
+    weblink: null,
+  },
+  {
     title: "Privacy Policy",
     icon: "book-open",
     navigateTo: null,
@@ -62,6 +70,7 @@ export function Settings(): JSX.Element {
   const { config, setConfig } = useConfig();
   const { theme } = config;
   const navigation = useNavigation();
+  crashlytics().log("Settings screen Mounted");
 
   return (
     <ScrollView
@@ -103,6 +112,7 @@ export function Settings(): JSX.Element {
           />
         </View>
       </View>
+
       <View style={{ justifyContent: "center", alignItems: "center" }}>
         <BannerAd
           size={BannerAdSize.LARGE_BANNER}
