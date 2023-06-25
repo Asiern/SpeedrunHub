@@ -2,6 +2,7 @@ import React, { useState, useCallback } from "react";
 import { View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { Filter } from "./Filter";
+import crashlytics from "@react-native-firebase/crashlytics";
 
 interface IFilters {
   filters: string[]; // An array of all possible filters
@@ -17,21 +18,33 @@ export function Filters({ filters, initial, onChange }: IFilters): JSX.Element {
 
   const onRemove = useCallback(
     (filter: string) => {
-      const newFilters: string[] = enabled.filter((f) => f !== filter);
-      setEnabled([...newFilters]);
-      setDisabled([...disabled, filter]);
-      onChange(newFilters); // Call the onChange function to notify of the filter change
+      try {
+        crashlytics().log("Filter removed");
+        const newFilters: string[] = enabled.filter((f) => f !== filter);
+        setEnabled([...newFilters]);
+        setDisabled([...disabled, filter]);
+        onChange(newFilters); // Call the onChange function to notify of the filter change
+      } catch (e) {
+        console.error(e);
+        crashlytics().recordError(e);
+      }
     },
     [enabled, disabled]
   );
 
   const onAdd = useCallback(
     (filter: string) => {
-      const newEnabled: string[] = [...enabled, filter];
-      setEnabled(newEnabled);
-      const newDisabled: string[] = disabled.filter((f) => f !== filter);
-      setDisabled([...newDisabled]);
-      onChange(newEnabled); // Call the onChange function to notify of the filter change
+      try {
+        crashlytics().log("Filter added");
+        const newEnabled: string[] = [...enabled, filter];
+        setEnabled(newEnabled);
+        const newDisabled: string[] = disabled.filter((f) => f !== filter);
+        setDisabled([...newDisabled]);
+        onChange(newEnabled); // Call the onChange function to notify of the filter change
+      } catch (e) {
+        console.error(e);
+        crashlytics().recordError(e);
+      }
     },
     [enabled, disabled]
   );
