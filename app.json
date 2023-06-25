@@ -8,7 +8,7 @@
       "ios",
       "android"
     ],
-    "version": "1.1.1",
+    "version": "2.0.0",
     "orientation": "portrait",
     "icon": "./app/assets/trophy.png",
     "splash": {
@@ -30,7 +30,7 @@
     "githubUrl": "https://github.com/Asiern/SpeedrunHub",
     "android": {
       "package": "com.asiern.speedrun2",
-      "versionCode": 3,
+      "versionCode": 4,
       "permissions": []
     },
     "extra": {
@@ -40,7 +40,10 @@
     },
     "runtimeVersion": {
       "policy": "sdkVersion"
-    }
+    },"plugins": [
+      ["expo-community-flipper"], 
+      ["react-native-flipper-performance-plugin"]
+    ]
   },  
   "react-native-google-mobile-ads": {
     "android_app_id": "ca-app-pub-5820949657654069~3334705233"
