@@ -16,6 +16,10 @@ export const defaultConfig: config = {
   games: [],
   following: [],
   theme: Theme,
+  google: {
+    crashlyticsEnabled: false,
+    analyticsEnabled: false,
+  },
 };
 
 export type configCtx = {

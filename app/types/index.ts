@@ -20,6 +20,10 @@ export type config = {
   games: game[]; // Game list
   following: string[]; // User id's
   theme: theme;
+  google: {
+    crashlyticsEnabled: boolean;
+    analyticsEnabled: boolean;
+  };
 };
 
 export type theme = {

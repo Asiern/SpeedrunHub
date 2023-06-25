@@ -3,7 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 //Screens
 import Home from "../screens/home/Home";
-import { Settings } from "../screens/settings";
+import { Safety, Settings } from "../screens/settings";
 import { GameInfoContainer } from "../screens/game";
 import Search from "../screens/search/Search";
 import { NotificationsContainer } from "../screens/notifications";
@@ -84,6 +84,11 @@ function HomeStack(): JSX.Element {
       <Stack.Screen
         name="NotificationsSettings"
         component={NotificationsSettings}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Safety"
+        component={Safety}
         options={{ headerShown: false }}
       />
       <Stack.Screen
