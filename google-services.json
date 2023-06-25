@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "619104658744",
+    "project_id": "speedrunhub-73ae1",
+    "storage_bucket": "speedrunhub-73ae1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619104658744:android:66641cbdc39e7169268dcd",
+        "android_client_info": {
+          "package_name": "com.asiern.speedrun2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "619104658744-kh4r2oudmm2c0j9uh5ef1ro3acaul7mv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBR412MRZ5h52tbNO6d6gve0sz7wEsKhhQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "619104658744-kh4r2oudmm2c0j9uh5ef1ro3acaul7mv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
