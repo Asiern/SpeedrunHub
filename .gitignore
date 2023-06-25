@@ -71,3 +71,6 @@ coverage
 
 # Obsidian
 .obsidian
+
+# Google services
+google-services.json
