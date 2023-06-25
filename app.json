@@ -31,7 +31,8 @@
     "android": {
       "package": "com.asiern.speedrun2",
       "versionCode": 4,
-      "permissions": []
+      "permissions": [],
+      "googleServicesFile": "./google-services.json"
     },
     "extra": {
       "eas": {
@@ -40,9 +41,13 @@
     },
     "runtimeVersion": {
       "policy": "sdkVersion"
-    },"plugins": [
+    },
+    "plugins": [
       ["expo-community-flipper"], 
-      ["react-native-flipper-performance-plugin"]
+      ["react-native-flipper-performance-plugin"],
+      ["@react-native-firebase/crashlytics"],
+      ["@react-native-firebase/app"]
+      
     ]
   },  
   "react-native-google-mobile-ads": {

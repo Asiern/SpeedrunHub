@@ -6,6 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import { getUser, useConfig } from "../../hooks";
 import { loadInBrowser } from "../../utils";
 import { user } from "../../hooks/types";
+import crashlytics from "@react-native-firebase/crashlytics";
 
 export function Login(): JSX.Element {
   const [username, setUsername] = useState<string>("");
@@ -16,12 +17,14 @@ export function Login(): JSX.Element {
   const { theme } = config;
 
   async function guestLogin() {
+    crashlytics().log("Guest login");
     setConfig({ ...config, user: null, logged: true, key: null });
     navigation.navigate("Main", { screen: "Home" });
   }
 
   async function login(username: string, key: string) {
     try {
+      crashlytics().log("Login");
       if (username === "") {
         setUsernameError(true);
         return;
@@ -35,6 +38,7 @@ export function Login(): JSX.Element {
       });
       navigation.navigate("Main", { screen: "Home" });
     } catch (e) {
+      crashlytics().recordError(e);
       setUsernameError(true);
       console.warn(e);
     }

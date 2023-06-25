@@ -21,6 +21,7 @@ import {
   TestIds,
 } from "react-native-google-mobile-ads";
 import { ADS_IDS } from "../../constants/ads";
+import crashlytics from "@react-native-firebase/crashlytics";
 
 const INITIAL_FILTERS: string[] = ["games"];
 const FILTERS: string[] = ["users", "games"];
@@ -44,8 +45,13 @@ export default function Search(props: SearchProps): JSX.Element {
   const navigation = useNavigation();
 
   useEffect(() => {
-    if (params !== undefined && params.query !== "")
+    crashlytics().log("Search screen Mounted");
+    if (params !== undefined && params.query !== "") {
+      crashlytics().log(
+        "Search screen Mounted: Search function called on mount"
+      );
       search(setUsers, setGames, params.query, filters);
+    }
   }, [params.query, filters]);
 
   const search = useCallback(async function search(
@@ -54,27 +60,39 @@ export default function Search(props: SearchProps): JSX.Element {
     query: string,
     filters: string[]
   ) {
-    setLoading(true);
-    let users: usersResponse | null = null;
-    let games: gamesResponse | null = null;
-    let pagination: number;
+    try {
+      crashlytics().log("Search");
+      setLoading(true);
+      let users: usersResponse | null = null;
+      let games: gamesResponse | null = null;
+      let pagination: number;
 
-    // Check if all filters are selected or no filter is selected and set pagination
-    if (filters.length === 0 || FILTERS.length === filters.length)
-      pagination = 10;
-    else pagination = 20;
+      // Check if all filters are selected or no filter is selected and set pagination
+      if (filters.length === 0 || FILTERS.length === filters.length) {
+        crashlytics().log("Search: All filters selected");
+        pagination = 10;
+      } else {
+        pagination = 20;
+        crashlytics().log(`Search: ${filters} filters selected`);
+      }
 
-    // Fetch data based on selected filters
-    if (filters.includes("users") || filters.length === 0)
-      users = await getUsers(query, pagination);
+      // Fetch data based on selected filters
+      if (filters.includes("users") || filters.length === 0)
+        users = await getUsers(query, pagination);
 
-    if (filters.includes("games") || filters.length === 0)
-      games = await getGames(query, pagination);
+      if (filters.includes("games") || filters.length === 0)
+        games = await getGames(query, pagination);
 
-    setUsers(users);
-    setGames(games);
-    // Set state and loading to false after fetching data
-    setLoading(false);
+      crashlytics().log("Search: Data fetched");
+      setUsers(users);
+      setGames(games);
+
+      // Set state and loading to false after fetching data
+      setLoading(false);
+    } catch (e) {
+      console.error(e);
+      crashlytics().recordError(e);
+    }
   },
   []);
 
