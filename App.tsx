@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import crashlytics from "@react-native-firebase/crashlytics";
+import { version } from "./package.json";
 
 // TODO Migrate from expo-app-loading to expo-splash-screen
 import AppLoading from "expo-app-loading";
@@ -37,22 +39,80 @@ export default function App(): JSX.Element {
 
   const prepare = async () => {
     try {
+      crashlytics().log("AppLoading");
       await SplashScreen.preventAutoHideAsync();
       await loadAsync({
         Poppins: require("./app/assets/fonts/Poppins-Regular.ttf"),
         "Poppins-Medium": require("./app/assets/fonts/Poppins-Medium.ttf"),
       });
+      crashlytics().log("AppLoading: Fonts loaded");
 
       // Read config from AsyncStorage
       let CONFIG: string | null = await AsyncStorage.getItem("@Config");
+      crashlytics().log("AppLoading: Config loaded");
 
       // Config null => load default config
-      if (CONFIG === null)
-        await AsyncStorage.setItem("@Config", JSON.stringify(config));
+      if (CONFIG === null) {
+        crashlytics().log("AppLoading: Config null => load default config");
+        await AsyncStorage.setItem(
+          "@Config",
+          JSON.stringify({ ...config, version })
+        );
+      }
 
       // Read config from storage
       CONFIG = await AsyncStorage.getItem("@Config");
+      crashlytics().log("AppLoading: Config loaded from storage");
       const confObj: config = CONFIG ? JSON.parse(CONFIG) : config;
+
+      // Check if config version is outdated and update it
+      if (confObj.version !== version) {
+        crashlytics().log("AppLoading: Config version outdated");
+        confObj.version = version;
+        // Check if new version is compatible with old config
+        if (confObj.theme === undefined) {
+          crashlytics().log("AppLoading: Config version outdated");
+          confObj.theme = defaultConfig.theme;
+        }
+        if (confObj.google === undefined) {
+          crashlytics().log("AppLoading: Config version outdated");
+          confObj.google = defaultConfig.google;
+        }
+        if (confObj.accepted === undefined) {
+          crashlytics().log("AppLoading: Config version outdated");
+          confObj.accepted = defaultConfig.accepted;
+        }
+        if (confObj.notifications === undefined) {
+          crashlytics().log("AppLoading: Config version outdated");
+          confObj.notifications = defaultConfig.notifications;
+        }
+        if (confObj.logged === undefined) {
+          crashlytics().log("AppLoading: Config version outdated");
+          confObj.logged = defaultConfig.logged;
+        }
+        if (confObj.onboarding === undefined) {
+          crashlytics().log("AppLoading: Config version outdated");
+          confObj.onboarding = defaultConfig.onboarding;
+        }
+        if (confObj.user === undefined) {
+          crashlytics().log("AppLoading: Config version outdated");
+          confObj.user = defaultConfig.user;
+        }
+        if (confObj.key === undefined) {
+          crashlytics().log("AppLoading: Config version outdated");
+          confObj.key = defaultConfig.key;
+        }
+        if (confObj.games === undefined) {
+          crashlytics().log("AppLoading: Config version outdated");
+          confObj.games = defaultConfig.games;
+        }
+        if (confObj.following === undefined) {
+          crashlytics().log("AppLoading: Config version outdated");
+          confObj.following = defaultConfig.following;
+        }
+      }
+
+      // Update config state
       setConfig(confObj);
 
       // Set initial route
@@ -64,14 +124,17 @@ export default function App(): JSX.Element {
         setInitialRoute("Main");
       }
     } catch (e) {
+      crashlytics().recordError(e);
       console.warn(e);
     } finally {
+      crashlytics().log("AppLoading finished");
       setAppIsReady(true);
       await SplashScreen.hideAsync();
     }
   };
 
   const handleLoadingError = (error) => {
+    crashlytics().recordError(error);
     console.warn(error);
   };
 

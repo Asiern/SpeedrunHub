@@ -27,6 +27,8 @@ export type config = {
   };
   // Accepted terms
   accepted: boolean;
+  // App version that user last used
+  version: string | undefined;
 };
 
 export type theme = {

@@ -21,6 +21,7 @@ export const defaultConfig: config = {
     analyticsEnabled: true,
   },
   accepted: false,
+  version: undefined,
 };
 
 export type configCtx = {
