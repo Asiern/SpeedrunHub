@@ -6,13 +6,6 @@ import { useConfig } from "../../hooks";
 import crashlytics from "@react-native-firebase/crashlytics";
 import CheckBox from "expo-checkbox";
 
-type option = {
-  enabledTitle: string;
-  enabledDescription: string;
-  disabledTitle: string;
-  disabledDescription: string;
-};
-
 const options = {
   crashlytics: {
     enabledTitle: "Disable data collection for Firebase Crashlytics",
