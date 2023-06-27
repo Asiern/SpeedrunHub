@@ -7,7 +7,6 @@ import Animated, {
   useAnimatedScrollHandler,
 } from "react-native-reanimated";
 import { CrashData, Introduction, TermsConditions } from "./slides";
-import crashlytics from "@react-native-firebase/crashlytics";
 
 interface ISlide {
   index: SharedValue<number>;
@@ -22,14 +21,8 @@ export default function Slide({ index, scrollRef }: ISlide): JSX.Element {
   const { theme } = config;
 
   const onScroll = useAnimatedScrollHandler((event) => {
-    try {
-      crashlytics().log("User is scrolling through onboarding slides");
-      // Update the current index value based on the scroll position
-      index.value = Math.round(event.contentOffset.x / SLIDE_WIDTH);
-    } catch (e) {
-      crashlytics().recordError(e);
-      console.log(e);
-    }
+    // Update the current index value based on the scroll position
+    index.value = Math.round(event.contentOffset.x / SLIDE_WIDTH);
   });
 
   return (
