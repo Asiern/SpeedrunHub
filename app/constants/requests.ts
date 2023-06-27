@@ -1,2 +1,2 @@
-import * as Application from "expo-application";
-export const USER_AGENT = `speedrunhub/${Application.nativeApplicationVersion}`;
+import { version } from "../../package.json";
+export const USER_AGENT = `speedrunhub/${version}`;
