@@ -17,9 +17,10 @@ export const defaultConfig: config = {
   following: [],
   theme: Theme,
   google: {
-    crashlyticsEnabled: false,
-    analyticsEnabled: false,
+    crashlyticsEnabled: true,
+    analyticsEnabled: true,
   },
+  accepted: false,
 };
 
 export type configCtx = {
