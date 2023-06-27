@@ -111,24 +111,6 @@ export function Settings(): JSX.Element {
             shadow
           />
         </View>
-        <View style={{ marginVertical: 10 }}>
-          <Button
-            icon={"log-out"}
-            label={"Log out"}
-            onPress={() => {
-              setConfig({
-                ...config,
-                onboarding: false,
-                google: {
-                  analyticsEnabled: true,
-                  crashlyticsEnabled: true,
-                },
-              });
-              navigation.navigate("Login");
-            }}
-            shadow
-          />
-        </View>
       </View>
 
       <View style={{ justifyContent: "center", alignItems: "center" }}>
