@@ -6,7 +6,7 @@ import MainNavigator from "./MainNavigator";
 
 //Screens
 import { Login } from "../screens/login";
-import OnboardingScreen from "../screens/Onboarding";
+import { Onboarding } from "../screens/onboarding/";
 
 //Stacks
 const Root = createStackNavigator();
@@ -26,7 +26,7 @@ function Navigation({ initialRoute }: NavigationProps): JSX.Element {
         />
         <Root.Screen
           name="Onboarding"
-          component={OnboardingScreen}
+          component={Onboarding}
           options={{ headerShown: false }}
         />
         <Root.Screen

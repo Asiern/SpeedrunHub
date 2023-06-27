@@ -13,6 +13,8 @@ export interface ButtonProps {
   icon?: string | null;
   centerContent?: boolean;
   style?: ViewStyle;
+  disabled?: boolean;
+  iconPosition?: "left" | "right";
 }
 
 function Button({
@@ -23,6 +25,8 @@ function Button({
   icon,
   centerContent,
   style,
+  disabled = false,
+  iconPosition = "left",
 }: ButtonProps): JSX.Element {
   const { config } = useConfig();
   const { theme } = config;
@@ -32,27 +36,52 @@ function Button({
     variant === "primary" ? theme.colors.foreground : theme.colors.headerText;
   return (
     <RectButton
+      enabled={!disabled}
       testID="button-touchable"
       style={[
         styles.container,
-        { backgroundColor },
+        {
+          backgroundColor,
+        },
         variant === "primary" ? shadowStyle : shadow ? shadowStyle : null,
         centerContent ? { justifyContent: "center" } : null,
         style,
       ]}
       {...{ onPress }}
     >
+      {iconPosition === "left" ? null : (
+        <Text
+          style={[
+            styles.label,
+            { color: disabled ? theme.colors.text : color },
+          ]}
+        >
+          {label}
+        </Text>
+      )}
       {icon !== null ? (
         // TODO fix icon prop type
         <Feather
           testID="button-icon"
           name={icon}
           size={15}
-          style={{ marginRight: 10 }}
-          color={color}
+          style={{
+            marginRight: iconPosition === "left" ? 10 : 0,
+            marginLeft: iconPosition === "right" ? 10 : 0,
+          }}
+          color={disabled ? theme.colors.text : color}
         />
       ) : null}
-      <Text style={[styles.label, { color }]}>{label}</Text>
+      {iconPosition === "right" ? null : (
+        <Text
+          style={[
+            styles.label,
+            { color: disabled ? theme.colors.text : color },
+          ]}
+        >
+          {label}
+        </Text>
+      )}
     </RectButton>
   );
 }
