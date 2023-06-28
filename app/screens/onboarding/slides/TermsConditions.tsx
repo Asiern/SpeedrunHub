@@ -84,6 +84,9 @@ export default function TermsConditions({
           }
         />
         <Text
+          onPress={() => setHasAccepted(!hasAccepted)}
+          accessible
+          accessibilityLabel="Terms and conditions toggle"
           style={[
             styles.text,
             { color: theme.colors.text, marginLeft: 5, textAlign: "justify" },

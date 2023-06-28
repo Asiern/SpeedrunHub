@@ -67,6 +67,11 @@ export default function CrashData({ width }: ICrashData): JSX.Element {
           }
         />
         <Text
+          accessible
+          accessibilityLabel="Crash data toggle"
+          accessibilityHint="Toggles crash data sharing"
+          accessibilityRole="checkbox"
+          onPress={toggleCrashlytics}
           style={[
             styles.text,
             { color: theme.colors.text, marginLeft: 5, textAlign: "justify" },
