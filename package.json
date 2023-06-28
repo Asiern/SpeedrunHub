@@ -10,7 +10,8 @@
     "test": "jest",
     "update": "eas update",
     "prepare": "husky install",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "eas-build-pre-install": "echo $GOOGLE_SERVICES | base64 -d > ./google-services.json"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "1.17.11",
