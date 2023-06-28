@@ -15,6 +15,7 @@ export interface ButtonProps {
   style?: ViewStyle;
   disabled?: boolean;
   iconPosition?: "left" | "right";
+  buttonProps?: any;
 }
 
 function Button({
@@ -27,6 +28,7 @@ function Button({
   style,
   disabled = false,
   iconPosition = "left",
+  buttonProps,
 }: ButtonProps): JSX.Element {
   const { config } = useConfig();
   const { theme } = config;
@@ -36,6 +38,7 @@ function Button({
     variant === "primary" ? theme.colors.foreground : theme.colors.headerText;
   return (
     <RectButton
+      {...buttonProps}
       enabled={!disabled}
       testID="button-touchable"
       style={[
