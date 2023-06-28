@@ -72,6 +72,11 @@ export default function TermsConditions({
       </Text>
       <View style={styles.checkBoxView}>
         <Checkbox
+          accessible
+          accessibilityHint="Toggles terms and conditions acceptance"
+          accessibilityLabel="Terms and conditions toggle"
+          accessibilityRole="checkbox"
+          accessibilityState={{ checked: hasAccepted }}
           value={hasAccepted}
           onValueChange={() => setHasAccepted(!hasAccepted)}
           color={
@@ -88,6 +93,13 @@ export default function TermsConditions({
         </Text>
       </View>
       <Button
+        buttonProps={{
+          accessible: true,
+          accessibilityLabel: "Start browsing button",
+          accessibilityHint: "Navigates to the login screen",
+          accessibilityRole: "button",
+          accessibilityState: { disabled: !hasAccepted },
+        }}
         label={hasAccepted ? "Start browsing!" : "Please accept to continue."}
         onPress={finishOnboarding}
         variant={hasAccepted ? "primary" : "default"}

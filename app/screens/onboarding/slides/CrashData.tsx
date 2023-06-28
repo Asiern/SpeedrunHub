@@ -55,6 +55,11 @@ export default function CrashData({ width }: ICrashData): JSX.Element {
       </Text>
       <View style={styles.checkBoxView}>
         <Checkbox
+          accessible
+          accessibilityLabel="Crash data toggle"
+          accessibilityHint="Toggles crash data sharing"
+          accessibilityRole="checkbox"
+          accessibilityState={{ checked: config.google.crashlyticsEnabled }}
           value={config.google.crashlyticsEnabled}
           onValueChange={toggleCrashlytics}
           color={
