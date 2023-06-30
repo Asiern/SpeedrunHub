@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { Text, StyleSheet, ViewStyle } from "react-native";
-import { RectButton } from "react-native-gesture-handler";
+import { RectButton, RectButtonProperties } from "react-native-gesture-handler";
 import { shadow as shadowStyle } from "../themes/theme";
 import { Feather } from "@expo/vector-icons";
 import { useConfig } from "../hooks";
@@ -15,7 +15,7 @@ export interface ButtonProps {
   style?: ViewStyle;
   disabled?: boolean;
   iconPosition?: "left" | "right";
-  buttonProps?: any;
+  buttonProps?: RectButtonProperties | ButtonProps;
 }
 
 function Button({
