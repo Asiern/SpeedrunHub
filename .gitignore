@@ -75,4 +75,4 @@ coverage
 # Google services
 google-services.json
 
-.vsdcode
+.vscode
