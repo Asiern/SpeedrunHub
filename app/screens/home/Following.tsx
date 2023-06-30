@@ -17,6 +17,7 @@ import { ScrollIndicator } from "../../components";
 import { Feather } from "@expo/vector-icons";
 import { shadow } from "../../themes/theme";
 import { useNavigation } from "@react-navigation/native";
+import { useTranslation } from "react-i18next";
 
 const { width } = Dimensions.get("screen");
 
@@ -48,13 +49,15 @@ function Following(): JSX.Element {
     },
   });
 
+  const { t } = useTranslation();
+
   return (
     <View style={styles.container}>
       <Text
         style={[styles.header, { color: theme.colors.primary }]}
         onPress={() => navigation.navigate("Following")}
       >
-        Following
+        {t("following")}
       </Text>
       {following.length === 0 || following === undefined ? (
         <TouchableOpacity
@@ -76,8 +79,7 @@ function Following(): JSX.Element {
               textAlign: "center",
             }}
           >
-            Your following list is empty. Start following your favorite users
-            now!
+            {t("user-list-empty", { ns: "validation" })}
           </Text>
         </TouchableOpacity>
       ) : (

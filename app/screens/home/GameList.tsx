@@ -17,6 +17,7 @@ import Animated, {
   useSharedValue,
 } from "react-native-reanimated";
 import { useNavigation } from "@react-navigation/native";
+import { useTranslation } from "react-i18next";
 
 const { width } = Dimensions.get("screen");
 
@@ -47,6 +48,8 @@ function GameList(): JSX.Element {
     },
   });
 
+  const { t } = useTranslation();
+
   return (
     <View style={styles.container}>
       <Text
@@ -54,7 +57,7 @@ function GameList(): JSX.Element {
         style={[styles.headerText, { color: theme.colors.primary }]}
         onPress={() => navigation.navigate("GameList")}
       >
-        My Games
+        {t("my-games")}
       </Text>
       {games.length === 0 ? (
         <TouchableOpacity
@@ -74,7 +77,7 @@ function GameList(): JSX.Element {
               textAlign: "center",
             }}
           >
-            Your liked games list is empty. Add your favorite games now!
+            {t("game-list-empty", { ns: "validation" })}
           </Text>
         </TouchableOpacity>
       ) : (

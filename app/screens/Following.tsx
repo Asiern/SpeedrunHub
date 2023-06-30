@@ -4,6 +4,7 @@ import { useConfig } from "../hooks";
 import { Header, UserContainer } from "../components";
 import { Dimensions, StyleSheet, View } from "react-native";
 import Constants from "expo-constants";
+import { useTranslation } from "react-i18next";
 
 const { width } = Dimensions.get("screen");
 
@@ -14,11 +15,12 @@ const CARD_WIDTH: number = (width - 2 * 30 - 2 * CARD_GAP) / N_CARDS_SLIDE;
 function Following(): JSX.Element {
   const { config } = useConfig();
   const { theme, following } = config;
+  const { t } = useTranslation();
   return (
     <ScrollView
       style={[styles.container, { backgroundColor: theme.colors.background }]}
     >
-      <Header title="Following" />
+      <Header title={t("following")} />
       <View style={styles.games}>
         {following?.map((id: string) => {
           return <UserContainer id={id} width={CARD_WIDTH} key={id} />;

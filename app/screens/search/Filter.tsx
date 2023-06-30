@@ -12,6 +12,7 @@ import { shadow } from "../../themes/theme";
 import { Feather } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useConfig } from "../../hooks";
+import { useTranslation } from "react-i18next";
 
 interface IFilter {
   label: string;
@@ -31,6 +32,7 @@ export const Filter = memo(FilterComponent);
 function FilterComponent({ label, onPress, variant }: IFilter): JSX.Element {
   const { config } = useConfig();
   const { theme } = config;
+  const { t } = useTranslation();
   return (
     <TouchableOpacity
       style={[
@@ -60,7 +62,7 @@ function FilterComponent({ label, onPress, variant }: IFilter): JSX.Element {
           styles.text,
         ]}
       >
-        {label}
+        {t(label, { ns: "glossary" })}
       </Text>
     </TouchableOpacity>
   );

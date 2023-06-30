@@ -14,6 +14,7 @@ import { SquareButton } from "../../components/SquareButton";
 import { useNavigation } from "@react-navigation/native";
 import { useConfig } from "../../hooks";
 import { Header } from "../../components";
+import { useTranslation } from "react-i18next";
 const { width } = Dimensions.get("window");
 
 async function apply(
@@ -42,17 +43,19 @@ export function NotificationsSettings(): JSX.Element {
   const navigation = useNavigation();
   const [max, setMax] = useState<number>(config.notifications.max);
   const [unread, setUnread] = useState<boolean>(config.notifications.unread);
+  const { t } = useTranslation();
+
   return (
     <View
       style={[styles.container, { backgroundColor: theme.colors.background }]}
     >
-      <Header title="Notifications" />
+      <Header title={t("notifications", { ns: "common" })} />
       <View
         style={[styles.section, { backgroundColor: theme.colors.foreground }]}
       >
         <View style={styles.row}>
           <Text style={[{ color: theme.colors.headerText }, styles.text]}>
-            Only show unread notifications
+            {t("screens.settings.notification.show-unread", { ns: "common" })}
           </Text>
           <Switch
             value={unread}
@@ -67,7 +70,7 @@ export function NotificationsSettings(): JSX.Element {
         style={[styles.section, { backgroundColor: theme.colors.foreground }]}
       >
         <Text style={[{ color: theme.colors.headerText }, styles.text]}>
-          Set the number of notifications to receive{"\n"}
+          {t("screens.settings.notification.max", { ns: "common" })}
         </Text>
         <Text style={[{ color: theme.colors.headerText }, styles.text]}>
           {max}
@@ -109,8 +112,7 @@ export function NotificationsSettings(): JSX.Element {
               },
             ]}
           >
-            It seems you did not provide your api key, the key is required to
-            receive notifications.{"\n"}Please log back in using your key.
+            {t("no-key", { ns: "validation" })}
           </Text>
           <SquareButton
             icon="log-out"
