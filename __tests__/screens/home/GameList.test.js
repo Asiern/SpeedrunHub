@@ -4,6 +4,7 @@ import GameList from "../../../app/screens/home/GameList";
 import { useConfig } from "../../../app/hooks";
 import { defaultConfig } from "../../../app/config/config";
 import { useNavigation } from "@react-navigation/native";
+import { useTranslation } from "react-i18next";
 
 jest.mock("../../../app/hooks/useConfig");
 
@@ -15,21 +16,23 @@ beforeEach(() => {
   });
 });
 
+jest.mock("react-i18next", () => ({
+  useTranslation: () => ({ t: (key) => key }),
+}));
+
 describe("GameList", () => {
   it("renders an empty list message when there are no games", () => {
     const { getByText } = render(<GameList />);
-    const emptyListMessage = getByText(
-      "Your liked games list is empty. Add your favorite games now!"
-    );
+    const { t } = useTranslation();
+    const emptyListMessage = getByText(t("game-list-empty"));
     expect(emptyListMessage).toBeDefined();
   });
 
   it("navigates to the Search screen when the empty list message is pressed", () => {
     const { navigate } = useNavigation();
     const { getByText } = render(<GameList />);
-    const emptyListMessage = getByText(
-      "Your liked games list is empty. Add your favorite games now!"
-    );
+    const { t } = useTranslation();
+    const emptyListMessage = getByText(t("game-list-empty"));
     fireEvent.press(emptyListMessage);
     expect(navigate).toHaveBeenCalledWith("Search", { query: "" });
   });
