@@ -1,0 +1,29 @@
+{
+  "settings": "Ajustes",
+  "notifications": "Notificaciones",
+  "about": "Acerca de",
+  "privacy-safety": "Privacidad y seguridad",
+  "privacy-policy": "Política de privacidad",
+  "terms-service": "Términos de servicio",
+  "login": "Iniciar sesión",
+  "login-guest": "Iniciar sesión como invitado",
+  "logout": "Cerrar sesión",
+  "my-games": "Mis juegos",
+  "following": "Siguiendo",
+  "welcome-speedrunhub": "Bienvenido a SpeedrunHub",
+  "login-to-continue": "Inicia sesión para continuar",
+  "get-api-key": "Obtener clave de API",
+  "api-key": "Clave de API",
+  "screens": {
+    "settings": {
+      "notification": {
+        "show-unread": "Mostrar notificaciones no leídas",
+        "max": "Notificaciones máximas a mostrar"
+      },
+      "privacy": {
+        "preferences": "Preferencias de recolección de datos",
+        "information": "Información de privacidad"
+      }
+    }
+  }
+}

@@ -6,6 +6,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { useConfig } from "../../hooks";
 import Constants from "expo-constants";
 import { shadow } from "../../themes/theme";
+import { useTranslation } from "react-i18next";
 
 interface INotification {
   notifications: notificationResponse | null | undefined;
@@ -14,11 +15,14 @@ interface INotification {
 function Notifications({ notifications }: INotification): JSX.Element {
   const { config } = useConfig();
   const { theme } = config;
+
+  const { t } = useTranslation();
+
   return (
     <ScrollView
       style={[styles.container, { backgroundColor: theme.colors.background }]}
     >
-      <Header title="Notifications" />
+      <Header title={t("notifications")} />
       {notifications?.data.map((notification) => {
         return (
           <View

@@ -3,6 +3,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import crashlytics from "@react-native-firebase/crashlytics";
 import { version } from "./package.json";
 
+// Translations (i18n)
+import "./app/locale/i18n";
+
 // TODO Migrate from expo-app-loading to expo-splash-screen
 import AppLoading from "expo-app-loading";
 

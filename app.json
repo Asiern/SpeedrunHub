@@ -43,14 +43,22 @@
       "policy": "sdkVersion"
     },
     "plugins": [
-      ["expo-community-flipper"], 
-      ["react-native-flipper-performance-plugin"],
-      ["@react-native-firebase/crashlytics"],
-      ["@react-native-firebase/app"]
-      
+      [
+        "expo-community-flipper"
+      ],
+      [
+        "react-native-flipper-performance-plugin"
+      ],
+      [
+        "@react-native-firebase/crashlytics"
+      ],
+      [
+        "@react-native-firebase/app"
+      ],
+      "expo-localization"
     ]
-  },  
+  },
   "react-native-google-mobile-ads": {
     "android_app_id": "ca-app-pub-5820949657654069~3334705233"
-   }
+  }
 }

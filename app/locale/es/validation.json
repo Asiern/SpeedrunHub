@@ -1,0 +1,11 @@
+{
+  "disable-data-collection": "Desactivar la recopilación de datos",
+  "disable-data-collection-description": "Si desea no participar en la recopilación de datos, por favor marque esta casilla. Esto significa que no se enviará ningún dato a los servidores.",
+  "enable-data-collection": "Activar la recopilación de datos",
+  "enable-data-collection-description": "Si desea participar en la recopilación de datos, por favor marque esta casilla. Esto significa que se enviarán datos a los servidores",
+  "username-not-found": "Nombre de usuario no encontrado, por favor asegurese de que el nombre de usuario es correcto",
+  "search-games-users": "Buscar juegos o usuarios",
+  "game-list-empty": "Tu lista de juegos está vacía. Añade tus juegos ya!",
+  "user-list-empty": "Tu lista de amigos está vacía. Añade tus amigos ya!",
+  "no-key": "Parece ser que no proporcionó la clave de API, esta es necesaria para recivir notificaciones. Por favor, inicie sesión con la clave."
+}

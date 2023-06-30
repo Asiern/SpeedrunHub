@@ -11,6 +11,7 @@ import {
 } from "react-native-google-mobile-ads";
 import { ADS_IDS } from "../../constants/ads";
 import crashlytics from "@react-native-firebase/crashlytics";
+import { useTranslation } from "react-i18next";
 
 type section = {
   title: string;
@@ -22,7 +23,7 @@ type section = {
 
 const Sections: section[] = [
   {
-    title: "Notifications",
+    title: "notifications",
     icon: "bell",
     navigateTo: "NotificationsSettings",
     onPress: null,
@@ -35,21 +36,21 @@ const Sections: section[] = [
   //   weblink: null,
   // },
   {
-    title: "About",
+    title: "about",
     icon: "info",
     navigateTo: "About",
     onPress: null,
     weblink: null,
   },
   {
-    title: "Privacy & Safety",
+    title: "privacy-safety",
     icon: "shield",
     navigateTo: "Safety",
     onPress: null,
     weblink: null,
   },
   {
-    title: "Privacy Policy",
+    title: "privacy-policy",
     icon: "book-open",
     navigateTo: null,
     weblink:
@@ -57,7 +58,7 @@ const Sections: section[] = [
     onPress: null,
   },
   {
-    title: "Terms & Conditions",
+    title: "terms-service",
     icon: "book",
     navigateTo: null,
     weblink:
@@ -69,6 +70,9 @@ const Sections: section[] = [
 export function Settings(): JSX.Element {
   const { config, setConfig } = useConfig();
   const { theme } = config;
+
+  const { t } = useTranslation();
+
   const navigation = useNavigation();
   crashlytics().log("Settings screen Mounted");
 
@@ -79,7 +83,7 @@ export function Settings(): JSX.Element {
         marginTop: Constants.statusBarHeight,
       }}
     >
-      <Header title="Settings" />
+      <Header title={t("settings")} />
       <View
         style={{
           paddingHorizontal: 30,
@@ -90,7 +94,7 @@ export function Settings(): JSX.Element {
             <View key={index} style={{ marginTop: 10 }}>
               <Button
                 icon={icon}
-                label={title}
+                label={t(title)}
                 onPress={() => {
                   if (navigateTo) navigation.navigate(navigateTo);
                   else if (weblink) Linking.openURL(weblink);
@@ -103,7 +107,7 @@ export function Settings(): JSX.Element {
         <View style={{ marginVertical: 10 }}>
           <Button
             icon={"log-out"}
-            label={"Log out"}
+            label={t("logout")}
             onPress={() => {
               setConfig({ ...config, logged: false, key: null, user: null });
               navigation.navigate("Login");

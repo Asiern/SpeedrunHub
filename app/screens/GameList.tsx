@@ -5,6 +5,7 @@ import { game } from "../types";
 import { GameCard, Header } from "../components";
 import { Dimensions, StyleSheet, View } from "react-native";
 import Constants from "expo-constants";
+import { useTranslation } from "react-i18next";
 
 const { width } = Dimensions.get("screen");
 
@@ -16,11 +17,12 @@ const CARD_HEIGHT: number = (CARD_WIDTH * 4) / 3;
 function GameList(): JSX.Element {
   const { config } = useConfig();
   const { games, theme } = config;
+  const { t } = useTranslation();
   return (
     <ScrollView
       style={[styles.container, { backgroundColor: theme.colors.background }]}
     >
-      <Header title="My Games" />
+      <Header title={t("my-games")} />
       <View style={styles.games}>
         {games.map(({ abbreviation, id, uri }: game) => {
           return (

@@ -4,6 +4,7 @@ import { TextInput } from "react-native";
 import { shadow } from "../themes/theme";
 import { SquareButton } from "./SquareButton";
 import { useConfig } from "../hooks";
+import { useTranslation } from "react-i18next";
 
 export interface ISearchBar {
   onSearch: () => void;
@@ -22,6 +23,7 @@ function SearchBar({
   const { config } = useConfig();
   const { theme } = config;
 
+  const { t } = useTranslation();
   // Render a view containing a text input and a search button
   return (
     <View
@@ -38,7 +40,7 @@ function SearchBar({
     >
       <TextInput
         testID="input"
-        placeholder={"Search for games/users..."}
+        placeholder={t("search-games-users", { ns: "validation" })}
         onChangeText={(v) => {
           onChangeText(v);
           setValue(v);

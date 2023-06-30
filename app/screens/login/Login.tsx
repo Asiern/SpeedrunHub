@@ -7,6 +7,7 @@ import { getUser, useConfig } from "../../hooks";
 import { loadInBrowser } from "../../utils";
 import { user } from "../../hooks/types";
 import crashlytics from "@react-native-firebase/crashlytics";
+import { useTranslation } from "react-i18next";
 
 export function Login(): JSX.Element {
   const [username, setUsername] = useState<string>("");
@@ -15,6 +16,7 @@ export function Login(): JSX.Element {
   const navigation = useNavigation();
   const { config, setConfig } = useConfig();
   const { theme } = config;
+  const { t } = useTranslation();
 
   async function guestLogin() {
     crashlytics().log("Guest login");
@@ -58,7 +60,7 @@ export function Login(): JSX.Element {
             color: theme.colors.headerText,
           }}
         >
-          Welcome to SpeedrunHub!
+          {t("welcome-speedrunhub", { ns: "common" })}
         </Text>
         <Text
           style={{
@@ -69,12 +71,12 @@ export function Login(): JSX.Element {
             color: theme.colors.headerText,
           }}
         >
-          Please login to continue.
+          {t("login-to-continue", { ns: "common" })}
         </Text>
         <TextInput
           onChange={setUsername}
           value={username}
-          placehorder="username"
+          placehorder={t("username", { ns: "glossary" })}
           icon="user"
         />
         {usernameError ? (
@@ -87,13 +89,15 @@ export function Login(): JSX.Element {
               color: theme.colors.error,
             }}
           >
-            Username not found. Make sure the username you inputed is correct.
+            {t("username-not-found", { ns: "validation" })}
           </Text>
         ) : null}
         <TextInput
           onChange={setKey}
           value={key}
-          placehorder="API-key"
+          placehorder={`${t("api-key", { ns: "common" })} (${t("optional", {
+            ns: "glossary",
+          })})`}
           icon="key"
           secureTextEntry
         />
@@ -107,11 +111,11 @@ export function Login(): JSX.Element {
           }}
           onPress={() => loadInBrowser("https://www.speedrun.com/api/auth")}
         >
-          Get your API key.
+          {t("get-api-key", { ns: "common" })}
         </Text>
         <View style={{ marginTop: 10 }}>
           <Button
-            label="Login"
+            label={t("login", { ns: "common" })}
             onPress={() => login(username, key)}
             variant="primary"
             shadow
@@ -120,7 +124,7 @@ export function Login(): JSX.Element {
         </View>
         <View style={{ marginTop: 10 }}>
           <Button
-            label="Login as guest"
+            label={t("login-guest", { ns: "common" })}
             onPress={guestLogin}
             variant="default"
             icon={"user-x"}

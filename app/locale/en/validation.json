@@ -1,0 +1,11 @@
+{
+  "disable-data-collection": "Disable data collection",
+  "disable-data-collection-description": "If you prefer not to share crash reports and error logs, you can disable data collection for Firebase Crashlytics. However, please note that this may limit our ability to identify and resolve app issues effectively.",
+  "enable-data-collection": "Enable data collection",
+  "enable-data-collection-description": "By enabling data collection, you allow us to receive crash reports and error logs anonymously, helping us identify and fix issues to provide a better app experience. No personal information is collected.",
+  "username-not-found": "Username not found. Make sure the username you inputed is correct.",
+  "search-games-users": "Search games and users",
+  "game-list-empty": "Your game list is empty. Add your favorite games now!",
+  "user-list-empty": "Your user list is empty. Add your friends users now!",
+  "no-key": "It seems you did not provide your api key, the key is required to receive notifications. Please log back in using your key."
+}
