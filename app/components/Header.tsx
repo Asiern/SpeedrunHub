@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginHorizontal: 30,
-    flex: 1,
   },
   headerText: {
     fontFamily: "Poppins",
