@@ -17,6 +17,7 @@
   "screens": {
     "settings": {
       "notification": {
+        "unread-title": "Notificaciones no leídas",
         "show-unread": "Mostrar notificaciones no leídas",
         "max": "Notificaciones máximas a mostrar"
       },

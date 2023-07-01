@@ -18,6 +18,7 @@
     "login": {},
     "settings": {
       "notification": {
+        "unread-title": "Unread notifications only",
         "show-unread": "Toggle unread notifications only",
         "max": "Set notifications to show"
       },

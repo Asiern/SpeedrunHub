@@ -15,6 +15,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useConfig } from "../../hooks";
 import { Header } from "../../components";
 import { useTranslation } from "react-i18next";
+import Divider from "../../components/Divider";
 const { width } = Dimensions.get("window");
 
 async function apply(
@@ -50,76 +51,89 @@ export function NotificationsSettings(): JSX.Element {
       style={[styles.container, { backgroundColor: theme.colors.background }]}
     >
       <Header title={t("notifications", { ns: "common" })} />
-      <View
-        style={[styles.section, { backgroundColor: theme.colors.foreground }]}
-      >
-        <View style={styles.row}>
-          <Text style={[{ color: theme.colors.headerText }, styles.text]}>
-            {t("screens.settings.notification.show-unread", { ns: "common" })}
+      <View style={{ paddingHorizontal: 30 }}>
+        <>
+          <Text style={[styles.header, { color: theme.colors.headerText }]}>
+            {t("screens.settings.notification.unread-title")}
           </Text>
-          <Switch
-            value={unread}
-            onValueChange={() => setUnread(!unread)}
-            thumbColor={theme.colors.primary}
-            trackColor={theme.colors.headerText}
-            ios_backgroundColor={theme.colors.background}
-          />
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <Text style={[styles.title, { color: theme.colors.text }]}>
+              {t("screens.settings.notification.show-unread", { ns: "common" })}
+            </Text>
+            <Switch
+              value={unread}
+              onValueChange={() => setUnread(!unread)}
+              thumbColor={theme.colors.primary}
+              trackColor={theme.colors.headerText}
+              ios_backgroundColor={theme.colors.background}
+            />
+          </View>
+        </>
+        <View style={{ marginVertical: 20 }}>
+          <Divider />
         </View>
-      </View>
-      <View
-        style={[styles.section, { backgroundColor: theme.colors.foreground }]}
-      >
-        <Text style={[{ color: theme.colors.headerText }, styles.text]}>
-          {t("screens.settings.notification.max", { ns: "common" })}
-        </Text>
-        <Text style={[{ color: theme.colors.headerText }, styles.text]}>
-          {max}
-        </Text>
-        <Slider
-          style={{
-            width: width - 40,
-            height: 40,
-          }}
-          minimumValue={20}
-          maximumValue={200}
-          minimumTrackTintColor={theme.colors.primary}
-          maximumTrackTintColor={theme.colors.text}
-          value={max}
-          onValueChange={(value) => setMax(Math.round(value))}
-        />
-      </View>
-      {config.key ? (
-        <SquareButton
-          icon="save"
-          onPress={() => apply(config, max, unread, setConfig)}
-          style={{ alignSelf: "center" }}
-        />
-      ) : (
-        <View
-          style={{
-            padding: 30,
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
+        <View>
+          <Text style={[styles.header, { color: theme.colors.headerText }]}>
+            {t("screens.settings.notification.max", { ns: "common" })}
+          </Text>
           <Text
             style={[
-              styles.text,
-              {
-                color: theme.colors.headerText,
-                textAlign: "justify",
-                marginBottom: 10,
-              },
+              styles.title,
+              { color: theme.colors.text, alignSelf: "center" },
             ]}
           >
-            {t("no-key", { ns: "validation" })}
+            {max}
           </Text>
-          <SquareButton
-            icon="log-out"
-            onPress={() => navigation.navigate("Login")}
+          <Slider
+            style={{
+              width: width - 40,
+              height: 40,
+            }}
+            minimumValue={20}
+            maximumValue={200}
+            minimumTrackTintColor={theme.colors.primary}
+            maximumTrackTintColor={theme.colors.text}
+            value={max}
+            onValueChange={(value) => setMax(Math.round(value))}
           />
         </View>
-      )}
+        <View style={{ marginVertical: 20 }}>
+          <Divider />
+        </View>
+        {config.key ? (
+          <SquareButton
+            icon="save"
+            onPress={() => apply(config, max, unread, setConfig)}
+            style={{ alignSelf: "center" }}
+          />
+        ) : (
+          <View
+            style={{
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Text
+              style={[
+                styles.text,
+                {
+                  color: theme.colors.headerText,
+                  textAlign: "justify",
+                  marginBottom: 10,
+                },
+              ]}
+            >
+              {t("no-key", { ns: "validation" })}
+            </Text>
+            <SquareButton
+              icon="log-out"
+              onPress={() => navigation.navigate("Login")}
+            />
+          </View>
+        )}
+      </View>
     </View>
   );
 }
@@ -133,17 +147,24 @@ const styles = StyleSheet.create({
     width,
     justifyContent: "center",
     alignItems: "center",
-    padding: 30,
+    paddingHorizontal: 30,
     marginBottom: 10,
   },
   row: {
     flexDirection: "row",
-    justifyContent: "space-around",
     alignItems: "center",
     width,
   },
   text: {
     fontFamily: "Poppins",
     fontSize: 14,
+  },
+  header: {
+    fontSize: 20,
+    fontFamily: "Poppins-Medium",
+  },
+  title: {
+    fontFamily: "Poppins-Medium",
+    fontSize: 15,
   },
 });
