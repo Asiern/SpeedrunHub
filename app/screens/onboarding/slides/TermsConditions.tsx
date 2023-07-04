@@ -6,6 +6,7 @@ import { loadInBrowser } from "../../../utils";
 import { Button } from "../../../components";
 import { useNavigation } from "@react-navigation/native";
 import crashlytics from "@react-native-firebase/crashlytics";
+import { useTranslation } from "react-i18next";
 
 interface ITermsConditions {
   width: number;
@@ -17,7 +18,7 @@ export default function TermsConditions({
   const { config, setConfig } = useConfig();
   const { theme } = config;
   const navigation = useNavigation();
-
+  const { t } = useTranslation();
   const [hasAccepted, setHasAccepted] = React.useState<boolean>(false);
 
   function finishOnboarding() {
@@ -39,16 +40,12 @@ export default function TermsConditions({
   return (
     <View style={[styles.container, { width }]}>
       <Text style={[styles.subHeader, { color: theme.colors.headerText }]}>
-        Terms and Conditions
+        {t("screens.onboarding.terms.title")}
       </Text>
       <Text
         style={[styles.text, { color: theme.colors.headerText, marginTop: 5 }]}
       >
-        Before you can proceed, please review and accept our Terms and
-        Conditions and Privacy Policy. By accepting, you acknowledge that you
-        have read and understood our policies and agree to abide by them. Your
-        privacy and data security are important to us, and we appreciate your
-        trust in our app.
+        {t("screens.onboarding.terms.description")}
       </Text>
       <Text
         style={[styles.text, { color: theme.colors.primary, marginTop: 5 }]}
@@ -58,7 +55,7 @@ export default function TermsConditions({
           )
         }
       >
-        Terms and Conditions
+        {t("terms-conditions", { ns: "glossary" })}
       </Text>
       <Text
         style={[styles.text, { color: theme.colors.primary, marginTop: 5 }]}
@@ -68,7 +65,7 @@ export default function TermsConditions({
           )
         }
       >
-        Privacy Policy
+        {t("privacy-policy", { ns: "glossary" })}
       </Text>
       <View style={styles.checkBoxView}>
         <Checkbox
@@ -92,7 +89,7 @@ export default function TermsConditions({
             { color: theme.colors.text, marginLeft: 5, textAlign: "justify" },
           ]}
         >
-          I accept the Terms and Conditions and Privacy Policy.
+          {t("screens.onboarding.terms.toggle")}
         </Text>
       </View>
       <Button
@@ -103,7 +100,11 @@ export default function TermsConditions({
           accessibilityRole: "button",
           accessibilityState: { disabled: !hasAccepted },
         }}
-        label={hasAccepted ? "Start browsing!" : "Please accept to continue."}
+        label={
+          hasAccepted
+            ? t("screens.onboarding.terms.continue-button")
+            : t("screens.onboarding.terms.continue-button-disabled")
+        }
         onPress={finishOnboarding}
         variant={hasAccepted ? "primary" : "default"}
         style={{ flex: 0, marginTop: 10 }}

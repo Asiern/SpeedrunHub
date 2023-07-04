@@ -5,6 +5,7 @@ import { StyleSheet } from "react-native";
 import { useConfig } from "../../../hooks";
 import Checkbox from "expo-checkbox";
 import crashlytics from "@react-native-firebase/crashlytics";
+import { useTranslation } from "react-i18next";
 
 interface ICrashData {
   width: number;
@@ -13,6 +14,7 @@ interface ICrashData {
 export default function CrashData({ width }: ICrashData): JSX.Element {
   const { config, setConfig } = useConfig();
   const { theme } = config;
+  const { t } = useTranslation();
 
   async function toggleCrashlytics() {
     try {
@@ -37,7 +39,7 @@ export default function CrashData({ width }: ICrashData): JSX.Element {
   return (
     <View style={[styles.container, { width }]}>
       <Text style={[styles.subHeader, { color: theme.colors.headerText }]}>
-        Share Crash Data
+        {t("screens.onboarding.crash-data.title")}
       </Text>
       <Text
         style={[
@@ -45,13 +47,7 @@ export default function CrashData({ width }: ICrashData): JSX.Element {
           { color: theme.colors.text, textAlign: "justify" },
         ]}
       >
-        We prioritize your privacy and are committed to providing a secure app
-        experience. To enhance app stability and address any potential issues,
-        we kindly ask for your consent to share crash data. Rest assured that
-        all data collected is treated with strict confidentiality. Your
-        participation helps us identify and resolve crashes, ensuring a smooth
-        and reliable app for all users. Thank you for contributing to our
-        continuous improvement efforts while maintaining your privacy.
+        {t("screens.onboarding.crash-data.description")}
       </Text>
       <View style={styles.checkBoxView}>
         <Checkbox
@@ -77,7 +73,7 @@ export default function CrashData({ width }: ICrashData): JSX.Element {
             { color: theme.colors.text, marginLeft: 5, textAlign: "justify" },
           ]}
         >
-          You can change your privacy settings at any time by going to Settings.
+          {t("screens.onboarding.crash-data.toggle")}
         </Text>
       </View>
     </View>
