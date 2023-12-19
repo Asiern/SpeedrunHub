@@ -47,6 +47,7 @@ export function Profile(props: ProfileProps): JSX.Element {
       ...config.following.slice(0, index),
       ...config.following.slice(index + 1, config.following.length),
     ];
+    setFollowing(false);
     setConfig({ ...config, following: [...newArray] });
   }, []);
 
@@ -70,21 +71,22 @@ export function Profile(props: ProfileProps): JSX.Element {
           <SquareButton
             testID="follow-square-button"
             icon="heart"
+            variant={following ? "primary" : "gray"}
             onPress={following ? unFollow : follow}
             style={{ marginLeft: 5, height: 60, width: 60 }}
           />
         ) : null}
       </View>
       <View style={styles.social}>
-        <View style={{ marginRight: 10, flex: 1 }}>
+        <View style={{ flex: 1 }}>
           <Social user={user} />
         </View>
-        <SquareButton
+        {/* <SquareButton
           icon="more-horizontal"
           onPress={() => null}
           style={styles.moreButton}
           variant="primary"
-        />
+        /> */}
       </View>
       <View style={styles.banner}>
         <BannerAd

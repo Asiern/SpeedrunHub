@@ -172,7 +172,7 @@ export type run = {
     emulated: boolean;
     region: string | null;
   };
-  values: unknown;
+  values: { [key: string]: string };
   videos: {
     text?: string;
     links: { uri: string }[];

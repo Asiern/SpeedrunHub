@@ -7,9 +7,9 @@ import { Safety, Settings } from "../screens/settings";
 import { GameInfoContainer } from "../screens/game";
 import Search from "../screens/search/Search";
 import { NotificationsContainer } from "../screens/notifications";
-import RunInfo from "../screens/RunInfo";
+import { RunContainer } from "../screens/run";
 import { About, NotificationsSettings } from "../screens/settings";
-import { user } from "../hooks/types";
+import { run, user } from "../hooks/types";
 import { Profile } from "../screens/profile";
 import GameList from "../screens/GameList";
 import Following from "../screens/Following";
@@ -24,7 +24,8 @@ type ProfileParams = {
   user: user;
 };
 type RunInfoParams = {
-  weblink: string;
+  run: run;
+  place: number;
 };
 type SearchParams = {
   query: string;
@@ -93,7 +94,7 @@ function HomeStack(): JSX.Element {
       />
       <Stack.Screen
         name="RunInfo"
-        component={RunInfo}
+        component={RunContainer}
         options={{ headerShown: false }}
       />
       <Stack.Screen

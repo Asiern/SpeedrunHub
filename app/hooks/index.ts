@@ -12,6 +12,7 @@ import getCategories from "./getCategories";
 import getVariables from "./getVariables";
 import getVariable from "./getVariable";
 import getLeaderboard from "./getLeaderboard";
+import getRun from "./getRun";
 
 export {
   getNotifications,
@@ -27,5 +28,6 @@ export {
   getCategories,
   getVariables,
   getVariable,
+  getRun,
   getLeaderboard,
 };

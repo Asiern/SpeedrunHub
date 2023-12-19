@@ -30,6 +30,7 @@
     "expo": "~48.0.15",
     "expo-app-loading": "^2.1.1",
     "expo-application": "~5.1.1",
+    "expo-av": "~13.2.1",
     "expo-checkbox": "~2.3.1",
     "expo-constants": "~14.2.1",
     "expo-dev-client": "~2.2.1",

@@ -11,7 +11,6 @@ export default async function getLeaderboard(
 ): Promise<leaderboardResponse> {
   return new Promise((resolve, reject) => {
     if (category === "" || game === "") return;
-
     let url = `https://www.speedrun.com/api/v1/leaderboards/${game}/category/${category}?embed=players`;
     if (variables !== undefined) {
       url += "&";

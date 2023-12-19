@@ -24,7 +24,7 @@ function PB({ pb }: IPB): JSX.Element {
   return (
     <TouchableOpacity
       testID="touchable-pb"
-      onPress={() => navigation.navigate("RunInfo", { weblink: run.weblink })}
+      onPress={() => navigation.navigate("RunInfo", { run, place })}
       style={[
         styles.container,
         { backgroundColor: theme.colors.foreground },

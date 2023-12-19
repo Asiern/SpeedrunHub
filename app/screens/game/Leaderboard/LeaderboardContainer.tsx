@@ -11,6 +11,8 @@ interface ILeaderboardContainer {
   variables: selectedVariables;
 }
 
+// const MAX_LEADERBOARD = 20;
+
 function LeaderboardContainer({
   category,
   game,
@@ -18,21 +20,24 @@ function LeaderboardContainer({
 }: ILeaderboardContainer): JSX.Element {
   const [leaderboard, setLeaderboard] = useState<leaderboard | undefined>();
   const [loading, setLoading] = useState<boolean>(true);
+
   useEffect(() => {
-    async function prepare() {
-      const leaderborad = await getLeaderboard(game.id, category, variables);
-      setLeaderboard(leaderborad.data);
-    }
     setLoading(true);
     setLeaderboard(undefined);
-    prepare();
+    onEndReached();
     setLoading(false);
   }, [category, variables]);
+
+  async function onEndReached() {
+    const leaderboard = await getLeaderboard(game.id, category, variables);
+    setLeaderboard(leaderboard.data);
+    // setOffset(offset + MAX_LEADERBOARD);
+  }
 
   if (loading) return <ActivityIndicator />;
   if (leaderboard === undefined) return <></>;
 
-  return <Leaderboard {...{ leaderboard }} />;
+  return <Leaderboard {...{ leaderboard, onEndReached }} />;
 }
 
 export default LeaderboardContainer;

@@ -1,25 +1,42 @@
-import React, { memo } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, Text, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { useConfig } from "../hooks";
+import { getUser, useConfig } from "../hooks";
 import { shadow } from "../themes/theme";
+import { run } from "../hooks/types";
+import { getTimeLabel } from "../utils";
 
 export interface IRun {
+  run: run;
   place: number;
-  players: string;
-  weblink: string;
-  time: string;
 }
 
-function Run({ place, players, time, weblink }: IRun): JSX.Element {
+function Run({ run, place }: IRun): JSX.Element {
   const navigation = useNavigation();
   const { config } = useConfig();
   const { theme } = config;
+  const [players, setPlayers] = useState<string[]>([]);
+
+  useEffect(() => {
+    setPlayers([]);
+    run.players.map(async (player) => {
+      if (player.rel === "guest" && player.name)
+        setPlayers([...players, player.name]);
+      else if (player.id)
+        getUser(player.id).then((user) => {
+          if (user.names.international || user.names.japanese)
+            setPlayers([
+              ...players,
+              user.names.international || user.names.japanese || "",
+            ]);
+        });
+    });
+  }, []);
 
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate("RunInfo", { weblink })}
+      onPress={() => navigation.navigate("RunInfo", { run, place })}
       style={[
         styles.container,
         { backgroundColor: theme.colors.foreground },
@@ -39,12 +56,12 @@ function Run({ place, players, time, weblink }: IRun): JSX.Element {
           ellipsizeMode="tail"
           numberOfLines={2}
         >
-          {players}
+          {players.join(", ") || run.players[0].id}
         </Text>
       </View>
       <View style={styles.time} testID="run-time">
         <Text style={[{ color: theme.colors.headerText }, styles.text]}>
-          {time}
+          {getTimeLabel(run.times.primary_t)}
         </Text>
       </View>
     </TouchableOpacity>
