@@ -54,7 +54,7 @@ const Sections: section[] = [
     icon: "book-open",
     navigateTo: null,
     weblink:
-      "https://github.com/Asiern/SpeedrunHub/blob/master/Readme/Privacy%20Policy.md",
+      "https://github.com/Asiern/SpeedrunHub/blob/main/docs/Privacy%20Policy.md",
     onPress: null,
   },
   {
@@ -62,7 +62,7 @@ const Sections: section[] = [
     icon: "book",
     navigateTo: null,
     weblink:
-      "https://github.com/Asiern/SpeedrunHub/blob/master/Readme/Terms%20%26%20Conditions.md",
+      "https://github.com/Asiern/SpeedrunHub/blob/main/docs/Terms%20%26%20Conditions.md",
     onPress: null,
   },
 ];
