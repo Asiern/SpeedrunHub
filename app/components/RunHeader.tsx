@@ -6,7 +6,7 @@ export interface RunHeaderProps {
   backgroundUri: string;
 }
 
-export default function RunHeader(props: RunHeaderProps) {
+export default function RunHeader(props: RunHeaderProps): JSX.Element {
   return (
     <ImageBackground
       style={styles.container}

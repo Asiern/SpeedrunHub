@@ -2,12 +2,16 @@ import * as React from "react";
 import { View, StyleSheet, Text } from "react-native";
 
 interface SplitProps {
-  name: String;
-  duration: String;
-  finished: String;
+  name: string;
+  duration: string;
+  finished: string;
 }
 
-export default function Split({ name, duration, finished }: SplitProps) {
+export default function Split({
+  name,
+  duration,
+  finished,
+}: SplitProps): JSX.Element {
   return (
     <View style={styles.container}>
       <View style={styles.nameContainer}>

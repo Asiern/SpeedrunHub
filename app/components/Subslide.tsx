@@ -1,7 +1,7 @@
 import * as React from "react";
 import { View, Text, StyleSheet, Dimensions } from "react-native";
 import { h2, h4 } from "../themes/theme";
-import Button from "./Buttons/Button";
+import Button from "./Button";
 export interface SubslideProps {
   title: string;
   description: string;
@@ -15,7 +15,7 @@ export default function Subslide({
   description,
   last,
   onPress,
-}: SubslideProps) {
+}: SubslideProps): JSX.Element {
   return (
     <View style={styles.container}>
       <View style={styles.textcontainer}>

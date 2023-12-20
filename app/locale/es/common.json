@@ -1,0 +1,45 @@
+{
+  "settings": "Ajustes",
+  "notifications": "Notificaciones",
+  "about": "Acerca de",
+  "privacy-safety": "Privacidad y seguridad",
+  "privacy-policy": "Política de privacidad",
+  "terms-service": "Términos de servicio",
+  "login": "Iniciar sesión",
+  "login-guest": "Iniciar sesión como invitado",
+  "logout": "Cerrar sesión",
+  "my-games": "Mis juegos",
+  "following": "Siguiendo",
+  "welcome-speedrunhub": "Bienvenido a SpeedrunHub",
+  "login-to-continue": "Inicia sesión para continuar",
+  "get-api-key": "Obtener clave de API",
+  "api-key": "Clave de API",
+  "screens": {
+    "settings": {
+      "notification": {
+        "unread-title": "Notificaciones no leídas",
+        "show-unread": "Mostrar notificaciones no leídas",
+        "max": "Notificaciones máximas a mostrar"
+      },
+      "privacy": {
+        "preferences": "Preferencias de recolección de datos",
+        "information": "Información de privacidad"
+      }
+    },
+    "onboarding": {
+      "introduction": "Explora el emocionante mundo de las speedruns y descubre los récords de speedrun.com. Mantente actualizado con las últimas clasificaciones en la tabla de líderes, mira increíbles videos de speedruns y sigue tus juegos y corredores favoritos. Únete a nosotros en este emocionante viaje a través del mundo de las speedruns y sé testigo de la historia del juego en acción. Prepárate para experimentar la adrenalina de las speedruns como nunca antes. ¡Vamos a correr!",
+      "crash-data": {
+        "title": "Compartir datos de fallos",
+        "description": "Priorizamos tu privacidad y nos comprometemos a brindar una experiencia segura en nuestra aplicación. Para mejorar la estabilidad de la aplicación y abordar posibles problemas, te pedimos amablemente tu consentimiento para compartir datos de fallos. Ten la seguridad de que todos los datos recopilados se tratan con estricta confidencialidad. Tu participación nos ayuda a identificar y resolver fallos, garantizando una aplicación fluida y confiable para todos los usuarios. Gracias por contribuir a nuestros esfuerzos de mejora continua al tiempo que proteges tu privacidad.",
+        "toggle": "Puedes cambiar la configuración de privacidad en cualquier momento yendo a Configuración."
+      },
+      "terms": {
+        "title": "Términos y condiciones",
+        "description": "Antes de continuar, por favor revisa y acepta nuestros Términos y Condiciones y nuestra Política de Privacidad. Al aceptar, reconoces que has leído y entendido nuestras políticas, y estás de acuerdo en cumplirlas. Tu privacidad y seguridad de datos son importantes para nosotros, y apreciamos tu confianza en nuestra aplicación.",
+        "toggle": "Acepto los términos de servicio y la política de privacidad.",
+        "continue-button-disabled": "Acepta para continuar",
+        "continue-button": "Empieza a correr"
+      }
+    }
+  }
+}

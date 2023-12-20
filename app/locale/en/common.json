@@ -1,0 +1,45 @@
+{
+  "settings": "Settings",
+  "notifications": "Notifications",
+  "about": "About",
+  "privacy-safety": "Privacy & Safety",
+  "privacy-policy": "Privacy Policy",
+  "terms-service": "Terms of Service",
+  "login": "Login",
+  "login-guest": "Login as Guest",
+  "logout": "Logout",
+  "my-games": "My Games",
+  "following": "Following",
+  "welcome-speedrunhub": "Welcome to SpeedrunHub",
+  "login-to-continue": "Login to continue",
+  "get-api-key": "Get API Key",
+  "api-key": "API key",
+  "screens": {
+    "settings": {
+      "notification": {
+        "unread-title": "Unread notifications only",
+        "show-unread": "Toggle unread notifications only",
+        "max": "Set notifications to show"
+      },
+      "privacy": {
+        "preferences": "Data collection preferences",
+        "information": "Privacy information"
+      }
+    },
+    "onboarding": {
+      "introduction": "Explore the exciting world of speedrunning and discover the fastest gameplay records from speedrun.com. Stay updated with the latest leaderboard rankings, watch incredible speedrun videos, and follow your favorite games and runners. Join us on this thrilling journey through the world of speedrunning and witness gaming history in action. Get ready to experience the adrenaline of speedruns like never before. Let's race!",
+      "crash-data": {
+        "title": "Share Crash Data",
+        "description": "We prioritize your privacy and are committed to providing a secure app experience. To enhance app stability and address any potential issues, we kindly ask for your consent to share crash data. Rest assured that all data collected is treated with strict confidentiality. Your participation helps us identify and resolve crashes, ensuring a smooth and reliable app for all users. Thank you for contributing to our continuous improvement efforts while maintaining your privacy.",
+        "toggle": "You can change your privacy settings at any time by going to Settings."
+      },
+      "terms": {
+        "title": "Terms and Conditions",
+        "description": "Before you can proceed, please review and accept our Terms and Conditions and Privacy Policy. By accepting, you acknowledge that you have read and understood our policies and agree to abide by them. Your privacy and data security are important to us, and we appreciate your trust in our app.",
+        "toggle": "I accept the Terms and Conditions and Privacy Policy.",
+        "continue-button-disabled": "Please accept to continue",
+        "continue-button": "Start browsing"
+      }
+    }
+  }
+}

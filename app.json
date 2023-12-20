@@ -4,20 +4,25 @@
   "expo": {
     "name": "SpeedrunHub",
     "slug": "speedruncomapp",
-    "platforms": ["ios", "android"],
-    "version": "1.1.1",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "version": "2.0.1",
     "orientation": "portrait",
     "icon": "./app/assets/trophy.png",
-
     "splash": {
       "image": "./app/assets/trophy.png",
       "resizeMode": "contain",
       "backgroundColor": "#fff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/041f1baf-8635-40e4-89ab-2ad730a1eb50"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "bundleIdentifier": "SpeedrunHub"
     },
@@ -25,11 +30,35 @@
     "githubUrl": "https://github.com/Asiern/SpeedrunHub",
     "android": {
       "package": "com.asiern.speedrun2",
-      "versionCode": 3,
+      "versionCode": 5,
       "permissions": [],
-      "config": {
-        "googleMobileAdsAppId": "ca-app-pub-3552758561036628~8801055846"
+      "googleServicesFile": "./google-services.json"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "041f1baf-8635-40e4-89ab-2ad730a1eb50"
       }
-    }
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    },
+    "plugins": [
+      [
+        "expo-community-flipper"
+      ],
+      [
+        "react-native-flipper-performance-plugin"
+      ],
+      [
+        "@react-native-firebase/crashlytics"
+      ],
+      [
+        "@react-native-firebase/app"
+      ],
+      "expo-localization"
+    ]
+  },
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-5820949657654069~3334705233"
   }
 }

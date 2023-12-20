@@ -31,7 +31,9 @@ export interface VideoCarouselProps {
   links: any[];
 }
 
-export default function VideoCarousel({ links }: VideoCarouselProps) {
+export default function VideoCarousel({
+  links,
+}: VideoCarouselProps): JSX.Element {
   const x = useSharedValue(0);
   const onScroll = useAnimatedScrollHandler({
     onScroll: ({ contentOffset }) => {

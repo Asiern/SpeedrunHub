@@ -19,7 +19,11 @@ const modalWidth = width * 0.9;
 const modalHeight = modalWidth * 1.5;
 const topPosition = height / 2 - modalHeight / 2;
 
-export default function Modal({ visible, offset, children }: ModalProps) {
+export default function Modal({
+  visible,
+  offset,
+  children,
+}: ModalProps): JSX.Element {
   const isVisible = useSharedValue(visible ? 1 : 0);
   const transition = useDerivedValue(() => {
     return withTiming(isVisible.value);

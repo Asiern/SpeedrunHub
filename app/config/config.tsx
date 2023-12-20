@@ -1,37 +1,33 @@
 import { createContext } from "react";
+import { Theme } from "../themes/DefaultTheme";
+import { config } from "../types";
 
-export const context = createContext(null);
-
-export const config = {
+// Default config
+export const defaultConfig: config = {
   onboarding: false,
-  user: {
-    logged: false,
-    username: null,
-    userid: null,
-    key: null,
-    image: null,
-  },
+  logged: false,
+  user: null,
+  key: null,
   notifications: {
     unread: false,
     push: false,
     max: 20,
   },
   games: [],
+  following: [],
+  theme: Theme,
+  google: {
+    crashlyticsEnabled: true,
+    analyticsEnabled: true,
+  },
+  accepted: false,
+  version: undefined,
 };
 
-export interface config {
-  onboarding: boolean;
-  user: {
-    logged: boolean;
-    username: string | null;
-    userid: string | null;
-    key: string | null;
-    image: string | null;
-  };
-  notifications: {
-    unread: boolean;
-    push: boolean;
-    max: number;
-  };
-  games: [];
-}
+export type configCtx = {
+  config: config;
+  setConfig: (config: config) => Promise<void>;
+};
+
+// Define context
+export const context = createContext<configCtx | undefined>(undefined);

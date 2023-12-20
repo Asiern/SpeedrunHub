@@ -4,15 +4,16 @@ import { View, StyleSheet, Linking, Share } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { colors } from "../../themes/theme";
 import { GLYPHS } from "@expo/vector-icons/createIconSet";
-import { context } from "../../config/config";
+import { useConfig } from "../../hooks";
 
 export interface LinksProps {
   videolink: string;
   weblink: string;
 }
 
-export default function Links({ videolink, weblink }: LinksProps) {
-  const { theme } = React.useContext(context);
+export default function Links({ videolink, weblink }: LinksProps): JSX.Element {
+  const { config } = useConfig();
+  const { theme } = config;
   const onShare = async () => {
     try {
       const result = await Share.share({
@@ -38,7 +39,7 @@ export default function Links({ videolink, weblink }: LinksProps) {
   }
 
   //Set icon depending on the video platform
-  var browsericon: GLYPHS = "globe";
+  let browsericon: GLYPHS = "globe";
   if (videolink.includes("yout")) {
     browsericon = "youtube";
   } else if (videolink.includes("twit")) {

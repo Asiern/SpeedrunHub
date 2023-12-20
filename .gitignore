@@ -62,6 +62,17 @@ buck-out/
 # Expo
 .expo/*
 web-build/
+dist
+android
 
-#Lock files
-yarn.lock
+# Jest
+*.snap
+coverage
+
+# Obsidian
+.obsidian
+
+# Google services
+google-services.json
+
+.vscode

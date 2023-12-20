@@ -12,7 +12,7 @@ export interface runnerProps {
 }
 
 const { width } = Dimensions.get("window");
-export default function Runners({ runners }: RunnersProps) {
+export default function Runners({ runners }: RunnersProps): JSX.Element {
   return (
     <View style={styles.container}>
       <ScrollView
