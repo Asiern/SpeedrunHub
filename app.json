@@ -5,7 +5,7 @@
     "name": "SpeedrunHub",
     "slug": "speedruncomapp",
     "platforms": ["ios", "android"],
-    "version": "2.0.2",
+    "version": "2.0.3",
     "orientation": "portrait",
     "icon": "./app/assets/trophy.png",
     "splash": {
@@ -25,7 +25,7 @@
     "githubUrl": "https://github.com/Asiern/SpeedrunHub",
     "android": {
       "package": "com.asiern.speedrun2",
-      "versionCode": 6,
+      "versionCode": 7,
       "permissions": [],
       "googleServicesFile": "./google-services.json"
     },
@@ -42,10 +42,19 @@
       ["react-native-flipper-performance-plugin"],
       ["@react-native-firebase/crashlytics"],
       ["@react-native-firebase/app"],
-      "expo-localization"
+      "expo-localization",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "extraProguardRules": "-keep class com.google.android.gms.internal.consent_sdk.** { *; }"
+          }
+        }
+      ]
     ]
   },
   "react-native-google-mobile-ads": {
-    "android_app_id": "ca-app-pub-5820949657654069~3334705233"
+    "android_app_id": "ca-app-pub-5820949657654069~3334705233",
+    "delay_app_measurement_init": true
   }
 }

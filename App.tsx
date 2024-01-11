@@ -3,6 +3,28 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import crashlytics from "@react-native-firebase/crashlytics";
 import { version } from "./package.json";
 
+// Ads Consent
+import { AdsConsent, AdsConsentStatus } from "react-native-google-mobile-ads";
+
+async function requestConsent() {
+  const consentInfo = await AdsConsent.requestInfoUpdate();
+
+  // Check if user requires consent
+  if (
+    consentInfo.isConsentFormAvailable &&
+    (consentInfo.status === AdsConsentStatus.UNKNOWN ||
+      consentInfo.status === AdsConsentStatus.REQUIRED)
+  ) {
+    // Show a Google-rendered form
+    const formResult = await AdsConsent.showForm();
+
+    console.log(
+      "User consent obtained: ",
+      formResult.status === AdsConsentStatus.OBTAINED
+    );
+  }
+}
+
 // Translations (i18n)
 import "./app/locale/i18n";
 
@@ -43,6 +65,7 @@ export default function App(): JSX.Element {
   const prepare = async () => {
     try {
       crashlytics().log("AppLoading");
+      await requestConsent();
       await SplashScreen.preventAutoHideAsync();
       await loadAsync({
         Poppins: require("./app/assets/fonts/Poppins-Regular.ttf"),
