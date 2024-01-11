@@ -34,3 +34,13 @@ export function getWebViewUri(url: string): string {
 export function getTimeLabel(time: number): string {
   return new Date(time * 1000).toISOString().substr(11, 8);
 }
+
+export function getIconFromUrl(url: string): string {
+  if (url.includes("youtube") || url.includes("youtu.be")) {
+    return "youtube";
+  } else if (url.includes("twitch")) {
+    return "twitch";
+  } else {
+    return "link";
+  }
+}

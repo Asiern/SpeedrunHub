@@ -5,7 +5,7 @@ import Constants from "expo-constants";
 import { useConfig } from "../../hooks";
 import { run } from "../../hooks/types";
 import Info, { IInfoSquare } from "./Info";
-import { getTimeLabel } from "../../utils";
+import { getIconFromUrl, getTimeLabel } from "../../utils";
 
 interface IRun {
   run: run;
@@ -59,6 +59,17 @@ export default function Run({
     { title: "Submitted", value: run.submitted || "", icon: "user" },
   ];
 
+  const videoElements: IInfoSquare[] | undefined = run.videos?.links.map(
+    (link, i) => {
+      return {
+        title: `Video ${i + 1}`,
+        value: link.uri,
+        icon: getIconFromUrl(link.uri),
+        link: link.uri,
+      };
+    }
+  );
+
   if (verifier)
     detailsElements.push({
       title: "Verified",
@@ -78,6 +89,7 @@ export default function Run({
       <Info elements={runElements} title="RUN" />
       <Info elements={leaderboardElements} title="LEADERBOARD" />
       <Info elements={detailsElements} title="DETAILS" />
+      {videoElements && <Info elements={videoElements} title="Videos" />}
     </View>
   );
 }

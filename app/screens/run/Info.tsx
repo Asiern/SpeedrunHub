@@ -1,21 +1,31 @@
 import React from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { Linking, ScrollView, StyleSheet, Text, View } from "react-native";
 import { useConfig } from "../../hooks";
 import { shadow } from "../../themes/theme";
 import { Feather } from "@expo/vector-icons";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 export interface IInfoSquare {
   title: string;
   value: string | number;
   icon?: string;
   index?: number;
+  link?: string;
 }
 
-function InfoSquare({ title, value, icon, index }: IInfoSquare): JSX.Element {
+function InfoSquare({
+  title,
+  value,
+  icon,
+  index,
+  link,
+}: IInfoSquare): JSX.Element {
   const { config } = useConfig();
   const { theme } = config;
   return (
-    <View
+    <TouchableOpacity
+      disabled={link === undefined}
+      onPress={() => link && Linking.openURL(link)}
       style={[
         styles.infoSquare,
         {
@@ -51,7 +61,7 @@ function InfoSquare({ title, value, icon, index }: IInfoSquare): JSX.Element {
       <Text style={[styles.infoSquareText, { color: theme.colors.text }]}>
         {value}
       </Text>
-    </View>
+    </TouchableOpacity>
   );
 }
 
