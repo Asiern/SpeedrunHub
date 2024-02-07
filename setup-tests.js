@@ -51,3 +51,13 @@ i18n.use(initReactI18next).init({
     escapeValue: false,
   },
 });
+
+
+// React native firebase
+jest.mock('@react-native-firebase/crashlytics', () => {
+  return () => ({
+      log: jest.fn(),
+      recordError: jest.fn(),
+      // Any function you want to use or mock
+  });
+});
