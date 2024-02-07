@@ -15,44 +15,26 @@ beforeAll(() => {
 
 describe("Run component", () => {
   it("displays place correctly", async () => {
-    const { getByText } = render(
-      <Run
-        place={20}
-        players={"Player"}
-        time="1h22m5s"
-        weblink={runData.weblink}
-      />
-    );
+    const { getByText } = render(<Run place={20} run={runData} />);
     const place = getByText("20");
     expect(place).toBeDefined();
   });
   it("displays time correctly", async () => {
-    const time = "1h22m5s";
+    const time = "00:31:22";
     const { getByText } = render(
-      <Run
-        place={20}
-        players={"Player"}
-        time={time}
-        weblink={runData.weblink}
-      />
+      <Run place={20} run={runData} />
     );
     const timeComp = getByText(time);
     expect(timeComp).toBeDefined();
   });
   it("navigates to RunInfo screen when pressed", () => {
-    const { getByTestId } = render(
-      <Run
-        place={20}
-        players={"Player"}
-        time="1h22m5s"
-        weblink={runData.weblink}
-      />
-    );
+    const { getByTestId } = render(<Run place={20} run={runData} />);
     const touchable = getByTestId("run-touchable");
     fireEvent.press(touchable);
     const navigation = useNavigation();
     expect(navigation.navigate).toHaveBeenCalledWith("RunInfo", {
-      weblink: runData.weblink,
+      run: runData,
+      place: 20,
     });
   });
 });

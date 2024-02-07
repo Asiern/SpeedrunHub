@@ -36,7 +36,8 @@ describe("PB component", () => {
     const navigation = useNavigation();
 
     expect(navigation.navigate).toBeCalledWith("RunInfo", {
-      weblink: pbData.run.weblink,
+      run: pbData.run,
+      place: pbData.place,
     });
   });
 });
