@@ -20,11 +20,11 @@ export interface ButtonProps {
 
 function Button({
   label,
-  variant,
+  variant = "default",
   onPress,
-  shadow,
-  icon,
-  centerContent,
+  shadow = false,
+  icon = null,
+  centerContent = false,
   style,
   disabled = false,
   iconPosition = "left",
@@ -88,13 +88,6 @@ function Button({
     </RectButton>
   );
 }
-
-Button.defaultProps = {
-  variant: "default",
-  shadow: false,
-  icon: null,
-  centerContent: false,
-};
 
 const styles = StyleSheet.create({
   container: {

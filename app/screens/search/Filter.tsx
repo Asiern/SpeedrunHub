@@ -20,16 +20,13 @@ interface IFilter {
   variant?: "add" | "remove";
 }
 
-/**
-  Set the default variant of the Filter component to "add".
-*/
-FilterComponent.defaultProps = {
-  variant: "add",
-};
-
 export const Filter = memo(FilterComponent);
 
-function FilterComponent({ label, onPress, variant }: IFilter): JSX.Element {
+function FilterComponent({
+  label,
+  onPress,
+  variant = "add",
+}: IFilter): JSX.Element {
   const { config } = useConfig();
   const { theme } = config;
   const { t } = useTranslation();

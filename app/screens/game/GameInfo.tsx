@@ -8,12 +8,6 @@ import { InfoContainer } from "./Info";
 import { CategoriesContainer } from "./Categories";
 import { VariablesContainer } from "./Variables";
 import { LeaderboardContainer } from "./Leaderboard";
-import {
-  BannerAd,
-  BannerAdSize,
-  TestIds,
-} from "react-native-google-mobile-ads";
-import { ADS_IDS } from "../../constants/ads";
 
 interface IGameInfo {
   game: game;
@@ -82,19 +76,6 @@ function GameInfo({ game }: IGameInfo): JSX.Element {
         }
       />
       <InfoContainer {...{ game }} />
-      <View
-        style={{
-          marginVertical: 10,
-          justifyContent: "center",
-          alignContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <BannerAd
-          size={BannerAdSize.BANNER}
-          unitId={__DEV__ ? TestIds.BANNER : ADS_IDS.GameInfo}
-        />
-      </View>
       <CategoriesContainer {...{ game, category, setCategory }} />
       <VariablesContainer
         {...{ category, selectedVariables, setSelectedVariables }}

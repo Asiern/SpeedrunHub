@@ -13,12 +13,6 @@ import Constants from "expo-constants";
 import { CARD_HEIGHT, CARD_WIDTH } from "./GameCard";
 import { PersonalBestsContainer } from "./PersonalBestsContainer";
 import { MainNavigatorParamList } from "../../navigation/MainNavigator";
-import {
-  BannerAd,
-  BannerAdSize,
-  TestIds,
-} from "react-native-google-mobile-ads";
-import { ADS_IDS } from "../../constants/ads";
 
 const { width } = Dimensions.get("screen");
 
@@ -88,12 +82,6 @@ export function Profile(props: ProfileProps): JSX.Element {
           variant="primary"
         /> */}
       </View>
-      <View style={styles.banner}>
-        <BannerAd
-          size={BannerAdSize.BANNER}
-          unitId={__DEV__ ? TestIds.BANNER : ADS_IDS.Profile}
-        />
-      </View>
       <PersonalBestsContainer user={user} />
     </ScrollView>
   );
@@ -131,9 +119,5 @@ const styles = StyleSheet.create({
     width,
     paddingHorizontal: 30,
     paddingBottom: 10,
-  },
-  banner: {
-    justifyContent: "center",
-    alignItems: "center",
   },
 });
